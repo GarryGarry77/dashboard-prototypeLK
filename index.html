@@ -1217,6 +1217,14 @@ button.gauge{width:100%;border:0;cursor:pointer;text-align:left;color:var(--ink)
 .h6-money b{white-space:nowrap}
 @media (max-width:760px){.h6-money button{padding:10px 12px}.h6-money b{font-size:17px}.h6-money .h6-eye{flex:0 0 44px;padding:0}}
 .perk{gap:12px}
+.fn6{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.fr6{display:grid;grid-template-columns:200px 1fr 96px;gap:14px;align-items:center}
+.fr6 .l small{display:block;color:var(--muted);font-size:12.5px}
+.fr6 .bar{position:relative;height:36px;background:var(--soft);border-radius:10px;overflow:hidden}
+.fr6 .bar i{position:absolute;inset:0 auto 0 0;background:var(--brand);border-radius:10px}
+.fr6 .bar b{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#fff;font-weight:600}
+.fr6 .c{text-align:right}.fr6 .c b{font-size:20px;font-weight:600}.fr6 .c b.bad{color:var(--bad)}.fr6 .c small{display:block;color:var(--muted);font-size:12px}
+@media (max-width:760px){.fr6{grid-template-columns:1fr 64px}.fr6 .l{grid-column:1/-1}.fr6 .c b{font-size:17px}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4303,6 +4311,18 @@ function acct(){ const p=P(); openDr(`<div class="ac6"><span class="av avt u-${p
   <div class="li6" onclick="closeDrSilent();tipsCenter()">Советы и туры <span>›</span></div>`); applyPhotos&&applyPhotos(); document.querySelectorAll('#dr .ac6 .av').forEach(e=>{ const c=UPH[pk]; if(c) e.classList.add(c); }); }
 const _tb6=topbar; topbar=function(t,s,x){ return _tb6(t,s,x).replace(/onclick="go\('profile','data'\)" aria-label="Профиль"/,`onclick="acct()" aria-label="Профиль и настройки"`)
   .replace('<button class="ib bulb"',`<button class="kar6" onclick="aiOpen=true;drawAI()" aria-label="Спросить Каролину"><span class="kar"></span>Каролина</button><button class="ib bulb"`); };
+
+/* Клиенты: убрана полоса «фаз Health OS» (внутренняя дорожная карта, не задача партнёра); воронка — строго вложенные шаги, один цвет */
+const _cl6=clients; clients=function(){ return _cl6().replace(/<div class="c12 phase">[\s\S]*?наборы<\/span><\/div><\/div>/,''); };
+function funnelHos(){
+  const r=R0(), ids=scope==='my'?M.kids[r]:subtree(M,r), hs=hosStats(M,ids), mat=hs.mat;
+  const n2=mat.filter(c=>c.h.n>=2), n3=mat.filter(c=>c.h.n>=3), loy=mat.filter(c=>c.h.loyal&&c.h.n>=3), s90=mat.filter(c=>c.h.second90).length;
+  const st=[['Первый заказ','клиенты, пришедшие 3–12 мес. назад',mat.length],['Второй заказ',`из них заказали снова · в первые 90 дней — ${s90}`,n2.length],['Третий заказ','привычка формируется',n3.length],['Лоялисты','3+ заказа за полгода',loy.length]];
+  const mx=st[0][2]||1;
+  return `<div class="card c-pad s12 fun6"><div class="hrow"><div><h3 class="h20">Воронка клиента</h3><div class="sub">${scope==='my'?'Мои клиенты':'Вся структура'} · каждый шаг — часть предыдущего</div></div></div>
+   <div class="fn6">${st.map(([t,s2,v],i)=>{ const prev=i?st[i-1][2]:v, conv=i&&prev?Math.round(v/prev*100):null, w=Math.max(6,Math.round(v/mx*100));
+     return `<div class="fr6"><div class="l"><b>${t}</b><small>${s2}</small></div><div class="bar"><i style="width:${w}%;opacity:${1-i*.18}"></i><b>${v}</b></div><div class="c">${conv==null?'':`<b class="${i===1&&conv<65?'bad':''}">${conv}%</b><small>от шага выше</small>`}</div></div>`; }).join('')}</div>
+   <div class="note h">Главная потеря — между первым и вторым заказом. Второй заказ в первые 90 дней: ${s90} из ${mat.length} (цель трека 65%). Пишите клиенту на 20–45 день.</div></div>`; }
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4436,6 +4456,7 @@ Object.assign(EN_DICT,{
 });EN_RE=null;
 Object.assign(EN_DICT,{"Быстрее всего — помочь":"Fastest: help","закрыть Директора: не хватает":"close Director: missing","Чеки приходят на почту и хранятся здесь — для отчёта или возврата":"Receipts arrive by email and are stored here — for reports or returns","Чек по 54-ФЗ — то же, что бумажный. Для возврата товара достаточно номера заказа.":"A receipt under Federal Law 54 equals a paper one. The order number is enough for a return.","по умолчанию":"default","для всех":"for everyone","для лидеров":"for leaders"});EN_RE=null;
 Object.assign(EN_DICT,{"октябрь, предварительно":"October, preliminary","Изменить":"Edit","Октябрь, предварительно · до конца месяца":"October, preliminary · days to month-end:","Новости":"News","Ещё":"More:","блоков можно включить: новички, рекомендации, промокоды, САП, обучение…":"blocks can be turned on: newcomers, recommendations, promo codes, SAP, learning…","Профиль и данные":"Profile & data","Язык":"Language","Страна и валюта":"Country & currency","Тёмная тема":"Dark theme","Советы и туры":"Tips & tours","Спросить Каролину":"Ask Karolina","Профиль и настройки":"Profile & settings","Каролина":"Karolina","Истории":"Stories"});EN_RE=null;
+Object.assign(EN_DICT,{"Воронка клиента":"Client funnel","каждый шаг — часть предыдущего":"each step is part of the previous one","клиенты, пришедшие 3–12 мес. назад":"clients who joined 3–12 months ago","из них заказали снова · в первые 90 дней —":"of them ordered again · within the first 90 days —","Второй заказ":"Second order","Третий заказ":"Third order","привычка формируется":"habit forming","Лоялисты":"Loyal clients","3+ заказа за полгода":"3+ orders in six months","от шага выше":"of previous step","Мои клиенты":"My clients","Вся структура":"Whole structure","Главная потеря — между первым и вторым заказом. Второй заказ в первые 90 дней:":"The main loss is between the first and second order. Second order in the first 90 days:","(цель трека 65%). Пишите клиенту на 20–45 день.":"(track goal 65%). Message the client on days 20–45."});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
