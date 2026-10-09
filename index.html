@@ -1327,6 +1327,15 @@ body,#main{font-size:15px}
 .tr7 em span{background:var(--soft);padding:0 4px}
 :root:not([data-theme="dark"]) .tag.t-b{color:#a32a00!important}
 :root:not([data-theme="dark"]) .note.h{color:#7a4412!important}
+/* «Ваши задачи»: иконка в строку с заголовком, 28 px — плитка ниже на ~50 px */
+.todo6 .td{display:grid!important;grid-template-columns:28px 1fr;column-gap:10px;row-gap:0;align-content:start}
+.todo6 .td .ti6{width:28px;height:28px;margin:0;grid-row:1}
+.todo6 .td .ti6 svg{width:16px;height:16px}
+.todo6 .td>*:not(.ti6){grid-column:2}
+.todo6 .td .t{grid-row:1;align-self:center;line-height:18px}
+.todo6 .td .v2,.todo6 .td .v3{grid-column:1/-1!important}
+.todo6 .td .v2{padding-top:12px}
+.todo6 .td .s2{grid-column:1/-1!important;margin-top:4px}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
