@@ -1225,6 +1225,13 @@ button.gauge{width:100%;border:0;cursor:pointer;text-align:left;color:var(--ink)
 .fr6 .bar b{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#fff;font-weight:600}
 .fr6 .c{text-align:right}.fr6 .c b{font-size:20px;font-weight:600}.fr6 .c b.bad{color:var(--bad)}.fr6 .c small{display:block;color:var(--muted);font-size:12px}
 @media (max-width:760px){.fr6{grid-template-columns:1fr 64px}.fr6 .l{grid-column:1/-1}.fr6 .c b{font-size:17px}}
+/* крестик закрытия: виден в обеих темах, зона нажатия 44 */
+.dr>.x,#dr>.x{width:40px;height:40px;border-radius:50%;border:0;background:var(--soft)!important;color:var(--ink)!important;font-size:16px;display:grid;place-items:center;cursor:pointer;top:14px;right:14px;z-index:3}
+.dr>.x:hover{background:var(--line)!important}
+body:has(#dr.on) #aiw .aifab{display:none}
+.seg6{display:inline-flex;background:var(--soft);border-radius:999px;padding:3px;gap:2px}
+.seg6 button{all:unset;cursor:pointer;padding:0 12px;height:34px;display:grid;place-items:center;border-radius:999px;font-size:13.5px;color:var(--muted);font-weight:500}
+.seg6 button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4323,6 +4330,15 @@ function funnelHos(){
    <div class="fn6">${st.map(([t,s2,v],i)=>{ const prev=i?st[i-1][2]:v, conv=i&&prev?Math.round(v/prev*100):null, w=Math.max(6,Math.round(v/mx*100));
      return `<div class="fr6"><div class="l"><b>${t}</b><small>${s2}</small></div><div class="bar"><i style="width:${w}%;opacity:${1-i*.18}"></i><b>${v}</b></div><div class="c">${conv==null?'':`<b class="${i===1&&conv<65?'bad':''}">${conv}%</b><small>от шага выше</small>`}</div></div>`; }).join('')}</div>
    <div class="note h">Главная потеря — между первым и вторым заказом. Второй заказ в первые 90 дней: ${s90} из ${mat.length} (цель трека 65%). Пишите клиенту на 20–45 день.</div></div>`; }
+
+/* Тема: «Как в системе / Светлая / Тёмная» — в меню аватара и в «Меню» на телефоне; выбор запоминается */
+function curTheme(){ return document.documentElement.dataset.theme||'auto'; }
+function setTheme(m){ const d=document.documentElement; if(m==='auto') delete d.dataset.theme; else d.dataset.theme=m; LS.set('coral_lk_theme',m); document.querySelectorAll('.thm6 button').forEach(b=>b.classList.toggle('on',b.dataset.m===m)); }
+(()=>{ const m=LS.get('coral_lk_theme','auto'); if(m!=='auto') document.documentElement.dataset.theme=m; })();
+const thmRow=()=>`<div class="li6"><span>Оформление</span><div class="thm6 seg6">${[['auto','Авто'],['light','Светлая'],['dark','Тёмная']].map(([m,t])=>`<button data-m="${m}" class="${curTheme()===m?'on':''}" onclick="event.stopPropagation();setTheme('${m}')">${t}</button>`).join('')}</div></div>`;
+const _acct6=acct; acct=function(){ _acct6(); const d=document.getElementById('dr'); d.innerHTML=d.innerHTML.replace(/<div class="li6" onclick="toggleTheme\(\);closeDrSilent\(\)">[\s\S]*?<\/div>/,L(thmRow())); };
+const _mm6=moreMenu; moreMenu=function(){ _mm6(); const d=document.getElementById('dr'); d.insertAdjacentHTML('beforeend',L(`<div style="margin-top:12px">${thmRow()}</div>`)); };
+toggleTheme=function(){ setTheme(curTheme()==='dark'?'light':'dark'); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4457,6 +4473,7 @@ Object.assign(EN_DICT,{
 Object.assign(EN_DICT,{"Быстрее всего — помочь":"Fastest: help","закрыть Директора: не хватает":"close Director: missing","Чеки приходят на почту и хранятся здесь — для отчёта или возврата":"Receipts arrive by email and are stored here — for reports or returns","Чек по 54-ФЗ — то же, что бумажный. Для возврата товара достаточно номера заказа.":"A receipt under Federal Law 54 equals a paper one. The order number is enough for a return.","по умолчанию":"default","для всех":"for everyone","для лидеров":"for leaders"});EN_RE=null;
 Object.assign(EN_DICT,{"октябрь, предварительно":"October, preliminary","Изменить":"Edit","Октябрь, предварительно · до конца месяца":"October, preliminary · days to month-end:","Новости":"News","Ещё":"More:","блоков можно включить: новички, рекомендации, промокоды, САП, обучение…":"blocks can be turned on: newcomers, recommendations, promo codes, SAP, learning…","Профиль и данные":"Profile & data","Язык":"Language","Страна и валюта":"Country & currency","Тёмная тема":"Dark theme","Советы и туры":"Tips & tours","Спросить Каролину":"Ask Karolina","Профиль и настройки":"Profile & settings","Каролина":"Karolina","Истории":"Stories"});EN_RE=null;
 Object.assign(EN_DICT,{"Воронка клиента":"Client funnel","каждый шаг — часть предыдущего":"each step is part of the previous one","клиенты, пришедшие 3–12 мес. назад":"clients who joined 3–12 months ago","из них заказали снова · в первые 90 дней —":"of them ordered again · within the first 90 days —","Второй заказ":"Second order","Третий заказ":"Third order","привычка формируется":"habit forming","Лоялисты":"Loyal clients","3+ заказа за полгода":"3+ orders in six months","от шага выше":"of previous step","Мои клиенты":"My clients","Вся структура":"Whole structure","Главная потеря — между первым и вторым заказом. Второй заказ в первые 90 дней:":"The main loss is between the first and second order. Second order in the first 90 days:","(цель трека 65%). Пишите клиенту на 20–45 день.":"(track goal 65%). Message the client on days 20–45."});EN_RE=null;
+Object.assign(EN_DICT,{"Оформление":"Appearance","Авто":"Auto","Светлая":"Light","Тёмная":"Dark"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
