@@ -1235,6 +1235,60 @@ body:has(#dr.on) #aiw .aifab{display:none}
 .todo6 .td .v2{gap:8px;align-items:baseline}.todo6 .td .v2 small{font-size:13px;color:var(--muted)}
 .todo6 .td .v3{font-size:13px;margin-top:4px}.todo6 .td .v3 b{color:var(--ink);font-weight:600}
 .tile .qi{color:var(--muted)!important;opacity:1!important}
+/* ================= v7 ================= */
+/* сворачиваемое меню */
+.navtg{all:unset;cursor:pointer;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--muted);margin:0 0 6px 4px}
+.navtg:hover{background:var(--soft);color:var(--ink)}
+body.navc .side{width:76px;padding:14px 10px;align-items:center}
+body.navc .side .logo small,body.navc .side .demo{display:none}
+body.navc .side .logo{font-size:0;height:0;margin:0;padding:0}
+body.navc #nav{display:flex;flex-direction:column;align-items:center;gap:4px}
+body.navc .navtg{margin:0 0 8px}
+.ua7{width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;background:var(--brand);color:#fff;font-weight:600;display:grid;place-items:center;margin-bottom:10px;background-size:cover;background-position:center}
+.nv.rl{width:48px;height:48px;padding:0;justify-content:center;border-radius:14px;position:relative}
+.nv.rl svg{width:22px;height:22px}
+.nv.rl.on{background:var(--soft);color:var(--brand)}
+.dot7{position:absolute;top:10px;right:10px;width:7px;height:7px;border-radius:50%;background:var(--brand)}
+.side{transition:width .2s ease}
+@media (max-width:760px){.navtg{display:none}}
+
+/* уведомление-баннер */
+.nt7{position:relative;display:flex;gap:14px;align-items:flex-start;background:var(--good-s);border-radius:20px;padding:16px 52px 16px 16px;overflow:hidden;transition:height .22s ease,opacity .22s ease,margin .22s ease}
+.nt7 .ti6{margin:0;background:var(--card)}
+.nt7 b{display:block;font-size:16px;line-height:22px}.nt7 small{display:block;color:var(--muted);font-size:13.5px;line-height:19px;margin-top:2px}
+.nt7 .link{margin-top:6px;padding:0;font-weight:600}
+.x7{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:var(--muted);font-size:15px;cursor:pointer}
+.x7:hover{background:rgba(0,0,0,.06);color:var(--ink)}
+.dis7{opacity:0;overflow:hidden}
+/* промо: 1 баннер — на всю ширину, 2 — пополам; на телефоне — лентой */
+.bn7{display:grid;gap:16px}.bn7.n2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.bn7.n1{grid-template-columns:1fr}
+.bn7.n1 .bn5{flex-direction:row}.bn7.n1 .bn5 .img{flex:0 0 40%;height:auto;min-height:180px}
+@media (max-width:760px){.bn7.n2{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory}.bn7 .bn5{scroll-snap-align:start}.bn7.n1 .bn5{flex-direction:column}.bn7.n1 .bn5 .img{min-height:0;height:160px}}
+
+/* экран показателя */
+.kp7{display:flex;flex-direction:column;gap:16px;max-width:880px}
+.kp7h{display:flex;gap:12px;align-items:center}
+.kp7h h1{margin:0;font-size:22px;line-height:28px;font-weight:600}.kp7h small{color:var(--muted);font-size:13px}
+.bk7{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:26px;color:var(--ink);background:var(--soft);flex:none}
+.kp7v{font-size:44px;line-height:50px;font-weight:600;letter-spacing:-.01em}.kp7v span{font-size:22px;color:var(--muted);font-weight:500}
+.kp7d{font-size:15px;color:var(--muted);margin-top:-8px}.kp7d .up{color:var(--good)}.kp7d .dn{color:var(--bad)}
+.ch7{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;height:220px;align-items:end;padding-top:24px}
+.cb7{display:flex;flex-direction:column;align-items:stretch;height:100%;justify-content:flex-end;gap:8px}
+.bar7{background:var(--soft);border-radius:14px 14px 6px 6px;position:relative;min-height:6px}
+.bar7.cur{background:var(--brand)}
+.bar7 em{position:absolute;top:-22px;left:0;right:0;text-align:center;font-style:normal;font-size:12.5px;color:var(--muted)}
+.bar7.cur em{color:var(--ink);font-weight:600}
+.cb7 small{text-align:center;font-size:13px;color:var(--muted)}
+.thr7{position:absolute;left:0;right:0;border-top:1.5px dashed var(--line);margin-bottom:26px;pointer-events:none}
+.thr7 span{position:absolute;right:0;top:-18px;font-size:11.5px;color:var(--muted);background:var(--card);padding:0 4px}
+.ka7 .hd7{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-bottom:6px}.ka7 .kar{width:24px;height:24px;border-radius:50%;background-size:cover}
+.ka7>b{font-size:17px}
+.li7{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}.li7:first-of-type{border-top:0}.li7 b{font-weight:600;white-space:nowrap}
+.li7.tot{border-top:1.5px solid var(--ink)}.li7.tot span{font-weight:600}
+.hx7 summary{cursor:pointer;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between}.hx7 summary::after{content:'›';color:var(--muted);transform:rotate(90deg)}.hx7[open] summary::after{transform:rotate(-90deg)}
+.hx7 .expl{margin-top:10px}
+.thr7{z-index:2;border-top-color:var(--muted);opacity:.7}
+.nt7 .link{border:0!important;text-decoration:none;color:var(--ink);display:inline-block}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4344,6 +4398,86 @@ const thmRow=()=>`<div class="li6"><span>Оформление</span><div class="
 const _acct6=acct; acct=function(){ _acct6(); const d=document.getElementById('dr'); d.innerHTML=d.innerHTML.replace(/<div class="li6" onclick="toggleTheme\(\);closeDrSilent\(\)">[\s\S]*?<\/div>/,L(thmRow())); };
 const _mm6=moreMenu; moreMenu=function(){ _mm6(); const d=document.getElementById('dr'); d.insertAdjacentHTML('beforeend',L(`<div style="margin-top:12px">${thmRow()}</div>`)); };
 toggleTheme=function(){ setTheme(curTheme()==='dark'?'light':'dark'); };
+/* ================= v7: сворачиваемое меню (рельс с иконками), закрываемые уведомления и промо с адаптивной сеткой, экран показателя как «Аналитика» у Сбера ================= */
+
+/* ---------- 1. Боковое меню сворачивается в рельс с иконками (только десктоп/планшет; на телефоне — нижняя панель) ---------- */
+let navC=LS.get('coral_lk_navc',null); if(navC===null) navC=innerWidth<1200;
+function applyNavC(){ document.body.classList.toggle('navc',!!navC); }
+function toggleNavC(){ navC=!navC; LS.set('coral_lk_navc',navC); applyNavC(); renderNav(); setTimeout(()=>{ if(page==='home'&&typeof masonry==='function') masonry(); },220); }
+const _navHtml7=navHtml; navHtml=function(){
+  const tg=`<button class="navtg" onclick="toggleNavC()" aria-label="${navC?'Развернуть меню':'Свернуть меню'}" title="${navC?'Развернуть меню':'Свернуть меню'}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>`;
+  if(!navC||innerWidth<761) return tg+_navHtml7();
+  const p=P(), cons=pk==='elena', ini=cons?'Е':p.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+  const items=cons?[['home','Мой путь','home'],['shop:orders','Заказы','orders'],['learn','Обучение','learn'],['ai','Coral AI','ai']]:NAV4.filter(g=>g.t).map(g=>[g.sub?g.sub[0][0]:g.k,g.t,g.ic,g]);
+  return tg+`<button class="ua7 ua u-${pk}" onclick="acct()" title="${cons?'Елена Смирнова':p.name}" aria-label="Профиль">${ini}</button>`+
+   items.map(([k,t,ic,g])=>{ const on=g?(g.sub?g.sub.some(([s])=>isOnSub(s)):page===g.k):isOnSub(k); return `<button class="nv rl ${on?'on':''}" onclick="navTo('${k}')" title="${t}" aria-label="${t}">${svg(ic)}${g&&g.isNew?'<i class="dot7"></i>':''}</button>`; }).join(''); };
+applyNavC();
+
+/* ---------- 2. Уведомление-баннер (одно за раз) и промо: закрываются крестиком, сетка перестраивается ---------- */
+let DISM=new Set(LS.get('coral_lk_dismiss',[]));
+function dismiss(id,label){ DISM.add(id); LS.set('coral_lk_dismiss',[...DISM]); const el=document.querySelector(`[data-dis="${id}"]`);
+  const done=()=>{ render(); toastUndo(label||'Скрыто',()=>{ DISM.delete(id); LS.set('coral_lk_dismiss',[...DISM]); render(); }); };
+  if(el){ el.style.height=el.offsetHeight+'px'; el.classList.add('dis7'); requestAnimationFrame(()=>{ el.style.height='0px'; }); setTimeout(done,240); } else done(); }
+const NOTICES=()=>{ const r=R0(), dir=M.isDir[r], L=[];
+  if(dir&&!sapOn[pk]) L.push({id:'n-sap',ic:'users',t:'Подключите Автоподбор',s:'Компания передаёт Директорам заявки с сайта и рекламы — бесплатно',cta:'Как подключиться',f:"go('team','sap')"});
+  L.push({id:'n-mar',ic:'drop',t:'Марафон гидратации · 2-й поток с 20 октября',s:'Запишите клиентов первых 90 дней — после марафона их поддерживают чат-боты',cta:'Записать клиентов',f:"go('clients','90')"});
+  if(!dir) L.push({id:'n-dir',ic:'flag',t:`До Директора ${Math.max(0,500-M.go[r])} баллов ГО`,s:'С ранга Директор — 25% с личного объёма и 10–25% с группы',cta:'Спланировать',f:"go('plan')"});
+  return L.filter(n=>!DISM.has(n.id)); };
+function noticeW(){ const n=NOTICES()[0]; if(!n) return '';
+  return `<div class="nt7" data-dis="${n.id}" role="status"><span class="ti6 t3">${ic6(n.ic,22)}</span><div class="g1"><b>${n.t}</b><small>${n.s}</small><button class="link" onclick="${n.f}">${n.cta} ›</button></div><button class="x7" onclick="dismiss('${n.id}','Уведомление скрыто')" aria-label="Скрыть уведомление">✕</button></div>`; }
+HW.notice={t:'Уведомление',d:'Одно важное уведомление или акция, закрывается крестиком',size:'s12'};
+['dir','asst'].forEach(s=>{ const o=HDEF[s].order; if(!o.includes('notice')) o.splice(o.indexOf('metrics')+1,0,'notice'); });
+Object.values(HCFG).forEach(c=>{ if(c&&c.order&&!c.order.includes('notice')){ const i=c.order.indexOf('metrics'); c.order.splice(i<0?0:i+1,0,'notice'); } });
+const _W7=W; W=function(k){
+  if(k==='notice') return noticeW();
+  if(k==='banners'){ const B=[!DISM.has('b-mar')&&`<div class="bn5" data-dis="b-mar"><div class="img ph-cm_l" role="img" aria-label="Марафон гидратации"></div><div class="in"><span class="k">Для партнёров · с 20 октября</span><b>Марафон гидратации · 2-й поток</b><span>Запишите клиентов первых 90 дней</span><div class="btns"><button class="btn pri sm" onclick="toast('Открыта запись клиентов')">Записать клиентов</button></div></div><button class="x" aria-label="Скрыть баннер" onclick="dismiss('b-mar','Баннер скрыт')">✕</button></div>`,
+      !DISM.has('b-mag')&&`<div class="bn5" data-dis="b-mag"><div class="img ph-mag_l" role="img" aria-label="Coral Magnesium"></div><div class="in"><span class="k">Новинка</span><b>Coral Magnesium</b><span>Магний для вечернего ритуала</span><div class="btns"><button class="btn pri sm" onclick="toastUndo('Coral Magnesium в корзине',()=>toast('Убрано из корзины'))">В корзину · ${CAT4.mag.pt} б.</button></div></div><button class="x" aria-label="Скрыть баннер" onclick="dismiss('b-mag','Баннер скрыт')">✕</button></div>`].filter(Boolean);
+    if(!B.length) return '';
+    return `<div class="bn7 n${B.length}">${B.join('')}</div>`; }
+  return _W7(k); };
+/* пустой блок не оставляет «дыру» в сетке */
+const _render7=render; render=function(){ _render7(); document.querySelectorAll('.hw').forEach(s=>{ if(!s.textContent.trim()&&!s.querySelector('img,svg,.img')) s.remove(); }); if(page==='home'&&typeof masonry==='function') masonry(); };
+
+/* ---------- 3. Экран показателя (как «Аналитика» у Сбера): цифра, динамика по месяцам, из чего складывается, Каролина ---------- */
+function firstLineOf(x,r){ let c=x; while(c!=null&&M.by[c].p!==r) c=M.by[c].p; return c; }
+function kpiData(k){ const r=R0(), p=P(), cur=M.rank[r], months=['Июль','Август','Сентябрь','Октябрь'];
+  const ser=i=>p.prev.map(x=>x[i]).concat([[0,0,M.lo[r],M.go[r],sopFor(M,r,sopDepthCode())][i]]);
+  if(k==='lo'){ const pe=pending(M,r); return {v:M.lo[r],unit:'баллов',need:loNeedOf(r),series:ser(2),months,parts:[['Мои заказы за октябрь',M.lo[r]],['Баллы в пути — пока не входят, засчитаются после доставки',pe.own]]}; }
+  if(k==='go'){ const g=groupIds(M,r).filter(x=>!M.isDir[x]&&x!==r), by={}; g.forEach(x=>{ const f=firstLineOf(x,r); if(f!=null) by[f]=(by[f]||0)+M.lo[x]; });
+    const parts=[['Ваш ЛО',M.lo[r]],...Object.entries(by).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]).map(([f,v])=>[`Ветка ${M.by[f].n}`,v])];
+    return {v:M.go[r],unit:'баллов',need:500,series:ser(3),months,parts,check:parts.reduce((a,x)=>a+x[1],0)}; }
+  if(k==='sop'){ const Rr=RANKS.find(x=>x.c===sopDepthCode()); const G=M.gens(r).filter(x=>x[1]<=Rr.depth); const gs={}; G.forEach(([d,gen])=>gs[gen]=(gs[gen]||0)+M.go[d]);
+    const parts=[['Ваш ГО',M.go[r]],...Object.keys(gs).sort().map(gn=>[`${gn}-е поколение · ${G.filter(x=>x[1]==gn).length} Дир.`,gs[gn]])];
+    const s=ser(4); return {v:sopFor(M,r,Rr.c),unit:'баллов',need:Rr.sop,series:s.slice(0,3).every(x=>x)?s:null,months,parts,check:parts.reduce((a,x)=>a+x[1],0)}; }
+  if(k==='bonus'){ const b=bonus(M,r,p.prevRank), T=Math.round(b.parts.reduce((a,x)=>a+x.v,0));
+    /* округление методом наибольших остатков: слагаемые на экране дают ровно итог */
+    const fl=b.parts.map(x=>Math.floor(x.v)); let rest=T-fl.reduce((a,x)=>a+x,0); b.parts.map((x,i)=>[i,x.v-Math.floor(x.v)]).sort((a,c)=>c[1]-a[1]).forEach(([i])=>{ if(rest>0){ fl[i]++; rest--; } });
+    return {v:T,unit:'у.е.',need:null,series:null,months,parts:b.parts.map((x,i)=>[x.k,fl[i]]),check:fl.reduce((a,x)=>a+x,0)}; }
+  return null; }
+function kpiPage(){ const k=tabs.kpi||'go', K=KPI4[k], d=kpiData(k);
+  if(!d){ return topbar(K.n,'')+`<div class="card c-pad">Нет детализации</div>`; }
+  const s=d.series, mx=s?Math.max(...s,d.need||0,1):1, prev=s?s[2]:null, dlt=s&&prev!=null?d.v-prev:null;
+  const chart=s?`<div class="ch7" role="img" aria-label="${K.n} по месяцам">${d.need?`<div class="thr7" style="bottom:${Math.round(d.need/mx*100)}%"><span>порог ${fmt(d.need)}</span></div>`:''}${s.map((v,i)=>`<div class="cb7"><div class="bar7 ${i===s.length-1?'cur':''}" style="height:${Math.max(3,Math.round(v/mx*100))}%"><em>${fmt(v)}</em></div><small>${d.months[i].slice(0,3).toLowerCase()}</small></div>`).join('')}</div>`
+    :`<div class="note">История по месяцам для этого показателя появится, когда подключим данные нового бэкенда — выдумывать не стали.</div>`;
+  return `<div class="kp7"><div class="kp7h"><button class="bk7" onclick="go(lastPage||'home')" aria-label="Назад">‹</button><div><h1>${K.n}</h1><small>Актуально на 08.10.2026, 18:31 · октябрь, предварительно</small></div></div>
+   <div class="kp7v">${fmt(d.v)} <span>${d.unit}</span></div>
+   <div class="kp7d">${dlt!=null?`<b class="${dlt>=0?'up':'dn'}">${dlt>=0?'▲':'▼'} ${fmt(Math.abs(dlt))}</b> к сентябрю`:''}${d.need?`${dlt!=null?' · ':''}${d.v>=d.need?`<b class="up">порог ${fmt(d.need)} выполнен</b>`:`до порога ${fmt(d.need-d.v)}`}`:''}</div>
+   <div class="card c-pad">${chart}<div class="seg6" style="margin-top:14px"><button class="on">По месяцам</button></div></div>
+   <div class="card c-pad ka7"><div class="hd7"><span class="kar"></span>Подробнее с Каролиной</div><b>Спросите, что делать с этой цифрой</b><div class="chips" style="margin-top:10px">${['Что мне нужно до следующего ранга?','Кто ближе всего к Директору?','Кто на грани потери ранга?'].map(q=>`<button class="chip" onclick="aiAsk('${q}')">${q.replace('?','')}</button>`).join('')}</div></div>
+   <div class="card c-pad"><h3 class="h20">Из чего складывается</h3>${d.parts.map(([t,v])=>`<div class="li7"><span>${t}</span><b>${fmt(v)}</b></div>`).join('')}${d.check!=null?`<div class="li7 tot"><span>Итого</span><b>${fmt(d.check)}</b></div>`:''}</div>
+   <details class="card c-pad hx7"><summary>Как считается</summary><div class="expl" id="kx7"></div></details></div>`; }
+const _kpiExplain7=kpiExplain;
+kpiExplain=function(k){ if(!kpiData(k)) return _kpiExplain7(k); lastPage=page==='kpi'?lastPage:page; tabs.kpi=k; go('kpi'); };
+let lastPage='home';
+const _render7b=render; render=function(){ if(page!=='kpi') return _render7b();
+  renderNav(); document.getElementById('main').innerHTML=L('<div class="wrapm">'+kpiPage()+'</div>'); drawAI();
+  const k=tabs.kpi, _o=openDr; let html=''; openDr=h=>{html=h;}; try{ _kpiExplain7(k); } finally { openDr=_o; } const m=html.match(/<div class="expl">([\s\S]*?)<\/div>\s*<div class="btns"/); const t=document.getElementById('kx7'); if(t&&m) t.innerHTML=L(m[1]); };
+
+/* Бонус: слагаемые округляются методом наибольших остатков — на любом экране сумма строк = итог */
+const _bonus7=bonus; bonus=function(){ const b=_bonus7.apply(null,arguments); const T=Math.round(b.parts.reduce((a,x)=>a+x.v,0));
+  const fl=b.parts.map(x=>Math.floor(x.v)); let rest=T-fl.reduce((a,x)=>a+x,0);
+  b.parts.map((x,i)=>[i,x.v-Math.floor(x.v)]).sort((a,c)=>c[1]-a[1]).forEach(([i])=>{ if(rest>0){ fl[i]++; rest--; } });
+  const parts=b.parts.map((x,i)=>Object.assign({},x,{v:fl[i]})); return Object.assign({},b,{parts,total:T,min:T,max:T}); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4480,6 +4614,9 @@ Object.assign(EN_DICT,{"октябрь, предварительно":"October, 
 Object.assign(EN_DICT,{"Воронка клиента":"Client funnel","каждый шаг — часть предыдущего":"each step is part of the previous one","клиенты, пришедшие 3–12 мес. назад":"clients who joined 3–12 months ago","из них заказали снова · в первые 90 дней —":"of them ordered again · within the first 90 days —","Второй заказ":"Second order","Третий заказ":"Third order","привычка формируется":"habit forming","Лоялисты":"Loyal clients","3+ заказа за полгода":"3+ orders in six months","от шага выше":"of previous step","Мои клиенты":"My clients","Вся структура":"Whole structure","Главная потеря — между первым и вторым заказом. Второй заказ в первые 90 дней:":"The main loss is between the first and second order. Second order in the first 90 days:","(цель трека 65%). Пишите клиенту на 20–45 день.":"(track goal 65%). Message the client on days 20–45."});EN_RE=null;
 Object.assign(EN_DICT,{"Оформление":"Appearance","Авто":"Auto","Светлая":"Light","Тёмная":"Dark"});EN_RE=null;
 Object.assign(EN_DICT,{"1-я линия":"1st line","1-е поколение":"1st generation","Всего:":"Total:"});EN_RE=null;
+Object.assign(EN_DICT,{"Свернуть меню":"Collapse menu","Развернуть меню":"Expand menu","Подключите Автоподбор":"Join Auto-matching","Компания передаёт Директорам заявки с сайта и рекламы — бесплатно":"The company passes leads from the website and ads to Directors — for free","Как подключиться":"How to join","Марафон гидратации · 2-й поток с 20 октября":"Hydration marathon · 2nd run from October 20","Запишите клиентов первых 90 дней — после марафона их поддерживают чат-боты":"Sign up clients in their first 90 days — chatbots support them after the marathon","Спланировать":"Plan","Скрыть уведомление":"Hide notice","Уведомление скрыто":"Notice hidden","Баннер скрыт":"Banner hidden","Скрыто":"Hidden","Запишите клиентов первых 90 дней":"Sign up clients in their first 90 days","До Директора":"To Director:","баллов ГО":"GV points","С ранга Директор — 25% с личного объёма и 10–25% с группы":"From Director rank — 25% of personal volume and 10–25% of the group","Актуально на 08.10.2026, 18:31 · октябрь, предварительно":"As of 08.10.2026, 18:31 · October, preliminary","к сентябрю":"vs September","выполнен":"met","до порога":"to threshold:","порог":"threshold","По месяцам":"By month","Подробнее с Каролиной":"More with Karolina","Что важно в":"What matters in","сейчас":"now","Из чего складывается":"Breakdown","Итого":"Total","Как считается":"How it's calculated","Мои заказы за октябрь":"My October orders","Баллы в пути — засчитаются после доставки":"Points in transit — count after delivery","Ваш ЛО":"Your PV","Ваш ГО":"Your GV","Ветка":"Branch","-е поколение ·":" generation ·","Дир.":"Dir.","История по месяцам для этого показателя появится, когда подключим данные нового бэкенда — выдумывать не стали.":"Monthly history for this metric will appear once the new backend data is connected — we didn't make it up.","баллов":"points","Назад":"Back"});EN_RE=null;
+Object.assign(EN_DICT,{"Баллы в пути — пока не входят, засчитаются после доставки":"Points in transit — not included yet, count after delivery"});EN_RE=null;
+Object.assign(EN_DICT,{"Спросите, что делать с этой цифрой":"Ask what to do with this number"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
