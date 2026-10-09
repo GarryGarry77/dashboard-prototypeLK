@@ -1153,6 +1153,17 @@ button.gauge{width:100%;border:0;cursor:pointer;text-align:left;color:var(--ink)
 .aib .m{min-height:0!important;display:block!important;flex:none!important;cursor:auto;border-left-width:0!important}.aib .m.bot .src5{border-top-color:var(--line)}
 @media (max-width:760px){body:has(.crmf) .topbar .srch,body:has(.sinp) .topbar .srch{display:none!important}}
 .cc.crm .msg{flex-wrap:wrap;gap:6px}.cc.crm .msg button{flex:1 1 auto}
+/* «Ваши задачи»: мягкий фон из семантических токенов ДС, текст — основной цвет */
+.todo .td:nth-child(1){background:var(--info-s)!important}
+.todo .td:nth-child(2){background:var(--bad-s)!important}
+.todo .td:nth-child(3){background:var(--warn-s)!important}
+.todo .td:nth-child(4){background:var(--good-s)!important}
+.todo .td{box-shadow:none!important}
+.todo .td:nth-child(1) .t::before{background:var(--info)}.todo .td:nth-child(2) .t::before{background:var(--bad)}.todo .td:nth-child(3) .t::before{background:var(--warn)}.todo .td:nth-child(4) .t::before{background:var(--good)}
+.todo .td .t span{background:rgba(255,255,255,.55)}
+:root[data-theme="dark"] .todo .td .t span{background:rgba(255,255,255,.08)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .todo .td .t span{background:rgba(255,255,255,.08)}}
+.todo .td:nth-child(1){box-shadow:inset 0 0 0 1px var(--line)!important}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
