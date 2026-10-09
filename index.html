@@ -1387,6 +1387,25 @@ body{font-size:15px;line-height:1.45}
 .pm9 .link{font-weight:600;margin-left:auto}
 h3,.card h3{line-height:1.3!important}.btn{line-height:1.25!important}
 .pm9{flex-wrap:nowrap;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}.pm9>span:nth-child(2){flex:1;min-width:0}.pm9 .link{flex:none}
+.todo6 .td{position:relative}
+.todo6 .td .s2{font-size:13px!important;line-height:18px!important;color:var(--muted)}
+.todo6 .td .t{font-size:15px!important;line-height:20px!important;padding-right:18px}
+.todo6 .td .v2 small{font-size:12.5px!important;line-height:16px;color:var(--ink)!important;background:var(--card);border-radius:999px;padding:2px 8px;font-weight:500}
+.todo6 .td .v3{font-size:13px!important;line-height:18px!important}
+.chv9{position:absolute;top:12px;right:12px;font-size:20px;line-height:20px;color:var(--muted)}
+.all9{cursor:pointer;color:var(--muted);border-radius:6px;padding:4px 0}.all9:hover{color:var(--brand)}.all9 b{color:var(--ink)}
+.todo6 .td .t{padding-right:20px;overflow-wrap:anywhere}
+.chv9{top:14px;right:10px}
+@media (max-width:760px){.todo6 .td{padding:12px!important}.todo6 .td .t{font-size:14px!important;line-height:19px!important}}
+.todo6 .td .t{grid-column:1/-1!important;grid-row:2!important;padding-right:0;overflow-wrap:normal;margin-top:8px}
+.todo6 .td .ti6{grid-row:1}
+.todo6 .td .s2{grid-row:3}
+.chv9{top:16px;right:12px}
+@media (min-width:1100px){.todo6 .td .t{grid-column:2!important;grid-row:1!important;margin-top:0;padding-right:20px}}
+.todo6 .td .v2 small{white-space:nowrap}
+@media (min-width:1100px){.todo6 .td .s2{grid-row:2!important}.todo6 .td .v2{grid-row:3}.todo6 .td .v3{grid-row:4}}
+.todo6 .td .v2{grid-row:4}.todo6 .td .v3{grid-row:5}
+@media (min-width:1100px){.todo6 .td .v2{grid-row:3!important}.todo6 .td .v3{grid-row:4!important}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4456,7 +4475,7 @@ const TD6=['users','clock','basket','star'];
 const _W6c=W; W=function(k){ let h=_W6c(k); if(k!=='todo'||!h) return h; let i=0;
   h=h.replace('<h2 class="sec" style="margin-top:4px">Ваши задачи</h2><div class="todo">','<div class="card c-pad"><h3 class="h20">Ваши задачи</h3><div class="todo todo6">')
      .replace(/<button class="td" onclick="([^"]*)">/g,(m,f)=>`<button class="td" onclick="${f}"><span class="ti6 t${i}">${ic6(TD6[i++],20)}</span>`);
-  h=h.replace(/<small>в первой линии<\/small>/g,'<small>1-я линия</small>').replace(/<small>в 1-м поколении<\/small>/g,'<small>1-е поколение</small>')
+  h=h.replace(/<small>в первой линии<\/small>/g,'<small>1-я линия</small>').replace(/<small>в 1-м поколении<\/small>/g,'<small>1-е пок.</small>')
      .replace(/<span class="v3">(\d[\d\s\u00a0]*) [^<]*<\/span>/g,'<span class="v3">Всего: <b>$1</b></span>');
   return h+'</div>'; };
 
@@ -4694,6 +4713,10 @@ const _setP9=setP; setP=function(k){ planLoaded=null; _setP9(k); };
   sh('sop',(v)=>v.need!=null&&v.have<v.need?`не хватает ${fmt(v.need-v.have)}`:'выполнено');
   sh('bonus',()=>'предварительно');
 })();
+/* Ваши задачи: стрелка-указатель, «1-я линия» — бейджем, «Всего» — отдельной ссылкой на всю структуру */
+const _W9=W; W=function(k){ let h=_W9(k); if(k!=='todo'||!h) return h;
+  return h.replace(/<span class="v3">Всего: <b>([^<]*)<\/b><\/span>/g,(m,n)=>`<span class="v3"><span class="all9" role="link" tabindex="0" onclick="event.stopPropagation();tscope='g10';go('team','all')">Всего: <b>${n}</b> ›</span></span>`)
+          .replace(/<button class="td" onclick="([^"]*)">/g,'<button class="td" onclick="$1"><span class="chv9" aria-hidden="true">›</span>'); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4829,7 +4852,7 @@ Object.assign(EN_DICT,{"Быстрее всего — помочь":"Fastest: he
 Object.assign(EN_DICT,{"октябрь, предварительно":"October, preliminary","Изменить":"Edit","Октябрь, предварительно · до конца месяца":"October, preliminary · days to month-end:","Новости":"News","Ещё":"More:","блоков можно включить: новички, рекомендации, промокоды, САП, обучение…":"blocks can be turned on: newcomers, recommendations, promo codes, SAP, learning…","Профиль и данные":"Profile & data","Язык":"Language","Страна и валюта":"Country & currency","Тёмная тема":"Dark theme","Советы и туры":"Tips & tours","Спросить Каролину":"Ask Karolina","Профиль и настройки":"Profile & settings","Каролина":"Karolina","Истории":"Stories"});EN_RE=null;
 Object.assign(EN_DICT,{"Воронка потребителя":"Consumer funnel","каждый шаг — часть предыдущего":"each step is part of the previous one","потребители, пришедшие 3–12 мес. назад":"consumers who joined 3–12 months ago","из них заказали снова · в первые 90 дней —":"of them ordered again · within the first 90 days —","Второй заказ":"Second order","Третий заказ":"Third order","привычка формируется":"habit forming","Лоялисты":"Loyal consumers","3+ заказа за полгода":"3+ orders in six months","от шага выше":"of previous step","Мои потребители":"My consumers","Вся структура":"Whole structure","Главная потеря — между первым и вторым заказом. Второй заказ в первые 90 дней:":"The main loss is between the first and second order. Second order in the first 90 days:","(цель трека 65%). Пишите потребителю на 20–45 день.":"(track goal 65%). Message the consumer on days 20–45."});EN_RE=null;
 Object.assign(EN_DICT,{"Оформление":"Appearance","Авто":"Auto","Светлая":"Light","Тёмная":"Dark"});EN_RE=null;
-Object.assign(EN_DICT,{"1-я линия":"1st line","1-е поколение":"1st generation","Всего:":"Total:"});EN_RE=null;
+Object.assign(EN_DICT,{"1-я линия":"1st line","1-е поколение":"1st gen.","1-е пок.":"1st gen.","Всего:":"Total:"});EN_RE=null;
 Object.assign(EN_DICT,{"Свернуть меню":"Collapse menu","Развернуть меню":"Expand menu","Подключите Автоподбор":"Join Auto-matching","Компания передаёт Директорам заявки с сайта и рекламы — бесплатно":"The company passes leads from the website and ads to Directors — for free","Как подключиться":"How to join","Марафон гидратации · 2-й поток с 20 октября":"Hydration marathon · 2nd run from October 20","Запишите потребителей первых 90 дней — после марафона их поддерживают чат-боты":"Sign up consumers in their first 90 days — chatbots support them after the marathon","Спланировать":"Plan","Скрыть уведомление":"Hide notice","Уведомление скрыто":"Notice hidden","Баннер скрыт":"Banner hidden","Скрыто":"Hidden","Запишите потребителей первых 90 дней":"Sign up consumers in their first 90 days","До Директора":"To Director:","баллов ГО":"GV points","С ранга Директор — 25% с личного объёма и 10–25% с группы":"From Director rank — 25% of personal volume and 10–25% of the group","Актуально на 08.10.2026, 18:31 · октябрь, предварительно":"As of 08.10.2026, 18:31 · October, preliminary","к сентябрю":"vs September","выполнен":"met","до порога":"to threshold:","порог":"threshold","По месяцам":"By month","Подробнее с Каролиной":"More with Karolina","Что важно в":"What matters in","сейчас":"now","Из чего складывается":"Breakdown","Итого":"Total","Как считается":"How it's calculated","Мои заказы за октябрь":"My October orders","Баллы в пути — засчитаются после доставки":"Points in transit — count after delivery","Ваш ЛО":"Your PV","Ваш ГО":"Your GV","Ветка":"Branch","-е поколение ·":" generation ·","Дир.":"Dir.","История по месяцам для этого показателя появится, когда подключим данные нового бэкенда — выдумывать не стали.":"Monthly history for this metric will appear once the new backend data is connected — we didn't make it up.","баллов":"points","Назад":"Back"});EN_RE=null;
 Object.assign(EN_DICT,{"Баллы в пути — пока не входят, засчитаются после доставки":"Points in transit — not included yet, count after delivery"});EN_RE=null;
 Object.assign(EN_DICT,{"Спросите, что делать с этой цифрой":"Ask what to do with this number"});EN_RE=null;
