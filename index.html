@@ -1289,6 +1289,44 @@ body.navc .navtg{margin:0 0 8px}
 .hx7 .expl{margin-top:10px}
 .thr7{z-index:2;border-top-color:var(--muted);opacity:.7}
 .nt7 .link{border:0!important;text-decoration:none;color:var(--ink);display:inline-block}
+/* Health OS: полоса с отметками */
+.hb7{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--soft);border-radius:16px;padding:16px;margin-top:12px;box-sizing:border-box;width:100%}
+.hb7 .lb{font-size:14px;color:var(--muted)}
+.hb7 .vv{display:flex;align-items:baseline;gap:10px}.hb7 .vv b{font-size:34px;line-height:40px;font-weight:600}.hb7 .vv small{font-size:14px;color:var(--muted)}
+.tr7{position:relative;height:10px;background:var(--line);border-radius:99px;margin:26px 0 4px}
+.tr7 i{position:absolute;inset:0 auto 0 0;border-radius:99px;background:var(--bad)}.tr7 i.mid{background:var(--warn)}.tr7 i.ok{background:var(--good)}
+.tr7 em{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--muted)}.tr7 em.g{background:var(--ink)}
+.tr7 em span{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-style:normal;font-size:12px;white-space:nowrap;color:var(--muted)}
+.tr7 em:not(.g) span{transform:translateX(-100%);padding-right:4px}.tr7 em.g span{transform:none;padding-left:4px;color:var(--ink);font-weight:600}
+.hb7 .hint{font-size:13.5px;color:var(--muted)}
+.hs7{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.hs7 button{all:unset;cursor:pointer;background:var(--soft);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.hs7 b{font-size:22px;font-weight:600}.hs7 b.bad{color:var(--bad)}.hs7 span{font-size:13px;color:var(--muted);line-height:17px}
+
+/* Минимальные кегли: 12 px только для сносок, основной текст ≥ 14, подписи ≥ 13 */
+.sub,.meta,.tile .h,.kc4 .ft,.li small,.cc .sub,.qst small,.strk small,.todo6 .td .s2,.todo6 .td .v3,.bdg5,.tag,.hc small,.gw-i small,.a4 small,.fl2 small,.fr6 .l small{font-size:max(13px,1em)!important}
+.li small,.cc .sub,.qst small,.a4 small,.hc small,.gw-i small{font-size:13px!important;line-height:18px}
+.tag{font-size:12.5px!important}.bdg5{font-size:11.5px!important}
+body,#main{font-size:15px}
+.nsub button{font-size:14.5px}
+.kc4 .bars i em,.bar7 em,.thr7 span,.ind small,.cb7 small{font-size:12px!important}
+.rtab td,.rtab th{font-size:14px}.rtab td small{font-size:12.5px!important}
+.kv5 small,.kcol p,.sumx small,.sumx span,.ptb .gl{font-size:13px!important}
+.h6-money small,.h6-qa small{font-size:13px}
+.chip,.crmf .chip,.msg button,.cc .msg button{font-size:14px}
+.nt7 small,.ccards .sub{font-size:14px}
+.rk,.stb{font-size:12.5px!important}
+.ind small{font-size:12.5px!important}
+.sumx em,.sumx div em{font-size:12.5px!important;font-style:normal}
+.kc small,.fr6 .c small{font-size:13px!important}
+.rtab th{font-size:13px!important}
+/* мелкие плашки в светлой теме: те же оттенки ДС, текст на тон темнее — контраст ≥ 4.5 */
+:root:not([data-theme="dark"]) .tag.t-ok,:root:not([data-theme="dark"]) .pill,:root:not([data-theme="dark"]) .perk .pill,:root:not([data-theme="dark"]) .dot.d-ok{color:#3b6a12!important}
+:root:not([data-theme="dark"]) .tag.t-w,:root:not([data-theme="dark"]) .tag.t-h,:root:not([data-theme="dark"]) .bdg.hos,:root:not([data-theme="dark"]) .dot.d-risk{color:#8a4b14!important}
+:root:not([data-theme="dark"]) .dot.d-no{color:#b02f00!important}
+.tr7 em span{background:var(--soft);padding:0 4px}
+:root:not([data-theme="dark"]) .tag.t-b{color:#a32a00!important}
+:root:not([data-theme="dark"]) .note.h{color:#7a4412!important}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4478,6 +4516,16 @@ const _bonus7=bonus; bonus=function(){ const b=_bonus7.apply(null,arguments); co
   const fl=b.parts.map(x=>Math.floor(x.v)); let rest=T-fl.reduce((a,x)=>a+x,0);
   b.parts.map((x,i)=>[i,x.v-Math.floor(x.v)]).sort((a,c)=>c[1]-a[1]).forEach(([i])=>{ if(rest>0){ fl[i]++; rest--; } });
   const parts=b.parts.map((x,i)=>Object.assign({},x,{v:fl[i]})); return Object.assign({},b,{parts,total:T,min:T,max:T}); };
+
+/* Health OS на главной: вместо спидометра — полоса прогресса с отметками «сеть» и «цель» (одна шкала 0–100%, читается за секунду) */
+const _W7h=W; W=function(k){ if(k!=='hos') return _W7h(k); const r=R0(), hs=hosStats(M,M.kids[r]), v=hs.rate;
+  const st=v==null?'':v>=65?'ok':v>=59?'mid':'low';
+  return `<div class="card c-pad"><div class="hrow"><h3 class="h20">Health OS · клиенты</h3>${B('hos')}</div>
+   <button class="hb7" onclick="kpiExplain('hos2')"><span class="lb">Второй заказ за 90 дней</span>
+    <span class="vv"><b>${v==null?'—':v+'%'}</b><small>${hs.s90} из ${hs.mat.length} клиентов</small></span>
+    <span class="tr7"><i class="${st}" style="width:${v||0}%"></i><em style="left:59%"><span>сеть 59%</span></em><em class="g" style="left:65%"><span>цель 65%</span></em></span>
+    <span class="hint">${v==null?'Пока нет клиентов с закрытым окном 90 дней':v>=65?'Выше цели трека':`До цели ${65-v} п.п. — ${Math.max(1,Math.ceil(0.65*hs.mat.length)-hs.s90)} клиента со вторым заказом`}</span></button>
+   <div class="hs7">${[[hs.win.length,'в окне 90 дней',''],[hs.help.length,'нужна помощь',hs.help.length?'bad':''],[hs.water+'%','начали с воды','']].map(([n,t,c])=>`<button onclick="go('clients','90')"><b class="${c}">${n}</b><span>${t}</span></button>`).join('')}</div></div>`; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4617,6 +4665,7 @@ Object.assign(EN_DICT,{"1-я линия":"1st line","1-е поколение":"1
 Object.assign(EN_DICT,{"Свернуть меню":"Collapse menu","Развернуть меню":"Expand menu","Подключите Автоподбор":"Join Auto-matching","Компания передаёт Директорам заявки с сайта и рекламы — бесплатно":"The company passes leads from the website and ads to Directors — for free","Как подключиться":"How to join","Марафон гидратации · 2-й поток с 20 октября":"Hydration marathon · 2nd run from October 20","Запишите клиентов первых 90 дней — после марафона их поддерживают чат-боты":"Sign up clients in their first 90 days — chatbots support them after the marathon","Спланировать":"Plan","Скрыть уведомление":"Hide notice","Уведомление скрыто":"Notice hidden","Баннер скрыт":"Banner hidden","Скрыто":"Hidden","Запишите клиентов первых 90 дней":"Sign up clients in their first 90 days","До Директора":"To Director:","баллов ГО":"GV points","С ранга Директор — 25% с личного объёма и 10–25% с группы":"From Director rank — 25% of personal volume and 10–25% of the group","Актуально на 08.10.2026, 18:31 · октябрь, предварительно":"As of 08.10.2026, 18:31 · October, preliminary","к сентябрю":"vs September","выполнен":"met","до порога":"to threshold:","порог":"threshold","По месяцам":"By month","Подробнее с Каролиной":"More with Karolina","Что важно в":"What matters in","сейчас":"now","Из чего складывается":"Breakdown","Итого":"Total","Как считается":"How it's calculated","Мои заказы за октябрь":"My October orders","Баллы в пути — засчитаются после доставки":"Points in transit — count after delivery","Ваш ЛО":"Your PV","Ваш ГО":"Your GV","Ветка":"Branch","-е поколение ·":" generation ·","Дир.":"Dir.","История по месяцам для этого показателя появится, когда подключим данные нового бэкенда — выдумывать не стали.":"Monthly history for this metric will appear once the new backend data is connected — we didn't make it up.","баллов":"points","Назад":"Back"});EN_RE=null;
 Object.assign(EN_DICT,{"Баллы в пути — пока не входят, засчитаются после доставки":"Points in transit — not included yet, count after delivery"});EN_RE=null;
 Object.assign(EN_DICT,{"Спросите, что делать с этой цифрой":"Ask what to do with this number"});EN_RE=null;
+Object.assign(EN_DICT,{"Второй заказ за 90 дней":"Second order within 90 days","клиентов":"clients","сеть 59%":"network 59%","цель 65%":"goal 65%","Выше цели трека":"Above track goal","До цели":"To goal:","п.п. —":"pp —","клиента со вторым заказом":"clients with a second order","Пока нет клиентов с закрытым окном 90 дней":"No clients with a closed 90-day window yet","в окне 90 дней":"in 90-day window","нужна помощь":"need help","начали с воды":"started with water"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
