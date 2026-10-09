@@ -1164,6 +1164,59 @@ button.gauge{width:100%;border:0;cursor:pointer;text-align:left;color:var(--ink)
 :root[data-theme="dark"] .todo .td .t span{background:rgba(255,255,255,.08)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .todo .td .t span{background:rgba(255,255,255,.08)}}
 .todo .td:nth-child(1){box-shadow:inset 0 0 0 1px var(--line)!important}
+/* ================= v6: по итогам аудита ================= */
+/* шапка-герой */
+.hero6{background:linear-gradient(135deg,#0f5f5a 0%,#138a80 100%);color:#fff;border-radius:24px;padding:20px;margin-bottom:16px}
+.h6-top{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.h6-hi{font-size:22px;line-height:28px;font-weight:600}
+.h6-rk{all:unset;cursor:pointer;margin-top:4px;font-size:14px;opacity:.9;display:inline-flex;gap:6px}
+.h6-money{display:flex;gap:8px;align-items:stretch}
+.h6-money button{all:unset;cursor:pointer;background:rgba(255,255,255,.12);border-radius:16px;padding:10px 14px;min-width:120px}
+.h6-money small{display:block;font-size:12px;opacity:.85}.h6-money b{font-size:18px;font-weight:600}
+.h6-money .h6-eye{min-width:0;display:grid;place-items:center;padding:0 12px}
+.h6-qa{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:18px}
+.h6-qa button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.h6-qa span{width:48px;height:48px;border-radius:16px;background:rgba(255,255,255,.16);display:grid;place-items:center;color:#fff}
+.h6-qa small{font-size:12px;line-height:15px;opacity:.95}
+@media (max-width:760px){.h6-money{width:100%}.h6-money button{flex:1;min-width:0}.h6-qa{grid-template-columns:repeat(6,72px);overflow-x:auto;scrollbar-width:none;margin-right:-20px;padding-right:20px}}
+
+/* одна поверхность: белые карточки, серые плитки, цвет только в кружках иконок */
+.todo6{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+@media (min-width:1100px){.hw.s12 .todo6{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.todo6 .td,.todo6 .td:nth-child(n){background:var(--soft)!important;box-shadow:none!important;min-height:0;padding:14px;border-radius:16px}
+.todo6 .td .t::before{display:none!important}
+.todo6 .td .t{font-size:14px;font-weight:600}
+.todo6 .td .t span{display:none}
+.ti6{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin-bottom:10px;flex:none}
+.ti6.t0{background:var(--info-s);color:var(--info)}.ti6.t1{background:var(--bad-s);color:var(--bad)}.ti6.t2{background:var(--warn-s);color:var(--warn)}.ti6.t3{background:var(--good-s);color:var(--good)}
+:root:not([data-theme="dark"]) .ti6.t0{background:#ecebfb}
+.todo6 .td .v2 b{font-size:28px;line-height:32px}
+.qst .qi{color:var(--muted)}.qst.ok .qi{color:var(--good)}
+.strk .ti6{margin:0}
+
+/* шкала шрифтов: KPI-цифра — главный акцент экрана */
+.tile .v{font-size:28px!important;line-height:32px;font-weight:600;margin-top:8px!important;white-space:nowrap}
+.tile .v small{font-size:14px!important;font-weight:400}
+.tile .t{font-size:14px;font-weight:600}
+.tile .h{font-size:12.5px!important;line-height:16px;color:var(--muted)}
+.tile{min-height:136px}
+.tar .meta{font-size:13px;color:var(--muted);margin-top:2px}
+.hw h3,.h20{font-size:20px!important;line-height:26px!important;font-weight:600!important}
+.sec6{font-size:20px;font-weight:600;margin:4px 0 8px}
+.topbar h1 small{line-height:1.4!important;font-size:13px}
+.hfoot6{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+
+/* шапка на ноутбуке: в одну строку */
+@media (min-width:761px){.topbar .lseg,.topbar .ctryb,.topbar .ib.hide-m,.topbar .custbtn{display:none!important}.topbar{flex-wrap:nowrap}.topbar h1{flex:1 1 auto;min-width:0}}
+.kar6{all:unset;cursor:pointer;display:none;align-items:center;gap:8px;height:40px;padding:0 14px 0 4px;border-radius:999px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);font-weight:600;font-size:14px}
+.kar6 .kar{width:32px;height:32px;border-radius:50%;background-size:cover;background-position:center}
+@media (min-width:1100px){.kar6{display:inline-flex}#aiw .aifab{display:none}}
+/* меню аватара */
+.ac6{display:flex;gap:12px;align-items:center;margin-bottom:12px}.ac6 .av{width:56px;height:56px;font-size:18px}.ac6 small{display:block;color:var(--muted)}
+.li6{display:flex;justify-content:space-between;align-items:center;min-height:52px;border-top:1px solid var(--line);cursor:pointer;font-size:15px}.li6>span:last-child{color:var(--muted)}
+.h6-money b{white-space:nowrap}
+@media (max-width:760px){.h6-money button{padding:10px 12px}.h6-money b{font-size:17px}.h6-money .h6-eye{flex:0 0 44px;padding:0}}
+.perk{gap:12px}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4178,6 +4231,78 @@ const _aiAsk5=aiAsk; aiAsk=function(q){ const R=karo(q);
   if(!R) return _aiAsk5(q);
   const ks=R.k.map(id=>KB.find(k=>k.id===id)).filter(Boolean);
   aiLog.push(`<div class="m me">${q}</div><div class="m bot">${R.a}${R.x.length?`<div class="kacts">${R.x.join('')}</div>`:''}${ks.length?kbSrc(ks):''}</div>`); aiOpen=true; drawAI(); const i=document.getElementById('aiIn'); if(i) i.value=''; };
+/* ================= v6: по итогам UX/UI-аудита — KPI на первый экран, 1 фокус + немного блоков, одна поверхность, шкала шрифтов, иконки вместо эмодзи ================= */
+const IC6={
+ plus:'<path d="M12 5v14M5 12h14"/>',
+ share:'<path d="M7 17 17 7M9 7h8v8"/>',
+ plan:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ swap:'<path d="M4 8h14l-3-3M20 16H6l3 3"/>',
+ cart:'<path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
+ spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>',
+ users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ basket:'<path d="M4 9h16l-1.5 10h-13zM8 9l4-5 4 5"/>',
+ star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+ drop:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+ flag:'<path d="M5 21V4h11l-2 4 2 4H5"/>',
+ check:'<path d="m5 12 4.5 4.5L19 7"/>',
+ flame:'<path d="M12 21a6 6 0 0 0 6-6c0-4-3-6-4-9-1 2-2 3-4 4 0-2-1-3-1-3-2 2-3 5-3 8a6 6 0 0 0 6 6z"/>',
+ eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ eyeoff:'<path d="M3 3l18 18M10.6 6.1A10 10 0 0 1 12 6c6.5 0 10 6 10 6a17 17 0 0 1-3.2 3.9M6.6 7.6C3.8 9.3 2 12 2 12s3.5 6 10 6a9.7 9.7 0 0 0 4.4-1"/>'
+};
+const ic6=(k,s)=>`<svg width="${s||20}" height="${s||20}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC6[k]||''}</svg>`;
+
+/* быстрые действия: линейные иконки одного набора */
+QA.splice(0,QA.length,['plus','Вступление в клуб',"go('tools','new')"],['share','Поделиться ссылкой',"refLink()"],['plan','Разметка',"go('plan')"],['swap','Перевести баллы',"go('transfer','mgmt')"],['cart','Каталог',"window.open('https://coralclub.ru/','_blank')"],['spark','Каролина',"aiOpen=true;drawAI()"]);
+
+/* шапка-герой: компактная — приветствие, один ранг, деньги, действия */
+function heroBand(){
+  const p=P(), ri=rankInfo(), h=new Date().getHours(), hi=h<12?'Доброе утро':h<18?'Добрый день':'Добрый вечер';
+  return `<section class="hero6"><div class="h6-top"><div class="h6-id"><div class="h6-hi">${hi}, ${p.short}</div>
+     <button class="h6-rk" onclick="rankHelp()">${RANK_NAME[ri.cur]} · октябрь, предварительно <span aria-hidden="true">›</span></button></div>
+    <div class="h6-money"><button onclick="go('wallet','move')"><small>Coral Кошелёк</small><b>${hideMoney?'•••••':money(p.wallet)}</b></button><button onclick="go('transfer','mgmt')"><small>Трансферный счёт</small><b>${hideMoney?'•••••':p.transfer+' б.'}</b></button><button class="h6-eye" onclick="hideMoney=!hideMoney;render()" aria-label="${hideMoney?'Показать суммы':'Скрыть суммы'}">${ic6(hideMoney?'eye':'eyeoff',18)}</button></div></div>
+   <div class="h6-qa" role="list">${QA.map(([i,t,f])=>`<button role="listitem" onclick="${f}"><span>${ic6(i,22)}</span><small>${t}</small></button>`).join('')}</div></section>`;
+}
+
+/* главная: 1 фокус (показатели) + 5 блоков по умолчанию, остальное — в «Настроить» */
+HW.metrics.size='s12'; HW.stories={t:'Истории',d:'Новости и обучение в формате историй',size:'s12'};
+const _W6=W; W=function(k){ if(k==='stories') return `<h2 class="sec6">Новости</h2>`+stories4(); return _W6(k); };
+HDEF.dir={order:['cele','metrics','todo','rank','risk','hos','quests'],hidden:['start','actions','growth','sap','bday','perso','newbies','recs','banners','promos','learn','stories'],kpis:['lo','go','sop','bonus']};
+HDEF.asst={order:['cele','start','metrics','todo','rank','hos','quests'],hidden:['actions','growth','sap','bday','perso','newbies','recs','banners','promos','learn','stories','risk'],kpis:['lo','go','active','bonus']};
+HCFG=LS.get('coral_lk_home_v3',{}); saveH=function(){ LS.set('coral_lk_home_v3',HCFG); };
+homeDir=function(){ const r=R0(), c=hcfg();
+  return topbar('Рабочий стол','',per())+
+  (hasPlan()?`<div class="warn" style="margin-bottom:14px"><span>Показаны значения <b>по плану</b> · отмечено ${Object.keys(plans[pk]).length}. Факт: ГО ${fmt(F.go[r])}, квалификация ${RANK_NAME[F.rank[r]]}.</span><button class="btn sm gh" style="margin-left:auto" onclick="plans[pk]={};recalc();render()">Показать факт</button></div>`:'')+
+  heroBand()+
+  `<div class="g4 hgrid">${c.order.filter(k=>HW[k]).map(k=>{ const h=W(k); return h?`<section id="w-${k}" class="${HW[k].size} hw" aria-label="${HW[k].t}">${h}</section>`:''; }).join('')}</div>
+  <div class="hfoot6"><button class="btn gh" onclick="customize()">Настроить главную</button><span class="sub">Ещё ${c.hidden.length} блоков можно включить: новички, рекомендации, промокоды, САП, обучение…</span></div>`; };
+
+/* «Мои показатели» — фокус экрана: короткая подпись, крупные цифры */
+const _W6b=W; W=function(k){ let h=_W6b(k); if(k==='metrics'&&h) h=h.replace(/<div class="meta">[\s\S]*?<\/div>/,`<div class="meta">Октябрь, предварительно · до конца месяца ${daysLeft()} дн.</div>`).replace('✎ Выбрать','Изменить').replace('<span class="pi">⚡</span>',`<span class="ti6 t3" style="margin:0">${ic6('star',20)}</span>`).replace('<span class="pi">🎁</span>',`<span class="ti6 t0" style="margin:0">${ic6('spark',20)}</span>`);
+  if(h) h=h.replace(/ <span class="bdg5[^"]*">[^<]*<\/span><\/h3>/,'</h3>'); return h; };
+
+/* «Ваши задачи»: серые плитки на белой карточке, цвет — только в кружке иконки (как «Сервисы» у Сбера) */
+const TD6=['users','clock','basket','star'];
+const _W6c=W; W=function(k){ let h=_W6c(k); if(k!=='todo'||!h) return h; let i=0;
+  h=h.replace('<h2 class="sec" style="margin-top:4px">Ваши задачи</h2><div class="todo">','<div class="card c-pad"><h3 class="h20">Ваши задачи</h3><div class="todo todo6">')
+     .replace(/<button class="td" onclick="([^"]*)">/g,(m,f)=>`<button class="td" onclick="${f}"><span class="ti6 t${i}">${ic6(TD6[i++],20)}</span>`);
+  return h+'</div>'; };
+
+/* цели месяца: иконки одного набора вместо эмодзи */
+const QIC6={rank:'flag',dir:'users',hos:'drop',join:'plus'};
+const _q6=quests; quests=function(){ return _q6().map(q=>Object.assign(q,{ic:ic6(QIC6[q.id]||'flag',20)})); };
+const _qw6=questsW; questsW=function(){ return _qw6().replace('<span>🔥</span>',`<span class="ti6 t1">${ic6('flame',20)}</span>`).replace(/<span class="qi">✓<\/span>/g,`<span class="qi">${ic6('check',20)}</span>`).replace(/ <span class="bdg5[^"]*">[^<]*<\/span><\/h3>/,'</h3>'); };
+
+/* шапка: одна строка на ноутбуке. Язык, страна и тема — в меню аватара; Каролина — кнопкой в шапке на десктопе */
+function acct(){ const p=P(); openDr(`<div class="ac6"><span class="av avt u-${pk}">${p.name.split(' ').map(w=>w[0]).join('').slice(0,2)}</span><div><b>${p.name}</b><small>${RANK_NAME[M.rank[R0()]]} · №${p.num}</small></div></div>
+  <div class="li6" onclick="closeDrSilent();go('profile','data')">Профиль и данные <span>›</span></div>
+  <div class="li6"><span>Язык</span><div class="lseg"><button class="${lang==='ru'?'on':''}" onclick="setLang('ru')">RU</button><button class="${lang==='en'?'on':''}" onclick="setLang('en')">EN</button></div></div>
+  <div class="li6" onclick="localeDr()">Страна и валюта <span>${COUNTRIES[ctry][3]} ${COUNTRIES[ctry][1]} ›</span></div>
+  <div class="li6" onclick="toggleTheme();closeDrSilent()">Тёмная тема <span>›</span></div>
+  <div class="li6" onclick="closeDrSilent();customize()">Настроить главную <span>›</span></div>
+  <div class="li6" onclick="closeDrSilent();tipsCenter()">Советы и туры <span>›</span></div>`); applyPhotos&&applyPhotos(); document.querySelectorAll('#dr .ac6 .av').forEach(e=>{ const c=UPH[pk]; if(c) e.classList.add(c); }); }
+const _tb6=topbar; topbar=function(t,s,x){ return _tb6(t,s,x).replace(/onclick="go\('profile','data'\)" aria-label="Профиль"/,`onclick="acct()" aria-label="Профиль и настройки"`)
+  .replace('<button class="ib bulb"',`<button class="kar6" onclick="aiOpen=true;drawAI()" aria-label="Спросить Каролину"><span class="kar"></span>Каролина</button><button class="ib bulb"`); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4310,6 +4435,7 @@ Object.assign(EN_DICT,{
 "выполнено":"done","в работе":"in progress","Связь с командой · CRM":"Team contact · CRM","Сменить фото":"Change photo","Загрузить фото":"Upload photo","Удалить":"Delete","Фото удалено":"Photo deleted","С фото вам на 30% чаще отвечают в мессенджерах.":"With a photo, people reply 30% more often in messengers.","Каролина · Coral AI":"Karolina · Coral AI"
 });EN_RE=null;
 Object.assign(EN_DICT,{"Быстрее всего — помочь":"Fastest: help","закрыть Директора: не хватает":"close Director: missing","Чеки приходят на почту и хранятся здесь — для отчёта или возврата":"Receipts arrive by email and are stored here — for reports or returns","Чек по 54-ФЗ — то же, что бумажный. Для возврата товара достаточно номера заказа.":"A receipt under Federal Law 54 equals a paper one. The order number is enough for a return.","по умолчанию":"default","для всех":"for everyone","для лидеров":"for leaders"});EN_RE=null;
+Object.assign(EN_DICT,{"октябрь, предварительно":"October, preliminary","Изменить":"Edit","Октябрь, предварительно · до конца месяца":"October, preliminary · days to month-end:","Новости":"News","Ещё":"More:","блоков можно включить: новички, рекомендации, промокоды, САП, обучение…":"blocks can be turned on: newcomers, recommendations, promo codes, SAP, learning…","Профиль и данные":"Profile & data","Язык":"Language","Страна и валюта":"Country & currency","Тёмная тема":"Dark theme","Советы и туры":"Tips & tours","Спросить Каролину":"Ask Karolina","Профиль и настройки":"Profile & settings","Каролина":"Karolina","Истории":"Stories"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
