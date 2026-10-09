@@ -1232,6 +1232,8 @@ body:has(#dr.on) #aiw .aifab{display:none}
 .seg6{display:inline-flex;background:var(--soft);border-radius:999px;padding:3px;gap:2px}
 .seg6 button{all:unset;cursor:pointer;padding:0 12px;height:34px;display:grid;place-items:center;border-radius:999px;font-size:13.5px;color:var(--muted);font-weight:500}
 .seg6 button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.todo6 .td .v2{gap:8px;align-items:baseline}.todo6 .td .v2 small{font-size:13px;color:var(--muted)}
+.todo6 .td .v3{font-size:13px;margin-top:4px}.todo6 .td .v3 b{color:var(--ink);font-weight:600}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4301,6 +4303,8 @@ const TD6=['users','clock','basket','star'];
 const _W6c=W; W=function(k){ let h=_W6c(k); if(k!=='todo'||!h) return h; let i=0;
   h=h.replace('<h2 class="sec" style="margin-top:4px">Ваши задачи</h2><div class="todo">','<div class="card c-pad"><h3 class="h20">Ваши задачи</h3><div class="todo todo6">')
      .replace(/<button class="td" onclick="([^"]*)">/g,(m,f)=>`<button class="td" onclick="${f}"><span class="ti6 t${i}">${ic6(TD6[i++],20)}</span>`);
+  h=h.replace(/<small>в первой линии<\/small>/g,'<small>1-я линия</small>').replace(/<small>в 1-м поколении<\/small>/g,'<small>1-е поколение</small>')
+     .replace(/<span class="v3">(\d[\d\s\u00a0]*) [^<]*<\/span>/g,'<span class="v3">Всего: <b>$1</b></span>');
   return h+'</div>'; };
 
 /* цели месяца: иконки одного набора вместо эмодзи */
@@ -4474,6 +4478,7 @@ Object.assign(EN_DICT,{"Быстрее всего — помочь":"Fastest: he
 Object.assign(EN_DICT,{"октябрь, предварительно":"October, preliminary","Изменить":"Edit","Октябрь, предварительно · до конца месяца":"October, preliminary · days to month-end:","Новости":"News","Ещё":"More:","блоков можно включить: новички, рекомендации, промокоды, САП, обучение…":"blocks can be turned on: newcomers, recommendations, promo codes, SAP, learning…","Профиль и данные":"Profile & data","Язык":"Language","Страна и валюта":"Country & currency","Тёмная тема":"Dark theme","Советы и туры":"Tips & tours","Спросить Каролину":"Ask Karolina","Профиль и настройки":"Profile & settings","Каролина":"Karolina","Истории":"Stories"});EN_RE=null;
 Object.assign(EN_DICT,{"Воронка клиента":"Client funnel","каждый шаг — часть предыдущего":"each step is part of the previous one","клиенты, пришедшие 3–12 мес. назад":"clients who joined 3–12 months ago","из них заказали снова · в первые 90 дней —":"of them ordered again · within the first 90 days —","Второй заказ":"Second order","Третий заказ":"Third order","привычка формируется":"habit forming","Лоялисты":"Loyal clients","3+ заказа за полгода":"3+ orders in six months","от шага выше":"of previous step","Мои клиенты":"My clients","Вся структура":"Whole structure","Главная потеря — между первым и вторым заказом. Второй заказ в первые 90 дней:":"The main loss is between the first and second order. Second order in the first 90 days:","(цель трека 65%). Пишите клиенту на 20–45 день.":"(track goal 65%). Message the client on days 20–45."});EN_RE=null;
 Object.assign(EN_DICT,{"Оформление":"Appearance","Авто":"Auto","Светлая":"Light","Тёмная":"Dark"});EN_RE=null;
+Object.assign(EN_DICT,{"1-я линия":"1st line","1-е поколение":"1st generation","Всего:":"Total:"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
