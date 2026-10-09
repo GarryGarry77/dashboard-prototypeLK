@@ -1363,6 +1363,29 @@ body,#main{font-size:15px}
 .tb8{all:unset;cursor:pointer;height:40px;padding:0 16px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);background:var(--card);font-weight:600;font-size:14px;color:var(--ink);display:inline-flex;align-items:center}
 .tb8.on{background:var(--soft)}
 .mrow .tg{min-width:36px;min-height:36px;font-size:18px}
+/* ================= v9: строгая шкала шрифтов, без наездов строк ================= */
+body{font-size:15px;line-height:1.45}
+.tile .t{font-size:14px!important;line-height:20px!important;font-weight:600}
+.tile .v{font-size:28px!important;line-height:34px!important;margin-top:6px!important}
+.tile .v small{font-size:14px!important;line-height:20px}
+.tile .h{font-size:13px!important;line-height:18px!important;margin-top:4px;display:block}
+.tile .pb{margin-top:auto!important}
+.tile .tm{display:flex;flex-direction:column;gap:0;height:100%}
+.tile{min-height:0!important}
+.tile .tm{padding:14px!important}
+.tile .h{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px}
+.tar .meta{font-size:14px!important;line-height:20px}
+.perk b{font-size:15px;line-height:20px}.perk small{font-size:13px!important;line-height:18px!important}
+.perk .pill{font-size:13.5px!important;line-height:18px;padding:6px 12px}
+.h6-hi{font-size:22px!important;line-height:28px!important}
+.h6-rk{font-size:14px!important;line-height:20px}
+.h6-money small{font-size:12.5px!important;line-height:16px}.h6-money b{font-size:18px!important;line-height:24px}
+.h6-qa small{font-size:12.5px!important;line-height:16px!important}
+.sub,.meta{line-height:1.4}
+.li small,.cc .sub,.qst small,.a4 small,.hc small,.gw-i small{line-height:18px!important}
+.pm9{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13.5px;line-height:19px;color:var(--muted);background:var(--soft);border-radius:14px;padding:10px 12px;margin-bottom:12px}
+.pm9 .link{font-weight:600;margin-left:auto}
+h3,.card h3{line-height:1.3!important}.btn{line-height:1.25!important}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4648,6 +4671,28 @@ const _plan8=plan; plan=function(){ const html=_plan8(), allOpen=opened[pk]&&ope
    .replace(/<button class="link" onclick="opened\[pk\]=new Set\(M\.order\);render\(\)">[^<]*<\/button>/,`<button class="tb8" onclick="planAll(${!allOpen})">${allOpen?'Свернуть всё':'Развернуть всё'}</button>`); };
 /* та же лупа во всех полях поиска */
 const _render8=render; render=function(){ _render8(); document.querySelectorAll('.sinp > span').forEach(s=>{ if(s.textContent.trim()==='⌕'){ s.className='si8'; s.innerHTML=SRCH8; } }); };
+/* ================= v9: Разметка запоминает фильтры каждого пользователя; умные настройки по рангу ================= */
+const PKEY=()=>'coral_lk_plan_'+pk;
+function planSmart(){ const rk=M.rank[R0()]; const i=rankIdx(rk); return {pscope: i>=rankIdx('М')?'g6': i>=rankIdx('Д')?'g1':'my', gensLimit: i>=rankIdx('М')?6:3, showCl:false}; }
+function planSave(){ LS.set(PKEY(),{pscope,gensLimit,showCl,PF:{...PF,ranks:[...PF.ranks]}}); }
+function planLoad(){ const s=LS.get(PKEY(),null), d=planSmart();
+  if(!s){ pscope=d.pscope; gensLimit=d.gensLimit; showCl=d.showCl; PF=FDEF(); return 'smart'; }
+  pscope=s.pscope; gensLimit=s.gensLimit; showCl=s.showCl; PF=Object.assign(FDEF(),s.PF,{ranks:new Set(s.PF.ranks||[])}); return 'saved'; }
+function planReset(){ try{ localStorage.removeItem(PKEY()); }catch(e){} planLoaded=null; planLoad(); planLoaded=pk; render(); toast('Вернули рекомендуемые настройки для вашего ранга'); }
+let planLoaded=null, planMode='smart';
+const _plan9=plan; plan=function(){ if(planLoaded!==pk){ planMode=planLoad(); planLoaded=pk; } const h=_plan9(); planSave();
+  const d=planSmart(), custom=pscope!==d.pscope||gensLimit!==d.gensLimit||showCl!==d.showCl||JSON.stringify({...PF,ranks:[...PF.ranks]})!==JSON.stringify({...FDEF(),ranks:[]});
+  const scopeName={my:'личная структура',g1:'+ директора 1-го поколения',g6:'+ директора 1–6 поколений',g10:'директорская до 10-го поколения'}[pscope];
+  const bar=`<div class="pm9"><span class="ti6 t0" style="margin:0;width:28px;height:28px">${ic6('check',16)}</span><span>${custom?`Ваши настройки сохранены: ${scopeName}, ${gensLimit} пок.`:`Настроено под ваш ранг: ${scopeName}, ${gensLimit} пок.`} Запомним и в следующий раз.</span>${custom?`<button class="link" onclick="planReset()">Сбросить</button>`:''}</div>`;
+  return h.replace('<div class="ptb">',bar+'<div class="ptb">'); };
+const _setP9=setP; setP=function(k){ planLoaded=null; _setP9(k); };
+/* короткие подписи в плитках: одна строка, без переносов */
+(()=>{ const sh=(k,f)=>{ const c0=KPI4[k].c; KPI4[k].c=r=>{ const v=c0(r); v.hint=f(v,r); return v; }; };
+  sh('lo',(v,r)=>{ const p=pending(M,r).own; return p?`+${p} в пути`:'без баллов в пути'; });
+  sh('go',(v,r)=>M.go[r]>=750?'экстрабонус ✓':`до экстрабонуса ${750-M.go[r]}`);
+  sh('sop',(v)=>v.need!=null&&v.have<v.need?`не хватает ${fmt(v.need-v.have)}`:'выполнено');
+  sh('bonus',()=>'предварительно');
+})();
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4791,6 +4836,8 @@ Object.assign(EN_DICT,{"Второй заказ за 90 дней":"Second order 
 Object.assign(EN_DICT,{"Подписка на воду — пилот в Румынии и Молдове":"Water subscription — pilot in Romania and Moldova","Регулярная доставка воды со скидкой до −40%. В вашей стране запуск — после итогов пилота; сообщим заранее.":"Regular water delivery at up to −40%. Launch in your country follows the pilot results; we'll let you know in advance.","Посмотреть, как это работает (Румыния)":"See how it works (Romania)","Подписка":"Subscription","Моя подписка":"My subscription","активна":"active","на паузе":"paused","Пауза до":"Paused until","Доставки возобновятся автоматически":"Deliveries resume automatically","Следующая доставка":"Next delivery","Оплата спишется":"Payment will be charged","каждый месяц":"every month","раз в":"every","мес.":"mo.","Возобновить сейчас":"Resume now","Пропустить доставку":"Skip delivery","Пауза":"Pause","Как часто":"How often","Состав":"Contents","баллов за шт.":"points each","Меньше":"Less","Больше":"More","＋ Добавить продукт":"＋ Add product","Скидка подписки — до −40% по условиям пилота. Точная цена — в корзине перед списанием.":"Subscription discount — up to −40% per pilot terms. The exact price is shown in the cart before charging.","Доставки":"Deliveries","Доставлено":"Delivered","Пропущено":"Skipped","Оплата и адрес":"Payment & address","Карта":"Card","Адрес":"Address","Изменить ›":"Change ›","Ваш партнёр":"Your partner","Подписку ведёт Ирина Дмитриева — напишет, если что-то пойдёт не так.":"Your subscription is supported by Irina Dmitrieva — she'll reach out if anything goes wrong.","Написать партнёру ›":"Message partner ›","Отменить подписку":"Cancel subscription","Пауза подписки":"Pause subscription","Доставки и списания остановятся. Скидка сохранится.":"Deliveries and charges stop. Your discount is kept.","месяц":"month","месяца":"months","до":"until","Как часто доставлять":"How often to deliver","Каждый месяц":"Every month","Раз в 2 месяца":"Every 2 months","Раз в 3 месяца":"Every 3 months","для семьи из 2–3 человек":"for a family of 2–3","если вода остаётся":"if water is left over","для одного человека":"for one person","Добавить в подписку":"Add to subscription","Отменить подписку?":"Cancel subscription?","Скидка до −40% перестанет действовать. Подскажите, почему — мы передадим партнёру и команде пилота.":"The up to −40% discount will stop. Tell us why — we'll pass it to your partner and the pilot team.","Вода остаётся — слишком часто":"Water is left over — too often","Дорого":"Too expensive","Переезжаю или уезжаю":"Moving or travelling","Не подошёл продукт":"Product didn't suit me","Другое":"Other","Может, так удобнее?":"Would this be better?","Скидка сохранится, отменить можно в любой момент позже.":"Your discount stays; you can cancel any time later.","Доставлять раз в 2 месяца":"Deliver every 2 months","Поставить на паузу":"Pause it","Лучше пауза на 1–3 месяца":"Pause for 1–3 months instead","Всё равно отменить":"Cancel anyway","Оформить подписку":"Subscribe","Вода приходит сама раз в месяц, со скидкой до −40%. Пропустить, поставить на паузу или отменить можно в любой момент.":"Water arrives every month at up to −40%. Skip, pause or cancel any time.","Заказы и подписка":"Orders & subscription","Вода приходит сама — управляйте здесь":"Water arrives on its own — manage it here","Заказы":"Orders","Адреса":"Addresses","Оплата":"Payment","на подписке":"subscribed","Удержание 3-й доставки":"3rd-delivery retention","цель пилота ≥ 60%":"pilot goal ≥ 60%","подписка ·":"subscription ·","дост.":"deliv.","Заказы, подписка, чеки и счета, оплата, адреса и отзывы":"Orders, subscription, receipts & invoices, payment, addresses and reviews","Сообщить о запуске":"Notify me at launch"});EN_RE=null;
 Object.assign(EN_DICT,{"Моя подписка":"My subscription","Подписка на воду — регулярная доставка со скидкой до −40% по условиям пилота (Румыния и Молдова). В «Заказы → Подписка» можно пропустить доставку, поставить паузу на 1–3 месяца, изменить состав и частоту или отменить. Оплата списывается за 2 дня до доставки.":"Water subscription — regular delivery at up to −40% per pilot terms (Romania and Moldova). In “Orders → Subscription” you can skip a delivery, pause for 1–3 months, change contents and frequency, or cancel. Payment is charged 2 days before delivery."});EN_RE=null;
 Object.assign(EN_DICT,{"Свернуть всё":"Collapse all","Развернуть всё":"Expand all","Показать потребителей":"Show consumers","Скрыть потребителей":"Hide consumers","Развёрнуто:":"Expanded:","в дереве":"in the tree","Дерево свёрнуто до первой линии":"Tree collapsed to the first line","Потребители показаны в дереве":"Consumers shown in the tree","Потребители скрыты — только партнёры":"Consumers hidden — partners only"});EN_RE=null;
+Object.assign(EN_DICT,{"Ваши настройки сохранены:":"Your settings are saved:","Настроено под ваш ранг:":"Set up for your rank:","пок.":"gen.","Запомним и в следующий раз.":"We'll remember them next time.","Сбросить":"Reset","Вернули рекомендуемые настройки для вашего ранга":"Restored the recommended settings for your rank","личная структура":"personal structure","+ директора 1-го поколения":"+ 1st-generation directors","+ директора 1–6 поколений":"+ directors, generations 1–6","директорская до 10-го поколения":"director structure to 10th generation"});EN_RE=null;
+Object.assign(EN_DICT,{"в пути":"in transit","без баллов в пути":"nothing in transit","экстрабонус ✓":"extra bonus ✓","до экстрабонуса":"to extra bonus:","не хватает":"short by","выполнено":"done"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
