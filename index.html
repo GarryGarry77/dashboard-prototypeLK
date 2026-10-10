@@ -1545,6 +1545,20 @@ h3,.card h3{line-height:1.3!important}.btn{line-height:1.25!important}
 .sumx{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))!important}
 .sumx>div{min-width:0}.sumx span{overflow-wrap:anywhere}
 .fld .v{flex:1 1 120px}
+/* v13 баллы в пути */
+.p13seg{margin:14px 0 10px;display:flex}.p13seg button{flex:1}
+.p13so{margin:12px 0 4px}
+.p13r{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) auto auto;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);min-height:56px}
+.p13a b{display:block;font-size:15px;line-height:21px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.p13a small,.p13s small{display:block;font-size:13px;line-height:18px;color:var(--muted)}
+.p13s span{display:flex;align-items:center;gap:6px;font-size:14px;line-height:20px;color:var(--ink)}
+.p13s.ok span{color:var(--good);font-weight:600}
+.p13p{font-size:15px;color:var(--good);white-space:nowrap}
+.p13m{width:36px;height:36px}
+.p13w{background:var(--warn-s);border-color:transparent}.p13ok{background:var(--good-s);border-color:transparent}
+.p13e{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;box-sizing:border-box;width:100%;background:var(--card);border-radius:var(--r,20px);padding:16px 20px;min-height:64px}
+.p13e b{display:block;font-size:15px;font-weight:600;color:var(--ink)}.p13e small{display:block;font-size:13px;color:var(--muted)}
+@media (max-width:420px){.p13r{grid-template-columns:minmax(0,1fr) auto auto;}.p13s{grid-column:1/2;grid-row:2}.p13a{grid-row:1}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5039,6 +5053,35 @@ sapBars=function(){ const on=sapOn[pk]&&M.isDir[R0()];
    <div class="sapl"><em>демо-цифры — заменим данными РАО</em></div></div>`; };
 const _sapW12=sapW; sapW=function(){ let h=_sapW12(); if(sapOn[pk]&&M.isDir[R0()]) h=h.replace(`<button class="btn gh sm" onclick="go('team','sap')">Как это работает</button>`,`<button class="btn gh sm" onclick="go('clients','90')">Без второго заказа · 4</button>`); return h; };
 const _sapPage12=sapPage; sapPage=function(){ return _sapPage12().replace(/<b>Ведите первые 90 дней<\/b><small>[^<]*<\/small>/,'<b>Ведите к второму заказу</b><small>Человек попадает в окно 90 дней в «Потребителях»</small>'); };
+/* ================= v13: «Заказы в пути» — по заказу, статус, дата доставки, группировка по неделям ================= */
+const ST13=[['Оплачен','clock'],['Собирается','basket'],['В пути','cart'],['В пункте выдачи','check']];
+const MON13=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+function d13(off){ const d=new Date(Date.UTC(2026,9,8)+off*864e5); return `${d.getUTCDate()} ${MON13[d.getUTCMonth()]}`; }
+function orders13(){ const r=R0(), pe=pending(M,r), L=[];
+  if(pe.own){ const a=Math.round(pe.own*.6); [[a,1,2,4],[pe.own-a,6,0,9]].forEach(([v,ago,st,eta],i)=>{ if(v>0) L.push({who:'me',n:'Вы',no:48312+i*7,ago,st,eta,pts:v}); }); }
+  groupIds(M,r).filter(x=>x!==r&&M.by[x].pend&&!M.isDir[x]).forEach(x=>{ const ago=(x*5)%13, st=x%4; L.push({who:'grp',id:x,n:M.by[x].n,no:47100+x*13,ago,st,eta:st===3?0:Math.max(1,9-ago+st),pts:M.by[x].pend}); });
+  return L; }
+let P13={sc:'me',so:'date'};
+function pendSheet(sc,so){ if(sc) P13.sc=sc; if(so) P13.so=so;
+  const r=R0(), all=orders13(), me=all.filter(o=>o.who==='me'), gr=all.filter(o=>o.who==='grp'), sum=a=>a.reduce((s,o)=>s+o.pts,0);
+  let L=(P13.sc==='me'?me:gr).slice(); L.sort(P13.so==='pts'?(a,b)=>b.pts-a.pts:(a,b)=>a.ago-b.ago);
+  const need=typeof loNeedOf==='function'?loNeedOf(r):null, lo=M.lo[r], gap=need?Math.max(0,need-lo):0, pin=sum(me);
+  const risk=P13.sc==='me'&&gap>0?(pin>=gap?`<div class="note p13ok"><b>ЛО закроется после доставки.</b> Сейчас ${fmt(lo)} из ${fmt(need)} — заказы в пути добавят ${fmt(pin)}.</div>`
+    :`<div class="note p13w"><b>До ЛО для ранга не хватает ${fmt(gap-pin)}.</b> Сейчас ${fmt(lo)} из ${fmt(need)}${pin?`, в пути ещё ${fmt(pin)}`:''}. Закажите до 31 октября, чтобы сохранить ранг.<div class="btns" style="margin-top:10px"><button class="btn pri sm" onclick="closeDrSilent();window.open('https://coralclub.ru/','_blank')">Оформить заказ</button></div></div>`):'';
+  const grp=P13.so==='date'?[['Эта неделя',L.filter(o=>o.ago<=6)],['Раньше',L.filter(o=>o.ago>6)]]:[['По баллам',L]];
+  const row=o=>`<div class="p13r"><div class="p13a"><b>${o.who==='me'?'№ '+o.no:o.n}</b><small>${o.who==='me'?'':'№ '+o.no+' · '}${d13(-o.ago)}</small></div>
+    <div class="p13s ${o.st===3?'ok':''}"><span>${ic6(ST13[o.st][1],16)}${ST13[o.st][0]}</span><small>${o.st===3?'можно забрать':'доставка ≈ '+d13(o.eta)}</small></div>
+    <b class="p13p">+${fmt(o.pts)}</b>${o.who==='grp'?`<button class="ic10 p13m" onclick="crmMsg&&crmMsg(${o.id})" aria-label="Написать ${o.n}">💬</button>`:''}</div>`;
+  openDr(`<h2>Баллы в пути</h2><div class="sub" style="color:var(--muted)">Оплачены, ещё не доставлены · засчитаются в объём после доставки</div>
+   <div class="seg6 p13seg"><button class="${P13.sc==='me'?'on':''}" onclick="pendSheet('me')">Мои · ${fmt(sum(me))}</button><button class="${P13.sc==='grp'?'on':''}" onclick="pendSheet('grp')">Структура · ${fmt(sum(gr))}</button></div>
+   ${risk}
+   <div class="chips p13so"><button class="chip ${P13.so==='date'?'on':''}" onclick="pendSheet(null,'date')">По дате</button><button class="chip ${P13.so==='pts'?'on':''}" onclick="pendSheet(null,'pts')">По баллам</button></div>
+   ${L.length?grp.filter(g=>g[1].length).map(([t,a])=>`<div class="w12m">${t}</div>${a.map(row).join('')}`).join(''):'<div class="note">Заказов в пути нет.</div>'}
+   <div class="note" style="margin-top:14px">Даты доставки — оценка службы доставки. Коррекция баллов — неделя после закрытия месяца.</div>`); }
+/* вход: со страницы ЛО и ГО, из вкладки «Баллы в пути», из подсказки плитки ЛО */
+const _kpiPage13=kpiPage; kpiPage=function(){ let h=_kpiPage13(); const k=tabs.kpi||'go'; if(k!=='lo'&&k!=='go') return h;
+  const all=orders13(), n=all.filter(o=>k==='lo'?o.who==='me':true), s=n.reduce((a,o)=>a+o.pts,0);
+  return h.replace('<div class="card c-pad">',`<button class="card c-pad p13e" onclick="pendSheet('${k==='lo'?'me':'grp'}')"><span class="w12i">${ic6('cart',20)}</span><span class="g1"><b>Баллы в пути · +${fmt(s)}</b><small>${n.length} заказ${n.length===1?'':n.length<5?'а':'ов'} · статус и дата доставки</small></span><span class="chi10">${CHVs}</span></button><div class="card c-pad">`); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
