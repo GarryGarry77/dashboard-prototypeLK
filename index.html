@@ -1440,6 +1440,8 @@ h3,.card h3{line-height:1.3!important}.btn{line-height:1.25!important}
 .cz10 .g1,.as10 .g1{flex:1;min-width:0}
 .h6-rk{align-items:center}.h6-rk .chv10{width:20px;height:20px;background:transparent;color:#fff}
 .hero6 .chv10,.hero6 .chi10{color:#fff;background:transparent}
+.nv .chev.chv11{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;margin-left:auto;color:var(--muted);transition:transform .2s;font-size:0}
+.nv .chev.chv11 svg{width:18px;height:18px}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -1618,8 +1620,8 @@ function bonus(M,id,prevRank){
 
 /* ===== Демо-структуры. Все цифры на экранах считаются движком из этих узлов ===== */
 function rng(seed){ let s=seed>>>0; return ()=>{ s=(s*1664525+1013904223)>>>0; return s/4294967296; }; }
-const FN=['Мария','Елена','Ольга','Татьяна','Наталья','Ирина','Светлана','Анна','Юлия','Екатерина','Галина','Людмила','Оксана','Вера','Алина','Дарья','Ксения','Полина','Виктория','Надежда','Лариса','Марина','Жанна','Инна','Валентина','Алексей','Дмитрий','Сергей','Андрей','Игорь','Олег','Павел','Максим','Роман','Виктор','Евгений','Артём','Николай','Владимир','Михаил'];
-const LN=['К.','С.','П.','В.','М.','Д.','Л.','Т.','Р.','Г.','Б.','Н.','Ш.','Е.','З.','А.','Ф.','Ч.','О.','Х.'];
+const FN=['Мария','Елена','Ольга','Анна','Ирина','Наталья','Андрей','Дмитрий','Игорь','Павел','Ioana','Andreea','Elena','Mihai','Andrei','Ion','Cristina','Vlad','Anna','Lukas','Sophie','Jonas','Lena','Thomas','Katarzyna','Piotr','Marta','Giulia','Marco','Emma','Lucas','Olivia','James','Emily','Daniel','Sarah','Michael','Yuki','Hiroshi','Mei','Wei','Ji-woo','Min-jun','Aigerim','Nurlan','Priya','Arjun','Aisha'];
+const LN=['K.','S.','P.','M.','D.','L.','T.','R.','G.','B.','N.','H.','W.','A.','F.','C.','O.','Z.','V.','I.'];
 const PRODUCTS=['Coral-Mine','Coral-Mine ×3','Набор «Гидратация»','Simag-стик','Mizu-Mine Pure','Coral-Mine + Simag-стик','H-500'];
 
 function build(spec, seed){
@@ -1668,23 +1670,23 @@ function build(spec, seed){
 const D=(n,lo,grp,kids,o)=>Object.assign({n,lo,fill:[Math.max(0,grp-lo),Math.max(2,Math.round((grp-lo)/48))],kids:kids||[]},o||{});
 
 const PERSONAS={
- anna:{label:'Анна · Ассистент',name:'Анна Ковалёва',short:'Анна',num:'3104418',country:'Россия',cur:'₽',wallet:'4 870 ₽',transfer:'0,00',
+ anna:{label:'Анна · Ассистент',name:'Анна Ковалёва',short:'Анна',num:'3104418',country:'Германия',cur:'€',wallet:'€ 60,90',transfer:'0,00',
   prev:[['Июль','А',38,212,null],['Август','А',51,264,null],['Сентябрь','А',34,254,null]],prevRank:'А',
-  spec:{n:'Анна Ковалёва',nso:1840,lo:42,pend:30,fill:[150,5],kids:[D('Мария К.',30,90),D('Дмитрий С.',25,36),{n:'Ксения Л.',lo:0,t:'d'}]},seed:11},
- irina:{label:'Ирина · Золотой директор',name:'Ирина Дмитриева',short:'Ирина',num:'2804051',country:'Россия',cur:'₽',wallet:'21 940 ₽',transfer:'133,10',
+  spec:{n:'Анна Ковалёва',nso:1840,lo:42,pend:30,fill:[150,5],kids:[D('Мария К.',30,90),D('Lukas M.',25,36),{n:'Ioana P.',lo:0,t:'d'}]},seed:11},
+ irina:{label:'Ирина · Золотой директор',name:'Ирина Дмитриева',short:'Ирина',num:'2804051',country:'Румыния',cur:'€',wallet:'€ 274,25',transfer:'133,10',
   prev:[['Июль','ЗД',74,1012,3104],['Август','ЗД',90,968,3271],['Сентябрь','ЗД',71,1133,3402]],prevRank:'ЗД',
   spec:{n:'Ирина Дмитриева',lo:82,pend:46,fill:[150,9],kids:[
    D('Олег П.',60,420,[D('Света Р.',55,485,[D('Карина М.',30,210)]),D('Денис Т.',20,110)]),
-   D('Нина С.',70,550,[D('Артём Л.',52,512)]),
+   D('Нина С.',70,550,[D('Andrei L.',52,512)]),
    D('Павел Д.',48,455,[],{pend:38}),
-   D('Марат Г.',52,232,[D('Елена В.',40,200)])]},seed:7},
- sergey:{label:'Сергей · Мастер',name:'Сергей Волков',short:'Сергей',num:'1022937',country:'Россия · Румыния',cur:'₽',wallet:'187 320 ₽',transfer:'2 410,50',
+   D('Giulia R.',52,232,[D('Елена В.',40,200)])]},seed:7},
+ sergey:{label:'Сергей · Мастер',name:'Сергей Волков',short:'Сергей',num:'1022937',country:'Румыния · Молдова',cur:'€',wallet:'€ 2 341,50',transfer:'2 410,50',
   prev:[['Июль','М',128,560,12980],['Август','М',141,602,13420],['Сентябрь','БД',104,540,11870]],prevRank:'БД',
   spec:{n:'Сергей Волков',lo:136,pend:120,fill:[384,8],kids:[
-   D('Ольга В.',70,1050,[D('Роман К.',55,545,[D('Юлия Н.',60,560,[D('Вера З.',50,520)])]),D('Инна Б.',58,600,[D('Олеся Ч.',52,510)]),D('Максим Ф.',60,620)]),
-   D('Павел Д.',65,765,[D('Жанна О.',55,560,[D('Лариса Е.',50,505)]),D('Виктор Ш.',60,600)]),
-   D('Нина С.',62,700,[D('Андрей Т.',55,520),D('Галина М.',58,560,[D('Полина А.',52,505)])]),
-   D('Игорь Р.',60,560,[D('Дарья Х.',50,510),D('Евгений Л.',55,530)],{country:'RO'}),
+   D('Ольга В.',70,1050,[D('Thomas K.',55,545,[D('Yuki N.',60,560,[D('Вера З.',50,520)])]),D('Katarzyna B.',58,600,[D('Olivia C.',52,510)]),D('Максим Ф.',60,620)]),
+   D('Павел Д.',65,765,[D('Emma O.',55,560,[D('Priya S.',50,505)]),D('Mihai Ș.',60,600)]),
+   D('Нина С.',62,700,[D('James T.',55,520),D('Wei M.',58,560,[D('Aigerim A.',52,505)])]),
+   D('Игорь Р.',60,560,[D('Cristina H.',50,510),D('Vlad L.',55,530)],{country:'RO'}),
    D('Алексей Г.',55,520,[D('Алина П.',52,505,[],{nd:true})],{country:'RO'}),
    D('Татьяна С.',40,250)]},seed:3}
 };
@@ -2808,7 +2810,7 @@ const PRODUCTS_CAT=[
  {id:'set',n:'Гидрамакс',d:'набор · старт с воды',pt:82,eur:102.5,img:IMG+'iblock/8f3/oq9z3cymo6bugbsv5brha4zjtt5w6djr.webp',url:'https://de.coral.club/shop/hydramax-europe.html',ic:'🎁',promo:'ХИТ'},
  {id:'fd',n:'ФанДетокс',d:'30 стик-пакетов',pt:52,eur:65,img:IMG+'iblock/ed7/3nt1fzogwqmlhad0nvab1cks7hpevths.webp',url:'https://de.coral.club/shop/fandetox.html?offer=9167500',ic:'🌿',promo:'ХИТ'}
 ];
-const priceOf=pr=>pr.soon?'скоро в продаже':ctry==='DE'?`€ ${pr.eur.toLocaleString(LOC,{minimumFractionDigits:2})}`:`${pr.pt} баллов`;
+const priceOf=pr=>pr.soon?'скоро в продаже':['RO','MD','DE','PL'].includes(ctry)&&pr.eur?`€ ${pr.eur.toLocaleString(LOC,{minimumFractionDigits:2})}`:`${pr.pt} баллов`;
 const hiddenW={anna:new Set(),irina:new Set(),sergey:new Set()};
 let recTab='me', dismissed=new Set(), tourOff=false;
 function spark(vals){
@@ -3099,7 +3101,7 @@ function progTab(){
    <div class="li"><div class="g1"><b>Олег С.</b><small>день 7 · «забываю пить»</small></div><span class="tag t-w">включить напоминания</span></div>
    <div class="note h">💧 Опыт Coral Health 365: программы, напоминания, самочувствие, команда и опросы — здесь же, в ЛК и Telegram-боте, без отдельного приложения.</div></div></div>`;
 }
-const NEWBIES=[['Карина М.',12,[1,1,0,0,0]],['Денис Т.',34,[1,1,1,0,0]],['Елена В.',58,[1,1,1,1,0]],['Виктор Ч.',71,[1,0,0,0,0]]];
+const NEWBIES=[['Карина М.',12,[1,1,0,0,0]],['Lukas T.',34,[1,1,1,0,0]],['Елена В.',58,[1,1,1,1,0]],['Mei C.',71,[1,0,0,0,0]]];
 const NB_STEPS=['Первый заказ','Курс «Старт» в CBA','Первый приглашённый потребитель','Потребитель сделал второй заказ','ЛО 50 · путь к Директору'];
 function newbiesTab(){
   return `<div class="g"><div class="card c12"><h3>Новички-партнёры · первые 90 дней</h3><div class="sub">Ваша первая линия и те, кого вы наставляете. 5 шагов, после которых партнёр обычно остаётся</div>
@@ -3207,7 +3209,7 @@ function profile(){
   const T=[['data','Личные данные'],['sec','Вход и безопасность'],...(cons?[]:[['pay','Вознаграждение'],['ref','Визитка и промо']]),['consent','Согласия и уведомления'],['docs','Заявления и файлы']];
   let t=tab('profile','data'); if(!T.find(x=>x[0]===t)) t='data';
   const body={
-   data:`<div class="card c8"><h3>Основное</h3>${fld('Почта','user'+num.slice(-3)+'@mail.ru','<span class="tag t-ok">подтверждена</span>')}${fld('Телефон','+7 926 ••• 56 58','<span class="tag t-ok">подтверждён</span>')}${fld('Язык консультаций','Русский')}${fld('Страна и магазин',cons?'Россия · ₽':P().country)}</div>
+   data:`<div class="card c8"><h3>Основное</h3>${fld('Почта','user'+num.slice(-3)+'@gmail.com','<span class="tag t-ok">подтверждена</span>')}${fld('Телефон','+40 721 ••• 658','<span class="tag t-ok">подтверждён</span>')}${fld('Язык консультаций','Русский')}${fld('Страна и магазин',cons?'Румыния · €':P().country)}</div>
     <div class="card c4"><h3>Фото профиля</h3><div class="sub">Видно команде и потребителям на визитке</div><div style="display:grid;place-items:center;padding:16px"><span class="av" style="width:96px;height:96px;font-size:34px">${nm[0]}</span></div></div>
     <div class="card c8"><h3>Личные данные</h3>${fld('Фамилия',nm.split(' ')[1])}${fld('Имя',nm.split(' ')[0])}${fld('Дата рождения','12 марта 1986')}${fld('Адрес доставки','Москва, ул. Тверская, 7, кв. 12')}<div class="sub" style="margin-top:8px">ФИО и дата рождения меняются через заявление — они нужны для договора и выплат.</div></div>
     <div class="card c4"><h3>Статус</h3>${fld('Клубный номер',num,'',false)}${fld('Ранг',rk,'',false)}${fld('Наставник','Светлана К.',`<button class="btn sm gh" onclick="toast('Чат с наставником')">Написать</button>`,false)}${cons?'<button class="btn acc sm" style="margin-top:10px" onclick="toast(\'Заявление на статус дистрибьютора\')">Стать дистрибьютором</button>':''}</div>`,
@@ -3351,7 +3353,7 @@ const CAT4={
  spir:{n:'Спирулина',d:'суперфуд',ph:'ph-spir_l',pt:20},
  lec:{n:'Coral Lecithin',d:'лецитин',ph:'ph-lec_l',pt:16}
 };
-const price4=p=>ctry==='DE'&&p.eur?`€ ${p.eur.toLocaleString(LOC,{minimumFractionDigits:2})}`:`${p.pt} баллов`;
+const price4=p=>['RO','MD','DE','PL'].includes(ctry)&&p.eur?`€ ${p.eur.toLocaleString(LOC,{minimumFractionDigits:2})}`:`${p.pt} баллов`;
 
 /* ---------- Навигация: структура текущего ЛК ---------- */
 const NAV4=[
@@ -3653,11 +3655,11 @@ function wallet(){
   const p=P(), t=tab('wallet','move'), c=COUNTRIES[ctry], bm=bonus(F,R0(),p.prevRank).min;
   const head=topbar('Coral Кошелёк','Бонусы, переводы на заказы и выплаты',per())+tabs4('wallet',[['move','Движение бонусов'],['ctry','Бонусы по странам'],['tr','Перевод бонусов для заказов'],['pay','Выплата бонусов'],['disc','Детализация бонус-скидки']],'move');
   const bal=`<div class="card c-pad s4"><span class="sub">Баланс</span><div style="font-size:30px;font-weight:600;margin:4px 0 12px">${money(p.wallet)}</div><div class="inv" style="margin-top:0"><button class="b" onclick="setTab('wallet','tr')">Оплатить заказ</button><button class="a" onclick="setTab('wallet','pay')">Вывести</button></div></div>`;
-  const mv=[['Бонус за сентябрь','+',bm*80,'1 нояб · ожидается'],['Оплата заказа №48177','−',3200,'2 окт'],['Бонус за август','+',12400,'5 сен'],['Выплата на карту •• 4417','−',9000,'12 сен']];
+  const mv=[['Бонус за сентябрь','+',bm,'1 нояб · ожидается'],['Оплата заказа №48177','−',40,'2 окт'],['Бонус за август','+',155,'5 сен'],['Выплата на карту •• 4417','−',110,'12 сен']];
   let body='';
-  if(t==='move') body=`<div class="card c-pad s8"><h3>Движение бонусов</h3>${mv.map(([a,s,v,d])=>`<div class="li"><div class="g1">${a}<small>${d}</small></div><span class="num ${s==='+'?'up':''}">${s}${fmt(v*c[2])} ${c[1]}</span></div>`).join('')}</div>`;
-  if(t==='ctry') body=`<div class="card c-pad s8"><h3>Бонусы по странам</h3><div class="sub">Начисления за заказы вашей структуры в разных странах</div>${[['🇷🇺 Россия',72],['🇰🇿 Казахстан',14],['🇷🇴 Румыния',9],['🇲🇩 Молдова',5]].map(([k,v])=>`<div class="li"><div class="g1">${k}<div class="prog" style="margin-top:6px"><i style="width:${v}%"></i></div></div><span class="num">${v}%</span></div>`).join('')}</div>`;
-  if(t==='tr') body=`<div class="card c-pad s8"><h3>Перевод бонусов для оформления заказов</h3><div class="formx" style="margin-top:12px"><label>Сумма<input value="3 200"></label><label>На заказ<select><option>Новый заказ в корзине</option><option>Заказ №48312</option></select></label></div><button class="btn pri" style="margin-top:14px" onclick="confirmTx('перевод','3 200 бонусов','на новый заказ в корзине','Бонусы переведены на заказ')">Перевести</button></div>`;
+  if(t==='move') body=`<div class="card c-pad s8"><h3>Движение бонусов</h3>${mv.map(([a,s,v,d])=>`<div class="li"><div class="g1">${a}<small>${d}</small></div><span class="num ${s==='+'?'up':''}">${s}${cur(v)}</span></div>`).join('')}</div>`;
+  if(t==='ctry') body=`<div class="card c-pad s8"><h3>Бонусы по странам</h3><div class="sub">Начисления за заказы вашей структуры в разных странах</div>${[['🇷🇴 Румыния',46],['🇩🇪 Германия',22],['🇲🇩 Молдова',18],['🇵🇱 Польша',14]].map(([k,v])=>`<div class="li"><div class="g1">${k}<div class="prog" style="margin-top:6px"><i style="width:${v}%"></i></div></div><span class="num">${v}%</span></div>`).join('')}</div>`;
+  if(t==='tr') body=`<div class="card c-pad s8"><h3>Перевод бонусов для оформления заказов</h3><div class="formx" style="margin-top:12px"><label>Сумма, €<input value="40,00"></label><label>На заказ<select><option>Новый заказ в корзине</option><option>Заказ №48312</option></select></label></div><button class="btn pri" style="margin-top:14px" onclick="confirmTx('перевод','€ 40,00','на новый заказ в корзине','Бонусы переведены на заказ')">Перевести</button></div>`;
   if(t==='pay') body=`<div class="card c-pad s8"><h3>Выплата бонусов</h3>${ctry==='RU'?'<div class="warn" style="margin:8px 0">Изменения в НК РФ: если доход превысил 20 млн ₽ в 2025 или 2026 году, проверьте налоговый статус.</div>':''}${fld('Налоговый статус','Самозанятый','<span class="tag t-ok">проверен</span>')}${fld('Способ выплаты','Карта •• 4417')}<button class="btn pri" style="margin-top:12px" onclick="confirmTx('выплату','бонусы октября после расчёта','карта •• 4417','Заявка на выплату создана')">Заказать выплату</button></div>`;
   if(t==='disc') body=`<div class="card c-pad s8"><h3>Детализация расчёта бонус-скидки</h3>${bonus(M,R0(),p.prevRank).parts.map(x=>`<div class="li"><div class="g1">${x.k}<small>${x.note}</small></div><span class="num">${x.v?fmt(x.v):'—'}</span></div>`).join('')}</div>`;
   return head+`<div class="g4">${bal}${body}</div>`;
@@ -4068,7 +4070,7 @@ function promo(){ const t=tab('promo','codes');
   const head=topbar('Промокоды и акции','Ваши промокоды, подарочные сертификаты и акции месяца')+tabs4('promo',[['codes','Мои промокоды'],['certs','Сертификаты'],['sales','Акции'],['partners','Партнёры']],'codes');
   if(t==='partners') return head+partners();
   if(t==='codes') return head+`<div class="pcs">${myCodes().map(codeCard).join('')}</div><div class="note">Промокоды подбираются по вашим заказам и событиям: ДР, новый ранг, регулярные покупки. Один промокод на заказ.</div>`;
-  if(t==='certs') return head+`<div class="g4"><div class="s6 gcert"><span>Подарочный сертификат</span><b>3 000 ₽</b><small>№ GC-4471 · до 31.12.2026</small><div class="btns"><button class="btn wh sm" onclick="toast('Сертификат применён к корзине')">Применить</button><button class="btn ghw sm" onclick="toast('Открыто меню «Подарить»')">Подарить</button></div></div><div class="card c-pad s6"><h3 class="h20">Купить сертификат</h3><div class="sub">Подарок потребителю или партнёру — номинал от 1 000 ₽</div><div class="rch" style="margin-top:12px">${['1 000','3 000','5 000','10 000'].map(v=>`<button onclick="toast('Сертификат на ${v} ₽ в корзине')">${v} ₽</button>`).join('')}</div></div></div>`;
+  if(t==='certs') return head+`<div class="g4"><div class="s6 gcert"><span>Подарочный сертификат</span><b>€ 35,00</b><small>№ GC-4471 · до 31.12.2026</small><div class="btns"><button class="btn wh sm" onclick="toast('Сертификат применён к корзине')">Применить</button><button class="btn ghw sm" onclick="toast('Открыто меню «Подарить»')">Подарить</button></div></div><div class="card c-pad s6"><h3 class="h20">Купить сертификат</h3><div class="sub">Подарок потребителю или партнёру — номинал от 1 000 ₽</div><div class="rch" style="margin-top:12px">${['1 000','3 000','5 000','10 000'].map(v=>`<button onclick="toast('Сертификат на ${v} ₽ в корзине')">${v} ₽</button>`).join('')}</div></div></div>`;
   return head+`<div class="g4">${[['−30%','Collagen Peptides','до 20 октября','ph-coll_l'],['−15%','B-Luron','до 20 октября','ph-blu_l'],['−20%','Оушенмин · курс на месяц','до 31 октября','ph-ocean_l'],['1+1','Пентокан К+','до 25 октября','ph-pk_l']].map(([d,n,s,ph])=>`<div class="s6"><button class="promo" onclick="toast('Акция: ${esc(n)}')"><span class="tx"><span class="d">${d}</span><b>${n}</b><small>${s}</small></span><span class="im ${ph}"></span></button></div>`).join('')}</div><div class="note">Пример наполнения: состав акций задаёт маркетинг страны.</div>`; }
 NAV4.splice(NAV4.findIndex(g=>g.k==='mplan'),0,{k:'promo',t:'Промокоды и акции',ic:'gift',isNew:1,sub:[['promo:codes','Мои промокоды'],['promo:certs','Подарочные сертификаты'],['promo:sales','Акции месяца'],['promo:partners','Партнёры и привилегии',1]]});
 IC.gift='<rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M3 9h18M12 9v11M12 9c-2-4-6-4-6-1.5S10 9 12 9zM12 9c2-4 6-4 6-1.5S14 9 12 9z"/>';
@@ -4815,6 +4817,31 @@ function dragInit(){ const L=document.getElementById('czl'); if(!L) return; let 
   L.addEventListener('pointerup',end); L.addEventListener('pointercancel',end); }
 /* кнопка «Настроить главную» внизу главной — как «Настроить для себя» у Сбера */
 const _homeDir10=homeDir; homeDir=function(){ return _homeDir10().replace(/<div class="hfoot6">[\s\S]*?<\/div>$/,`<div class="hfoot10"><button class="cust10" onclick="customize()">${SLID}<span>Настроить главную</span></button></div>`); };
+/* ================= v11: евро по умолчанию, меню сворачивается везде ================= */
+/* валюта: EU-магазины — €, база сумм в данных — евро; RU/KZ — курс к евро */
+COUNTRIES.RU=['Россия','₽',93,'🇷🇺']; COUNTRIES.KZ=['Казахстан','₸',520,'🇰🇿'];
+['RO','MD','DE','PL'].forEach(k=>{ COUNTRIES[k][1]='€'; COUNTRIES[k][2]=1; });
+function cur(v){ const c=COUNTRIES[ctry], x=v*c[2];
+  return c[1]==='€'?'€ '+x.toLocaleString(LOC,{minimumFractionDigits:2,maximumFractionDigits:2}):x.toLocaleString(LOC,{maximumFractionDigits:0})+' '+c[1]; }
+money=function(s){ const v=parseFloat(String(s).replace(/[^\d,]/g,'').replace(',','.'))||0; return cur(v); };
+ctry='RO';
+/* меню: любую группу можно свернуть, в том числе активную; в мобильном «Меню» группы не раскрыты все сразу */
+let closedG=new Set();
+function grpOpen(g){ const active=g.sub.some(([k])=>isOnSub(k)); return !closedG.has(g.k)&&(openG.has(g.k)||active); }
+function togG(k){ const g=NAV4.find(x=>x.k===k); if(!g) return;
+  if(grpOpen(g)){ closedG.add(k); openG.delete(k); } else { openG.add(k); closedG.delete(k); }
+  renderNav(); const n2=document.getElementById('nav2'); if(n2){ n2.innerHTML=L(navHtml()); if(typeof applyPhotos==='function') applyPhotos(); chev10(document.getElementById('dr')); } }
+const _navHtml11=navHtml;
+navHtml=function(){ let h=_navHtml11();
+  NAV4.forEach(g=>{ if(!g.sub) return; const op=grpOpen(g), active=g.sub.some(([k])=>isOnSub(k));
+    const re=new RegExp(`<div class="ng[^"]*"><button class="nv[^"]*" onclick="openG\\.has\\('${g.k}'\\)[^"]*"`);
+    h=h.replace(re,`<div class="ng ${op?'open':''}"><button class="nv ${active&&!op?'on':''}" aria-expanded="${op}" onclick="togG('${g.k}')"`); });
+  return h; };
+const _go11=go; go=function(p,t){ openG.clear(); _go11(p,t); const g=typeof groupOfPage==='function'?groupOfPage():null; if(g) closedG.delete(g); };
+const _more11=moreMenu; moreMenu=function(){ const keep=new Set(openG); _more11(); openG=keep; const n2=document.getElementById('nav2'); if(n2){ n2.innerHTML=L(navHtml()); if(typeof applyPhotos==='function') applyPhotos(); chev10(document.getElementById('dr')); } };
+openG.clear();
+/* стрелка группы меню — та же, что у Сбера, вместо мелкого «▸» */
+const _navHtml11b=navHtml; navHtml=function(){ return _navHtml11b().split('<span class="chev">▸</span>').join(`<span class="chev chv11">${CHVs}</span>`); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
