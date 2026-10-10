@@ -1610,6 +1610,62 @@ body::before{content:'';position:fixed;left:0;right:0;top:0;height:env(safe-area
 .p14x .g{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px}
 .p14x .g>*{grid-column:1/-1!important;width:auto!important}
 .fld .k{width:min(200px,40%)}
+/* ================= v15 ================= */
+/* сетка без пустот */
+.mrow2.r15{align-items:start}
+.mrow2.r15 .mcol>.hw:last-child{flex:none;display:block}.mrow2.r15 .mcol>.hw:last-child>.card{flex:none}
+.mrow2.r15.eq15{align-items:stretch}
+.mrow2.r15.eq15 .mcol>.hw:last-child{flex:1;display:flex;flex-direction:column}.mrow2.r15.eq15 .mcol>.hw:last-child>.card{flex:1}
+.hgrid.mas>.hw.span15{width:100%}
+/* меню блока */
+.mr14 .g1 b{display:block;font-size:15px;line-height:21px;font-weight:500}
+.mr14 .g1 small{display:block;color:var(--muted);font-size:13px;line-height:18px}
+/* шапка */
+.tt15{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0;margin-right:auto;flex-wrap:wrap}
+.tt15 h1{flex:0 1 auto!important;margin:0!important;min-width:0;max-width:100%}
+@media (max-width:760px){.tt15{flex:1 1 100%;gap:8px}}
+.tt15 .per{border:0;background:var(--soft);font-weight:500;height:36px;padding:0 14px;cursor:pointer;color:var(--ink)}
+.tt15 .per:hover{background:var(--line)}
+.ib.bell15{position:relative}
+.ib.bell15 .cnt5{position:absolute;top:-3px;right:-3px;border-radius:99px;font-size:11px;font-weight:700;min-width:18px;height:18px;line-height:18px;display:grid;place-items:center;padding:0 5px;box-shadow:0 0 0 2px var(--card)}
+.seg15{display:flex;gap:4px;background:var(--soft);border-radius:12px;padding:4px;margin:4px 0 14px}
+.seg15 button{flex:1;border:0;background:transparent;border-radius:9px;min-height:36px;font:inherit;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;padding:0 8px}
+.seg15 button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+:root .celeb .pill,:root:not([data-theme="dark"]) .celeb .pill{color:#fff!important}
+/* меню: кнопка сворачивания у логотипа, рельс, всплывающая панель */
+.side{position:sticky}
+.side .tg15{position:absolute;top:14px;right:10px;margin:0;width:40px;height:40px}
+body.navc .side .tg15{position:static;margin:0 0 10px}
+body.navc .side{padding-top:14px}
+.side .logo{padding-right:44px}
+#fly15{position:fixed;inset:0 auto auto 0;z-index:60;pointer-events:none}
+.fy15{position:fixed;pointer-events:auto;background:var(--card);border-radius:16px;box-shadow:0 12px 32px rgba(10,30,30,.16),0 0 0 1px var(--line);padding:8px;min-width:240px;max-width:300px;animation:fy15 .14s ease}
+@keyframes fy15{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:none}}
+.fy15 .fh15{font-size:13px;font-weight:600;color:var(--muted);padding:8px 12px 6px;text-transform:none}
+.fy15 button{display:flex;align-items:center;gap:8px;width:100%;min-height:40px;border:0;background:transparent;border-radius:10px;padding:8px 12px;text-align:left;font:inherit;font-size:14.5px;color:var(--ink);cursor:pointer}
+.fy15 button:hover,.fy15 button:focus-visible{background:var(--soft);outline:none}
+.fy15 button.on{background:var(--soft);color:var(--brand);font-weight:600}
+.fy15.tip{min-width:0;padding:4px;border-radius:12px}
+.fy15.tip .ft15{min-height:36px;white-space:nowrap;font-weight:500}
+.nb15{margin-left:auto;font-size:11.5px;font-weight:600;color:var(--good);background:var(--good-s);border-radius:99px;padding:2px 8px}
+@media (prefers-reduced-motion:reduce){.fy15{animation:none}}
+/* истории */
+.st15{gap:10px;align-items:center;justify-content:flex-start}
+.st15 .h20{margin:0}
+.st15{position:relative}
+.st15 .st4{margin-bottom:0;padding-top:8px}
+.st15b{position:absolute;top:20px;right:56px}
+#w-stories .mo14.abs{top:12px;right:4px;background:transparent}
+@media (max-width:760px){.st15b{position:static;display:block;margin-top:4px}}
+/* Каролина — снова плавающий виджет на всех экранах, без дубля в шапке */
+@media (min-width:1100px){#aiw .aifab{display:inline-block}}
+.topbar .kar6{display:none!important}
+@media (max-width:760px){
+ .tt15 .per{padding:0;height:32px;background:none}
+ .topbar .srch{flex:1 1 100%!important;max-width:none!important;width:auto!important;grid-column:1/-1}
+ #w-stories .mo14.abs{top:auto;bottom:-8px;right:0;background:transparent}
+ .st15b{min-height:28px;display:flex;align-items:center}
+}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5207,6 +5263,108 @@ profile=function(){ const cons=pk==='elena', p=P(), nm=cons?'Елена Смир
     return `<div class="p14sub"><button class="p14bk" onclick="setTab('profile','_');window.scrollTo(0,0)">${CHV.replace('m9 6 6 6-6 6','m15 6-6 6 6 6')}<span>Профиль</span></button><h1>${title}</h1></div>${prof14Body(t,title)}`; }
   return topbar('Профиль','Данные, безопасность, выплаты и настройки')+`<div class="p14w"><div class="p14s">${side}</div><div class="p14x"><h2 class="p14t">${title}</h2>${prof14Body(t,title)}</div></div>`; };
 let _rz14; window.addEventListener('resize',()=>{ clearTimeout(_rz14); _rz14=setTimeout(()=>{ if(page==='profile') render(); },200); });
+/* ================= v15: сетка без пустот, меню блока без «выше/ниже», чистая шапка, рельс меню как в Shopify ================= */
+
+/* ---------- 1. Сетка главной: колонки балансируются по реальной высоте; блок без пары растягивается на всю ширину ---------- */
+masonry=function(){
+  const g=document.querySelector('.hgrid'); if(!g) return;
+  let items=[...g.querySelectorAll('.hw')];
+  items.forEach((it,i)=>{ if(it.dataset.o==null) it.dataset.o=i; it.classList.remove('span15'); });
+  items.sort((a,b)=>a.dataset.o-b.dataset.o);
+  g.innerHTML='';
+  if(innerWidth<1100){ g.classList.remove('mas'); items.forEach(it=>g.appendChild(it)); return; }
+  g.classList.add('mas');
+  const GAP=16, H=c=>{ const k=[...c.children]; return k.reduce((s,e)=>s+e.offsetHeight,0)+Math.max(0,k.length-1)*GAP; };
+  let run=[];
+  const flush=()=>{ if(!run.length) return;
+    const row=document.createElement('div'); row.className='mrow2 r15';
+    const L2=document.createElement('div'), R=document.createElement('div'); L2.className='mcol'; R.className='mcol'; row.append(L2,R); g.appendChild(row);
+    if(run.length===1){ run[0].classList.add('span15'); g.replaceChild(run[0],row); run=[]; return; }
+    run.forEach(it=>{ (H(L2)<=H(R)?L2:R).appendChild(it); });
+    /* пустота больше ~120px: последний блок высокой колонки уходит под пару на всю ширину */
+    let d=H(L2)-H(R); const T=d>0?L2:R;
+    if(Math.abs(d)>120&&T.children.length>1){ const last=T.lastElementChild, h=last.offsetHeight+GAP;
+      if(Math.abs(Math.abs(d)-h)<Math.abs(d)){ last.classList.add('span15'); row.after(last); d=H(L2)-H(R); } }
+    if(!R.children.length){ [...L2.children].forEach(e=>{ e.classList.add('span15'); row.before(e); }); row.remove(); }
+    else if(Math.abs(d)<=72) row.classList.add('eq15');
+    run=[]; };
+  items.forEach(it=>{ if(it.classList.contains('s12')){ flush(); g.appendChild(it); } else run.push(it); });
+  flush();
+};
+
+/* ---------- 2. Меню «⋯» блока: действия этого блока, без «Переместить выше/ниже» ---------- */
+const OPEN15={rank:['Все условия ранга',"go('rank','ladder')"],risk:['Лидерский отчёт',"go('team','branches')"],todo:['Отчёты по структуре',"go('team','all')"],
+  hos:['Все потребители 90 дней',"go('clients','90')"],sap:['Открыть Автоподбор',"go('team','sap')"],newbies:['Все новички',"go('team','onb')"],
+  learn:['Открыть обучение',"go('learn')"],growth:['Открыть разметку',"go('plan')"],quests:['Все достижения',"go('rank','ladder')"]};
+const ORD15='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="2"/><rect x="4" y="14" width="16" height="6" rx="2"/></svg>';
+const OPN15='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
+blockMenu=function(k){ const lock=LOCK14.includes(k), t=HW[k].t, o=OPEN15[k];
+  const row=(ic,txt,sub,f)=>`<button class="mr14" onclick="${f}"><span class="w12i">${ic}</span><span class="g1"><b>${txt}</b>${sub?`<small>${sub}</small>`:''}</span></button>`;
+  openDr(`<h2>${t}</h2><div style="height:6px"></div>
+   ${lock?row(SLID,'Выбрать показатели','какие цифры видны на главной',"closeDrSilent();pickKpi()"):''}
+   ${o?row(OPN15,o[0],'',`closeDrSilent();${o[1]}`):''}
+   ${row(ORD15,'Порядок блоков','перетащите блоки на главной',"closeDrSilent();customize()")}
+   ${lock?`<div class="note">«Мои показатели» — основа главной, этот блок не скрывается</div>`:row(TRASH,'Скрыть с главной','вернуть — в «Порядок блоков»',`closeDrSilent();hideBlock('${k}')`)}`); };
+
+/* ---------- 3. Шапка: месяц рядом с заголовком, один центр уведомлений, без дубля профиля в меню ---------- */
+const NOTIF15=()=>pk==='elena'?1:3;
+const _topbar15=topbar; topbar=function(title,sub,extra){ let h=_topbar15(title,sub,extra);
+  h=h.replace(/(<h1>[\s\S]*?<\/h1>)\s*(<button class="per"[^>]*>[^<]*<\/button>)/,'<div class="tt15">$1$2</div>');
+  h=h.replace(/<button class="ib bulb"[\s\S]*?<\/button>/,'').replace(/<button class="kar6"[\s\S]*?<\/button>/,'');
+  const n=unreadTips()+NOTIF15();
+  h=h.replace(/<button class="ib" onclick="openNotif\(\)"[^>]*>([\s\S]*?)<span class="d"><\/span><\/button>/,`<button class="ib bell15" onclick="notif15()" aria-label="Уведомления и новое в ЛК · ${n}" title="Уведомления">$1<span class="cnt5">${n}</span></button>`);
+  return h; };
+let nTab15='n';
+function notif15(t){ if(t) nTab15=t; const nu=unreadTips(), seg=`<div class="seg15" role="tablist"><button role="tab" aria-selected="${nTab15==='n'}" class="${nTab15==='n'?'on':''}" onclick="notif15('n')">Важное · ${NOTIF15()}</button><button role="tab" aria-selected="${nTab15==='w'}" class="${nTab15==='w'?'on':''}" onclick="notif15('w')">Новое в ЛК${nu?` · ${nu}`:''}</button></div>`;
+  if(nTab15==='w') tipsCenter(); else openNotif();
+  { const dr0=document.getElementById('dr'); dr0.innerHTML=dr0.innerHTML.replace(/(\d+) новых участника/,(a,n)=>{ n=+n; return n+' '+(n%10===1&&n%100!==11?'новый участник':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?'новых участника':'новых участников'); }); }
+  const dr=document.getElementById('dr'), x=dr.querySelector(':scope > .x');
+  if(nTab15==='w'){ const hd=dr.querySelector('.tc-h'); if(hd) hd.remove(); }
+  else { const h2=dr.querySelector('h2'); if(h2) h2.remove(); }
+  x.insertAdjacentHTML('afterend',`<h2>Уведомления</h2>${L(seg)}`); }
+const _renderTop15=renderTop; renderTop=function(){ _renderTop15(); document.querySelectorAll('.bell15 .cnt5').forEach(e=>{ e.textContent=unreadTips()+NOTIF15(); }); };
+
+/* ---------- 4. Боковое меню: свёрнутый рельс с подменю-панелью (как Shopify), подсказки, понятная кнопка ---------- */
+const SIDE15='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg>';
+function railItems15(){ const cons=pk==='elena';
+  return cons?[['home','Мой путь','home'],['shop:orders','Заказы','orders'],['learn','Обучение','learn'],['ai','Coral AI','ai']].map(([k,t,ic])=>({k,t,ic}))
+   :NAV4.filter(g=>g.t).map(g=>({k:g.sub?g.sub[0][0]:g.k,t:g.t,ic:g.ic,sub:g.sub,isNew:g.isNew,g})); }
+const _navHtml15=navHtml; navHtml=function(){
+  const tg=`<button class="navtg tg15" onclick="toggleNavC()" aria-label="${navC?'Развернуть меню':'Свернуть меню'}" data-tip="${navC?'Развернуть меню':'Свернуть меню'}">${SIDE15}</button>`;
+  if(!navC||innerWidth<761){ return tg+_navHtml15().replace(/^<button class="navtg"[\s\S]*?<\/button>/,'').replace(/<button class="ucard[\s\S]*?<\/button>/,''); }
+  return tg+railItems15().map((it,i)=>{ const on=it.g?(it.sub?it.sub.some(([s])=>isOnSub(s)):page===it.g.k):isOnSub(it.k);
+    return `<button class="nv rl ${on?'on':''}" data-i15="${i}" onclick="rail15(${i},this)" onmouseenter="flyIn15(${i},this)" onmouseleave="flyOut15()" aria-label="${it.t}" ${it.sub?'aria-haspopup="menu"':''}>${svg(it.ic)}${it.isNew?'<i class="dot7"></i>':''}</button>`; }).join(''); };
+let _fly15=null, _flyT=null;
+function flyHtml15(i){ const it=railItems15()[i];
+  if(!it.sub) return `<div class="fy15 tip" onmouseenter="clearTimeout(_flyT)" onmouseleave="flyOut15()"><button class="ft15" onclick="flyClose15();navTo('${it.k}')">${L(it.t)}</button></div>`;
+  return `<div class="fy15" role="menu" onmouseenter="clearTimeout(_flyT)" onmouseleave="flyOut15()"><div class="fh15">${L(it.t)}</div>${it.sub.map(([s,t,nw])=>`<button role="menuitem" class="${isOnSub(s)?'on':''}" onclick="flyClose15();navTo('${s}')">${L(t)}${nw?`<span class="nb15">${L('Новое')}</span>`:''}</button>`).join('')}</div>`; }
+function flyShow15(i,el){ flyClose15(); const r=el.getBoundingClientRect(); const w=document.createElement('div'); w.id='fly15'; w.innerHTML=flyHtml15(i); document.body.appendChild(w);
+  const f=w.firstElementChild, top=Math.min(r.top-(railItems15()[i].sub?6:0), innerHeight-f.offsetHeight-12);
+  f.style.top=Math.max(12,railItems15()[i].sub?top:r.top+r.height/2-f.offsetHeight/2)+'px'; f.style.left=(r.right+10)+'px'; _fly15=i; }
+function flyIn15(i,el){ if(!matchMedia('(hover:hover)').matches) return; clearTimeout(_flyT); _flyT=setTimeout(()=>flyShow15(i,el),90); }
+function flyOut15(){ clearTimeout(_flyT); _flyT=setTimeout(flyClose15,220); }
+function flyClose15(){ const w=document.getElementById('fly15'); if(w) w.remove(); _fly15=null; }
+function rail15(i,el){ const it=railItems15()[i]; if(!it.sub){ flyClose15(); navTo(it.k); return; }
+  if(_fly15===i&&document.getElementById('fly15')){ flyClose15(); return; } flyShow15(i,el); const b=document.querySelector('#fly15 button'); if(b&&!matchMedia('(hover:hover)').matches) b.focus(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') flyClose15(); });
+document.addEventListener('click',e=>{ if(!e.target.closest('#fly15,.nv.rl')) flyClose15(); });
+window.addEventListener('scroll',flyClose15,{passive:true});
+/* подсказка у кнопки сворачивания */
+document.addEventListener('mouseover',e=>{ const b=e.target.closest&&e.target.closest('.tg15'); if(!b) return; b.setAttribute('title',b.dataset.tip); });
+const _toggleNavC15=toggleNavC; toggleNavC=function(){ flyClose15(); _toggleNavC15(); };
+
+
+/* ---------- 5. Истории: возвращаем на главную с пометкой «Идея · в планах» (функционала пока нет) ---------- */
+BADGES.idea=['Идея · в планах','b-soon'];
+HW.stories.badge='idea'; HW.stories.d='Новости и обучение в формате историй · идея, в планах';
+{ const i=TEMP14.indexOf('stories'); if(i>=0) TEMP14.splice(i,1); }
+const _W15=W; W=function(k){ if(k==='stories') return `<div class="st15">${stories4()}<span class="st15b">${bdg4('idea')}</span></div>`; return _W15(k); };
+['dir','asst'].forEach(s=>{ const d=HDEF[s]; d.hidden=d.hidden.filter(x=>x!=='stories'); if(!d.order.includes('stories')){ const j=d.order.indexOf('cele'); d.order.splice(j+1,0,'stories'); } });
+if(!LS.get('coral_lk_v15st',false)){ Object.values(HCFG).forEach(c=>{ if(!c||!c.order) return; c.hidden=(c.hidden||[]).filter(x=>x!=='stories'); if(!c.order.includes('stories')){ const j=c.order.indexOf('cele'); c.order.splice(j+1,0,'stories'); } }); LS.set('coral_lk_v15st',true); saveH&&saveH(); }
+
+/* у потребителя нет бонусов партнёра — кошелёк без блока «Бонус за месяц» */
+const _wallet15=wallet; wallet=function(){ if(pk!=='elena') return _wallet15();
+  return topbar('Coral Кошелёк','Баланс и оплата заказов')+`<div class="card c-pad"><small style="color:var(--muted)">Всего в кошельке</small><div class="kp7v">${cur(12.4)}</div><div class="btns" style="margin-top:12px"><button class="btn pri" onclick="go('shop','orders')">Оплатить заказ</button></div></div>`; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -5356,6 +5514,15 @@ Object.assign(EN_DICT,{"СОП* — без перекоса на одну вет
 Object.assign(EN_DICT,{"Кто на грани потери ранга":"Who might lose their rank","Что мне нужно до следующего ранга":"What do I need for the next rank","Кто ближе всего к Директору":"Who is closest to Director","порог":"threshold"});EN_RE=null;
 Object.assign(EN_DICT,{"Оплата заказа №48177": "Order No. 48177 payment", "окт · бонусами": "Oct · with bonuses", "Перевод бонусов на заказ №48012": "Bonuses applied to order No. 48012", "Выплата на карту •• 4417": "Payout to card •• 4417", "сен · исполнено": "Sep · completed", "сен · начислено": "Sep · credited", "авг · начислено": "Aug · credited", "Бонус за июль": "Bonus for July", "Бонус за август": "Bonus for August", "Бонус за сентябрь": "Bonus for September", "История": "History", "Фильтры: период и страна": "Filters: period and country", "Период и страна": "Period and country", "Начисления": "Credits", "Списания": "Debits", "За выбранный период движений нет.": "No transactions for the selected period.", "Когда приходит бонус": "When the bonus arrives", "Как оплатить заказ бонусами": "How to pay for an order with bonuses", "Налоговый статус и выплаты": "Tax status and payouts", "Бонусы, оплата заказов и выплаты": "Bonuses, order payments and payouts", "Всего в кошельке": "Total in wallet", "ожидается 1 ноября": "expected on 1 November", "Оплатить заказ": "Pay for an order", "бонусами": "with bonuses", "на карту": "to card", "Перевести баллы": "Transfer points", "в ЛО участника": "to a member's PV", "Выписка": "Statement", "PDF или Excel": "PDF or Excel", "Баллы в ЛО участника": "Points to a member's PV", "балл.": "pts", "ожидается": "expected", "Месяц закрыт": "Month closed", "Расчёт РАО": "Calculation by accounting", "готов": "done", "Начисление в кошелёк": "Credit to wallet", "1 нояб": "1 Nov", "30 сен": "30 Sep", "Из чего складывается": "Breakdown", "Октябрь · предварительно": "October · preliminary", "Как растёт бонус октября": "How October's bonus grows", "Начисления по странам": "Credits by country", "За заказы вашей структуры · сентябрь": "For orders in your structure · September", "Подсказки": "Tips", "Оплатить заказ бонусами": "Pay for an order with bonuses", "Доступно": "Available", "Сумма, €": "Amount, €", "На заказ": "To order", "Новый заказ в корзине": "New order in cart", "Заказ №48312": "Order No. 48312", "Бонусы переводятся на заказ сразу. Отменить перевод можно, пока заказ не оплачен.": "Bonuses are applied to the order immediately. You can cancel while the order is unpaid.", "Продолжить": "Continue", "Вывести на карту": "Withdraw to card", "Срок": "Timing", "1–3 рабочих дня": "1–3 business days", "Заявка на выплату создана": "Payout request created", "Из чего складывается бонус": "Bonus breakdown", "Детализация расчёта бонус-скидки · предварительно": "Bonus-discount calculation · preliminary", "Окончательные цифры — после закрытия месяца и расчёта РАО.": "Final figures after month close and accounting calculation.", "Выписка по кошельку": "Wallet statement", "Для налоговой и личного учёта": "For tax and personal records", "Период": "Period", "3 месяца": "3 months", "2026 год": "Year 2026", "Выписка PDF сформирована": "PDF statement ready", "Выписка Excel сформирована": "Excel statement ready", "Фильтры": "Filters", "Этот месяц": "This month", "Полгода": "6 months", "Год": "Year", "Страна": "Country", "Фильтры применены": "Filters applied", "Показать": "Show", "Заявки за 90 дней": "Leads in 90 days", "Вступили в клуб": "Joined the club", "Сделали первый заказ": "Placed a first order", "Второй заказ за 90 дней": "Second order within 90 days", "Заявки": "Leads", "Первый заказ": "First order", "Чаще всего человек из САП делает один заказ и уходит — второй делают единицы. Вступление — не результат: ведите к второму заказу.": "Most people from auto-matching place one order and leave — very few make a second. Sign-up isn't the result: lead them to a second order.", "демо-цифры — заменим данными РАО": "demo figures — to be replaced with accounting data", "Без второго заказа · 4": "No second order · 4", "Ведите к второму заказу": "Lead to a second order", "Человек попадает в окно 90 дней в «Потребителях»": "The person enters the 90-day window in Consumers", "Оплачен": "Paid", "Собирается": "Being packed", "В пути": "In transit", "В пункте выдачи": "At pickup point", "ЛО закроется после доставки.": "PV will be met after delivery.", "До ЛО для ранга не хватает": "PV short for your rank by", "Закажите до 31 октября, чтобы сохранить ранг.": "Order by 31 October to keep your rank.", "Оформить заказ": "Place an order", "Эта неделя": "This week", "Раньше": "Earlier", "По баллам": "By points", "По дате": "By date", "можно забрать": "ready for pickup", "доставка ≈": "delivery ≈", "Баллы в пути": "Points in transit", "Оплачены, ещё не доставлены · засчитаются в объём после доставки": "Paid, not yet delivered · count toward volume after delivery", "Мои": "Mine", "Структура": "Structure", "Заказов в пути нет.": "No orders in transit.", "Даты доставки — оценка службы доставки. Коррекция баллов — неделя после закрытия месяца.": "Delivery dates are carrier estimates. Points are corrected within a week after month close.", "заказ · статус и дата доставки": "order · status and delivery date", "заказа · статус и дата доставки": "orders · status and delivery date", "заказов · статус и дата доставки": "orders · status and delivery date", "в пути ещё": "another in transit", "заказы в пути добавят": "orders in transit add", "Сейчас": "Now", "Вы": "You"});EN_RE=null;
 Object.assign(EN_DICT,{"Действия с блоком": "Block actions", "Основа главной: набор цифр выбираете вы": "Core of Home: you choose which numbers", "Блок можно скрыть и вернуть в любой момент": "You can hide and restore the block any time", "Выбрать показатели": "Choose metrics", "Скрыть с главной": "Hide from Home", "Переместить выше": "Move up", "Переместить ниже": "Move down", "Настроить главную": "Customize Home", "скрыт с главной": "hidden from Home", "Профиль": "Profile", "Данные, безопасность, выплаты и настройки": "Data, security, payouts and settings", "Требует внимания": "Needs attention", "Обновите пароль": "Update your password", "последний раз — 20 месяцев назад": "last changed 20 months ago", "Аккаунт": "Account", "Деньги": "Money", "Рекомендации": "Referrals", "Приватность": "Privacy", "Документы": "Documents", "Приложение": "App", "Личные данные": "Personal data", "почта и телефон подтверждены": "email and phone verified", "Вход и безопасность": "Sign-in and security", "пароль обновлён 20 мес. назад": "password changed 20 mo. ago", "Вознаграждение и выплаты": "Rewards and payouts", "Самозанятый · карта •• 4417": "Self-employed · card •• 4417", "Визитка, ссылка и промокод": "Card, link and promo code", "как вас видят по ссылке": "how people see you via your link", "Согласия и уведомления": "Consents and notifications", "контакты видны структуре": "contacts visible to your structure", "Заявления и файлы": "Applications and files", "3 заявления · все исполнены": "3 applications · all completed", "Язык": "Language", "Страна и валюта": "Country and currency", "Тема": "Theme", "как в системе": "system", "светлая": "light", "тёмная": "dark", "Наставник": "Mentor", "Написать": "Message", "условий до": "conditions to"});EN_RE=null;
+Object.assign(EN_DICT,{
+"Все условия ранга":"All rank conditions","Отчёты по структуре":"Structure reports","Все потребители 90 дней":"All 90-day consumers","Открыть Автоподбор":"Open Auto-matching",
+"Все новички":"All newcomers","Открыть обучение":"Open learning","Открыть разметку":"Open markup","Все достижения":"All achievements",
+"Порядок блоков":"Block order","перетащите блоки на главной":"drag blocks on the home screen","какие цифры видны на главной":"which numbers show on home",
+"«Мои показатели» — основа главной, этот блок не скрывается":"“My metrics” is the core of home — this block can’t be hidden","вернуть — в «Порядок блоков»":"restore it in “Block order”",
+"Важное":"Important","Новое в ЛК":"New in the back office","Уведомления и новое в ЛК":"Notifications and what’s new","Идея · в планах":"Idea · planned",
+"Новости и обучение в формате историй · идея, в планах":"News and learning as stories · idea, planned","Свернуть меню":"Collapse menu","Развернуть меню":"Expand menu",
+"новый участник в первой линии":"new member in the first line","новых участников в первой линии":"new members in the first line","новых участника в первой линии":"new members in the first line"
+});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
