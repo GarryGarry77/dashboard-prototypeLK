@@ -1406,6 +1406,40 @@ h3,.card h3{line-height:1.3!important}.btn{line-height:1.25!important}
 @media (min-width:1100px){.todo6 .td .s2{grid-row:2!important}.todo6 .td .v2{grid-row:3}.todo6 .td .v3{grid-row:4}}
 .todo6 .td .v2{grid-row:4}.todo6 .td .v3{grid-row:5}
 @media (min-width:1100px){.todo6 .td .v2{grid-row:3!important}.todo6 .td .v3{grid-row:4!important}}
+/* стрелки как у Сбера */
+.chv10{display:inline-grid!important;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--soft);color:var(--ink);flex:none;font-size:0!important}
+.chi10{display:inline-grid;place-items:center;vertical-align:-3px;margin-left:2px}
+.chv9.chv10{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:9px;background:var(--card)}
+.nv .chev.chv10,.ucard .chev.chv10{width:24px;height:24px;background:transparent;color:var(--muted)}
+.all9 .chi10 svg{width:14px;height:14px}
+/* Настроить главную */
+.cz10h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding-right:48px}
+.ic10{all:unset;cursor:pointer;width:44px;height:44px;border-radius:12px;background:var(--soft);display:grid;place-items:center;color:var(--ink);flex:none}
+.ic10:hover{background:var(--line)}
+.add10{all:unset;cursor:pointer;display:block;box-sizing:border-box;width:100%;text-align:center;padding:18px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);font-weight:600;font-size:16px;color:var(--brand);margin:16px 0 18px}
+.czl{display:flex;flex-direction:column;gap:10px}
+.cz10{display:flex;align-items:center;gap:8px;padding:12px 12px 12px 18px;border-radius:18px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);min-height:52px;font-size:16px}
+.cz10 b{font-weight:500}
+.grip10{width:44px;height:44px;display:grid;place-items:center;color:var(--muted);cursor:grab;touch-action:none}
+.drag10{position:fixed;z-index:100;box-shadow:0 12px 30px rgba(0,0,0,.18);cursor:grabbing}
+.ph10{background:var(--soft);box-shadow:none}
+.bk10{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--soft);margin-bottom:8px}
+.as10{all:unset;cursor:pointer;display:flex;gap:14px;align-items:center;box-sizing:border-box;width:100%;padding:12px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);margin-bottom:10px}
+.as10 small{display:block;color:var(--muted);font-size:13px;line-height:18px}
+.plus10{width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:18px;flex:none}
+.pvw{width:96px;height:64px;border-radius:12px;background:var(--soft);padding:8px;box-sizing:border-box;flex:none}
+.pv{display:grid;gap:4px;height:100%}.pv i,.pv b{display:block;background:var(--line);border-radius:4px}
+.pv.k4{grid-template-columns:1fr 1fr}.pv.k3{grid-template-columns:repeat(3,1fr)}.pv.k2{grid-template-columns:1fr 1fr}.pv.k6{grid-template-columns:repeat(3,1fr)}
+.pv.dots{grid-template-columns:repeat(5,1fr);align-items:center}.pv.dots i{border-radius:50%;aspect-ratio:1}
+.pv.bar{grid-template-rows:1fr 8px}.pv.img{grid-template-columns:1.4fr 1fr}.pv.card b,.pv.note b{height:12px;width:60%}.pv.list{grid-template-rows:repeat(3,1fr)}
+.pv.card,.pv.note{grid-template-rows:12px 1fr 1fr}
+.hfoot10{display:flex;justify-content:center;margin:20px 0 8px}
+.cust10{all:unset;cursor:pointer;display:inline-flex;gap:10px;align-items:center;padding:14px 22px;border-radius:999px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);font-weight:600;color:var(--brand)}
+@media (max-width:1099px){.tiles>.tile:last-child:nth-child(odd){grid-column:1/-1}}
+@media (min-width:1100px){.tiles:has(> .tile:nth-child(5)){grid-template-columns:repeat(5,minmax(0,1fr))}}
+.cz10 .g1,.as10 .g1{flex:1;min-width:0}
+.h6-rk{align-items:center}.h6-rk .chv10{width:20px;height:20px;background:transparent;color:#fff}
+.hero6 .chv10,.hero6 .chi10{color:#fff;background:transparent}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -4717,6 +4751,70 @@ const _setP9=setP; setP=function(k){ planLoaded=null; _setP9(k); };
 const _W9=W; W=function(k){ let h=_W9(k); if(k!=='todo'||!h) return h;
   return h.replace(/<span class="v3">Всего: <b>([^<]*)<\/b><\/span>/g,(m,n)=>`<span class="v3"><span class="all9" role="link" tabindex="0" onclick="event.stopPropagation();tscope='g10';go('team','all')">Всего: <b>${n}</b> ›</span></span>`)
           .replace(/<button class="td" onclick="([^"]*)">/g,'<button class="td" onclick="$1"><span class="chv9" aria-hidden="true">›</span>'); };
+/* ================= v10: стрелки как у Сбера, «Настроить главную» как у Сбера, СОП* ================= */
+const CHV='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
+const CHVs='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
+/* после каждого рендера: одиночные «›» → круглая кнопка-стрелка 32 px; «текст ›» → текст + стрелка 16 px */
+function chev10(root){ (root||document).querySelectorAll('#main *, #dr *, #nav *').forEach(e=>{
+  if(e.dataset.c10) return;
+  const own=[...e.childNodes].filter(n=>n.nodeType===3);
+  if(e.children.length===0&&e.textContent.trim()==='›'){ e.innerHTML=CHV; e.classList.add('chv10'); e.dataset.c10=1; return; }
+  own.forEach(n=>{ if(/\s›\s*$/.test(n.textContent)){ n.textContent=n.textContent.replace(/\s›\s*$/,''); const s=document.createElement('span'); s.className='chi10'; s.innerHTML=CHVs; n.after(s); e.dataset.c10=1; } });
+}); }
+const _render10=render; render=function(){ _render10(); chev10(); };
+const _openDr10=openDr; openDr=function(h){ _openDr10(h); chev10(document.getElementById('dr')); };
+const _renderNav10=renderNav; renderNav=function(){ _renderNav10(); chev10(document.getElementById('nav')); };
+
+/* ---------- СОП*: отдельный показатель и строка в плитке СОП ---------- */
+function sopStar(r){ const nr=nextRank(M,r), T=nr.next?RANKS.find(x=>x.c===nr.next):null, C=RANKS.find(x=>x.c===M.rank[r]);
+  const R=(T&&T.star&&T.sop)?T:(C&&C.star&&C.sop)?C:RANKS.find(x=>x.c==='БД');
+  const ev=M.evalRank(r,R); const sop=ev.sop, strong=Math.min(ev.strong,sop), rest=sop-strong, half=R.sop/2;
+  return {R,sop,strong,rest,half,need:R.sop,counted:Math.min(sop,rest+Math.min(strong,half))}; }
+KPI4.sops={t:'СОП*',n:'СОП* — без перекоса на одну ветвь',show:r=>rankIdx(M.rank[r])>=rankIdx('ЗД'),
+  c:r=>{ const s=sopStar(r); return {t:'СОП*',have:s.counted,need:s.need,hint:`сильная ветвь — до ${fmt(s.half)}`}; }};
+const _kx10=kpiExplain;
+/* СОП-плитка: подсказка без дублирования СОП* */
+/* «Как считается» для СОП* */
+const _kpiExplainS=kpiExplain; kpiExplain=function(k){ if(k!=='sops') return _kpiExplainS(k); const r=R0(), s=sopStar(r);
+  openDr(`<h2>СОП*</h2><div class="sub" style="color:var(--muted)">Как считается · данные на 08.10.2026 18:31</div><div class="expl"><b>СОП* — тот же СОП, но самая сильная ветвь засчитывается не больше чем на половину требования.</b> Так ранг не держится на одном лидере.<div class="fx">СОП ${fmt(s.sop)} = сильная ветвь ${fmt(s.strong)} + остальные ${fmt(s.rest)}<br>Засчитано: ${fmt(s.rest)} + min(${fmt(s.strong)}; ${fmt(s.half)}) = <b>${fmt(s.counted)}</b> из ${fmt(s.need)}</div>Требование ранга «${RANK_NAME[s.R.c]}»: СОП ${fmt(s.need)}, из них без сильной ветви — не меньше ${fmt(s.half)}. ${s.rest>=s.half?'У вас выполнено.':`Сейчас без сильной ветви ${fmt(s.rest)} — не хватает ${fmt(s.half-s.rest)}: растите другие ветви.`}</div>
+   <div class="btns" style="margin-top:14px"><button class="btn pri sm" onclick="closeDrSilent();go('plan')">Спланировать в Разметке</button><button class="btn gh sm" onclick="aiOpen=true;closeDrSilent();drawAI()">Спросить Каролину</button></div>`); };
+/* директорам с ЗД — СОП* в наборе по умолчанию */
+['dir'].forEach(s=>{ if(!HDEF[s].kpis.includes('sops')) HDEF[s].kpis=['lo','go','sop','sops','bonus']; });
+
+/* ---------- «Настроить главную» как у Сбера: список с корзиной и ручкой, «Добавить разделы» с превью, сброс ---------- */
+const PRV={metrics:'k4',todo:'k4',rank:'card',risk:'list',hos:'bar',quests:'list',notice:'note',actions:'k6',growth:'list',sap:'bar',bday:'list',perso:'k2',newbies:'k3',recs:'k3',banners:'img',promos:'k2',learn:'k3',cele:'note',start:'list',stories:'dots'};
+function prv(k){ const t=PRV[k]||'list';
+  if(t==='k4') return `<div class="pv k4">${'<i></i>'.repeat(4)}</div>`; if(t==='k3') return `<div class="pv k3">${'<i></i>'.repeat(3)}</div>`; if(t==='k2') return `<div class="pv k2">${'<i></i>'.repeat(2)}</div>`;
+  if(t==='k6') return `<div class="pv k6">${'<i></i>'.repeat(6)}</div>`; if(t==='dots') return `<div class="pv dots">${'<i></i>'.repeat(5)}</div>`;
+  if(t==='bar') return `<div class="pv bar"><b></b><i></i></div>`; if(t==='img') return `<div class="pv img"><i></i><i></i></div>`; if(t==='card') return `<div class="pv card"><b></b><i></i><i></i></div>`;
+  if(t==='note') return `<div class="pv note"><b></b><i></i></div>`; return `<div class="pv list">${'<i></i>'.repeat(3)}</div>`; }
+const TRASH='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
+const GRIP='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 8h14M5 12h14M5 16h14"/></svg>';
+const SLID='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>';
+const RESET='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"/></svg>';
+customize=function(){ const c=hcfg();
+  openDr(`<div class="cz10h"><div><h2>Настроить главную</h2><div class="sub" style="color:var(--muted)">Добавьте новые или измените порядок разделов</div></div><button class="ic10" onclick="resetH()" aria-label="Вернуть как было" title="Вернуть как было">${RESET}</button></div>
+   <button class="add10" onclick="addSections()">Добавить разделы${c.hidden.length?` · ${c.hidden.length}`:''}</button>
+   <div id="czl" class="czl">${c.order.filter(k=>HW[k]).map(k=>`<div class="cz10" data-k="${k}"><div class="g1"><b>${HW[k].t}</b></div>${k==='metrics'?`<button class="ic10" onclick="pickKpi()" aria-label="Выбрать показатели" title="Выбрать показатели">${SLID}</button>`:''}<button class="ic10" onclick="rmH('${k}')" aria-label="Убрать «${HW[k].t}»">${TRASH}</button><span class="grip10" aria-label="Перетащить" title="Перетащите, чтобы поменять порядок">${GRIP}</span></div>`).join('')}</div>
+   <div class="sub" style="text-align:center;margin-top:10px;color:var(--muted)">Потяните за ≡, чтобы поменять порядок</div>`);
+  dragInit(); markStart&&markStart('home'); };
+function rmH(k){ const c=hcfg(); c.order=c.order.filter(x=>x!==k); if(!c.hidden.includes(k)) c.hidden.push(k); saveH(); render(); customize(); toastUndo(`«${HW[k].t}» убран с главной`,()=>{ const c2=hcfg(); c2.hidden=c2.hidden.filter(x=>x!==k); c2.order.push(k); saveH(); render(); }); }
+function addSections(){ const c=hcfg(); const ks=c.hidden.filter(k=>HW[k]);
+  openDr(`<button class="bk10" onclick="customize()" aria-label="Назад">${CHV.replace('m9 6 6 6-6 6','m15 6-6 6 6 6')}</button><h2>Добавить разделы</h2><div class="sub" style="color:var(--muted);margin-bottom:14px">Выберите раздел, который хотите добавить на главную</div>
+   ${ks.length?ks.map(k=>`<button class="as10" onclick="addH('${k}')"><span class="pvw">${prv(k)}</span><span class="g1"><b>${HW[k].t}</b><small>${HW[k].d}</small></span><span class="plus10">＋</span></button>`).join(''):'<div class="note">Все разделы уже на главной.</div>'}`); }
+function addH(k){ const c=hcfg(); c.hidden=c.hidden.filter(x=>x!==k); c.order.push(k); saveH(); render(); toast(`«${HW[k].t}» добавлен в конец главной`); addSections(); }
+/* перетаскивание за ручку: мышь и палец */
+function dragInit(){ const L=document.getElementById('czl'); if(!L) return; let it=null, ph=null, y0=0, top0=0;
+  L.querySelectorAll('.grip10').forEach(g=>g.addEventListener('pointerdown',e=>{ e.preventDefault(); it=g.closest('.cz10'); const r=it.getBoundingClientRect(); y0=e.clientY; top0=r.top;
+    ph=document.createElement('div'); ph.className='cz10 ph10'; ph.style.height=r.height+'px'; it.after(ph); it.classList.add('drag10'); it.style.width=r.width+'px'; it.style.top=r.top+'px'; it.style.left=r.left+'px'; g.setPointerCapture(e.pointerId); }));
+  L.addEventListener('pointermove',e=>{ if(!it) return; const y=top0+(e.clientY-y0); it.style.top=y+'px';
+    const sib=[...L.querySelectorAll('.cz10:not(.drag10):not(.ph10)')]; const mid=y+it.offsetHeight/2;
+    const after=sib.find(s=>{ const r=s.getBoundingClientRect(); return mid<r.top+r.height/2; }); if(after) L.insertBefore(ph,after); else L.appendChild(ph); });
+  const end=()=>{ if(!it) return; ph.replaceWith(it); it.classList.remove('drag10'); it.style.cssText=''; it=null;
+    const c=hcfg(); c.order=[...L.querySelectorAll('.cz10')].map(x=>x.dataset.k); saveH(); render(); };
+  L.addEventListener('pointerup',end); L.addEventListener('pointercancel',end); }
+/* кнопка «Настроить главную» внизу главной — как «Настроить для себя» у Сбера */
+const _homeDir10=homeDir; homeDir=function(){ return _homeDir10().replace(/<div class="hfoot6">[\s\S]*?<\/div>$/,`<div class="hfoot10"><button class="cust10" onclick="customize()">${SLID}<span>Настроить главную</span></button></div>`); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -4862,6 +4960,7 @@ Object.assign(EN_DICT,{"Моя подписка":"My subscription","Подпис
 Object.assign(EN_DICT,{"Свернуть всё":"Collapse all","Развернуть всё":"Expand all","Показать потребителей":"Show consumers","Скрыть потребителей":"Hide consumers","Развёрнуто:":"Expanded:","в дереве":"in the tree","Дерево свёрнуто до первой линии":"Tree collapsed to the first line","Потребители показаны в дереве":"Consumers shown in the tree","Потребители скрыты — только партнёры":"Consumers hidden — partners only"});EN_RE=null;
 Object.assign(EN_DICT,{"Ваши настройки сохранены:":"Your settings are saved:","Настроено под ваш ранг:":"Set up for your rank:","пок.":"gen.","Запомним и в следующий раз.":"We'll remember them next time.","Сбросить":"Reset","Вернули рекомендуемые настройки для вашего ранга":"Restored the recommended settings for your rank","личная структура":"personal structure","+ директора 1-го поколения":"+ 1st-generation directors","+ директора 1–6 поколений":"+ directors, generations 1–6","директорская до 10-го поколения":"director structure to 10th generation"});EN_RE=null;
 Object.assign(EN_DICT,{"в пути":"in transit","без баллов в пути":"nothing in transit","экстрабонус ✓":"extra bonus ✓","до экстрабонуса":"to extra bonus:","не хватает":"short by","выполнено":"done"});EN_RE=null;
+Object.assign(EN_DICT,{"СОП* — без перекоса на одну ветвь":"DGV* — no reliance on one branch","сильная ветвь — до":"strong branch counted up to","Добавьте новые или измените порядок разделов":"Add new sections or change their order","Добавить разделы":"Add sections","Выберите раздел, который хотите добавить на главную":"Choose a section to add to home","Потяните за ≡, чтобы поменять порядок":"Drag ≡ to reorder","Убрать":"Remove","убран с главной":"removed from home","добавлен в конец главной":"added to the end of home","Все разделы уже на главной.":"All sections are already on home.","Выбрать показатели":"Choose metrics","Перетащить":"Drag","Настроить главную":"Customize home"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
