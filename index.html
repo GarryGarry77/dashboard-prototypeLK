@@ -1573,6 +1573,7 @@ body::before{content:'';position:fixed;left:0;right:0;top:0;height:env(safe-area
 .thr7 span{display:none!important}
 .lg7{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
 .lg7 i{display:inline-block;width:22px;border-top:1.5px dashed var(--muted)}
+.h6-rk13{cursor:default;background:none!important;padding-left:0!important}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5100,6 +5101,11 @@ const _kpiPage13=kpiPage; kpiPage=function(){ let h=_kpiPage13(); const k=tabs.k
   if(k!=='lo'&&k!=='go') return h;
   const all=orders13(), n=all.filter(o=>k==='lo'?o.who==='me':true), s=n.reduce((a,o)=>a+o.pts,0);
   return h.replace('<div class="card c-pad">',`<button class="card c-pad p13e" onclick="pendSheet('${k==='lo'?'me':'grp'}')"><span class="w12i">${ic6('cart',20)}</span><span class="g1"><b>Баллы в пути · +${fmt(s)}</b><small>${n.length} заказ${n.length===1?'':n.length<5?'а':'ов'} · статус и дата доставки</small></span><span class="chi10">${CHVs}</span></button><div class="card c-pad">`); };
+/* ---------- Ранг на главной — в одном месте: блок «Ваш ранг». В шапке ранг — только подпись, без второго входа в те же детали ---------- */
+function rankOnHome(){ try{ const c=hcfg(); return pk!=='elena'&&c.order.includes('rank')&&!c.hidden.includes('rank')&&!!HW.rank; }catch(e){ return false; } }
+const _heroBand13=heroBand; heroBand=function(){ const h=_heroBand13(); if(!rankOnHome()) return h;
+  return h.replace(/<button class="h6-rk" onclick="rankHelp\(\)">([^<]*)<span aria-hidden="true">›<\/span><\/button>/,'<div class="h6-rk h6-rk13">$1</div>'); };
+const _quests13=quests; quests=function(){ const Q=_quests13(); return rankOnHome()?Q.filter(q=>q.id!=='rank'):Q; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
