@@ -1574,6 +1574,42 @@ body::before{content:'';position:fixed;left:0;right:0;top:0;height:env(safe-area
 .lg7{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
 .lg7 i{display:inline-block;width:22px;border-top:1.5px dashed var(--muted)}
 .h6-rk13{cursor:default;background:none!important;padding-left:0!important}
+/* v14: меню блока */
+.mo14{all:unset;cursor:pointer;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;color:var(--muted);margin-left:auto;flex:none}
+.mo14:hover{background:var(--soft);color:var(--ink)}
+.mo14w{position:relative}.mo14.abs{position:absolute;top:10px;right:10px;z-index:3;background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+:root[data-theme="dark"] .mo14.abs{background:rgba(0,0,0,.35);color:#fff}
+.hw .hd{display:flex;align-items:center;gap:8px}
+.hw .hrow{display:flex;align-items:center;gap:8px}
+.mr14{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:10px 0;min-height:56px;font-size:15px;color:var(--ink);border-bottom:1px solid var(--line)}
+.mr14:last-child{border-bottom:0}.mr14[disabled]{opacity:.4;cursor:default}
+/* v14: профиль */
+.p14s{display:flex;flex-direction:column;gap:6px}
+.p14c{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.p14av{width:64px!important;height:64px!important;font-size:22px;flex:none}
+.p14c>.g1 b{display:block;font-size:20px;line-height:26px;font-weight:600}.p14c>.g1 small{font-size:14px;color:var(--muted)}
+.p14m{display:flex;align-items:center;gap:10px;width:100%;padding-top:12px;border-top:1px solid var(--line)}
+.p14m small{display:block;font-size:13px;color:var(--muted)}.p14m b{font-size:15px}
+.p14h{font-size:13px;line-height:18px;font-weight:600;color:var(--muted);margin:14px 4px 6px}
+.p14l,.p14a{background:var(--card);border-radius:var(--r,20px);overflow:hidden}
+.p14a{background:var(--warn-s)}
+.p14r{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:10px 16px;min-height:60px;border-bottom:1px solid var(--line)}
+.p14l .p14r:last-child,.p14a .p14r{border-bottom:0}
+.p14r b{display:block;font-size:15px;line-height:21px;font-weight:500;color:var(--ink)}
+.p14r small{display:block;font-size:13px;line-height:18px;color:var(--muted)}.p14r small.w{color:var(--warn)}
+.p14r .g1{flex:1;min-width:0}.p14r .chi10{color:var(--muted)}
+.p14r.on{background:color-mix(in srgb,var(--brand) 8%,transparent)}
+.p14a .w12i{background:var(--card);color:var(--warn)}
+.p14w{display:grid;grid-template-columns:360px minmax(0,1fr);gap:20px;align-items:start}
+.p14w .p14s{position:sticky;top:12px}
+.p14t{margin:4px 0 12px;font-size:22px;line-height:28px}
+.p14x .g{margin-top:0}
+.p14sub{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.p14sub h1{margin:0;font-size:24px;line-height:30px}
+.p14bk{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--brand);font-size:15px;font-weight:600;min-height:44px}
+.p14x .g{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px}
+.p14x .g>*{grid-column:1/-1!important;width:auto!important}
+.fld .k{width:min(200px,40%)}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -3343,7 +3379,7 @@ function profile(){
   const body={
    data:`<div class="card c8"><h3>Основное</h3>${fld('Почта','user'+num.slice(-3)+'@gmail.com','<span class="tag t-ok">подтверждена</span>')}${fld('Телефон','+40 721 ••• 658','<span class="tag t-ok">подтверждён</span>')}${fld('Язык консультаций','Русский')}${fld('Страна и магазин',cons?'Румыния · €':P().country)}</div>
     <div class="card c4"><h3>Фото профиля</h3><div class="sub">Видно команде и потребителям на визитке</div><div style="display:grid;place-items:center;padding:16px"><span class="av" style="width:96px;height:96px;font-size:34px">${nm[0]}</span></div></div>
-    <div class="card c8"><h3>Личные данные</h3>${fld('Фамилия',nm.split(' ')[1])}${fld('Имя',nm.split(' ')[0])}${fld('Дата рождения','12 марта 1986')}${fld('Адрес доставки','Москва, ул. Тверская, 7, кв. 12')}<div class="sub" style="margin-top:8px">ФИО и дата рождения меняются через заявление — они нужны для договора и выплат.</div></div>
+    <div class="card c8"><h3>Личные данные</h3>${fld('Фамилия',nm.split(' ')[1])}${fld('Имя',nm.split(' ')[0])}${fld('Дата рождения','12 марта 1986')}${fld('Адрес доставки','București, Str. Victoriei 12, ap. 7')}<div class="sub" style="margin-top:8px">ФИО и дата рождения меняются через заявление — они нужны для договора и выплат.</div></div>
     <div class="card c4"><h3>Статус</h3>${fld('Клубный номер',num,'',false)}${fld('Ранг',rk,'',false)}${fld('Наставник','Светлана К.',`<button class="btn sm gh" onclick="toast('Чат с наставником')">Написать</button>`,false)}${cons?'<button class="btn acc sm" style="margin-top:10px" onclick="toast(\'Заявление на статус дистрибьютора\')">Стать дистрибьютором</button>':''}</div>`,
    sec:`<div class="card c8"><h3>Вход и безопасность</h3>${fld('Пароль','обновлён 20 месяцев назад','<span class="tag t-w">пора обновить</span>')}${fld('Вход по коду из SMS','включён',sw(true,'Вход по коду'),false)}${fld('Защита выплат вторым фактором','выключена',sw(false,'Защита выплат'),false)}${fld('Активные сессии','2 устройства',`<button class="btn sm gh" onclick="toast('Все сессии завершены')">Выйти везде</button>`,false)}</div><div class="card c4"><h3>При переезде</h3><div class="sub">При первом входе в новый ЛК попросим подтвердить почту и телефон: в кабинете кошелёк и выплаты.</div></div>`,
    pay:`${ctry==='RU'?'<div class="c12 warn">Изменения в НК РФ: если доход превысил 20 млн ₽ в 2025 или 2026 году, проверьте налоговый статус.</div>':''}<div class="card c8"><h3>Получение вознаграждения</h3>${fld('Налоговый статус','Самозанятый','<span class="tag t-ok">проверен</span>')}${fld('Способ выплаты','Карта •• 4417')}${fld('Договор','№ '+num,`<button class="btn sm gh" onclick="toast('PDF')">PDF</button>`,false)}</div><div class="card c4"><h3>Бонус октября</h3><div style="font-size:24px;font-weight:600">≈ ${cons?'—':fmt(bonus(M,R0(),P().prevRank).min)} у.е.</div><div class="sub">предварительно · выплата после расчёта</div></div>`,
@@ -5106,6 +5142,71 @@ function rankOnHome(){ try{ const c=hcfg(); return pk!=='elena'&&c.order.include
 const _heroBand13=heroBand; heroBand=function(){ const h=_heroBand13(); if(!rankOnHome()) return h;
   return h.replace(/<button class="h6-rk" onclick="rankHelp\(\)">([^<]*)<span aria-hidden="true">›<\/span><\/button>/,'<div class="h6-rk h6-rk13">$1</div>'); };
 const _quests13=quests; quests=function(){ const Q=_quests13(); return rankOnHome()?Q.filter(q=>q.id!=='rank'):Q; };
+/* ================= v14: меню «⋯» у постоянных блоков главной; профиль — список настроек вместо вкладок ================= */
+const DOTS='<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>';
+const TEMP14=['cele','notice','banners','promos','stories'];          /* временное — закрывается крестиком */
+const LOCK14=['metrics'];                                                /* основа главной — не скрывается */
+function moBtn(k){ return `<button class="mo14" onclick="event.stopPropagation();blockMenu('${k}')" aria-label="Действия с блоком «${HW[k].t}»" title="Действия с блоком">${DOTS}</button>`; }
+function blockMenu(k){ const c=hcfg(), i=c.order.indexOf(k), lock=LOCK14.includes(k), t=HW[k].t;
+  const row=(ic,txt,f,dis)=>`<button class="mr14" ${dis?'disabled':''} onclick="${f}"><span class="w12i">${ic}</span><span class="g1">${txt}</span></button>`;
+  openDr(`<h2>${t}</h2><div class="sub" style="color:var(--muted);margin-bottom:10px">${lock?'Основа главной: набор цифр выбираете вы':'Блок можно скрыть и вернуть в любой момент'}</div>
+   ${lock?row(SLID,'Выбрать показатели',"closeDrSilent();pickKpi()"):row(TRASH,'Скрыть с главной',`closeDrSilent();hideBlock('${k}')`)}
+   ${row(CHV.replace('m9 6 6 6-6 6','m6 15 6-6 6 6'),'Переместить выше',`moveBlock('${k}',-1)`,i<=0)}
+   ${row(CHV.replace('m9 6 6 6-6 6','m6 9 6 6 6-6'),'Переместить ниже',`moveBlock('${k}',1)`,i>=c.order.length-1)}
+   ${row(GRIP,'Настроить главную',"closeDrSilent();customize()")}`); }
+function hideBlock(k){ const c=hcfg(), i=c.order.indexOf(k); c.order=c.order.filter(x=>x!==k); if(!c.hidden.includes(k)) c.hidden.push(k); saveH(); render();
+  toastUndo(`«${HW[k].t}» скрыт с главной`,()=>{ const c2=hcfg(); c2.hidden=c2.hidden.filter(x=>x!==k); c2.order.splice(Math.max(0,i),0,k); saveH(); render(); }); }
+function moveBlock(k,d){ const c=hcfg(), i=c.order.indexOf(k), j=i+d; if(i<0||j<0||j>=c.order.length) return; [c.order[i],c.order[j]]=[c.order[j],c.order[i]]; saveH(); render(); blockMenu(k);
+  setTimeout(()=>{ const e=document.getElementById('w-'+k); if(e) e.scrollIntoView({behavior:'smooth',block:'center'}); },80); }
+/* вставка «⋯» в заголовок блока */
+const _homeDir14=homeDir; homeDir=function(){ let h=_homeDir14();
+  return h.replace(/<section id="w-([a-z]+)" class="([^"]*)"([^>]*)>([\s\S]*?)<\/section>/g,(all,k,cls,rest,inner)=>{
+    if(TEMP14.includes(k)||!HW[k]) return all;
+    let x=inner, done=false;
+    if(k==='metrics'){ x=x.replace(/<button class="edit" onclick="pickKpi\(\)"[^>]*>[^<]*<\/button>/,moBtn(k)); done=x!==inner; }
+    if(!done&&/<div class="hrow">/.test(x)){ x=x.replace(/(<div class="hrow">[\s\S]*?)(<\/div>)/,`$1${moBtn(k)}$2`); done=true; }
+    if(!done&&/<h3 class="h20">[^<]*<\/h3>/.test(x)){ x=x.replace(/(<h3 class="h20">[^<]*<\/h3>)/,`<div class="hrow">$1${moBtn(k)}</div>`); done=true; }
+    if(!done){ return `<section id="w-${k}" class="${cls} mo14w"${rest}>${moBtn(k).replace('class="mo14"','class="mo14 abs"')}${inner}</section>`; }
+    return `<section id="w-${k}" class="${cls}"${rest}>${x}</section>`; }); };
+/* «Настроить главную»: «Мои показатели» не удаляются — только выбор цифр */
+const _customize14=customize; customize=function(){ _customize14(); const b=document.querySelector(`#dr button[onclick="rmH('metrics')"]`); if(b) b.remove(); };
+/* ранг скрыт с главной — в шапке появляется прогресс со ссылкой */
+const _heroBand14=heroBand; heroBand=function(){ let h=_heroBand14(); if(rankOnHome()||pk==='elena') return h;
+  const nr=nextRank(M,R0()); if(!nr.next) return h; const ok=nr.conds.filter(c=>c.ok).length;
+  return h.replace(/(<button class="h6-rk" onclick="rankHelp\(\)">)[^<]*(<span aria-hidden="true">›<\/span><\/button>)/,`$1${RANK_NAME[M.rank[R0()]]} · ${ok} из ${nr.conds.length} условий до «${RANK_NAME[nr.next]}» $2`); };
+
+/* ---------- Профиль: список настроек (как Настройки iOS и профиль Сбера) ---------- */
+const PIC={
+ user:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
+ lock:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+ shield:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>',
+ globe:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>',
+ moon:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></svg>',
+ warn:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>'
+};
+function prof14Groups(){ const cons=pk==='elena';
+  return [
+   ['Аккаунт',[['data',PIC.user,'Личные данные','почта и телефон подтверждены'],['sec',PIC.lock,'Вход и безопасность','пароль обновлён 20 мес. назад','warn']]],
+   ...(cons?[]:[['Деньги',[['pay',WIC.card,'Вознаграждение и выплаты','Самозанятый · карта •• 4417']]],['Рекомендации',[['ref',ic6('share',20),'Визитка, ссылка и промокод','как вас видят по ссылке']]]]),
+   ['Приватность',[['consent',PIC.shield,'Согласия и уведомления','контакты видны структуре']]],
+   ['Документы',[['docs',WIC.doc,'Заявления и файлы','3 заявления · все исполнены']]],
+   ['Приложение',[['_lang',PIC.globe,'Язык',lang==='en'?'English':'Русский'],['_ctry',PIC.globe,'Страна и валюта',`${COUNTRIES[ctry][0]} · ${COUNTRIES[ctry][1]}`],['_theme',PIC.moon,'Тема',{auto:'как в системе',light:'светлая',dark:'тёмная'}[curTheme()]||'как в системе']]]]; }
+function prof14Open(k){ if(k==='_lang'||k==='_theme') return acct(); if(k==='_ctry') return (typeof localeDr==='function'?localeDr():acct()); setTab('profile',k); window.scrollTo(0,0); }
+function prof14Body(k,tt){ const keep=tabs.profile; tabs.profile=k; const h=_profile14(); tabs.profile=keep; const i=h.indexOf('<div class="g">'); let o=i>=0?h.slice(i):h; return tt?o.replace(`<h3>${tt}</h3>`,''):o; }
+const _profile14=profile;
+profile=function(){ const cons=pk==='elena', p=P(), nm=cons?'Елена Смирнова':p.name, num=cons?'5520913':p.num, rk=cons?'Потребитель':RANK_NAME[M.rank[R0()]];
+  const G=prof14Groups(), keys=G.flatMap(g=>g[1].map(r=>r[0])).filter(x=>x[0]!=='_'), wide=window.matchMedia('(min-width:1024px)').matches;
+  let t=tabs.profile; if(!keys.includes(t)) t=wide?'data':null;
+  const title=t?G.flatMap(g=>g[1]).find(r=>r[0]===t)[2]:'';
+  const card=`<div class="card c-pad p14c"><span class="av p14av u-${pk}">${nm.split(' ').map(w=>w[0]).join('').slice(0,2)}</span><div class="g1"><b>${nm}</b><small>${rk} · №${num}</small></div>
+    ${cons?'':`<div class="p14m"><span class="g1"><small>Наставник</small><b>Светлана К.</b></span><button class="btn sm gh" onclick="toast('Чат с наставником')">Написать</button></div>`}</div>`;
+  const att=`<div class="p14a"><div class="p14h">Требует внимания</div><button class="p14r warn" onclick="prof14Open('sec')"><span class="w12i">${PIC.warn}</span><span class="g1"><b>Обновите пароль</b><small>последний раз — 20 месяцев назад</small></span><span class="chi10">${CHVs}</span></button></div>`;
+  const list=G.map(([g,rows])=>`<div class="p14h">${g}</div><div class="p14l">${rows.map(([k,ic,tt,st,w])=>`<button class="p14r ${t===k?'on':''}" onclick="prof14Open('${k}')"><span class="w12i">${ic}</span><span class="g1"><b>${tt}</b><small class="${w?'w':''}">${st}</small></span><span class="chi10">${CHVs}</span></button>`).join('')}</div>`).join('');
+  const side=card+att+list;
+  if(!wide){ if(!t) return topbar('Профиль','Данные, безопасность, выплаты и настройки')+`<div class="p14s">${side}</div>`;
+    return `<div class="p14sub"><button class="p14bk" onclick="setTab('profile','_');window.scrollTo(0,0)">${CHV.replace('m9 6 6 6-6 6','m15 6-6 6 6 6')}<span>Профиль</span></button><h1>${title}</h1></div>${prof14Body(t,title)}`; }
+  return topbar('Профиль','Данные, безопасность, выплаты и настройки')+`<div class="p14w"><div class="p14s">${side}</div><div class="p14x"><h2 class="p14t">${title}</h2>${prof14Body(t,title)}</div></div>`; };
+let _rz14; window.addEventListener('resize',()=>{ clearTimeout(_rz14); _rz14=setTimeout(()=>{ if(page==='profile') render(); },200); });
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -5254,6 +5355,7 @@ Object.assign(EN_DICT,{"в пути":"in transit","без баллов в пут
 Object.assign(EN_DICT,{"СОП* — без перекоса на одну ветвь":"DGV* — no reliance on one branch","сильная ветвь — до":"strong branch counted up to","Добавьте новые или измените порядок разделов":"Add new sections or change their order","Добавить разделы":"Add sections","Выберите раздел, который хотите добавить на главную":"Choose a section to add to home","Потяните за ≡, чтобы поменять порядок":"Drag ≡ to reorder","Убрать":"Remove","убран с главной":"removed from home","добавлен в конец главной":"added to the end of home","Все разделы уже на главной.":"All sections are already on home.","Выбрать показатели":"Choose metrics","Перетащить":"Drag","Настроить главную":"Customize home"});EN_RE=null;
 Object.assign(EN_DICT,{"Кто на грани потери ранга":"Who might lose their rank","Что мне нужно до следующего ранга":"What do I need for the next rank","Кто ближе всего к Директору":"Who is closest to Director","порог":"threshold"});EN_RE=null;
 Object.assign(EN_DICT,{"Оплата заказа №48177": "Order No. 48177 payment", "окт · бонусами": "Oct · with bonuses", "Перевод бонусов на заказ №48012": "Bonuses applied to order No. 48012", "Выплата на карту •• 4417": "Payout to card •• 4417", "сен · исполнено": "Sep · completed", "сен · начислено": "Sep · credited", "авг · начислено": "Aug · credited", "Бонус за июль": "Bonus for July", "Бонус за август": "Bonus for August", "Бонус за сентябрь": "Bonus for September", "История": "History", "Фильтры: период и страна": "Filters: period and country", "Период и страна": "Period and country", "Начисления": "Credits", "Списания": "Debits", "За выбранный период движений нет.": "No transactions for the selected period.", "Когда приходит бонус": "When the bonus arrives", "Как оплатить заказ бонусами": "How to pay for an order with bonuses", "Налоговый статус и выплаты": "Tax status and payouts", "Бонусы, оплата заказов и выплаты": "Bonuses, order payments and payouts", "Всего в кошельке": "Total in wallet", "ожидается 1 ноября": "expected on 1 November", "Оплатить заказ": "Pay for an order", "бонусами": "with bonuses", "на карту": "to card", "Перевести баллы": "Transfer points", "в ЛО участника": "to a member's PV", "Выписка": "Statement", "PDF или Excel": "PDF or Excel", "Баллы в ЛО участника": "Points to a member's PV", "балл.": "pts", "ожидается": "expected", "Месяц закрыт": "Month closed", "Расчёт РАО": "Calculation by accounting", "готов": "done", "Начисление в кошелёк": "Credit to wallet", "1 нояб": "1 Nov", "30 сен": "30 Sep", "Из чего складывается": "Breakdown", "Октябрь · предварительно": "October · preliminary", "Как растёт бонус октября": "How October's bonus grows", "Начисления по странам": "Credits by country", "За заказы вашей структуры · сентябрь": "For orders in your structure · September", "Подсказки": "Tips", "Оплатить заказ бонусами": "Pay for an order with bonuses", "Доступно": "Available", "Сумма, €": "Amount, €", "На заказ": "To order", "Новый заказ в корзине": "New order in cart", "Заказ №48312": "Order No. 48312", "Бонусы переводятся на заказ сразу. Отменить перевод можно, пока заказ не оплачен.": "Bonuses are applied to the order immediately. You can cancel while the order is unpaid.", "Продолжить": "Continue", "Вывести на карту": "Withdraw to card", "Срок": "Timing", "1–3 рабочих дня": "1–3 business days", "Заявка на выплату создана": "Payout request created", "Из чего складывается бонус": "Bonus breakdown", "Детализация расчёта бонус-скидки · предварительно": "Bonus-discount calculation · preliminary", "Окончательные цифры — после закрытия месяца и расчёта РАО.": "Final figures after month close and accounting calculation.", "Выписка по кошельку": "Wallet statement", "Для налоговой и личного учёта": "For tax and personal records", "Период": "Period", "3 месяца": "3 months", "2026 год": "Year 2026", "Выписка PDF сформирована": "PDF statement ready", "Выписка Excel сформирована": "Excel statement ready", "Фильтры": "Filters", "Этот месяц": "This month", "Полгода": "6 months", "Год": "Year", "Страна": "Country", "Фильтры применены": "Filters applied", "Показать": "Show", "Заявки за 90 дней": "Leads in 90 days", "Вступили в клуб": "Joined the club", "Сделали первый заказ": "Placed a first order", "Второй заказ за 90 дней": "Second order within 90 days", "Заявки": "Leads", "Первый заказ": "First order", "Чаще всего человек из САП делает один заказ и уходит — второй делают единицы. Вступление — не результат: ведите к второму заказу.": "Most people from auto-matching place one order and leave — very few make a second. Sign-up isn't the result: lead them to a second order.", "демо-цифры — заменим данными РАО": "demo figures — to be replaced with accounting data", "Без второго заказа · 4": "No second order · 4", "Ведите к второму заказу": "Lead to a second order", "Человек попадает в окно 90 дней в «Потребителях»": "The person enters the 90-day window in Consumers", "Оплачен": "Paid", "Собирается": "Being packed", "В пути": "In transit", "В пункте выдачи": "At pickup point", "ЛО закроется после доставки.": "PV will be met after delivery.", "До ЛО для ранга не хватает": "PV short for your rank by", "Закажите до 31 октября, чтобы сохранить ранг.": "Order by 31 October to keep your rank.", "Оформить заказ": "Place an order", "Эта неделя": "This week", "Раньше": "Earlier", "По баллам": "By points", "По дате": "By date", "можно забрать": "ready for pickup", "доставка ≈": "delivery ≈", "Баллы в пути": "Points in transit", "Оплачены, ещё не доставлены · засчитаются в объём после доставки": "Paid, not yet delivered · count toward volume after delivery", "Мои": "Mine", "Структура": "Structure", "Заказов в пути нет.": "No orders in transit.", "Даты доставки — оценка службы доставки. Коррекция баллов — неделя после закрытия месяца.": "Delivery dates are carrier estimates. Points are corrected within a week after month close.", "заказ · статус и дата доставки": "order · status and delivery date", "заказа · статус и дата доставки": "orders · status and delivery date", "заказов · статус и дата доставки": "orders · status and delivery date", "в пути ещё": "another in transit", "заказы в пути добавят": "orders in transit add", "Сейчас": "Now", "Вы": "You"});EN_RE=null;
+Object.assign(EN_DICT,{"Действия с блоком": "Block actions", "Основа главной: набор цифр выбираете вы": "Core of Home: you choose which numbers", "Блок можно скрыть и вернуть в любой момент": "You can hide and restore the block any time", "Выбрать показатели": "Choose metrics", "Скрыть с главной": "Hide from Home", "Переместить выше": "Move up", "Переместить ниже": "Move down", "Настроить главную": "Customize Home", "скрыт с главной": "hidden from Home", "Профиль": "Profile", "Данные, безопасность, выплаты и настройки": "Data, security, payouts and settings", "Требует внимания": "Needs attention", "Обновите пароль": "Update your password", "последний раз — 20 месяцев назад": "last changed 20 months ago", "Аккаунт": "Account", "Деньги": "Money", "Рекомендации": "Referrals", "Приватность": "Privacy", "Документы": "Documents", "Приложение": "App", "Личные данные": "Personal data", "почта и телефон подтверждены": "email and phone verified", "Вход и безопасность": "Sign-in and security", "пароль обновлён 20 мес. назад": "password changed 20 mo. ago", "Вознаграждение и выплаты": "Rewards and payouts", "Самозанятый · карта •• 4417": "Self-employed · card •• 4417", "Визитка, ссылка и промокод": "Card, link and promo code", "как вас видят по ссылке": "how people see you via your link", "Согласия и уведомления": "Consents and notifications", "контакты видны структуре": "contacts visible to your structure", "Заявления и файлы": "Applications and files", "3 заявления · все исполнены": "3 applications · all completed", "Язык": "Language", "Страна и валюта": "Country and currency", "Тема": "Theme", "как в системе": "system", "светлая": "light", "тёмная": "dark", "Наставник": "Mentor", "Написать": "Message", "условий до": "conditions to"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
