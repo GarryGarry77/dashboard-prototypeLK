@@ -1915,6 +1915,24 @@ body.navc .side{padding-top:14px}
 .lr23 .bdg5{flex:none;margin-top:2px}
 .lr23 b{display:block;font-size:14.5px;line-height:20px}
 .lr23 small{display:block;font-size:13px;line-height:18px;color:var(--muted)}
+/* демо-переключатель: подпись говорит, что именно переключается */
+.dlb20{letter-spacing:.04em;text-transform:none;font-weight:600;font-size:11.5px}
+/* плитка показателя на телефоне: ближе к 140px, а не 208 */
+@media (max-width:760px){
+ #w-metrics .tile .tm{min-height:0!important;padding:12px 13px!important}
+ #w-metrics .tile .t{font-size:13px!important;line-height:18px!important}
+ #w-metrics .tile .v{font-size:23px!important;line-height:28px!important;margin-top:4px!important}
+ #w-metrics .tile .v small{font-size:13px!important}
+ #w-metrics .tile .h{font-size:12.5px!important;line-height:16px!important;margin:2px 0 8px!important;-webkit-line-clamp:2}
+ #w-metrics .tile .pb{height:8px}
+ #w-metrics .tile .qi{top:8px;right:9px}
+}
+/* на узких экранах прячем подпись, а не значение */
+@media (max-width:900px){
+ .dm20>span:nth-child(2){display:inline!important}
+ .dm20 .dlb20{display:none}
+ .dm20{border-style:dashed}
+}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6078,7 +6096,7 @@ const _topbar20=topbar; topbar=function(t,s,e){ let h=_topbar20(t,s,e);
 topbar=(function(_t){ return function(t,s,e){ let h=_t(t,s,e);
   const p=perLabel19();
   h=h.replace(/<button class="dm19"[\s\S]*?<\/button>/,
-    `<button class="dm20" onclick="demoDr19()" aria-label="${L('Демо: из-под какого статуса смотрим')}" title="${L('Демо: смена статуса')}"><span class="dlb20">${L('Демо')}</span><span>${L(p[2])}</span><span class="chv19">▾</span></button>`);
+    `<button class="dm20" onclick="demoDr19()" aria-label="${L('Демо: из-под какого статуса смотрим')}" title="${L('Демо: смена статуса')}"><span class="dlb20">${L('Смотрю как')}</span><span>${L(p[2])}</span><span class="chv19">▾</span></button>`);
   return h; }; })(topbar);
 
 /* ---------- 4. Быстрые действия и балансы — по рангу ---------- */
@@ -6613,6 +6631,7 @@ Object.assign(EN_DICT,{
 " дней. Зелёный — выполнено, бирюзовый — идёте по графику, оранжевый — отстаёте, красный — месяц кончается, а порог не взят. Засечка на шкале показывает, где вы должны быть сегодня.":" days elapsed. Green — met, teal — on pace, amber — behind, red — the month is ending and the threshold is not reached. The notch shows where you should be today.",
 "Цвет и засечка на шкалах — по темпу месяца: прошло":"Colour and notch follow the pace of the month: "
 });EN_RE=null;
+Object.assign(EN_DICT,{"Смотрю как":"Viewing as"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
