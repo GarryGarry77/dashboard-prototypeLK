@@ -1678,6 +1678,76 @@ body.navc .side{padding-top:14px}
 .li>.g1>b,.li>.g1>small{overflow-wrap:anywhere}
 .li>.tag{flex:none;white-space:nowrap}
 @media (max-width:440px){.li{flex-wrap:wrap}.li>.tag{margin-left:auto}}
+/* ================= v17 ================= */
+/* --- путь по рангам --- */
+.lad17{margin-top:4px}
+.ls17{background:var(--soft);border-radius:var(--r-card,20px);padding:16px 18px;margin-bottom:14px}
+.ls17 b{display:block;font-size:17px;line-height:24px}
+.ls17 span{display:block;font-size:14px;line-height:20px;color:var(--muted);margin-top:4px}
+.rws17{position:relative;display:flex;flex-direction:column}
+.rw17{position:relative;display:grid;grid-template-columns:36px minmax(0,1fr);align-items:stretch}
+.rl17{position:relative;display:block}
+.rl17::before{content:"";position:absolute;left:17px;top:0;bottom:0;width:2px;background:var(--line)}
+.rw17:first-child .rl17::before{top:26px}
+.rw17:last-child .rl17::before{bottom:calc(100% - 26px)}
+.rl17 i{position:absolute;left:11px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2px var(--line);z-index:1}
+.rw17.got .rl17::before,.rw17.here .rl17::before{background:var(--brand)}
+.rw17.got .rl17 i{background:var(--brand);box-shadow:inset 0 0 0 2px var(--brand)}
+.rw17.here .rl17 i{width:18px;height:18px;left:9px;top:18px;background:var(--brand);box-shadow:0 0 0 4px var(--soft),inset 0 0 0 3px var(--card)}
+.rw17.next .rl17 i{box-shadow:inset 0 0 0 2px var(--brand)}
+.rb17{all:unset;cursor:pointer;display:grid;gap:3px;padding:12px 14px;margin:0 0 8px;border-radius:16px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.rb17:hover,.rb17:focus-visible{background:var(--soft);outline:none}
+.rt17{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.rt17 b{font-size:16px;line-height:22px;font-weight:600}
+.rs17{font-size:12.5px;color:var(--muted)}
+.rr17{font-size:14px;line-height:20px;color:var(--ink)}
+.rq17{font-size:12.5px;line-height:18px;color:var(--muted)}
+.rw17.here .rb17{background:var(--soft);box-shadow:inset 0 0 0 2px var(--brand)}
+.rw17.here .rs17{color:var(--brand);font-weight:600}
+.rw17.next .rb17{box-shadow:inset 0 0 0 1px var(--brand)}
+.rw17.far .rt17 b,.rw17.far .rr17{color:var(--muted)}
+.rp17{display:flex;align-items:center;gap:10px;margin-top:6px}
+.rp17 .pbar{flex:1;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.rp17 .pbar i{display:block;height:100%;background:var(--brand);border-radius:99px}
+.rp17 em{font-style:normal;font-size:12.5px;color:var(--muted);white-space:nowrap}
+@media (max-width:560px){.rw17{grid-template-columns:28px minmax(0,1fr)}.rl17::before{left:13px}.rl17 i{left:7px}.rw17.here .rl17 i{left:5px}}
+/* --- путь потребителя --- */
+.sg17{display:flex;gap:3px;height:34px;margin-top:12px}
+.sg17 button{all:unset;cursor:pointer;position:relative;display:grid;place-items:center;border-radius:8px;min-width:34px;color:#fff;font-size:13px;font-weight:600;transition:opacity .15s}
+.sg17 .s0{background:#8FBFBC}.sg17 .s1{background:#4E948F}.sg17 .s2{background:var(--warn,#DB7D2E)}
+.sg17 .s3{background:#2F6D69}.sg17 .s4{background:var(--brand)}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.kc17{all:unset;cursor:pointer;display:flex;align-items:flex-start;gap:8px;padding:12px 14px;border-radius:14px;background:var(--soft);min-height:44px}
+.kc17:hover,.kc17:focus-visible{background:var(--line);outline:none}
+.kc17 .g1{flex:1;min-width:0}
+.kc17 b{display:block;font-size:15px;line-height:21px}
+.kc17 small{display:block;font-size:13px;line-height:18px;color:var(--muted);overflow-wrap:anywhere}
+.kc17 .dbar{display:block;height:4px;border-radius:99px;background:var(--line);margin-top:8px;overflow:hidden}
+.kc17 .dbar i{display:block;height:100%;background:var(--brand);border-radius:99px}
+.kc17 .tag{flex:none;white-space:nowrap}
+.empty17{padding:22px 16px;border-radius:14px;background:var(--soft);text-align:center}
+.empty17 b{display:block;font-size:15px}
+.empty17 small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+/* --- линейка воды --- */
+.hgrid17{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:12px}
+.hc17{padding:12px 14px;border-radius:14px;background:var(--soft)}
+.hc17.soon{background:var(--warn-s,#FDF1E6)}
+.hh17{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hh17 b{font-size:15px;line-height:21px}
+.hc17 small{display:block;font-size:13px;line-height:18px;color:var(--muted);margin-top:4px}
+
+.sg17 button{opacity:.55}
+.sg17 button.on,.sg17 button:hover,.sg17 button:focus-visible{opacity:1;outline:none}
+.sg17 button.on{box-shadow:0 0 0 2px var(--card),0 0 0 4px currentColor}
+.chips17{margin:12px 0 4px;display:flex;flex-wrap:wrap;gap:8px}
+.lt17{margin:2px 0 10px}
+.ph17{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.ph17>div{padding:12px 14px;border-radius:14px;background:var(--soft)}
+.ph17>div.on{background:var(--brand);color:#fff}
+.ph17 b{display:block;font-size:15px;line-height:21px}
+.ph17 span{display:block;font-size:13px;line-height:18px;color:var(--muted);margin-top:2px}
+.ph17>div.on span{color:rgba(255,255,255,.82)}
+@media (max-width:760px){.ph17{grid-template-columns:minmax(0,1fr)}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5422,6 +5492,98 @@ function mlab16(){ return month==='oct'?'октябрь, предварител�
 const _heroBand16=heroBand; heroBand=function(){ let h=_heroBand16(); if(month==='oct') return h;
   return h.replace(/октябрь, предварительно/g,mlab16()); };
 const _W16b=W; W=function(k){ let h=_W16b(k); if(h&&month!=='oct'&&k==='rank') h=h.replace(/октябрь, предварительно/g,mlab16()); return h; };
+/* ================= v17: лестница рангов как путь с наградами; путь потребителя — распределение и рабочий список; Health OS — три модуля и линейка воды ================= */
+
+/* ---------- 1. Лестница рангов: вертикальный путь, история, что открывает ранг ---------- */
+const RDATE17={ irina:{'Д':[3,2022],'СД':[11,2022],'ЗД':[7,2024]},
+  sergey:{'Д':[2,2019],'СД':[10,2019],'ЗД':[5,2020],'ИД':[4,2021],'БД':[9,2022],'М':[3,2024]},
+  anna:{} };
+const MO17=[['январь','January'],['февраль','February'],['март','March'],['апрель','April'],['май','May'],['июнь','June'],['июль','July'],['август','August'],['сентябрь','September'],['октябрь','October'],['ноябрь','November'],['декабрь','December']];
+const T17=(ru,en)=>lang==='en'?en:ru;
+function dt17(d){ return d?`${T17(MO17[d[0]-1][0],MO17[d[0]-1][1])} ${d[1]}`:''; }
+function pl17(n,a,b,c,en){ if(lang==='en') return n+' '+(en||a); const m=n%10, h=n%100; return n+' '+(m===1&&h!==11?a:m>=2&&m<=4&&(h<10||h>=20)?b:c); }
+function reward17(R){ const g=R.gb?T17(`бонус с ${pl17(R.gb,'поколения','поколений','поколений')} · `,`bonus from ${R.gb} generation${R.gb>1?'s':''} · `)+GEN_PCT.slice(0,R.gb).join('–')+'%'
+    :T17('25% с личного объёма + 10–25% с группы','25% of personal volume + 10–25% of the group');
+  return g+(R.inf?T17(` · бонус бесконечности ${String(R.inf).replace('.',',')}%`,` · infinity bonus ${R.inf}%`):''); }
+function reqs17(R){ const p=[T17('ЛО','PV')+' '+R.lo]; if(R.go) p.push(T17('ГО','GV')+' '+R.go);
+  if(R.br) p.push(pl17(R.br,'ветвь','ветви','ветвей',R.br>1?'branches':'branch'));
+  if(R.mbr) p.push(pl17(R.mbr,'мастерская ветвь','мастерские ветви','мастерских ветвей',R.mbr>1?'master branches':'master branch'));
+  if(R.dirs) p.push(pl17(R.dirs,'Директор','Директора','Директоров',R.dirs>1?'Directors':'Director')+T17(' в ',' in ')+pl17(R.depth,'поколении','поколениях','поколениях',R.depth>1?'generations':'generation'));
+  if(R.sop) p.push(T17('СОП','DGV')+(R.star?'*':'')+' '+fmt(R.sop)); return p.join(' · '); }
+let ladAll17=false;
+function ladToggle17(){ ladAll17=!ladAll17; render(); }
+function ladRow17(R,ctx){ const {cur,isD,nr,D,okN}=ctx, got=isD&&rankIdx(R.c)<=rankIdx(cur), here=isD&&R.c===cur, next=R.c===nr.next;
+  const st=here?T17('вы здесь','you are here'):got?(D[R.c]?T17('пройден · ','passed · ')+dt17(D[R.c]):T17('пройден','passed')):next?T17('следующий','next'):T17('впереди','ahead');
+  return `<div class="rw17 ${here?'here':got?'got':next?'next':'far'}">
+    <span class="rl17" aria-hidden="true"><i></i></span>
+    <button class="rb17" onclick="rankDr('${R.c}')" aria-label="${R.n}">
+      <span class="rt17"><b>${R.n}</b><span class="rs17">${st}</span></span>
+      <span class="rr17">${reward17(R)}</span>
+      <span class="rq17">${reqs17(R)}</span>
+      ${next?`<span class="rp17"><span class="pbar"><i style="width:${pct(okN,nr.conds.length)}%"></i></span><em>${okN} ${T17('из','of')} ${nr.conds.length} ${T17('условий','conditions')}</em></span>`:''}
+    </button></div>`; }
+function ladder17(){ const r=R0(), cur=M.rank[r], isD=M.isDir[r], nr=nextRank(M,r), RL=RANKS.slice().reverse(), D=RDATE17[pk]||{};
+  const okN=nr.conds.filter(c=>c.ok||c.exempt).length, ctx={cur,isD,nr,D,okN};
+  const done=RL.filter(R=>isD&&rankIdx(R.c)<=rankIdx(cur)).length;
+  const ni=nr.next?RL.findIndex(R=>R.c===nr.next):RL.length-1, cut=Math.min(RL.length,ni+3);
+  const near=RL.slice(0,cut), far=RL.slice(cut);
+  const miss=nr.conds.filter(c=>!c.ok&&!c.exempt);
+  const story=isD
+   ? `<b>${T17(`${pl17(done,'ранг пройден','ранга пройдено','рангов пройдено')} из ${RL.length}`,`${done} of ${RL.length} ranks passed`)}</b><span>${nr.next?`${T17('Следующий','Next')} — «${L(RANK_NAME[nr.next])}»: ${okN} ${T17('из','of')} ${nr.conds.length} ${T17('условий','conditions')}${miss.length?'. '+miss.map(c=>`${L(c.k)} — ${T17('не хватает','missing')} ${fmt(c.need-c.have)}`).join(', '):T17('. Всё выполнено — нужен месяц подтверждения','. All met — one confirmation month to go')}`:T17('Вы на вершине лестницы','You are at the top of the ladder')}</span>`
+   : `<b>${T17('Первый ранг впереди','Your first rank is ahead')}</b><span>${T17('Директор — это 25% с личного объёма и 10–25% с группы. Нужны ЛО 50 и ГО 500 за один месяц.','Director means 25% of personal volume and 10–25% of the group. You need PV 50 and GV 500 in a single month.')}</span>`;
+  return `<div class="lad17"><div class="ls17">${story}</div>
+   <div class="rws17">${near.map(R=>ladRow17(R,ctx)).join('')}${ladAll17?far.map(R=>ladRow17(R,ctx)).join(''):''}</div>
+   ${far.length?`<button class="btn gh sm lt17" onclick="ladToggle17()">${ladAll17?T17('Свернуть дальние ранги','Collapse the distant ranks'):T17(`Показать ещё ${pl17(far.length,'ранг','ранга','рангов')} — до Звёздного мастера`,`Show ${far.length} more ranks — up to Star Master`)}</button>`:''}
+   <div class="note">Ранг подтверждается: Директор — 1 месяц; Серебряный директор — Мастер — 2 месяца подряд; Серебряный мастер и выше — 3 месяца подряд. Нажмите на ранг — условия и расчёт бонуса.</div></div>`; }
+const _rankPage17=rankPage; rankPage=function(){ let h=_rankPage17();
+  if(tabs.rank!=='ladder') return h;
+  return h.replace(/<h2 class="sec">Лестница рангов<\/h2><div class="rlad">[\s\S]*?<div class="note">Оформление рангов[\s\S]*?<\/div>/,
+    '<h2 class="sec">'+L('Путь по рангам')+'</h2>'+ladder17()); };
+
+/* ---------- 2. Путь потребителя: распределение вместо колонок + рабочий список ---------- */
+let hsSeg=null;
+const SEG17=[['new','Дни 0–30','Знакомство с водой'],['rep','Дни 31–60','Пора повторить: вода заканчивается'],['risk','Дни 61–90','Риск потерять: второго заказа нет'],['two','Второй заказ','Сделали — ведём к третьему'],['loy','Лоялисты','3+ заказа за полгода']];
+function hsBuckets(){ const r=R0(), ids=scope==='my'?M.kids[r]:subtree(M,r), hs=hosStats(M,ids);
+  const st=c=>c.h.loyal&&c.h.first<=365?4:c.h.second&&c.h.first<=120?3:c.h.first<=30?0:c.h.first<=60?1:c.h.first<=90?2:-1;
+  const by=SEG17.map(()=>[]); hs.cl.forEach(c=>{ const s=st(c); if(s>=0) by[s].push(c); });
+  [0,1,2].forEach(i=>by[i].sort((a,b)=>b.h.first-a.h.first)); return by; }
+function hsCard17(c){ const d=c.h.first, inw=d<=90&&c.h.n===1;
+  return `<button class="kc17" onclick="clientDr(${c.id})"><span class="g1"><b>${c.n.n}</b><small>${inw?T17(`день ${d} из 90`,`day ${d} of 90`):T17(`${c.h.n} заказа`,`${c.h.n} orders`)} · ${c.h.product}${c.h.sub?' · подписка':''}</small>${inw?`<span class="dbar"><i style="width:${pct(d,90)}%"></i></span>`:''}</span>${inw&&d>=31?`<span class="tag ${d>60?'t-n':'t-w'}">${d>60?'риск':'пора писать'}</span>`:''}</button>`; }
+function hsAll17(i){ const L=hsBuckets()[i];
+  openDr(`<h2>${SEG17[i][1]}</h2><div class="sub" style="color:var(--muted);margin-bottom:10px">${SEG17[i][2]} · ${pl17(L.length,'потребитель','потребителя','потребителей',L.length>1?'consumers':'consumer')}</div><div class="kgrid">${L.map(hsCard17).join('')||'<div class="sub">Пока никого</div>'}</div>`); }
+function hsPick17(k){ hsSeg=k; render(); }
+function path17(){ const by=hsBuckets(), tot=by.reduce((a,x)=>a+x.length,0);
+  let si=SEG17.findIndex(s=>s[0]===hsSeg);
+  if(si<0) si=by[2].length?2:by[1].length?1:by[0].length?0:by[3].length?3:4;
+  const L=by[si]||[], SH=L.slice(0,8);
+  const bar=tot?`<div class="sg17" role="img" aria-label="Распределение потребителей по этапам">${SEG17.map(([k,t],i)=>by[i].length?`<button class="s${i} ${si===i?'on':''}" style="flex:${by[i].length}" title="${t} · ${by[i].length}" aria-label="${t} · ${by[i].length}" onclick="hsPick17('${k}')"><em>${by[i].length}</em></button>`:'').join('')}</div>`:'';
+  return `<div class="hrow"><div><h3>Путь потребителя: первые 90 дней</h3><div class="sub">Нажмите на потребителя — история заказов и готовое сообщение</div></div><button class="btn sm gh" onclick="go('learn')">Курс «Вода: первые 90 дней»</button></div>
+   ${bar}
+   <div class="chips chips17">${SEG17.map(([k,t],i)=>`<button class="chip ${si===i?'on':''}" onclick="hsPick17('${k}')">${t} · ${by[i].length}</button>`).join('')}</div>
+   <div class="sub" style="margin-bottom:10px">${SEG17[si][2]}</div>
+   ${L.length?`<div class="kgrid">${SH.map(hsCard17).join('')}</div>${L.length>8?`<button class="link" style="margin-top:10px" onclick="hsAll17(${si})">Показать всех · ${L.length}</button>`:''}`
+     :`<div class="empty17"><b>Здесь пока никого</b><small>${si<3?'Как только потребитель сделает первый заказ, он появится на этом этапе.':'Появятся, когда потребители сделают повторные заказы.'}</small></div>`}`; }
+
+/* ---------- 3. Health OS: три модуля и статус линейки воды ---------- */
+const HSTACK17=()=>[['Coral-Mine','в продаже','второй источник в Японии — запас под рост спроса',1],
+ ['H-500','в продаже','антиоксидант, частый второй заказ',1],
+ ['Пентокан К+','в продаже','электролиты, шипучие таблетки',1],
+ [T17('Наборы «Гидрамакс»','Hydramax sets'),'в продаже','старт с воды одним заказом',1],
+ ['Mizu-Mine Pure','на подходе','пополнение линейки, дата запуска уточняется',0],
+ [T17('Simag-стик','Simag stick'),'на подходе','выходит раньше, чем закончится запас Оушенмин',0]];
+function hos17(){ return `<div class="hrow"><div><h3>Health OS: три модуля</h3><div class="sub">В ЛК работает только первый — то, что вы продаёте в первые 90 дней</div></div></div>
+  <div class="ph17"><div class="on"><b>Гидратация</b><span>сейчас · линейка HydroStack собрана</span></div><div><b>Перезагрузка</b><span>с 2027 · правила фазы не утверждены</span></div><div><b>Персонализация</b><span>с 2028 · ассессмент и персональные наборы</span></div></div>
+  <div class="sub" style="margin:16px 0 0">Линейка воды · HydroStack</div>
+  <div class="hgrid17">${HSTACK17().map(([n,s,d,ok])=>`<div class="hc17 ${ok?'ok':'soon'}"><div class="hh17"><b>${n}</b><span class="tag ${ok?'t-ok':'t-w'}">${s}</span></div><small>${d}</small></div>`).join('')}</div>`; }
+
+/* ---------- вставка в DOM: надёжнее, чем разбор разметки регулярками ---------- */
+const _render17=render; render=function(){ _render17();
+  if(page!=='clients'||pk==='elena'||tab('clients','90')!=='90') return;
+  const kan=document.querySelector('.kan'), card=kan&&kan.closest('.card');
+  if(card){ card.innerHTML=L(path17()); }
+  if(!document.querySelector('.hos17')){ const g=document.querySelector('#main .g'), fun=[...document.querySelectorAll('#main .card')].find(c=>/Воронка потребителя|Client funnel/.test(c.textContent));
+    if(g){ const d=document.createElement('div'); d.className='card c12 hos17'; d.innerHTML=L(hos17()); (fun||g.firstElementChild)?.before?.(d); if(!d.parentNode) g.prepend(d); } }
+};
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -5588,6 +5750,24 @@ Object.assign(EN_DICT,{
 "Новости и обучение в формате историй · идея, функционала пока нет":"News and learning as stories · idea, not built yet"
 });EN_RE=null;
 Object.assign(EN_DICT,{"сентябрь, закрыт":"September, closed","август, закрыт":"August, closed","Сентябрь закрыт":"September closed","Август закрыт":"August closed"});EN_RE=null;
+Object.assign(EN_DICT,{
+"Путь по рангам":"Rank path","вы здесь":"you are here","пройден":"passed","следующий":"next","впереди":"ahead",
+"Первый ранг впереди":"Your first rank is ahead","Вы на вершине лестницы":"You are at the top of the ladder",
+"Линейка воды · HydroStack":"Water line · HydroStack","в продаже":"on sale","на подходе":"coming soon",
+"Чем обеспечен первый модуль Health OS — это то, что вы продаёте в первые 90 дней":"What backs the first Health OS module — this is what you sell in the first 90 days",
+"второй источник в Японии — запас под рост спроса":"a second source in Japan — supply for growing demand",
+"антиоксидант, частый второй заказ":"antioxidant, a frequent second order","электролиты, шипучие таблетки":"electrolytes, effervescent tablets",
+"старт с воды одним заказом":"start with water in a single order","пополнение линейки, дата запуска уточняется":"an addition to the line, launch date to be confirmed",
+"выходит раньше, чем закончится запас Оушенмин":"ships before the Oceanmin stock runs out",
+"Три модуля Health OS: Гидратация — сейчас, Перезагрузка — с 2027, Персонализация — с 2028. В ЛК пока работает только первый.":"Three Health OS modules: Hydration now, Restart from 2027, Personalisation from 2028. Only the first one works in the back office so far.",
+"Линейка воды HydroStack собрана: Coral-Mine, H-500, Пентокан К+, наборы и подписка":"The HydroStack water line is complete: Coral-Mine, H-500, Pentokan K+, sets and subscription",
+"Второй модуль Health OS, правила фазы ещё не утверждены":"The second Health OS module — the phase rules are not approved yet",
+"Третий модуль: ассессмент и персональные наборы":"The third module: assessment and personal sets",
+"Здесь пока никого":"Nobody here yet","Показать всех":"Show all","пора писать":"time to write","риск":"at risk",
+"Как только потребитель сделает первый заказ, он появится на этом этапе.":"As soon as a consumer places a first order they appear at this stage.",
+"Появятся, когда потребители сделают повторные заказы.":"They appear once consumers place repeat orders.",
+"Ранг подтверждается: Директор — 1 месяц; Серебряный директор — Мастер — 2 месяца подряд; Серебряный мастер и выше — 3 месяца подряд. Нажмите на ранг — условия и расчёт бонуса.":"Rank confirmation: Director — 1 month; Silver Director to Master — 2 months in a row; Silver Master and above — 3 months in a row. Tap a rank for its conditions and bonus."
+});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
