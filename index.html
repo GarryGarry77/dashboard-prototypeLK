@@ -1895,6 +1895,26 @@ body.navc .side{padding-top:14px}
 .dh22c b{display:block;font-size:15px;line-height:21px}
 .dh22c small{display:block;font-size:13px;line-height:18px;color:var(--muted);margin-top:3px}
 @media (max-width:760px){.dh22g{grid-template-columns:minmax(0,1fr);gap:12px}.dh22ar{transform:rotate(90deg);justify-self:center}}
+@media (max-width:760px){
+ #w-metrics .tiles .tile{padding:12px 14px}
+ #w-metrics .tiles .tile .v{font-size:24px;line-height:30px}
+ #w-metrics .tiles .tile .h{font-size:12.5px;line-height:17px}
+ #w-metrics .tiles{gap:10px}
+}
+/* ================= v23 ================= */
+/* подсказка у цифры: клик проходит на плитку, иконка крупнее */
+#w-metrics .tile .qi,.tile .qi{pointer-events:none;font-size:15px;opacity:.55}
+#w-metrics .tile:hover .qi,.tile:hover .qi{opacity:1}
+#w-metrics .tile .tm,.tile .tm{position:relative;z-index:1}
+/* метки */
+.bdg5.b-idea{background:#EDEBF7;color:#5A4FA3}
+:root[data-theme="dark"] .bdg5.b-idea{background:rgba(120,110,200,.22);color:#C9C3F0}
+.bdg5.b-none{background:var(--soft);color:var(--muted)}
+.lg23{display:grid;gap:8px;margin-top:8px}
+.lr23{display:flex;align-items:flex-start;gap:10px}
+.lr23 .bdg5{flex:none;margin-top:2px}
+.lr23 b{display:block;font-size:14.5px;line-height:20px}
+.lr23 small{display:block;font-size:13px;line-height:18px;color:var(--muted)}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6105,7 +6125,7 @@ const _W20c=W; W=function(k){ let h=_W20c(k);
 /* ================= v21: показатели сами заполняют строки (без дыр), лимит 8 с мягкой подсказкой, разведение блока и раздела ================= */
 
 /* ---------- 1. Плитки показателей: ровные строки при любом количестве ---------- */
-const KMIN21=190;                                   /* минимальная читаемая ширина плитки */
+const KMIN21=150;                                   /* минимальная читаемая ширина плитки */
 function cols21(n,w){ const max=Math.max(1,Math.min(n,Math.floor((w+16)/(KMIN21+16))));
   let best=max, waste=max*Math.ceil(n/max)-n;
   for(let c=max;c>=2;c--){ const wst=c*Math.ceil(n/c)-n; if(wst<waste||(wst===waste&&c>best&&false)){ waste=wst; best=c; } if(!waste) break; }
@@ -6114,8 +6134,8 @@ function fitKpi21(){ document.querySelectorAll('#w-metrics .tiles').forEach(g=>{
   const it=[...g.children]; if(!it.length) return;
   it.forEach(e=>e.style.gridColumn='');
   const w=g.clientWidth||g.getBoundingClientRect().width;
-  if(w<KMIN21*2){ g.style.gridTemplateColumns='minmax(0,1fr)'; g.classList.remove('dense21'); return; }
-  const c=cols21(it.length,w); g.style.gridTemplateColumns=`repeat(${c},minmax(0,1fr))`;
+  if(w<300){ g.style.gridTemplateColumns='minmax(0,1fr)'; g.classList.remove('dense21'); return; }
+  const c=w<640?2:cols21(it.length,w); g.style.gridTemplateColumns=`repeat(${c},minmax(0,1fr))`;
   const rest=it.length%c;
   if(rest){ const span=new Array(rest).fill(1); let extra=c-rest, i2=0;
     while(extra>0){ span[i2%rest]++; extra--; i2++; }
@@ -6181,11 +6201,15 @@ const _tile22=tile4; tile4=function(k){ const r=R0(), K=KPI4[k], v=K.c(r);
   h=h.replace(/^<div class="tile [^"]*"/,`<div class="tile t22 ${st}"`);
   if(v.need!=null&&v.have<v.need) h=h.replace(/(<span class="pb">[\s\S]*?)(<\/span>)/,`$1<span class="pc22" aria-hidden="true" style="left:${Math.round(PACE22()*100)}%"></span>$2`);
   return h; };
-/* подпись к цветам — один раз в блоке */
-const _W22=W; W=function(k){ let h=_W22(k);
-  if(k!=='metrics'||!h) return h;
-  return h.replace(/(<div class="tiles"[\s\S]*?<\/div>)(\s*<button class="perk")/,
-   `$1<div class="lg22"><span class="d ok"></span>${L('выполнено')}<span class="d pace"></span>${L('идёт по графику')}<span class="d slow"></span>${L('отстаёт от темпа')}<span class="d no"></span>${L('месяц кончается')}<span class="g1"></span><span class="sub">${L('Темп считаем от даты: прошло')} ${PASSED22()} ${L('из')} ${MDAYS22} ${L('дней')}</span></div>$2`); };
+/* объяснение цвета — там, где человек спрашивает «как считается», а не легендой на главной */
+function paceNote22(){ return L('Цвет шкалы — по темпу месяца: прошло ')+PASSED22()+L(' из ')+MDAYS22+L(' дней. Зелёный — выполнено, бирюзовый — идёте по графику, оранжевый — отстаёте, красный — месяц кончается, а порог не взят. Засечка на шкале показывает, где вы должны быть сегодня.'); }
+const _kpiEx22=kpiExplain;
+kpiExplain=function(k){ _kpiEx22(k);
+  setTimeout(function(){ const d=document.getElementById('dr');
+    if(d&&d.classList.contains('on')&&!d.querySelector('.pn22')) d.insertAdjacentHTML('beforeend','<div class="note pn22">'+paceNote22()+'</div>');
+  },60); };
+const _kpiPage22=kpiPage; kpiPage=function(){ let h=_kpiPage22();
+  return h.replace(/(<div class="ch7")/,`<div class="note pn22">${L('Цвет и засечка на шкалах — по темпу месяца: прошло')} ${PASSED22()} ${L('из')} ${MDAYS22} ${L('дней')}.</div>$1`); };
 
 /* ---------- 2. Четвёртая плитка задач: короткая подпись ---------- */
 const _render22=render; render=function(){ _render22();
@@ -6214,6 +6238,38 @@ function distHero22(){ const r=R0(), p=who19(), b=M?bonus(M,r,P()?P().prevRank:'
 const _dist22=dist; dist=function(){ let h=_dist22();
   if(isDist19()||tab('dist','start')==='form') return h;
   return h.replace(/<div class="card c-pad c12 d19h">[\s\S]*?<div class="btns" style="margin-top:16px">[\s\S]*?<\/div><\/div>/,distHero22()); };
+/* ================= v23: подсказка у цифры кликается; честная легенда «новое / идея / есть сейчас» ================= */
+
+/* ---------- 1. «ⓘ» у показателя перехватывал клик и был 13×19 px ---------- */
+/* иконка — часть кнопки: клик проходит на всю плитку, цель не меньше самой плитки */
+
+/* ---------- 2. Что в прототипе новое, что идея, а что уже есть ---------- */
+BADGES.idea=['Идея','b-idea'];
+(()=>{ const set=(g,k,v)=>{ const G=NAV4.find(x=>x.k===g); if(!G) return; if(!k){ G.isNew=v; return; } const s=(G.sub||[]).find(x=>x[0]===k); if(s) s[2]=v; };
+  set('home',null,'new');                 /* дашборд — наше предложение */
+  set('promo',null,'new');                /* промокоды и акции */
+  set('events',null,'new'); set('learn',null,'new');
+  set('ai',null,'new'); set('clients',null,'new');   /* Health OS */
+  set('shop','shop:subscr','new');        /* подписка на воду — пилот */
+  set('dist',null,null);                  /* «Стать дистрибьютором» уже есть в текущем ЛК */
+  const W=NAV4.find(x=>x.k==='wallet');
+  if(W&&!W.sub.some(x=>x[0]==='wallet:paym')) W.sub.push(['wallet:paym','Способы оплаты','idea']);
+})();
+const _navTo23=navTo; navTo=function(k){ if(k==='wallet:paym'){ ideaDr23(); return; } return _navTo23(k); };
+function ideaDr23(){ openDr(`<span class="bdg5 b-idea">${L('Идея')}</span><h2 style="margin-top:8px">${L('Способы оплаты')}</h2>
+  <p class="sub" style="color:var(--muted)">${L('Одно место, где участник управляет тем, чем платит за заказы: карта, бонусы Coral Кошелька, трансферные баллы, локальные способы оплаты страны. Сейчас это разнесено по шагам оформления заказа.')}</p>
+  <div class="note">${L('Решения о внедрении нет. Блок помечен как идея, чтобы отделить его от того, что мы предлагаем делать.')}</div>
+  <button class="btn gh" onclick="closeDrSilent()">${L('Понятно')}</button>`); }
+
+/* ---------- 3. Легенда меток — там, где её ищут стейкхолдеры ---------- */
+const LEG23=[['new','Новое','предлагаем сделать — этого нет в текущем ЛК'],
+ ['beta','Бета','работает, но ещё меняется по отзывам'],
+ ['idea','Идея','решения нет, показываем как возможность'],
+ [null,'Без метки','раздел уже есть в текущем ЛК']];
+function legend23(){ return `<div class="lg23">${LEG23.map(([b,t,d])=>`<div class="lr23">${b?bdg4(b):`<span class="bdg5 b-none">${L('—')}</span>`}<span class="g1"><b>${L(t)}</b><small>${L(d)}</small></span></div>`).join('')}</div>`; }
+const _demoDr23=demoDr19; demoDr19=function(){ _demoDr23();
+  const d=document.getElementById('dr'); if(!d) return;
+  d.insertAdjacentHTML('beforeend',L(`<h3 class="dh">Как читать прототип</h3>${legend23()}`)); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -6543,6 +6599,19 @@ Object.assign(EN_DICT,{
 "Появляются инструменты":"Tools appear","Digital KIT, договор и акты, трансферный счёт после закрытого Директора":"Digital KIT, contract and acts, a transfer account after a qualified Director rank",
 "Разовое удержание 15 у.е. за Digital KIT. Статус держится, пока выполняется ранг Директор.":"A one-off 15 c.u. for the Digital KIT. The status holds while the Director rank is met.",
 "Участники мероприятий":"Event participants","Показатели и ранги":"Metrics and ranks"
+});EN_RE=null;
+Object.assign(EN_DICT,{
+"Идея":"Idea","Способы оплаты":"Payment methods",
+"Одно место, где участник управляет тем, чем платит за заказы: карта, бонусы Coral Кошелька, трансферные баллы, локальные способы оплаты страны. Сейчас это разнесено по шагам оформления заказа.":"One place where a member manages what they pay with: card, Coral Wallet bonuses, transfer points, local payment methods. Today this is scattered across checkout steps.",
+"Решения о внедрении нет. Блок помечен как идея, чтобы отделить его от того, что мы предлагаем делать.":"No decision has been made. It is marked as an idea to separate it from what we propose to build.",
+"Понятно":"Got it","Как читать прототип":"How to read the prototype",
+"Новое":"New","предлагаем сделать — этого нет в текущем ЛК":"we propose building it — it does not exist in the current back office",
+"Бета":"Beta","работает, но ещё меняется по отзывам":"works, but still changing based on feedback",
+"решения нет, показываем как возможность":"no decision yet, shown as a possibility",
+"Без метки":"No label","раздел уже есть в текущем ЛК":"the section already exists in the current back office",
+"Цвет шкалы — по темпу месяца: прошло ":"Bar colour follows the pace of the month: "," из ":" of ",
+" дней. Зелёный — выполнено, бирюзовый — идёте по графику, оранжевый — отстаёте, красный — месяц кончается, а порог не взят. Засечка на шкале показывает, где вы должны быть сегодня.":" days elapsed. Green — met, teal — on pace, amber — behind, red — the month is ending and the threshold is not reached. The notch shows where you should be today.",
+"Цвет и засечка на шкалах — по темпу месяца: прошло":"Colour and notch follow the pace of the month: "
 });EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
