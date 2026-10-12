@@ -1748,6 +1748,37 @@ body.navc .side{padding-top:14px}
 .ph17 span{display:block;font-size:13px;line-height:18px;color:var(--muted);margin-top:2px}
 .ph17>div.on span{color:rgba(255,255,255,.82)}
 @media (max-width:760px){.ph17{grid-template-columns:minmax(0,1fr)}}
+/* ================= v18: мост к рангу ================= */
+.brc18{display:flex;flex-direction:column;gap:12px}
+.bhd18 h3{font-size:20px;line-height:26px;font-weight:600;margin:0}
+.bhd18 .sub{margin-top:2px}
+.bok18{display:flex;align-items:flex-start;gap:8px;background:var(--good-s);border-radius:14px;padding:10px 14px;font-size:13.5px;line-height:19px;color:var(--ink)}
+.bok18 .dot{flex:none}
+.bd18{border-radius:16px;box-shadow:inset 0 0 0 1px var(--line);padding:14px}
+.bh18{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bh18 b{font-size:16px;line-height:22px;font-weight:600;flex:1;min-width:0}
+.bh18 .tag{flex:none;white-space:nowrap}
+.bs18{font-size:13px;line-height:19px;color:var(--muted);margin-top:6px}
+.bn18{font-size:13.5px;line-height:19px;background:var(--soft);border-radius:12px;padding:10px 12px;margin-top:10px}
+.rr18{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-top:1px solid var(--line);margin-top:10px}
+.rr18:first-of-type{margin-top:8px}
+.rr18 .g1{flex:1;min-width:0}
+.rr18 b{display:block;font-size:15px;line-height:21px}
+.rr18 small{display:block;font-size:13px;line-height:18px;color:var(--muted);overflow-wrap:anywhere}
+.tr18{margin-top:2px}
+.tr18.dn{color:var(--bad)}
+.tr18.up{color:var(--good)}
+.ra18{flex:none;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.gl18{margin-top:12px}
+.gh18{display:flex;align-items:baseline;gap:10px;background:var(--soft);border-radius:10px;padding:8px 12px}
+.gh18 b{flex:1;min-width:0;font-size:14px;line-height:20px;font-weight:600}
+.gh18 span{font-size:14px;font-weight:600;white-space:nowrap}
+.gl18 .rr18:first-of-type{margin-top:0}
+@media (max-width:620px){
+ .rr18{flex-wrap:wrap}
+ .ra18{width:100%;justify-content:flex-start}
+ .ra18 .btn{flex:1 1 auto}
+}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5584,6 +5615,129 @@ const _render17=render; render=function(){ _render17();
   if(!document.querySelector('.hos17')){ const g=document.querySelector('#main .g'), fun=[...document.querySelectorAll('#main .card')].find(c=>/Воронка потребителя|Client funnel/.test(c.textContent));
     if(g){ const d=document.createElement('div'); d.className='card c12 hos17'; d.innerHTML=L(hos17()); (fun||g.firstElementChild)?.before?.(d); if(!d.parentNode) g.prepend(d); } }
 };
+/* ================= v18: мост к следующему рангу — каждое невыполненное условие разложено по людям, с действием ================= */
+
+/* ---------- вспомогательное ---------- */
+function nm18(id){ return M.by[id].n; }
+function goNeed18(id){ return Math.max(0,500-M.go[id]); }
+function loNeed18(id){ return Math.max(0,50-M.lo[id]); }
+/* сколько заказать, чтобы закрыть разрыв: ближайшая позиция каталога */
+function orderHint18(gap){ if(gap<=0) return '';
+  const items=Object.values(CAT4).filter(x=>x.pt).sort((a,b)=>a.pt-b.pt);
+  const one=items.find(x=>x.pt>=gap);
+  if(one) return T17(`это один заказ: ${one.n} — ${one.pt} ${pl17(one.pt,'балл','балла','баллов').split(' ')[1]}`,`that is one order: ${one.n} — ${one.pt} points`);
+  const pick=[]; let left=gap;
+  for(let i=items.length-1;i>=0&&left>0&&pick.length<3;i--){ const it=items[i];
+    if(it.pt<=left||pick.length===0&&it.pt>=left){ pick.push(it); left-=it.pt; } }
+  if(left>0){ const sm=items.find(x=>x.pt>=left); if(sm&&pick.length<3){ pick.push(sm); left-=sm.pt; } }
+  if(left>0||!pick.length) return T17(`это ${Math.ceil(gap/items[items.length-1].pt)} заказа набора «${items[items.length-1].n}»`,`that is ${Math.ceil(gap/items[items.length-1].pt)} orders of “${items[items.length-1].n}”`);
+  const list=pick.map(x=>`${x.n} (${x.pt})`).join(' + ');
+  return T17(`например: ${list}`,`for example: ${list}`); }
+
+/* тренд ветви по месячным срезам: в прототипе — пример, детерминированный по участнику */
+function trend18(id){ const h=(id*2654435761)%100;
+  if(h<18) return {d:-1,t:T17('3-й месяц снижается','falling for 3 months')};
+  if(h<34) return {d:-1,t:T17('2-й месяц снижается','falling for 2 months')};
+  if(h<62) return {d:0,t:T17('держится ровно','holding steady')};
+  return {d:1,t:T17('растёт','growing')}; }
+/* лучший кандидат в Директора внутри ветви */
+function senior18(leg){ const ids=[leg,...subtree(M,leg)].filter(x=>M.isDir[x]);
+  if(!ids.length) return null; return ids.slice().sort((a,b)=>rankIdx(M.rank[b])-rankIdx(M.rank[a])||M.go[b]-M.go[a])[0]; }
+function cand18(leg){ const ids=[leg,...subtree(M,leg)].filter(x=>!M.isDir[x]);
+  if(!ids.length) return null; const best=ids.slice().sort((a,b)=>M.go[b]-M.go[a])[0];
+  return {id:best,go:M.go[best],lo:M.lo[best],gap:goNeed18(best),lgap:loNeed18(best)}; }
+
+function row18(id,metric,note,acts){ const tr=trend18(id);
+  return `<div class="rr18"><span class="g1"><b>${nm18(id)}</b><small>${metric}${note?` · ${note}`:''}</small>
+    ${tr.d<0?`<small class="tr18 dn">${T17('Ранний сигнал','Early signal')}: ${T17('ГО ветви','branch GV')} ${tr.t}</small>`:''}</span>
+   <span class="ra18">${acts}</span></div>`; }
+const ACT_MSG18=id=>`<button class="btn sm pri" onclick="crmMsg(${id},'lk')">${T17('Написать','Message')}</button>`;
+const ACT_PLAN18=`<button class="btn sm gh" onclick="go('plan')">${T17('Разметка','Markup')}</button>`;
+
+/* ---------- разбор условия ---------- */
+function cond18(c,R,ev,r){
+  const gap=Math.max(0,c.need-c.have), H=(t,s,rows,hint)=>`<div class="bd18">
+   <div class="bh18"><b>${t}</b><span class="tag ${c.have>=c.need*.8?'t-w':'t-n'}">${T17('не хватает','missing')} ${fmt(gap)}</span></div>
+   ${s?`<div class="bs18">${s}</div>`:''}${rows||''}${hint?`<div class="bn18">${hint}</div>`:''}</div>`;
+
+  if(c.k==='ЛО'){ const pe=pending(M,r).own;
+    return H(`${T17('Личный объём','Personal volume')} · ${fmt(c.have)} ${T17('из','of')} ${fmt(c.need)}`,
+      pe?T17(`В пути ${fmt(pe)} баллов — засчитаются при доставке.`,`${fmt(pe)} points in transit — they count on delivery.`):'',
+      `<div class="rr18"><span class="g1"><b>${T17('Ваши заказы','Your orders')}</b><small>${T17('не хватает','missing')} ${fmt(gap)} ${T17('баллов','points')}</small></span><span class="ra18"><button class="btn sm pri" onclick="go('shop')">${T17('Открыть каталог','Open catalog')}</button></span></div>`,
+      orderHint18(gap)); }
+
+  if(c.k==='ГО'){ const legs=M.kids[r].filter(x=>!M.isDir[x]).sort((a,b)=>M.go[b]-M.go[a]).slice(0,3);
+    return H(`${T17('Групповой объём','Group volume')} · ${fmt(c.have)} ${T17('из','of')} ${fmt(c.need)}`,
+      T17('ГО — ваш личный объём и объём группы до ближайших Директоров.','GV is your personal volume plus the group volume down to the nearest Directors.'),
+      legs.map(x=>row18(x,`${T17('ГО','GV')} ${fmt(M.go[x])}`,M.by[x].last>=2?T17('давно не заказывал','no order for a while'):'',ACT_MSG18(x))).join('')||'',
+      orderHint18(gap)); }
+
+  if(c.k==='Директорские ветви'||c.k==='Мастерские ветви'){
+    const mast=c.k==='Мастерские ветви';
+    const inLeg=new Set((mast?M.gens(r).filter(x=>rankIdx(M.rank[x[0]])>=rankIdx('М')):M.gens(r)).map(x=>x[2]));
+    const free=M.kids[r].filter(x=>!inLeg.has(x)).sort((a,b)=>M.go[b]-M.go[a]).slice(0,Math.max(2,gap+1));
+    const rows=free.map(leg=>{ if(mast){ const sn=senior18(leg);
+        return row18(leg,sn?(sn===leg?L(RANK_NAME[M.rank[sn]]):`${T17('старший в ветви','most senior in the branch')}: ${nm18(sn)} · ${L(RANK_NAME[M.rank[sn]])}`):T17('в ветви пока нет Директоров','no Directors in this branch yet'),'',
+          (sn?ACT_MSG18(sn):'')+`<button class="btn sm gh" onclick="go('team','branches')">${T17('Лидерский отчёт','Leader report')}</button>`); }
+      const cd=cand18(leg);
+      if(!cd) return row18(leg,`${T17('ГО ветви','Branch GV')} ${fmt(M.go[leg])}`,T17('нет кандидата','no candidate'),ACT_PLAN18);
+      const need=[cd.gap?`${T17('ГО','GV')} ${fmt(cd.go)} ${T17('из','of')} 500 — ${T17('не хватает','missing')} ${fmt(cd.gap)}`:`${T17('ГО','GV')} ${fmt(cd.go)} ✓`,
+                  cd.lgap?`${T17('ЛО','PV')} ${fmt(cd.lo)} ${T17('из','of')} 50 — ${T17('не хватает','missing')} ${fmt(cd.lgap)}`:''].filter(Boolean).join(' · ');
+      return row18(leg,cd.id===leg?need:`${T17('ближе всех','closest')}: ${nm18(cd.id)} · ${need}`,cd.id===leg?'':'',ACT_MSG18(cd.id)+ACT_PLAN18); }).join('');
+    return H(`${mast?T17('Мастерские ветви','Master branches'):T17('Директорские ветви','Director branches')} · ${c.have} ${T17('из','of')} ${c.need}`,
+      mast?T17('В ветви нужен хотя бы один Мастер.','A branch needs at least one Master.'):T17('В ветви нужен хотя бы один Директор. Показаны ветви без Директора и ближайший кандидат в каждой.','A branch needs at least one Director. Branches without one are shown with their closest candidate.'),
+      rows,''); }
+
+  if(/Директора в/.test(c.k)){ const inside=new Set(M.gens(r).map(x=>x[0]));
+    const all=subtree(M,r).filter(x=>!M.isDir[x]&&!inside.has(x)).sort((a,b)=>M.go[b]-M.go[a]);
+    const cands=all.filter(x=>M.go[x]>=250).slice(0,3);
+    return H(`${L(c.k)} · ${c.have} ${T17('из','of')} ${c.need}`,
+      T17(`Нужно ${c.need} закрытых Директоров в первых ${R.depth} поколениях.`,`You need ${c.need} qualified Directors in the first ${R.depth} generations.`)+' '+(cands.length?T17('Ближе всех к Директору:','Closest to Director:'):''),
+      cands.map(x=>row18(x,`${T17('ГО','GV')} ${fmt(M.go[x])} ${T17('из','of')} 500`,goNeed18(x)?`${T17('не хватает','missing')} ${fmt(goNeed18(x))}`:T17('ГО закрыт','GV met'),ACT_MSG18(x)+ACT_PLAN18)).join(''),
+      cands.length?'':T17('Никто не подошёл к половине порога — ранг закрывается ростом веток, а не одним человеком. Смотрите лидерский отчёт.','Nobody is even halfway to the threshold — this rank closes through branch growth, not one person. See the leader report.')); }
+
+  if(/^СОП/.test(c.k)){ const G=M.gens(r).filter(x=>x[1]<=R.depth), byg={};
+    G.forEach(([d,g])=>{ (byg[g]=byg[g]||[]).push(d); });
+    const gens=Object.keys(byg).sort().map(g=>{ const ids=byg[g].sort((a,b)=>M.go[b]-M.go[a]);
+      const sum=ids.reduce((a,x)=>a+M.go[x],0);
+      return `<div class="gl18"><div class="gh18"><b>${T17(`${g}-е поколение`,`${ord18(+g)} generation`)} · ${pl18(ids.length)}</b><span>${fmt(sum)}</span></div>
+       ${ids.slice(0,2).map(x=>row18(x,`${T17('ГО','GV')} ${fmt(M.go[x])}`,'',ACT_MSG18(x))).join('')}
+       ${ids.length>2?`<div class="sub" style="margin:8px 0 0">${T17(`и ещё ${ids.length-2} — в отчёте по структуре`,`and ${ids.length-2} more — in the structure report`)}</div>`:''}</div>`; }).join('');
+    const star=c.star?`<div class="bs18">${T17(`Сильная ветвь засчитывается не более чем на половину: ${fmt(c.strong)} из ${fmt(c.half)}. Без неё набрано ${fmt(c.rest)}.`,`The strongest branch counts for no more than half: ${fmt(c.strong)} of ${fmt(c.half)}. Without it you have ${fmt(c.rest)}.`)}</div>`:'';
+    const worst=G.map(x=>x[0]).filter(x=>trend18(x).d<0).sort((a,b)=>M.go[b]-M.go[a])[0];
+    const hint=gap<=300?orderHint18(gap)
+      :T17(`Такой разрыв не закрывается одним заказом — он закрывается ростом веток.${worst?` Самая просевшая из крупных — ${nm18(worst)}: ГО ${fmt(M.go[worst])}, ${trend18(worst).t}.`:''}`,
+           `A gap this size does not close with one order — it closes through branch growth.${worst?` The biggest one that is slipping is ${nm18(worst)}: GV ${fmt(M.go[worst])}, ${trend18(worst).t}.`:''}`);
+    return H(`${c.k} · ${fmt(c.have)} ${T17('из','of')} ${fmt(c.need)}`,
+      T17(`СОП — ваш ГО ${fmt(M.go[r])} плюс ГО Директоров первых ${R.depth} поколений.`,`DGV is your GV of ${fmt(M.go[r])} plus the GV of Directors in the first ${R.depth} generations.`)+star,
+      gens, hint); }
+
+  return H(L(c.k)+` · ${fmt(c.have)} ${T17('из','of')} ${fmt(c.need)}`,'','',''); }
+function ord18(n){ const s=['th','st','nd','rd'], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+function pl18(n){ return pl17(n,'Директор','Директора','Директоров',n>1?'Directors':'Director'); }
+
+/* ---------- сам мост ---------- */
+function bridge18(){ const r=R0(), nr=nextRank(M,r);
+  if(!nr.next) return `<div class="card c-pad s7"><h3>${T17('Вы на вершине лестницы','You are at the top of the ladder')}</h3><div class="sub">${T17('Выше рангов нет — дальше растут бонус бесконечности и ваша структура.','There are no higher ranks — from here the infinity bonus and your structure grow.')}</div></div>`;
+  const R=RANKS.find(x=>x.c===nr.next), ev=M.isDir[r]?M.evalRank(r,R):null;
+  const conds=ev?ev.conds:nr.conds, miss=conds.filter(c=>!c.ok&&!c.exempt), ok=conds.filter(c=>c.ok||c.exempt);
+  const head=`<div class="bhd18"><h3>${T17('Мост к рангу','Bridge to')} «${L(RANK_NAME[nr.next])}»</h3>
+    <div class="sub">${T17(`Выполнено ${ok.length} из ${conds.length}`,`${ok.length} of ${conds.length} met`)}${miss.length?` · ${T17('осталось закрыть','still to close')} ${miss.length}`:` · ${T17('нужен месяц подтверждения','one confirmation month to go')}`}</div></div>`;
+  const okLine=ok.length?`<div class="bok18"><span class="dot d-ok">✓</span><span>${ok.map(c=>`${L(c.k)} ${c.exempt?T17('— не требуется','— not required'):fmt(c.have)}`).join(' · ')}</span></div>`:'';
+  const body=miss.length?miss.map(c=>cond18(c,R,ev,r)).join(''):`<div class="bn18">${T17('Все условия выполнены. Ранг подтверждается после расчёта 1 ноября.','All conditions are met. The rank is confirmed after the calculation on 1 November.')}</div>`;
+  return `<div class="card c-pad s7 brc18">${head}${okLine}${body}
+   <div class="note">${T17('Тренд по ветви — из месячных срезов нового бэка; в прототипе показан пример. Цифры условий — предварительные, окончательный расчёт после 1 ноября.','Branch trend comes from monthly snapshots of the new backend; the prototype shows an example. Condition figures are preliminary, the final calculation is after 1 November.')}</div></div>`; }
+
+/* подставляем мост вместо карточки «Следующий: …» на вкладке «Ранги и сертификаты» */
+const _rankPage18=rankPage; rankPage=function(){ let h=_rankPage18();
+  if(tabs.rank!=='ladder') return h;
+  return h.replace(/<div class="card c-pad s7"><h3 style="font-size:20px;font-weight:600">[\s\S]*?<div class="note">Подтверждение:[\s\S]*?<\/div><\/div>/,bridge18()); };
+
+/* склонение «балл» в шаблонах сообщений и карточке CRM */
+function bal18(n){ return pl17(n,'балл','балла','баллов','points'); }
+const _crmTpl18=crmTpl; crmTpl=function(x){ const T=_crmTpl18(x), gp=crmGap(x);
+  if(gp&&gp.g) T.forEach(t=>{ t[1]=t[1].replace(`${gp.g} баллов ГО`,`${bal18(gp.g)} ГО`).replace(`${gp.l} баллов ЛО`,`${bal18(gp.l)} ЛО`); });
+  return T; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -5768,6 +5922,7 @@ Object.assign(EN_DICT,{
 "Появятся, когда потребители сделают повторные заказы.":"They appear once consumers place repeat orders.",
 "Ранг подтверждается: Директор — 1 месяц; Серебряный директор — Мастер — 2 месяца подряд; Серебряный мастер и выше — 3 месяца подряд. Нажмите на ранг — условия и расчёт бонуса.":"Rank confirmation: Director — 1 month; Silver Director to Master — 2 months in a row; Silver Master and above — 3 months in a row. Tap a rank for its conditions and bonus."
 });EN_RE=null;
+Object.assign(EN_DICT,{"Мост к":"Bridge to","Директорские ветви":"Director branches","Мастерские ветви":"Master branches","ЛО":"PV","ГО":"GV","СОП":"DGV","СОП*":"DGV*"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
