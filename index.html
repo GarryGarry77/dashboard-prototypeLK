@@ -1666,6 +1666,18 @@ body.navc .side{padding-top:14px}
  #w-stories .mo14.abs{top:auto;bottom:-8px;right:0;background:transparent}
  .st15b{min-height:28px;display:flex;align-items:center}
 }
+/* ================= v16 ================= */
+.d16{font-weight:600}
+.d16.up{color:var(--good)}
+.d16.dn{color:var(--bad)}
+.p16bd{margin-left:auto;flex:none}
+.card.wide16{grid-column:span 12}
+@media (max-width:760px){.p16bd{margin-left:0;margin-top:8px;width:100%}}
+/* строка списка: длинный заголовок не выталкивает статус за край */
+.li>.g1{min-width:0}
+.li>.g1>b,.li>.g1>small{overflow-wrap:anywhere}
+.li>.tag{flex:none;white-space:nowrap}
+@media (max-width:440px){.li{flex-wrap:wrap}.li>.tag{margin-left:auto}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5365,6 +5377,51 @@ if(!LS.get('coral_lk_v15st',false)){ Object.values(HCFG).forEach(c=>{ if(!c||!c.
 /* у потребителя нет бонусов партнёра — кошелёк без блока «Бонус за месяц» */
 const _wallet15=wallet; wallet=function(){ if(pk!=='elena') return _wallet15();
   return topbar('Coral Кошелёк','Баланс и оплата заказов')+`<div class="card c-pad"><small style="color:var(--muted)">Всего в кошельке</small><div class="kp7v">${cur(12.4)}</div><div class="btns" style="margin-top:12px"><button class="btn pri" onclick="go('shop','orders')">Оплатить заказ</button></div></div>`; };
+/* ================= v16: истории — не в основе главной; профиль без дубля «Статус»; закрытый месяц показывает итоги и динамику ================= */
+
+/* ---------- 1. Истории: не в наборе по умолчанию, но доступны в «Настроить главную» ---------- */
+HW.stories.d='Новости и обучение в формате историй · идея, функционала пока нет';
+['dir','asst'].forEach(s=>{ const d=HDEF[s]; d.order=d.order.filter(x=>x!=='stories'); if(!d.hidden.includes('stories')) d.hidden.push('stories'); });
+if(!LS.get('coral_lk_v16st',false)){ Object.values(HCFG).forEach(c=>{ if(!c||!c.order) return; c.order=c.order.filter(x=>x!=='stories'); if(!(c.hidden||[]).includes('stories')) (c.hidden=c.hidden||[]).push('stories'); }); LS.set('coral_lk_v16st',true); saveH&&saveH(); }
+
+/* ---------- 2. Профиль: карточка «Статус» дублировала шапку профиля — убрана ---------- */
+const _prof16=prof14Body; prof14Body=function(k,tt){ let h=_prof16(k,tt);
+  if(k==='data') h=h.replace(/<div class="card c4"><h3>Статус<\/h3>[\s\S]*?<\/div>\s*(?=<\/div>|$)/,'').replace(/<div class="card c8"><h3>Личные данные<\/h3>/,'<div class="card c8 wide16"><h3>Личные данные</h3>');
+  return h; };
+const _profile16=profile; profile=function(){ let h=_profile16();
+  if(pk==='elena') h=h.replace(/(<div class="g1"><b>[^<]*<\/b><small>[^<]*<\/small><\/div>)/,'$1<button class="btn acc sm p16bd" onclick="toast(\'Заявление на статус дистрибьютора\')">Стать дистрибьютором</button>');
+  return h; };
+
+/* ---------- 3. Закрытый месяц: итоги месяца и изменение к предыдущему ---------- */
+const MN16={oct:'Октябрь',sep:'Сентябрь',aug:'Август',jul:'Июль'};
+const PREV16={sep:'Август',aug:'Июль'};
+function hist16(){ const p=P(); return {Июль:p.prev[0],Август:p.prev[1],Сентябрь:p.prev[2]}; }
+function tileH16(t,n,v,pv,unit,need){ const d=pv==null?null:v-pv, st=need==null?'na':v>=need?'ok':v>=need*.8?'risk':'no', w=need==null?0:Math.min(100,Math.round(v/need*100));
+  const dl=d==null?'':`<span class="h d16 ${d>0?'up':d<0?'dn':''}">${d>0?'+':d<0?'−':''}${fmt(Math.abs(d))}${unit==='%'?' п.п.':''} ${L('к')} ${PREV16[month].toLowerCase()}${PREV16[month]==='Август'?'у':'ю'}</span>`;
+  return `<div class="tile ${st}"><button class="tm" onclick="toast('${L('Закрытый месяц — цифры не меняются')}')" aria-label="${n}"><span class="t">${t}</span><span class="v">${fmt(v)}${need!=null?` <small>${L('из')} ${fmt(need)}</small>`:unit?` <small>${unit}</small>`:''}</span>${dl}${need!=null?`<span class="pb"><i style="width:${w}%"></i></span>`:''}</button></div>`; }
+const _W16=W; W=function(k){
+  if(k==='metrics'&&month!=='oct'){ const r=R0(), H=hist16(), c=H[MN16[month]], pv=H[PREV16[month]], isD=M.isDir[r];
+    const T=[tileH16('ЛО','Личный объём',c[2],pv?pv[2]:null,'баллов',loNeedOf(r)),
+             tileH16('ГО','Групповой объём',c[3],pv?pv[3]:null,'баллов',500)];
+    if(rankIdx(M.rank[r])>=rankIdx('СД')) T.push(tileH16(RANKS.find(x=>x.c===sopDepthCode()).star?'СОП*':'СОП','Совокупный объём поколений',c[4],pv?pv[4]:null,'баллов',RANKS.find(x=>x.c===sopDepthCode()).sop));
+    return `<div class="card c-pad tar"><div class="hd"><h3>${L('Мои показатели')}</h3></div>
+     <div class="meta">${L(MN16[month])} ${L('закрыт')} · ${L('ранг месяца')} <b>${RANK_NAME[c[1]]||c[1]}</b> · ${L('итоговые цифры, они больше не меняются')}</div>
+     <div class="tiles">${T.join('')}</div>
+     <div class="note">${L('Задачи, структура и кошелёк всегда показывают сегодняшний день — за прошлый месяц мы храним только итоги.')}</div></div>`; }
+  return _W16(k); };
+/* в закрытом месяце «цели месяца» и «что сделать» не имеют смысла */
+const _homeDir16=homeDir; homeDir=function(){ let h=_homeDir16(); if(month==='oct') return h;
+  return h.replace(/<section id="w-(quests|actions|cele)"[\s\S]*?<\/section>/g,''); };
+
+/* в «Добавить разделы» истории помечены как идея */
+const _addSections16=addSections; addSections=function(){ _addSections16();
+  const b=document.querySelector(`#dr button[onclick="addH('stories')"] b`); if(b) b.insertAdjacentHTML('afterend',' '+bdg4('idea')); };
+
+/* подпись ранга в шапке и в блоке «Ранг» следует выбранному месяцу */
+function mlab16(){ return month==='oct'?'октябрь, предварительно':MN16[month].toLowerCase()+', закрыт'; }
+const _heroBand16=heroBand; heroBand=function(){ let h=_heroBand16(); if(month==='oct') return h;
+  return h.replace(/октябрь, предварительно/g,mlab16()); };
+const _W16b=W; W=function(k){ let h=_W16b(k); if(h&&month!=='oct'&&k==='rank') h=h.replace(/октябрь, предварительно/g,mlab16()); return h; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -5523,6 +5580,14 @@ Object.assign(EN_DICT,{
 "Новости и обучение в формате историй · идея, в планах":"News and learning as stories · idea, planned","Свернуть меню":"Collapse menu","Развернуть меню":"Expand menu",
 "новый участник в первой линии":"new member in the first line","новых участников в первой линии":"new members in the first line","новых участника в первой линии":"new members in the first line"
 });EN_RE=null;
+Object.assign(EN_DICT,{
+"закрыт":"closed","ранг месяца":"rank for the month","итоговые цифры, они больше не меняются":"final figures — they no longer change",
+"Закрытый месяц — цифры не меняются":"Closed month — the figures no longer change",
+"Задачи, структура и кошелёк всегда показывают сегодняшний день — за прошлый месяц мы храним только итоги.":"To-dos, structure and the wallet always show today — for a past month we keep totals only.",
+"к":"vs","августу":"August","сентябрю":"September","Стать дистрибьютором":"Become a distributor",
+"Новости и обучение в формате историй · идея, функционала пока нет":"News and learning as stories · idea, not built yet"
+});EN_RE=null;
+Object.assign(EN_DICT,{"сентябрь, закрыт":"September, closed","август, закрыт":"August, closed","Сентябрь закрыт":"September closed","Август закрыт":"August closed"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
