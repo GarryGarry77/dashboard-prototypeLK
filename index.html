@@ -1832,6 +1832,69 @@ body.navc .side{padding-top:14px}
 .tb.rm19 td:nth-child(2),.tb.rm19 th:nth-child(2){width:18%}
 .tb.rm19 td:nth-child(3),.tb.rm19 th:nth-child(3){width:30%}
 .tb.rm19 td:nth-child(4),.tb.rm19 th:nth-child(4){width:32%}
+/* ================= v20 ================= */
+/* сетка 12 колонок */
+.hgrid.g20{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;align-items:start}
+.hgrid.g20>.hw{display:block;min-width:0}
+.hgrid.g20>.hw>.card{height:auto}
+@media (max-width:1023px){.hgrid.g20{grid-template-columns:minmax(0,1fr)}.hgrid.g20>.hw{grid-column:1/-1!important}}
+/* «⋯» у заголовка экрана */
+.pm20{all:unset;cursor:pointer;width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;color:var(--muted);vertical-align:middle;margin-left:4px;flex:none}
+.pm20:hover,.pm20:focus-visible{background:var(--soft);color:var(--ink);outline:none}
+.pm20 svg{width:18px;height:18px}
+/* демо — служебный контрол, не часть продукта */
+.dm20{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 11px;border-radius:9px;border:1px dashed var(--line);font-size:13px;color:var(--muted);white-space:nowrap}
+.dm20:hover,.dm20:focus-visible{border-color:var(--ink);color:var(--ink);outline:none}
+.dlb20{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--soft);border-radius:5px;padding:2px 5px}
+.dm20>span:nth-child(2){font-weight:500;color:var(--ink)}
+@media (max-width:900px){.dm20>span:nth-child(2){display:none}}
+/* поиск занимает ровно столько, сколько нужно */
+.topbar .srch .sl{display:none}
+.topbar .srch kbd{display:none}
+@media (min-width:1600px){.topbar .srch .sl{display:inline}.topbar .srch kbd{display:inline-block}}
+.topbar .srch{min-width:0;padding:0 12px}
+/* шаги начала работы */
+.hs .st5{min-height:0}
+.qdone20{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--good-s);border-radius:14px;padding:12px 14px;margin:10px 0}
+.qdone20 b{display:block;font-size:15px;line-height:21px}
+.qdone20 small{display:block;font-size:13px;line-height:18px;color:var(--muted);flex:1 1 240px}
+.qdone20 .btn{margin-left:auto}
+.topbar .pm20{order:0}
+/* ================= v21 ================= */
+#w-metrics .tiles{display:grid;gap:12px;align-items:stretch}
+#w-metrics .tiles .tile{min-width:0}
+#w-metrics .tiles.dense21 .tile .v{font-size:24px;line-height:30px}
+#w-metrics .tiles.dense21 .tile{padding:12px 14px}
+.kh21{margin-top:8px;background:var(--warn-s,#FDF1E6);border-radius:10px;padding:9px 11px;font-size:13px;line-height:18px;color:var(--ink)}
+.lnk21{padding:0;font-weight:500}
+/* ================= v22 ================= */
+/* светофор показателей */
+.tile.t22 .pb{position:relative}
+.tile.t22 .pb i{background:var(--good)}
+.tile.t22.pace .pb i{background:#4E948F}
+.tile.t22.slow .pb i{background:var(--warn-b,#DB7D2E)}
+.tile.t22.no .pb i{background:var(--bad-a,#D23C1E)}
+.pc22{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.35;border-radius:2px}
+.lg22{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--muted)}
+.lg22 .d{width:8px;height:8px;border-radius:50%;margin-left:10px}
+.lg22 .d:first-child{margin-left:0}
+.lg22 .d.ok{background:var(--good)}.lg22 .d.pace{background:#4E948F}.lg22 .d.slow{background:var(--warn-b,#DB7D2E)}.lg22 .d.no{background:var(--bad-a,#D23C1E)}
+.lg22 .g1{flex:1}
+@media (max-width:760px){.lg22 .g1{display:none}.lg22 .sub{flex-basis:100%;margin-top:4px}}
+/* стать дистрибьютором — продающий верх */
+.dh22g{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center}
+.dh22ar{font-size:26px;color:var(--muted)}
+.dh22k{font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.dh22k.on{color:var(--brand)}
+.dh22v{font-size:40px;line-height:46px;font-weight:600;letter-spacing:-.01em;color:var(--muted)}
+.dh22v span{font-size:18px;font-weight:500}
+.dh22v.on{color:var(--ink)}
+.dh22s{font-size:13.5px;line-height:19px;color:var(--muted);margin-top:4px}
+.dh22r{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:20px}
+.dh22c{padding:12px 14px;border-radius:14px;background:var(--soft)}
+.dh22c b{display:block;font-size:15px;line-height:21px}
+.dh22c small{display:block;font-size:13px;line-height:18px;color:var(--muted);margin-top:3px}
+@media (max-width:760px){.dh22g{grid-template-columns:minmax(0,1fr);gap:12px}.dh22ar{transform:rotate(90deg);justify-self:center}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5946,6 +6009,211 @@ const _prof19=prof14Groups; prof14Groups=function(){ const G=_prof19();
   const app=G.find(g=>g[0]==='Приложение'); if(app) app[1].unshift(['_home',GRIP,'Главный экран','блоки и показатели']);
   return G; };
 const _prof19open=prof14Open; prof14Open=function(k){ if(k==='_home') return customize(); return _prof19open(k); };
+/* ================= v20: одна точка настройки экрана, честная сетка 12 колонок, шапка без лишнего, быстрые действия и шаги по рангу ================= */
+
+/* ---------- 1. Сетка: блоки разного размера, строки без дыр ---------- */
+const W20={metrics:12,start:12,notice:12,todo:12,cele:12,stories:12,quests:12,newbies:12,recs:12,banners:12,
+ rank:4,risk:8,hos:8,actions:6,growth:6,sap:4,promos:6,learn:6,bday:4,perso:4};
+function wOf20(k,mode){ let w=W20[k]||12;
+  if(mode===2) w=w<=6?6:12;          /* планшет: половина или вся ширина */
+  if(mode===1) w=12;                 /* телефон: одна колонка */
+  return w; }
+masonry=function(){
+  const g=document.querySelector('.hgrid'); if(!g) return;
+  let items=[...g.querySelectorAll('.hw')];
+  items.forEach((it,i)=>{ if(it.dataset.o==null) it.dataset.o=i; });
+  items.sort((a,b)=>a.dataset.o-b.dataset.o);
+  g.innerHTML=''; g.classList.remove('mas'); g.classList.add('g20');
+  const mode=innerWidth>=1280?3:innerWidth>=1024?2:1;
+  let row=[], left=12;
+  const flush=()=>{ if(!row.length) return;
+    if(left>0) row[row.length-1].w+=left;        /* остаток добирает последний блок строки */
+    row.forEach(x=>{ x.el.style.gridColumn='span '+x.w; g.appendChild(x.el); });
+    row=[]; left=12; };
+  items.forEach(el=>{ const k=(el.id||'').replace('w-',''), w=Math.min(12,wOf20(k,mode));
+    if(w>left) flush();
+    row.push({el,w}); left-=w; if(left<=0) flush(); });
+  flush();
+};
+
+/* ---------- 2. Одна точка настройки: «⋯» у заголовка экрана ---------- */
+function deskMenu20(){ const row=(ic,t,s,f)=>`<button class="mr14" onclick="${f}"><span class="w12i">${ic}</span><span class="g1"><b>${t}</b><small>${s}</small></span></button>`;
+  openDr(`<h2>${L('Настроить рабочий стол')}</h2><div style="height:6px"></div>
+   ${row(SLID,L('Выбрать показатели'),L('какие цифры видны в блоке «Мои показатели»'),"closeDrSilent();pickKpi()")}
+   ${row(GRIP,L('Порядок блоков'),L('перетащите блоки или уберите лишние'),"closeDrSilent();customize()")}
+   <div class="note">${L('Настройка сохраняется в профиле и переносится на все устройства.')}</div>`); }
+const DOTSB20=`<button class="pm20" onclick="deskMenu20()" aria-label="${'Настроить рабочий стол'}" title="Настроить рабочий стол">${DOTS}</button>`;
+/* убираем лишние входы: строку кнопок под шапкой и кнопку внизу страницы */
+home=function(){ let h=_home19();
+  h=h.replace(/<div class="hb19">[\s\S]*?<\/div>\s*(?=<div class="[^"]*hgrid)/,'');
+  h=h.replace(/<div class="hfoot10">[\s\S]*?<\/div>\s*$/,'');
+  h=h.replace(/<div class="hfoot6">[\s\S]*?<\/div>\s*$/,'');
+  h=h.replace(/<div class="hfoot">[\s\S]*?<\/div>\s*$/,'');
+  return h; };
+const _topbar20=topbar; topbar=function(t,s,e){ let h=_topbar20(t,s,e);
+  if(page==='home'&&pk!=='elena') h=h.replace(/(<\/h1>)/,'$1'+DOTSB20);
+  return h; };
+
+/* ---------- 3. Шапка: демо — инструмент, а не элемент интерфейса; поиск компактный ---------- */
+topbar=(function(_t){ return function(t,s,e){ let h=_t(t,s,e);
+  const p=perLabel19();
+  h=h.replace(/<button class="dm19"[\s\S]*?<\/button>/,
+    `<button class="dm20" onclick="demoDr19()" aria-label="${L('Демо: из-под какого статуса смотрим')}" title="${L('Демо: смена статуса')}"><span class="dlb20">${L('Демо')}</span><span>${L(p[2])}</span><span class="chv19">▾</span></button>`);
+  return h; }; })(topbar);
+
+/* ---------- 4. Быстрые действия и балансы — по рангу ---------- */
+function hasTransfer20(){ const r=R0(); return M.isDir[r]&&rankIdx(M.rank[r])>=rankIdx('Д'); }
+const _heroBand20=heroBand; heroBand=function(){ let h=_heroBand20();
+  if(pk==='elena') return h;
+  if(!hasTransfer20()){
+    h=h.replace(/<button onclick="go\('transfer','mgmt'\)">[\s\S]*?<\/button>/,'');
+    h=h.replace(/<button role="listitem" onclick="go\('transfer','mgmt'\)">[\s\S]*?<\/button>/,'');
+    h=h.replace(/<button role="listitem" onclick="[^"]*transfer[^"]*">[\s\S]*?<\/button>/,'');
+  }
+  return h; };
+
+/* ---------- 5. «Начало работы»: шаги ведут к первому рангу ---------- */
+START.splice(0,START.length,
+ ['contacts','Подтвердить почту и телефон','нужно для кошелька и выплат',"go('profile','data')"],
+ ['lo','Сделать личный заказ от 50 баллов','это ЛО — первое из двух условий Директора',"go('shop','cat')"],
+ ['reg','Пригласить первого человека в клуб','его заказы идут в ваш групповой объём',"go('tools','new')"],
+ ['go','Довести группу до 500 баллов','второе условие Директора — помогает «Разметка»',"go('plan')"],
+ ['cba','Пройти курс «Старт» в CBA','15 минут: как рассказывать о продукте',"go('learn')"]);
+const _W20=W; W=function(k){ let h=_W20(k);
+  if(k!=='start'||!h) return h;
+  h=h.replace('Пройдите шаги — блок исчезнет сам',L('Пять шагов — это минимальный путь до первого ранга: ЛО 50 и ГО 500 за один месяц'));
+  h=h.replace(/<button class="link" onclick="hideH\('start'\)">[^<]*<\/button>/,'');
+  return h; };
+
+/* ---------- 6. «⋯» блока — всегда в правом верхнем углу карточки ---------- */
+const _render20=render; render=function(){ _render20();
+  if(page!=='home') return;
+  document.querySelectorAll('.hw').forEach(sec=>{
+    const b=sec.querySelector('.mo14'); if(!b) return;
+    const hr=sec.querySelector('.hrow,.hd'); if(!hr) return;
+    if(b.parentElement!==hr) hr.appendChild(b);
+    else if(hr.lastElementChild!==b) hr.appendChild(b); });
+};
+
+/* ---------- 8. «Цели месяца»: если всё выполнено — не делаем вид, что это цель ---------- */
+const _W20c=W; W=function(k){ let h=_W20c(k);
+  if(k!=='quests'||!h) return h;
+  if(/class="qst (?!ok)/.test(h)||h.includes('class="qst "')) return h;
+  const r=R0(), nr=nextRank(M,r), miss=nr.next?nr.conds.filter(c=>!c.ok&&!c.exempt):[];
+  if(!miss.length) return h;
+  return h.replace(/(<div class="hrow">[\s\S]*?<\/div>)([\s\S]*?)(<button class="link")/,`$1<div class="qdone20"><b>${L('Цели месяца выполнены')}</b><small>${L('Дальше — условия ранга')} «${L(RANK_NAME[nr.next])}»: ${miss.map(c=>`${L(c.k)} ${fmt(c.have)} ${L('из')} ${fmt(c.need)}`).join(' · ')}</small><button class="btn sm pri" onclick="go('rank','ladder')">${L('Что закрыть')}</button></div>$3`); };
+/* ================= v21: показатели сами заполняют строки (без дыр), лимит 8 с мягкой подсказкой, разведение блока и раздела ================= */
+
+/* ---------- 1. Плитки показателей: ровные строки при любом количестве ---------- */
+const KMIN21=190;                                   /* минимальная читаемая ширина плитки */
+function cols21(n,w){ const max=Math.max(1,Math.min(n,Math.floor((w+16)/(KMIN21+16))));
+  let best=max, waste=max*Math.ceil(n/max)-n;
+  for(let c=max;c>=2;c--){ const wst=c*Math.ceil(n/c)-n; if(wst<waste||(wst===waste&&c>best&&false)){ waste=wst; best=c; } if(!waste) break; }
+  return best; }
+function fitKpi21(){ document.querySelectorAll('#w-metrics .tiles').forEach(g=>{
+  const it=[...g.children]; if(!it.length) return;
+  it.forEach(e=>e.style.gridColumn='');
+  const w=g.clientWidth||g.getBoundingClientRect().width;
+  if(w<KMIN21*2){ g.style.gridTemplateColumns='minmax(0,1fr)'; g.classList.remove('dense21'); return; }
+  const c=cols21(it.length,w); g.style.gridTemplateColumns=`repeat(${c},minmax(0,1fr))`;
+  const rest=it.length%c;
+  if(rest){ const span=new Array(rest).fill(1); let extra=c-rest, i2=0;
+    while(extra>0){ span[i2%rest]++; extra--; i2++; }
+    for(let k2=0;k2<rest;k2++){ const el=it[it.length-rest+k2]; if(span[k2]>1) el.style.gridColumn='span '+span[k2]; } }
+  g.classList.toggle('dense21',it.length>6); }); }
+let RO21=null;
+function watchKpi21(){ const g=document.querySelector('#w-metrics .tiles'); if(!g) return;
+  if(!RO21) RO21=new ResizeObserver(()=>{ document.querySelectorAll('#w-metrics .tiles').forEach(()=>{}); fitKpi21(); });
+  RO21.disconnect(); RO21.observe(g); fitKpi21(); }
+const _render21=render; render=function(){ _render21(); if(page==='home') watchKpi21(); };
+let _kt21; addEventListener('resize',()=>{ clearTimeout(_kt21); _kt21=setTimeout(()=>{ if(page==='home') fitKpi21(); },120); });
+
+/* ---------- 2. Лимит: 8 вместо 6, мягкая подсказка с седьмого ---------- */
+const KMAX21=8;
+tgK=function(k){ const c=hcfg();
+  if(c.kpis.includes(k)) c.kpis=c.kpis.filter(x=>x!==k);
+  else { if(c.kpis.length>=KMAX21){ toast(L('Больше восьми цифр не помещается на телефоне — снимите одну')); return; } c.kpis.push(k); }
+  saveH(); render(); pickKpi(); };
+pickKpi=function(){ _pickKpi19(); const c=hcfg(), n=c.kpis.length;
+  const s=document.querySelector('#dr .sub'); if(!s) return;
+  s.innerHTML=L(`Выбрано ${n} из ${KMAX21}. Блок сам раскладывает цифры в ровные строки — дыр не будет при любом количестве.`)
+   +(n>6?`<div class="kh21">${L('С седьмой цифры блок читается как отчёт, а не как ответ «как у меня дела». Мы не запрещаем — просто имейте в виду.')}</div>`:''); };
+
+/* ---------- 3. Блок на главной и раздел меню — это разные вещи, пусть и называются по-разному ---------- */
+(()=>{ const g=NAV4.find(x=>x.k==='rank'); if(g) g.t='Показатели и ранги'; })();
+const _W21=W; W=function(k){ let h=_W21(k);
+  if(k!=='metrics'||!h) return h;
+  return h.replace(/(<div class="meta">[\s\S]*?)(<\/div>)/,`$1 · <button class="link lnk21" onclick="go('rank','kpi')">${L('вся динамика')}</button>$2`); };
+
+/* ---------- 4. Четвёртая плитка «Ваших задач» у ассистента: дело, а не метрика ---------- */
+const _render21b=render; render=function(){ _render21b();
+  if(page!=='home'||pk==='elena'||M.isDir[R0()]) return;
+  const t=[...document.querySelectorAll('.todo .td')].find(b=>/go\('team','all'\)/.test(b.getAttribute('onclick')||''));
+  if(!t) return;
+  const r=R0(), hs=hosStats(M,M.kids[r]);
+  const set=(sel,v)=>{ const e=t.querySelector(sel); if(e) e.firstChild&&(e.firstChild.nodeValue=v); };
+  set('.t',L('Ждут второго заказа')); set('.s2',L('окно 90 дней'));
+  const b=t.querySelector('.v2 b'), sm=t.querySelector('.v2 small'); if(b) b.textContent=hs.help.length; if(sm) sm.textContent=L('нужна помощь');
+  const all=t.querySelector('.v3 .all9 b'); if(all) all.textContent=hs.win.length;
+  t.setAttribute('onclick',"go('clients','90')"); };
+
+/* ---------- 5. «Участники мероприятий» живёт в «Мероприятиях», а не в структуре ---------- */
+(()=>{ const st=NAV4.find(x=>x.k==='structure'), ev=NAV4.find(x=>x.k==='events');
+  if(!st||!ev||!st.sub||!ev.sub) return;
+  const i=st.sub.findIndex(x=>x[0]==='team:events'); if(i<0) return;
+  const it=st.sub.splice(i,1)[0]; it[1]='Участники мероприятий';
+  if(!ev.sub.some(x=>x[0]===it[0])) ev.sub.splice(1,0,it); })();
+/* ================= v22: цвет показателя по темпу месяца, а не по «сколько осталось»; «Стать дистрибьютором» говорит про деньги ================= */
+
+/* ---------- 1. Светофор: красный — это потеря, а не «ещё не сделано» ---------- */
+const MDAYS22=31, PASSED22=()=>MDAYS22-daysLeft();          /* прошло дней месяца */
+const PACE22=()=>Math.min(1,Math.max(.05,PASSED22()/MDAYS22));
+/* ok — выполнено; pace — идёт по графику; slow — отстаёт; no — месяц кончается, а порога нет */
+function st22(have,need){ if(need==null) return 'na'; if(have>=need) return 'ok';
+  const share=have/need, exp=PACE22();
+  if(share>=exp) return 'pace';
+  if(daysLeft()<=7) return 'no';
+  return share>=exp*.6?'pace':'slow'; }
+stOf=function(have,need){ return st22(have,need); };
+const _tile22=tile4; tile4=function(k){ const r=R0(), K=KPI4[k], v=K.c(r);
+  let h=_tile22(k);
+  const st=v.need==null?'na':v.ratio?'ratio':st22(v.have,v.need);
+  h=h.replace(/^<div class="tile [^"]*"/,`<div class="tile t22 ${st}"`);
+  if(v.need!=null&&v.have<v.need) h=h.replace(/(<span class="pb">[\s\S]*?)(<\/span>)/,`$1<span class="pc22" aria-hidden="true" style="left:${Math.round(PACE22()*100)}%"></span>$2`);
+  return h; };
+/* подпись к цветам — один раз в блоке */
+const _W22=W; W=function(k){ let h=_W22(k);
+  if(k!=='metrics'||!h) return h;
+  return h.replace(/(<div class="tiles"[\s\S]*?<\/div>)(\s*<button class="perk")/,
+   `$1<div class="lg22"><span class="d ok"></span>${L('выполнено')}<span class="d pace"></span>${L('идёт по графику')}<span class="d slow"></span>${L('отстаёт от темпа')}<span class="d no"></span>${L('месяц кончается')}<span class="g1"></span><span class="sub">${L('Темп считаем от даты: прошло')} ${PASSED22()} ${L('из')} ${MDAYS22} ${L('дней')}</span></div>$2`); };
+
+/* ---------- 2. Четвёртая плитка задач: короткая подпись ---------- */
+const _render22=render; render=function(){ _render22();
+  if(page!=='home'||pk==='elena'||M.isDir[R0()]) return;
+  const t=[...document.querySelectorAll('.todo .td')].find(b=>/clients','90'/.test(b.getAttribute('onclick')||''));
+  if(!t) return; const sm=t.querySelector('.v2 small'); if(sm) sm.textContent=L('ждут'); };
+
+/* ---------- 3. «Стать дистрибьютором»: про деньги, а не про регламент ---------- */
+function distHero22(){ const r=R0(), p=who19(), b=M?bonus(M,r,P()?P().prevRank:'А').total:0;
+  return `<div class="card c-pad c12 dh22">
+   <div class="dh22g"><div>
+    <div class="dh22k">${L('Сейчас')}</div>
+    <div class="dh22v">${fmt(Math.round(b))} <span>${L('у.е.')}</span></div>
+    <div class="dh22s">${L('ваш бонус за октябрь. Его можно потратить только на свои заказы.')}</div>
+   </div><div class="dh22ar" aria-hidden="true">→</div><div>
+    <div class="dh22k on">${L('В статусе дистрибьютора')}</div>
+    <div class="dh22v on">${fmt(Math.round(b))} <span>${L('у.е.')}</span></div>
+    <div class="dh22s">${L('те же деньги приходят на ваш счёт — по договору, с актами.')}</div>
+   </div></div>
+   <div class="dh22r">${[[L('Деньги становятся деньгами'),L('вознаграждение на счёт, а не только на оплату заказов')],
+     [L('Открываются ранги выше Директора'),L('бонус с поколений до 38% и бонус бесконечности 1–5% — их нет в статусе потребителя')],
+     [L('Появляются инструменты'),L('Digital KIT, договор и акты, трансферный счёт после закрытого Директора')]]
+     .map(([t,s])=>`<div class="dh22c"><b>${t}</b><small>${s}</small></div>`).join('')}</div>
+   <div class="btns" style="margin-top:16px"><button class="btn pri" onclick="setTab('dist','form');window.scrollTo(0,0)">${L('Заполнить заявление')}</button><button class="btn gh" onclick="distRules19()">${L('Правила перехода')}</button></div>
+   <div class="sub" style="margin-top:10px">${L('Разовое удержание 15 у.е. за Digital KIT. Статус держится, пока выполняется ранг Директор.')}</div></div>`; }
+const _dist22=dist; dist=function(){ let h=_dist22();
+  if(isDist19()||tab('dist','start')==='form') return h;
+  return h.replace(/<div class="card c-pad c12 d19h">[\s\S]*?<div class="btns" style="margin-top:16px">[\s\S]*?<\/div><\/div>/,distHero22()); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -6251,6 +6519,30 @@ Object.assign(EN_DICT,{
 "сейчас":"current","структура и СОП":"structure and DGV","у.е.":"c.u.",
 "условия рангов, бонусов и наград":"rank, bonus and award conditions","этика, работа в интернете, структура":"ethics, online conduct, structure",
 "Выбрано":"Selected","Главный экран":"Home screen","блоки и показатели":"blocks and metrics"
+});EN_RE=null;
+Object.assign(EN_DICT,{
+"Настроить рабочий стол":"Customize the desktop","какие цифры видны в блоке «Мои показатели»":"which numbers show in “My metrics”",
+"перетащите блоки или уберите лишние":"drag the blocks or remove the extra ones",
+"Настройка сохраняется в профиле и переносится на все устройства.":"The setup is saved to your profile and follows you across devices.",
+"Пять шагов — это минимальный путь до первого ранга: ЛО 50 и ГО 500 за один месяц":"Five steps — the shortest path to your first rank: PV 50 and GV 500 in one month",
+"Сделать личный заказ от 50 баллов":"Place a personal order of at least 50 points","это ЛО — первое из двух условий Директора":"this is PV — the first of the two Director conditions",
+"Пригласить первого человека в клуб":"Invite your first person to the club","его заказы идут в ваш групповой объём":"their orders count towards your group volume",
+"Довести группу до 500 баллов":"Bring the group to 500 points","второе условие Директора — помогает «Разметка»":"the second Director condition — “Markup” helps",
+"Пройти курс «Старт» в CBA":"Take the “Start” course in CBA","15 минут: как рассказывать о продукте":"15 minutes: how to talk about the product",
+"нужно для кошелька и выплат":"needed for the wallet and payouts",
+"Больше восьми цифр не помещается на телефоне — снимите одну":"More than eight numbers will not fit on a phone — remove one",
+"вся динамика":"all trends","Ждут второго заказа":"Awaiting a second order","окно 90 дней":"90-day window","ждут":"waiting","нужна помощь":"need help","в окне 90 дней":"in the 90-day window",
+"Цели месяца выполнены":"Monthly goals are done","Дальше — условия ранга":"Next — the conditions for","Что закрыть":"What to close",
+"выполнено":"met","идёт по графику":"on pace","отстаёт от темпа":"behind pace","месяц кончается":"month is ending",
+"Темп считаем от даты: прошло":"Pace is measured by date: ","дней":"days elapsed","Как считается":"How it is calculated",
+"Сейчас":"Today","В статусе дистрибьютора":"As a distributor",
+"ваш бонус за октябрь. Его можно потратить только на свои заказы.":"your bonus for October. It can only be spent on your own orders.",
+"те же деньги приходят на ваш счёт — по договору, с актами.":"the same money reaches your bank account — under a contract, with acts.",
+"Деньги становятся деньгами":"Money becomes money","вознаграждение на счёт, а не только на оплату заказов":"compensation to your account, not only towards orders",
+"Открываются ранги выше Директора":"Ranks above Director open up","бонус с поколений до 38% и бонус бесконечности 1–5% — их нет в статусе потребителя":"a generation bonus up to 38% and an infinity bonus of 1–5% — neither exists for a consumer",
+"Появляются инструменты":"Tools appear","Digital KIT, договор и акты, трансферный счёт после закрытого Директора":"Digital KIT, contract and acts, a transfer account after a qualified Director rank",
+"Разовое удержание 15 у.е. за Digital KIT. Статус держится, пока выполняется ранг Директор.":"A one-off 15 c.u. for the Digital KIT. The status holds while the Director rank is met.",
+"Участники мероприятий":"Event participants","Показатели и ранги":"Metrics and ranks"
 });EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
