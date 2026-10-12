@@ -1779,6 +1779,59 @@ body.navc .side{padding-top:14px}
  .ra18{width:100%;justify-content:flex-start}
  .ra18 .btn{flex:1 1 auto}
 }
+/* ================= v19 ================= */
+/* демо-переключатель в шапке */
+.dm19{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px 0 4px;border-radius:999px;background:var(--soft);font-size:13.5px;font-weight:500;color:var(--ink);white-space:nowrap}
+.dm19:hover,.dm19:focus-visible{background:var(--line);outline:none}
+.dm19 .ua{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:#fff;font-size:13px;font-weight:600;background-size:cover;background-position:center}
+.chv19{color:var(--muted);font-size:11px}
+@media (max-width:1100px){.dm19 .hide-m{display:none}.dm19{padding:0 8px 0 4px}}
+.p19{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:12px;border-radius:14px;margin-bottom:8px;box-shadow:inset 0 0 0 1px var(--line)}
+.p19:hover,.p19:focus-visible{background:var(--soft);outline:none}
+.p19.on{box-shadow:inset 0 0 0 2px var(--brand);background:var(--soft)}
+.p19 .ua{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:#fff;font-weight:600;flex:none;background-size:cover;background-position:center}
+.p19 .g1{flex:1;min-width:0}.p19 b{display:block;font-size:15px;line-height:21px}.p19 small{display:block;font-size:13px;color:var(--muted)}
+/* настройка главной сверху */
+.hb19{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.hb19 .btn{display:inline-flex;align-items:center;gap:8px}
+.hb19 svg{width:18px;height:18px}
+/* стать дистрибьютором */
+.d19h{background:linear-gradient(135deg,var(--soft),var(--card))}
+.dg19{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:14px}
+.dc19{padding:12px 14px;border-radius:14px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.dc19 b{display:block;font-size:15px;line-height:21px}
+.dc19 small{display:block;font-size:13px;line-height:18px;color:var(--muted);margin-top:3px}
+.kit19{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:12px}
+.kc19{all:unset;cursor:pointer;padding:12px 14px;border-radius:14px;background:var(--soft);min-height:44px}
+.kc19:hover,.kc19:focus-visible{background:var(--line);outline:none}
+.kc19 b{display:block;font-size:15px;line-height:21px}
+.kc19 small{display:block;font-size:13px;line-height:18px;color:var(--muted);margin-top:3px}
+.ul19{margin:8px 0 0;padding-left:20px;display:grid;gap:7px}
+.ul19 li{font-size:13.5px;line-height:19px}
+.warn19{background:var(--warn-s,#FDF1E6)}
+.warnn19{background:var(--card)}
+.ok19{background:var(--good-s)}
+.ck19{display:flex;align-items:flex-start;gap:10px;margin-top:14px;font-size:14px;line-height:20px;cursor:pointer}
+.ck19 input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:var(--brand)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+/* регистрация */
+.inv19{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:14px;padding:10px 12px;margin:12px 0}
+.inv19 .ua{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:#fff;font-weight:600;flex:none;background-size:cover;background-position:center}
+.inv19 small{display:block;font-size:12.5px;color:var(--muted)}
+.inv19 b{display:block;font-size:15px}
+.formx.f19{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.formx.f19 .w19{grid-column:1/-1}
+.formx.f19 label{display:grid;gap:5px;font-size:13.5px;color:var(--muted)}
+.formx.f19 input{min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 12px;font:inherit;font-size:15px;color:var(--ink);width:100%}
+.formx.f19 small{font-size:12.5px;color:var(--muted)}
+@media (max-width:620px){.formx.f19{grid-template-columns:minmax(0,1fr)}}
+.tw19{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tb.rm19{min-width:860px}
+.tb.rm19 td,.tb.rm19 th{white-space:normal;vertical-align:top}
+.tb.rm19 td:nth-child(1),.tb.rm19 th:nth-child(1){width:20%}
+.tb.rm19 td:nth-child(2),.tb.rm19 th:nth-child(2){width:18%}
+.tb.rm19 td:nth-child(3),.tb.rm19 th:nth-child(3){width:30%}
+.tb.rm19 td:nth-child(4),.tb.rm19 th:nth-child(4){width:32%}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -5738,6 +5791,161 @@ function bal18(n){ return pl17(n,'балл','балла','баллов','points'
 const _crmTpl18=crmTpl; crmTpl=function(x){ const T=_crmTpl18(x), gp=crmGap(x);
   if(gp&&gp.g) T.forEach(t=>{ t[1]=t[1].replace(`${gp.g} баллов ГО`,`${bal18(gp.g)} ГО`).replace(`${gp.l} баллов ЛО`,`${bal18(gp.l)} ЛО`); });
   return T; };
+/* ================= v19: демо-переключатель в шапке, настройка главной сверху, «Стать дистрибьютором» и Digital KIT, карта изменений ЛК по рангам, упрощённая вступление в клуб ================= */
+
+/* ---------- 0. США в списке стран ---------- */
+COUNTRIES.US=['Соединённые Штаты','$',1.08,'🇺🇸'];
+
+/* ---------- 1. Демо: из-под какого статуса смотрим — в шапку ---------- */
+const PERS19=[['elena','Елена','Потребитель','потребитель без бизнеса'],['anna','Анна','Ассистент','первая линия, до Директора'],['irina','Ирина','Золотой директор','структура и СОП'],['sergey','Сергей','Мастер','поколения и бесконечность']];
+function perLabel19(){ const p=PERS19.find(x=>x[0]===pk)||PERS19[2]; return p; }
+function demoDr19(){ const cur=pk;
+  openDr(`<h2>${L('Демо: из-под какого статуса смотрим')}</h2><div class="sub" style="color:var(--muted);margin-bottom:10px">${L('Это переключатель прототипа. В продукте состав ЛК определяет ранг участника — он приходит с сервера.')}</div>
+   ${PERS19.map(([k,n,st,d])=>`<button class="p19 ${k===cur?'on':''}" onclick="closeDrSilent();setP('${k}')"><span class="ua u-${k}">${n[0]}</span><span class="g1"><b>${n} · ${L(st)}</b><small>${L(d)}</small></span>${k===cur?`<span class="tag t-ok">${L('сейчас')}</span>`:''}</button>`).join('')}
+   <button class="btn gh" style="margin-top:12px;width:100%" onclick="closeDrSilent();go('rankmap')">${L('Как ЛК меняется с рангом')} ›</button>`); }
+const _topbar19=topbar; topbar=function(t,s,e){ let h=_topbar19(t,s,e);
+  const p=perLabel19();
+  const btn=`<button class="dm19" onclick="demoDr19()" aria-label="${L('Демо: из-под какого статуса смотрим')}" title="${L('Демо: смена статуса')}"><span class="ua u-${pk}">${p[1][0]}</span><span class="hide-m">${L('Демо')}: ${p[1]} · ${L(p[2])}</span><span class="chv19">▾</span></button>`;
+  return h.replace(/<button class="srch"/,btn+'<button class="srch"'); };
+
+/* ---------- 2. «Настроить главную» — наверх ---------- */
+const _home19=home; home=function(){ let h=_home19();
+  if(pk==='elena') return h;
+  const bar=`<div class="hb19"><button class="btn gh sm" onclick="customize()">${GRIP}<span>${L('Настроить главную')}</span></button><button class="btn gh sm" onclick="pickKpi()">${SLID}<span>${L('Выбрать показатели')}</span></button></div>`;
+  return h.replace(/<div class="([^"]*\bhgrid\b[^"]*)">/,bar+'<div class="$1">'); };
+
+/* ---------- 3. Почему до 6 показателей ---------- */
+const _pickKpi19=pickKpi; pickKpi=function(){ _pickKpi19(); const c=hcfg();
+  const s=document.querySelector('#dr .sub'); if(s) s.innerHTML=L(`Выбрано ${c.kpis.length} из 6. Шесть — это строка на ноутбуке и два экрана прокрутки на телефоне; больше цифр читаются как отчёт, а не как ответ «как у меня дела». Остальные показатели открываются из блока по нажатию.`); };
+
+/* ---------- 4. Стать дистрибьютором и Digital KIT ---------- */
+const DKIT19=[['Маркетинг-план','как считается вознаграждение и ранги'],['Карьерная книга','условия рангов, бонусов и наград'],['Правила компании','этика, работа в интернете, структура'],['Обучающие материалы','запуск новичка, работа с потребителем'],['Маркетинговые ресурсы','макеты, тексты, фото для соцсетей'],['Полезные ссылки','поддержка, формы, документы']];
+const DBONUS19=[['Бонус с личного и группового объёма','процент с ваших покупок и покупок структуры'],['Экстрабонус','50 у.е. за ГО 750+ в директорской группе'],['Бонус с поколений','от Серебряного директора до Звёздного мастера, до 38%'],['Бонус бесконечности','1–5% от ГО для мастерских рангов'],['Бонус привилегия','премиальная программа для Мастеров'],['Мастерские каникулы','путешествие для лучших дистрибьюторов']];
+function isDist19(){ return pk==='irina'||pk==='sergey'; }
+function distRules19(){ openDr(`<h2>${L('Правила перехода в статус Дистрибьютора')}</h2>
+ ${[['Переход в статус','Заявление заполняется в Личном кабинете. Удержание за Digital KIT — 15 у.е. с бонусного счёта. С каждым дистрибьютором Компания заключает Договор: по нему составляются акты и выплачивается вознаграждение.'],
+    ['Кто может быть дистрибьютором','Только физическое лицо. Для Договора нужно оформить деятельность как ИП или самозанятый по законодательству своей страны.'],
+    ['Поддержание статуса','Если 12 месяцев подряд не выполнять условия ранга Директор, статус автоматически меняется на Потребителя.'],
+    ['Развитие структуры','Регистрировать людей без их согласия запрещено. У каждого участника только один клубный номер. Члены семьи регистрируются только под своим родственником.'],
+    ['Смена рекомендателя','Только при деактивации номера, отсутствии покупок 12+ месяцев и повторной вступления. Структура под участником остаётся на прежнем месте.'],
+    ['Этика продвижения','БАД — не лекарства. Нельзя приписывать лечебные свойства, продавать ниже клубной цены, продвигать через маркетплейсы и объявления, дарить подарки за вступление и ранги.'],
+    ['Обучение структуры','Передача знаний — на бескорыстной основе. Платные тренинги, марафоны и коуч-сессии дистрибьюторам запрещены.']].map(([t,d])=>`<div class="li"><div class="g1"><b>${L(t)}</b><small>${L(d)}</small></div></div>`).join('')}
+ <div class="note">${L('Полный текст — в разделе «Правила компании» Digital KIT. Здесь — выжимка по пунктам, которые касаются перехода.')}</div>`); }
+function distSend19(){ openDr(`<h2>${L('Заявление отправлено')}</h2><div class="sub" style="color:var(--muted)">${L('Номер 344512 · отчётный месяц — октябрь. Статус появится в «Моих заявлениях» после проверки.')}</div>
+ <div class="note">${L('15 у.е. за Digital KIT спишутся с бонусного счёта после утверждения. Если средств не хватает, баланс станет отрицательным.')}</div>`); }
+function who19(){ return P()||{num:'5520913',name:'Елена Смирнова',short:'Елена'}; }
+function distForm19(){ const p=who19(), us=ctry==='US';
+  return `<button class="p14bk" onclick="setTab('dist','start');window.scrollTo(0,0)">${CHV.replace('m9 6 6 6-6 6','m15 6-6 6 6 6')}<span>${L('Назад')}</span></button>
+  <div class="g4" style="margin-top:12px">
+   <div class="card c-pad s7"><h3>${L('Личные данные')}</h3><div class="sub">${L('Изменить можно в профиле')} — <button class="link" onclick="go('profile','data')">${L('Личные данные')}</button></div>
+    ${fld('Coral ID',p.num,'',false)}${fld('ФИО',p.name,'',false)}${fld('E-mail','user'+p.num.slice(-3)+'@gmail.com','<span class="tag t-ok">'+L('подтверждена')+'</span>',false)}${fld('Телефон','+40 721 ••• 658','<span class="tag t-ok">'+L('подтверждён')+'</span>',false)}
+    <h3 style="margin-top:18px">${L('Адрес фактического проживания')}</h3>
+    <div class="formx">${[['Страна',COUNTRIES[ctry][3]+' '+L(COUNTRIES[ctry][0])],['Город','București'],['Улица','Str. Victoriei 12, ap. 7'],['Индекс','030167']].map(([k,v])=>`<label>${L(k)}*<input value="${v}"></label>`).join('')}</div>
+    <label class="ck19"><input type="checkbox" id="dck19" onchange="document.getElementById('dsub19').disabled=!this.checked"><span>${L('Я прочитал и принимаю')} <button class="link" onclick="event.preventDefault();distRules19()">${L('правила перехода в статус Дистрибьютора')}</button></span></label>
+    <div class="btns" style="margin-top:12px"><button class="btn pri" id="dsub19" disabled onclick="distSend19()">${L('Отправить заявление')}</button></div>
+    <div class="sub" style="margin-top:8px">${L('Перед отправкой проверьте правильность введённых данных')}</div></div>
+   <div class="card c-pad s5 warn19"><h3>${L('Обратите внимание')}</h3>
+    <ul class="ul19">${[`${L('Удержание за Digital KIT — 15 у.е. Спишется с бонусного счёта сразу. Если средств не хватает, баланс станет отрицательным.')}`,
+      L('Перевод за отчётный месяц возможен в течение всего месяца и по 4 число следующего. С 5-го числа перевод оформляется только текущим месяцем.'),
+      L('После перехода бонус можно сразу монетизировать — вознаграждение идёт на счёт, а не только на оплату заказов.'),
+      L('Если вы уже закрывались в ранге Директор, Трансферный счёт и трансферные заказы станут доступны сразу.'),
+      L('Если ещё не закрывались — Трансферный счёт откроется 8 числа месяца, следующего за тем, в котором вы подтвердите ранг Директор (ЛО ≥ 50, ГО ≥ 500).'),
+      L('Ранг Серебряного директора и выше доступен только в статусе дистрибьютора.'),
+      L('Дистрибьютором может быть только физическое лицо: для Договора нужна оформленная деятельность — ИП или самозанятый, по законодательству вашей страны.')].map(x=>`<li>${x}</li>`).join('')}</ul>
+    ${us?`<div class="note warnn19"><b>${L('США')}</b><br>${L('Условия маркетинг-плана и формы договора для США отличаются. Цифры в этом экране — европейские; перед запуском их подтверждает локальный офис. В прототипе они не проверены.')}</div>`:''}</div></div>`; }
+function dist(){ const t=tab('dist','start'), p=who19();
+  const head=topbar(L('Стать дистрибьютором'),L('Статус, который открывает выплаты на счёт, бонус с поколений и ранги выше Директора'));
+  if(t==='form') return head+distForm19();
+  const apps=`<div class="card c-pad c12"><h3>${L('Мои заявления')}</h3><div class="tw" style="margin-top:8px"><table class="tb"><thead><tr><th>${L('Дата')}</th><th>${L('Заявление')}</th><th>${L('Отчётный месяц')}</th><th>${L('Условия перехода')}</th><th>${L('Статус')}</th></tr></thead><tbody>
+    ${(isDist19()?[['12.10.2026, 18:22','Перевод в статус Дистрибьютор','344459','Платно · 15 у.е.','t-ok','утверждено'],['12.10.2026, 15:40','Перевод в статус Потребитель','344468','Бесплатно','t-ok','утверждено']]:[['08.10.2026, 11:02','Перевод в статус Потребитель','344468','Бесплатно','t-ok','утверждено']])
+      .map(([d,n,num,c,tg,st])=>`<tr><td>${d}</td><td><b>${L(n)}</b><br><small style="color:var(--muted)">${num}</small></td><td>${L('Октябрь')}</td><td>${L(c)}</td><td><span class="tag ${tg}">${L(st)}</span></td></tr>`).join('')}
+    </tbody></table></div></div>`;
+  const kit=`<div class="card c-pad c12"><div class="hrow"><div><h3>Digital KIT</h3><div class="sub">${L('Набор бизнес-инструментов партнёра в цифровом формате — всегда под рукой, на телефоне и на компьютере')}</div></div>${isDist19()?`<span class="tag t-ok">${L('подключён')}</span>`:`<span class="tag t-w">15 ${L('у.е.')}</span>`}</div>
+    <div class="kit19">${DKIT19.map(([t2,d])=>`<button class="kc19" onclick="${isDist19()?`go('learn')`:`toast('${L('Откроется после перехода в статус дистрибьютора')}')`}"><b>${L(t2)}</b><small>${L(d)}</small></button>`).join('')}</div></div>`;
+  if(isDist19()) return head+`<div class="g">
+   <div class="card c-pad c12 ok19"><div class="hrow"><div><h3>${L('Вы дистрибьютор')}</h3><div class="sub">${L('Договор заключён · вознаграждение выплачивается на счёт')}</div></div><button class="btn gh sm" onclick="go('profile','pay')">${L('Вознаграждение и выплаты')}</button></div>
+    <div class="note">${L('Статус нужно поддерживать: если 12 месяцев подряд не выполнять условия ранга Директор, статус автоматически меняется на Потребителя. Сейчас ранг подтверждён.')}</div></div>
+   ${kit}${apps}</div>`;
+  return head+`<div class="g">
+   <div class="card c-pad c12 d19h"><h3>${L('Что даёт статус дистрибьютора')}</h3><div class="sub">${L('Сейчас бонус можно тратить только на свои заказы. В статусе дистрибьютора вознаграждение идёт на счёт.')}</div>
+    <div class="dg19">${DBONUS19.map(([t2,d])=>`<div class="dc19"><b>${L(t2)}</b><small>${L(d)}</small></div>`).join('')}</div>
+    <div class="btns" style="margin-top:16px"><button class="btn pri" onclick="setTab('dist','form');window.scrollTo(0,0)">${L('Заполнить заявление')}</button><button class="btn gh" onclick="distRules19()">${L('Правила перехода')}</button></div></div>
+   <div class="card c-pad c6"><h3>${L('Сколько стоит')}</h3><div class="kp7v" style="margin:6px 0">15 <span>${L('у.е.')}</span></div><div class="sub">${L('Удержание за Digital KIT. Спишется с бонусного счёта сразу после утверждения; если средств не хватает, баланс станет отрицательным.')}</div></div>
+   <div class="card c-pad c6"><h3>${L('Что нужно от вас')}</h3><div class="sub" style="margin-bottom:8px">${L('Дистрибьютором может быть только физическое лицо.')}</div>
+    <ul class="ul19">${[L('Оформленная деятельность — ИП или самозанятый, по законодательству вашей страны'),L('Договор с Компанией и акты выполненных работ'),L('Подтверждённые почта и телефон в профиле')].map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   ${kit}${apps}</div>`; }
+
+/* ---------- 5. Как ЛК меняется с рангом ---------- */
+const RMAP19=[
+ ['Кандидат','первые 90 дней','Мой путь, заказы, обучение, Coral AI','Стартовый заказ от 12 баллов за 90 дней — иначе номер блокируется'],
+ ['Потребитель','сделал стартовый заказ','+ бонус рекомендаций 5% с первой линии','Бонус можно тратить только на свои заказы'],
+ ['Премиум-потребитель','500 баллов группового объёма','+ возвратная скидка 10% в кошельке','Считается вместе с покупками первой линии'],
+ ['Ассистент','есть первая линия','+ моя структура, разметка, план месяца','Появляются блоки по структуре'],
+ ['Директор в статусе Потребителя','ЛО 50 и ГО 500 за месяц','+ мои показатели, экстрабонус, потребители 90 дней','Переходить в дистрибьюторы для этого не нужно'],
+ ['Дистрибьютор','заявление и Digital KIT','+ выплаты на счёт, договор и акты, Digital KIT','Трансферный счёт — после закрытого ранга Директор'],
+ ['Серебряный директор','1 директорская ветвь','+ СОП, бонус с поколений, лидерский отчёт','Доступен только в статусе дистрибьютора'],
+ ['Золотой директор','2 ветви и СОП 2 000','+ директора на грани, Автоподбор · САП','Появляется работа с чужими ветвями'],
+ ['Мастер','16 директоров и СОП* 12 500','+ бонус бесконечности, мастерские каникулы, мастерские ветви','Условия СОП* с ограничением сильной ветви']];
+function rankmap(){ const head=topbar(L('Как ЛК меняется с рангом'),L('Что появляется на главной и в меню при переходе — и что происходит, если ранг не подтверждён'));
+  return head+`<div class="g">
+   <div class="card c-pad c12"><h3>${L('Откуда берётся состав главной')}</h3>
+    <div class="sub">${L('Состав и порядок блоков приходят с сервера конфигом по сегменту: потребитель, ассистент, директор, мастер. Личные настройки участника лежат поверх конфига и не перетираются. Владелец конфига — продакт ЛК, менять состав можно без релиза.')}</div></div>
+   <div class="card c-pad c12"><h3>${L('Что открывается на каждом шаге')}</h3>
+    <div class="tw tw19" style="margin-top:8px"><table class="tb rm19"><thead><tr><th>${L('Статус или ранг')}</th><th>${L('Когда')}</th><th>${L('Что появляется в ЛК')}</th><th>${L('Важное')}</th></tr></thead><tbody>
+    ${RMAP19.map(([a,b,c,d])=>`<tr><td><b>${L(a)}</b></td><td>${L(b)}</td><td>${L(c)}</td><td style="color:var(--muted)">${L(d)}</td></tr>`).join('')}</tbody></table></div></div>
+   <div class="card c-pad c6"><h3>${L('Когда ранг вырос')}</h3><ul class="ul19">
+    ${[L('Изменения применяются после расчёта 1 числа, одновременно с подтверждением ранга.'),
+       L('Новые блоки добавляются в конец главной с меткой «Новое» — порядок, который настроил участник, не сбивается.'),
+       L('Блок, который участник сам скрыл, не возвращается насильно: он остаётся в «Настроить главную».'),
+       L('Показывается поздравление и короткий экран «что открылось» — с переходом в новые разделы.')].map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   <div class="card c-pad c6 warn19"><h3>${L('Когда ранг не подтверждён')}</h3><ul class="ul19">
+    ${[L('Блок не исчезает молча: он показывает состояние «доступно с ранга Директор» и объясняет, чего не хватает.'),
+       L('Данные сохраняются — при возврате ранга участник видит свою историю, а не пустой экран.'),
+       L('Разделы меню прячутся, но ссылки остаются рабочими: поиск находит раздел и объясняет условие доступа.'),
+       L('Статус дистрибьютора снимается только после 12 месяцев подряд без выполнения условий ранга Директор.')].map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   <div class="card c-pad c12"><h3>${L('Посмотреть ЛК из-под статуса')}</h3><div class="sub">${L('Переключатель прототипа — в шапке. Можно открыть сразу отсюда:')}</div>
+    <div class="chips" style="margin-top:10px">${PERS19.map(([k,n,st])=>`<button class="chip ${pk===k?'on':''}" onclick="setP('${k}')">${n} · ${L(st)}</button>`).join('')}</div></div></div>`; }
+
+/* ---------- 6. Вступление из ЛК — один экран, пять полей ---------- */
+function reg19(){ const p=who19();
+  return `<div class="g4"><div class="card c-pad s7"><h3>${L('Вступление нового члена клуба')}</h3>
+   <div class="sub">${L('Один экран, пять полей. Телефон нужен для входа и доставки; входа по одному номеру телефона пока нет.')}</div>
+   <div class="inv19"><span class="ua u-${pk}">${p.name[0]}</span><span class="g1"><small>${L('Рекомендатель')}</small><b>${p.name} · ${p.num}</b></span></div>
+   <div class="formx f19">${[['Имя',''],['Фамилия',''],['Телефон','+40 ___ ___ ___'],['E-mail','']].map(([k,v])=>`<label>${L(k)}*<input placeholder="${v}"></label>`).join('')}
+    <label class="w19">${L('Пароль')}*<input type="password"><small>${L('Не менее 6 символов')}</small></label></div>
+   <label class="ck19"><input type="checkbox"><span>${L('Согласен получать письма об акциях и новостях')}</span></label>
+   <div class="btns" style="margin-top:12px"><button class="btn pri" onclick="toast('${L('Coral ID активирован — приглашение отправлено')}')">${L('Активировать Coral ID')}</button></div>
+   <div class="sub" style="margin-top:8px">${L('Нажимая кнопку, человек подтверждает, что ему есть 18 лет, и соглашается с Правилами вступления, Условиями использования и Политикой конфиденциальности.')}</div>
+   <div class="note">${L('Перед приглашением убедитесь: человек не регистрировался раньше, у него нет активного клубного номера и в Coral Club нет его близких родственников — они регистрируются только под своим родственником.')}</div></div>
+   <div class="s5 bnr v ph-cm_l" style="min-height:320px"><div class="in"><b>${L('Начните с воды')}</b><span>${L('Первый заказ с Coral-Mine. Потребитель попадёт в ваш трекер «первые 90 дней».')}</span></div></div></div>`; }
+const _tools19=tools; tools=function(){ let h=_tools19();
+  if(tab('tools','subs')!=='new') return h;
+  const i=h.indexOf('<div class="g4">'); return i<0?h:h.slice(0,i)+reg19(); };
+
+/* ---------- маршрутизация новых страниц ---------- */
+const _render19=render; render=function(){
+  if(page!=='dist'&&page!=='rankmap') return _render19();
+  renderNav();
+  document.getElementById('main').innerHTML=L('<div class="wrapm">'+(page==='dist'?dist():rankmap())+'</div>');
+  ['#nav','#bnav','#ps'].forEach(id=>{ const e=document.querySelector(id); if(e) e.innerHTML=L(e.innerHTML); });
+  document.querySelectorAll('[data-ru]').forEach(e=>e.textContent=lang==='en'?e.dataset.en:e.dataset.ru);
+  document.documentElement.lang=lang; if(typeof drawAI==='function') drawAI();
+};
+/* пункт меню «Стать дистрибьютором» — только тем, кто ещё не дистрибьютор */
+NAV4.splice(NAV4.findIndex(x=>x.k==='mplan'),0,{k:'dist',t:'Стать дистрибьютором',ic:'tools',isNew:1});
+const _navItems19=navItems; navItems=function(){ let L2=_navItems19();
+  if(pk==='elena') return L2.concat([['dist','Стать дистрибьютором','tools']]);
+  return L2; };
+const _navHtml19=navHtml; navHtml=function(){ let h=_navHtml19();
+  if(isDist19()) h=h.replace(/<div class="ng[^"]*"><button class="nv[^"]*"[^>]*onclick="go\('dist'\)"[\s\S]*?<\/div>/,'')
+                  .replace(/<button class="nv[^"]*"[^>]*onclick="go\('dist'\)"[\s\S]*?<\/button>/,'');
+  return h; };
+
+/* «Настроить главную» также в профиле, в группе «Приложение» */
+const _prof19=prof14Groups; prof14Groups=function(){ const G=_prof19();
+  const app=G.find(g=>g[0]==='Приложение'); if(app) app[1].unshift(['_home',GRIP,'Главный экран','блоки и показатели']);
+  return G; };
+const _prof19open=prof14Open; prof14Open=function(k){ if(k==='_home') return customize(); return _prof19open(k); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -5923,6 +6131,127 @@ Object.assign(EN_DICT,{
 "Ранг подтверждается: Директор — 1 месяц; Серебряный директор — Мастер — 2 месяца подряд; Серебряный мастер и выше — 3 месяца подряд. Нажмите на ранг — условия и расчёт бонуса.":"Rank confirmation: Director — 1 month; Silver Director to Master — 2 months in a row; Silver Master and above — 3 months in a row. Tap a rank for its conditions and bonus."
 });EN_RE=null;
 Object.assign(EN_DICT,{"Мост к":"Bridge to","Директорские ветви":"Director branches","Мастерские ветви":"Master branches","ЛО":"PV","ГО":"GV","СОП":"DGV","СОП*":"DGV*"});EN_RE=null;
+Object.assign(EN_DICT,{
+"+ СОП, бонус с поколений, лидерский отчёт":"+ DGV, generation bonus, leader report",
+"+ бонус бесконечности, мастерские каникулы, мастерские ветви":"+ infinity bonus, Master holidays, master branches",
+"+ бонус рекомендаций 5% с первой линии":"+ 5% referral bonus from the first line",
+"+ возвратная скидка 10% в кошельке":"+ 10% cashback discount in the wallet",
+"+ выплаты на счёт, договор и акты, Digital KIT":"+ payouts to a bank account, contract and acts, Digital KIT",
+"+ директора на грани, Автоподбор · САП":"+ Directors at risk, Auto-matching",
+"+ мои показатели, экстрабонус, потребители 90 дней":"+ my metrics, extra bonus, 90-day consumers",
+"+ моя структура, разметка, план месяца":"+ my structure, markup, monthly plan",
+"1 директорская ветвь":"1 Director branch",
+"15 у.е. за Digital KIT спишутся с бонусного счёта после утверждения. Если средств не хватает, баланс станет отрицательным.":"The 15 c.u. for the Digital KIT is deducted from the bonus account once approved. If the balance is short, it goes negative.",
+"16 директоров и СОП* 12 500":"16 Directors and DGV* 12,500",
+"1–5% от ГО для мастерских рангов":"1–5% of GV for master ranks",
+"2 ветви и СОП 2 000":"2 branches and DGV 2,000",
+"50 у.е. за ГО 750+ в директорской группе":"50 c.u. for GV 750+ in a Director group",
+"500 баллов группового объёма":"500 points of group volume",
+"Coral ID активирован — приглашение отправлено":"Coral ID activated — invitation sent",
+"Адрес фактического проживания":"Residential address",
+"Активировать Coral ID":"Activate Coral ID",
+"Анна":"Anna","Ассистент":"Assistant","Ирина":"Irina","Сергей":"Sergey","Елена":"Elena",
+"БАД — не лекарства. Нельзя приписывать лечебные свойства, продавать ниже клубной цены, продвигать через маркетплейсы и объявления, дарить подарки за вступление и ранги.":"Supplements are not medicine. You may not claim healing properties, sell below club price, promote through marketplaces or classifieds, or give gifts for sign-ups and ranks.",
+"Блок не исчезает молча: он показывает состояние «доступно с ранга Директор» и объясняет, чего не хватает.":"A block never vanishes silently: it shows an “available from Director” state and explains what is missing.",
+"Блок, который участник сам скрыл, не возвращается насильно: он остаётся в «Настроить главную».":"A block the member hid themselves is not forced back: it stays in “Customize home”.",
+"Бонус бесконечности":"Infinity bonus","Бонус можно тратить только на свои заказы":"The bonus can only be spent on your own orders",
+"Бонус привилегия":"Privilege bonus","Бонус с личного и группового объёма":"Bonus on personal and group volume",
+"Бонус с поколений":"Generation bonus","Важное":"Key point","Вознаграждение и выплаты":"Compensation and payouts",
+"Вы дистрибьютор":"You are a distributor","Выбрать показатели":"Choose metrics","Город":"City",
+"Данные сохраняются — при возврате ранга участник видит свою историю, а не пустой экран.":"Data is kept — when the rank returns the member sees their history, not an empty screen.",
+"Дата":"Date","Демо":"Demo","Демо: из-под какого статуса смотрим":"Demo: which status you are viewing as",
+"Демо: смена статуса":"Demo: switch status","Директор в статусе Потребителя":"Director as a Consumer",
+"Дистрибьютор":"Distributor","Дистрибьютором может быть только физическое лицо.":"Only an individual can be a distributor.",
+"Дистрибьютором может быть только физическое лицо: для Договора нужна оформленная деятельность — ИП или самозанятый, по законодательству вашей страны.":"Only an individual can be a distributor: the contract requires registered self-employment under your country’s law.",
+"Договор заключён · вознаграждение выплачивается на счёт":"Contract signed · compensation is paid to your account",
+"Договор с Компанией и акты выполненных работ":"A contract with the Company and acts of work completed",
+"Доступен только в статусе дистрибьютора":"Available only with distributor status",
+"Если 12 месяцев подряд не выполнять условия ранга Директор, статус автоматически меняется на Потребителя.":"If the Director rank conditions are not met for 12 months in a row, the status automatically changes to Consumer.",
+"Если вы уже закрывались в ранге Директор, Трансферный счёт и трансферные заказы станут доступны сразу.":"If you have already qualified as Director, the transfer account and transfer orders become available at once.",
+"Если ещё не закрывались — Трансферный счёт откроется 8 числа месяца, следующего за тем, в котором вы подтвердите ранг Директор (ЛО ≥ 50, ГО ≥ 500).":"If not yet — the transfer account opens on the 8th of the month after you confirm the Director rank (PV ≥ 50, GV ≥ 500).",
+"Заполнить заявление":"Fill in the application","Заявление":"Application",
+"Заявление заполняется в Личном кабинете. Удержание за Digital KIT — 15 у.е. с бонусного счёта. С каждым дистрибьютором Компания заключает Договор: по нему составляются акты и выплачивается вознаграждение.":"The application is filled in the back office. The Digital KIT costs 15 c.u., deducted from the bonus account. The Company signs a contract with every distributor: acts are drawn up under it and compensation is paid.",
+"Заявление отправлено":"Application sent","Золотой директор":"Gold Director",
+"Изменения применяются после расчёта 1 числа, одновременно с подтверждением ранга.":"Changes apply after the calculation on the 1st, together with rank confirmation.",
+"Изменить можно в профиле":"You can change this in your profile","Индекс":"Postcode",
+"Как ЛК меняется с рангом":"How the back office changes with rank","Кандидат":"Candidate",
+"Карьерная книга":"Career book","Когда":"When","Когда ранг вырос":"When the rank goes up",
+"Когда ранг не подтверждён":"When the rank is not confirmed","Кто может быть дистрибьютором":"Who can be a distributor",
+"ЛО 50 и ГО 500 за месяц":"PV 50 and GV 500 in a month","Личные данные":"Personal details",
+"Маркетинг-план":"Marketing plan","Маркетинговые ресурсы":"Marketing assets","Мастер":"Master",
+"Мастерские каникулы":"Master holidays","Мои заявления":"My applications",
+"Мой путь, заказы, обучение, Coral AI":"My path, orders, learning, Coral AI",
+"Набор бизнес-инструментов партнёра в цифровом формате — всегда под рукой, на телефоне и на компьютере":"A partner’s business toolkit in digital form — always at hand, on your phone and your computer",
+"Нажимая кнопку, человек подтверждает, что ему есть 18 лет, и соглашается с Правилами вступления, Условиями использования и Политикой конфиденциальности.":"By pressing the button the person confirms they are over 18 and agrees to the Registration Rules, Terms of Use and Privacy Policy.",
+"Назад":"Back","Настроить главную":"Customize home","Начните с воды":"Start with water",
+"Не менее 6 символов":"At least 6 characters",
+"Новые блоки добавляются в конец главной с меткой «Новое» — порядок, который настроил участник, не сбивается.":"New blocks are added at the end of home with a “New” label — the order the member set is not disturbed.",
+"Номер 344512 · отчётный месяц — октябрь. Статус появится в «Моих заявлениях» после проверки.":"Number 344512 · reporting month October. The status will appear in “My applications” after review.",
+"Обратите внимание":"Please note","Обучающие материалы":"Training materials","Обучение структуры":"Training your structure",
+"Один экран, пять полей. Телефон нужен для входа и доставки; входа по одному номеру телефона пока нет.":"One screen, five fields. The phone is needed for login and delivery; phone-only login is not available yet.",
+"Октябрь":"October","Откроется после перехода в статус дистрибьютора":"Opens once you switch to distributor status",
+"Откуда берётся состав главной":"Where the home layout comes from","Отправить заявление":"Send the application",
+"Отчётный месяц":"Reporting month","Оформленная деятельность — ИП или самозанятый, по законодательству вашей страны":"Registered self-employment under your country’s law",
+"Пароль":"Password","Первый заказ с Coral-Mine. Потребитель попадёт в ваш трекер «первые 90 дней».":"A first order with Coral-Mine is the where the path starts point. The consumer lands in your “first 90 days” tracker.",
+"Перевод за отчётный месяц возможен в течение всего месяца и по 4 число следующего. С 5-го числа перевод оформляется только текущим месяцем.":"The switch for a reporting month is possible all month and up to the 4th of the next one. From the 5th it applies to the current month only.",
+"Перед отправкой проверьте правильность введённых данных":"Check the details before sending",
+"Перед приглашением убедитесь: человек не регистрировался раньше, у него нет активного клубного номера и в Coral Club нет его близких родственников — они регистрируются только под своим родственником.":"Before inviting, make sure the person has not signed up before, has no active club number, and has no close relatives in Coral Club — relatives sign up only under their own family member.",
+"Передача знаний — на бескорыстной основе. Платные тренинги, марафоны и коуч-сессии дистрибьюторам запрещены.":"Knowledge is shared free of charge. Paid trainings, marathons and coaching sessions are not allowed for distributors.",
+"Переключатель прототипа — в шапке. Можно открыть сразу отсюда:":"The prototype switch is in the header. You can also open it here:",
+"Переход в статус":"Switching status","Переходить в дистрибьюторы для этого не нужно":"You do not need distributor status for this",
+"Поддержание статуса":"Keeping the status","Подтверждённые почта и телефон в профиле":"A confirmed email and phone in the profile",
+"Показывается поздравление и короткий экран «что открылось» — с переходом в новые разделы.":"A congratulation and a short “what just opened” screen appear, with links to the new sections.",
+"Полезные ссылки":"Useful links",
+"Полный текст — в разделе «Правила компании» Digital KIT. Здесь — выжимка по пунктам, которые касаются перехода.":"The full text is in the “Company rules” section of the Digital KIT. This is a summary of the points that concern the switch.",
+"После перехода бонус можно сразу монетизировать — вознаграждение идёт на счёт, а не только на оплату заказов.":"After the switch the bonus can be cashed out — compensation goes to your account, not only towards orders.",
+"Посмотреть ЛК из-под статуса":"View the back office as a status","Потребитель":"Consumer",
+"Появляется работа с чужими ветвями":"Work with other people’s branches appears","Появляются блоки по структуре":"Structure blocks appear",
+"Правила компании":"Company rules","Правила перехода":"Switching rules","Правила перехода в статус Дистрибьютора":"Rules for switching to distributor status",
+"Премиум-потребитель":"Premium Consumer","Развитие структуры":"Growing the structure",
+"Разделы меню прячутся, но ссылки остаются рабочими: поиск находит раздел и объясняет условие доступа.":"Menu sections hide, but links keep working: search finds the section and explains the access condition.",
+"Ранг Серебряного директора и выше доступен только в статусе дистрибьютора.":"Silver Director and above is available only with distributor status.",
+"Вступление нового члена клуба":"New club member sign-up",
+"Регистрировать людей без их согласия запрещено. У каждого участника только один клубный номер. Члены семьи регистрируются только под своим родственником.":"Signing people up without their consent is forbidden. Each member has only one club number. Family members sign up only under their own relative.",
+"Рекомендатель":"Referrer","США":"United States",
+"Сейчас бонус можно тратить только на свои заказы. В статусе дистрибьютора вознаграждение идёт на счёт.":"Right now the bonus can only be spent on your own orders. With distributor status compensation goes to your account.",
+"Серебряный директор":"Silver Director","Сколько стоит":"What it costs","Смена рекомендателя":"Changing the referrer",
+"Согласен получать письма об акциях и новостях":"I agree to receive emails about promotions and news",
+"Состав и порядок блоков приходят с сервера конфигом по сегменту: потребитель, ассистент, директор, мастер. Личные настройки участника лежат поверх конфига и не перетираются. Владелец конфига — продакт ЛК, менять состав можно без релиза.":"The set and order of blocks come from the server as a config per segment: consumer, assistant, director, master. A member’s own settings sit on top of the config and are never overwritten. The config is owned by the back-office product manager and can change without a release.",
+"Стартовый заказ от 12 баллов за 90 дней — иначе номер блокируется":"A starter order of at least 12 points within 90 days — otherwise the number is blocked",
+"Статус":"Status","Статус дистрибьютора снимается только после 12 месяцев подряд без выполнения условий ранга Директор.":"Distributor status is removed only after 12 months in a row without meeting the Director rank conditions.",
+"Статус или ранг":"Status or rank",
+"Статус нужно поддерживать: если 12 месяцев подряд не выполнять условия ранга Директор, статус автоматически меняется на Потребителя. Сейчас ранг подтверждён.":"The status has to be maintained: 12 months in a row without the Director rank conditions and it automatically changes to Consumer. Your rank is currently confirmed.",
+"Статус, который открывает выплаты на счёт, бонус с поколений и ранги выше Директора":"The status that unlocks payouts to your account, the generation bonus and ranks above Director",
+"Стать дистрибьютором":"Become a distributor","Считается вместе с покупками первой линии":"Counted together with first-line purchases",
+"Телефон":"Phone",
+"Только при деактивации номера, отсутствии покупок 12+ месяцев и повторной вступления. Структура под участником остаётся на прежнем месте.":"Only with a deactivated number, no purchases for 12+ months and a fresh sign-up. The structure below the member stays where it is.",
+"Только физическое лицо. Для Договора нужно оформить деятельность как ИП или самозанятый по законодательству своей страны.":"An individual only. The contract requires registered self-employment under your country’s law.",
+"Трансферный счёт — после закрытого ранга Директор":"Transfer account — after a qualified Director rank",
+"Удержание за Digital KIT — 15 у.е. Спишется с бонусного счёта сразу. Если средств не хватает, баланс станет отрицательным.":"The Digital KIT costs 15 c.u. It is deducted from the bonus account at once. If the balance is short, it goes negative.",
+"Удержание за Digital KIT. Спишется с бонусного счёта сразу после утверждения; если средств не хватает, баланс станет отрицательным.":"The Digital KIT fee. Deducted from the bonus account right after approval; if the balance is short, it goes negative.",
+"Улица":"Street","Условия СОП* с ограничением сильной ветви":"DGV* rules with the strong-branch cap",
+"Условия маркетинг-плана и формы договора для США отличаются. Цифры в этом экране — европейские; перед запуском их подтверждает локальный офис. В прототипе они не проверены.":"The marketing plan terms and contract forms for the United States differ. The figures on this screen are European; the local office confirms them before launch. They are not verified in this prototype.",
+"Условия перехода":"Terms","Что даёт статус дистрибьютора":"What distributor status gives you",
+"Что нужно от вас":"What is required from you","Что открывается на каждом шаге":"What opens at each step",
+"Что появляется в ЛК":"What appears in the back office",
+"Что появляется на главной и в меню при переходе — и что происходит, если ранг не подтверждён":"What appears on home and in the menu on a transition — and what happens if the rank is not confirmed",
+"Экстрабонус":"Extra bonus","Этика продвижения":"Promotion ethics",
+"Это переключатель прототипа. В продукте состав ЛК определяет ранг участника — он приходит с сервера.":"This is a prototype switch. In the product the back office layout is set by the member’s rank and comes from the server.",
+"Я прочитал и принимаю":"I have read and accept","есть первая линия":"has a first line",
+"запуск новичка, работа с потребителем":"launching a newcomer, working with a consumer","заявление и Digital KIT":"application and Digital KIT",
+"как считается вознаграждение и ранги":"how compensation and ranks are calculated","потребитель без бизнеса":"a consumer with no business",
+"макеты, тексты, фото для соцсетей":"layouts, copy and photos for social media",
+"от Серебряного директора до Звёздного мастера, до 38%":"from Silver Director to Star Master, up to 38%",
+"первая линия, до Директора":"first line, on the way to Director","первые 90 дней":"first 90 days",
+"поддержка, формы, документы":"support, forms, documents","подключён":"included","подтверждена":"confirmed","подтверждён":"confirmed",
+"поколения и бесконечность":"generations and infinity","правила перехода в статус Дистрибьютора":"the rules for switching to distributor status",
+"премиальная программа для Мастеров":"a premium programme for Masters",
+"процент с ваших покупок и покупок структуры":"a percentage of your purchases and your structure’s",
+"путешествие для лучших дистрибьюторов":"a trip for the best distributors","сделал стартовый заказ":"made a starter order",
+"сейчас":"current","структура и СОП":"structure and DGV","у.е.":"c.u.",
+"условия рангов, бонусов и наград":"rank, bonus and award conditions","этика, работа в интернете, структура":"ethics, online conduct, structure",
+"Выбрано":"Selected","Главный экран":"Home screen","блоки и показатели":"blocks and metrics"
+});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
