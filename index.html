@@ -2036,6 +2036,22 @@ body.navc .side{padding-top:14px}
 .pt29w{display:inline-flex;align-items:center;vertical-align:baseline;line-height:1;font-size:inherit}
 .pt29{flex:none;position:relative;top:.03em}
 .sl25 input{touch-action:none}
+/* ================= v30: живая сеть ================= */
+.qi30{background:none;border:0;padding:0 0 0 6px;color:var(--muted);font-size:15px;cursor:pointer;line-height:1}
+.av30{display:flex;align-items:baseline;gap:10px;margin:14px 0 10px;flex-wrap:wrap}
+.av30 b{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.av30 span{font-size:13px;color:var(--muted)}
+.ab30{display:flex;gap:3px;height:10px;margin-bottom:14px}
+.ab30 button{border:0;padding:0;border-radius:3px;cursor:pointer;min-width:6px}
+.s-on{background:var(--good)}.s-sl{background:var(--warn)}.s-rk{background:var(--bad)}
+.al30{display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);padding-top:6px}
+.ar30{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;padding:9px 2px;cursor:pointer;text-align:left;border-radius:10px}
+.ar30:hover{background:var(--soft)}
+.ad30{flex:none;width:8px;height:8px;border-radius:50%}
+.ar30 .g1{min-width:0;flex:1}
+.ar30 b{display:block;font-size:14px;font-weight:600}
+.ar30 small{display:block;font-size:12px;color:var(--muted)}
+.an30{flex:none;font-size:18px;font-weight:600}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6649,6 +6665,41 @@ function sizeGem29(el){ const svg=el.querySelector('.pt29'); if(!svg) return;
 const _render29=render; render=function(){ _render29(); try{ pts29(document.getElementById('main')); }catch(e){} };
 const _openDr29=typeof openDr==='function'?openDr:null;
 if(_openDr29) openDr=function(h){ const r=_openDr29(h); try{ pts29(document.getElementById('dr')); }catch(e){} return r; };
+/* ================= v30: «Живая сеть» — сколько людей ещё заказывают ================= */
+/* Бенчмарк: у Oriflame первое, что видит партнёр, — доля активных в сети, а не деньги.
+   CX Long Run Aim 4: ясный обзор бизнеса и немедленное руководство по следующим шагам.
+   Чек-лист Карины, п.16 «Потребители без заказов»: напиши тем, кто давно не покупал. */
+function alive30(){ const r=R0(), ids=subtree(M,r);
+  const g={on:[],sleep:[],risk:[]};
+  ids.forEach(x=>{ const l=M.by[x].last||0; (l<=1?g.on:l<=5?g.sleep:g.risk).push(x); });
+  g.tot=ids.length; g.pct=g.tot?Math.round(g.on.length/g.tot*100):0;
+  return g; }
+function aliveList30(k){ const g=alive30(), T={on:['Активные','Заказ в этом или прошлом месяце'],
+   sleep:['Спящие','2–5 месяцев без заказа — пишем первыми'],risk:['На грани','6 месяцев и больше: номер под угрозой']}[k];
+  const ids=g[k].slice().sort((a,b)=>(M.by[b].last||0)-(M.by[a].last||0));
+  openDr(`<h2>${L(T[0])} · ${ids.length}</h2><div class="sub" style="color:var(--muted)">${L(T[1])}</div><div style="height:10px"></div>
+   ${ids.slice(0,40).map(x=>{const n=M.by[x],l=n.last||0;
+     return `<button class="er24" onclick="crmMsg(${x},'lk')"><span class="g1"><b>${esc(n.n)}</b><small>${l?`${L('без заказа')} ${l} ${L('мес.')}`:L('заказ в этом месяце')}${n.cart?` · ${L('корзина')} ${n.cart}`:''}</small></span><span class="tag ${l>=6?'t-n':l>=2?'t-w':'t-ok'}">${L('Написать')}</span></button>`;}).join('')}
+   ${ids.length>40?`<div class="sub" style="margin-top:8px">${L('Показаны 40 из')} ${ids.length} · ${L('полный список — в отчёте по структуре')}</div>`:''}`); }
+function aliveWhy30(){ openDr(`<h2>${L('Живая сеть: что это и зачем')}</h2>
+  <div class="note"><b>${L('Что считаем')}</b><div class="sub">${L('Вся ваша структура делится по дате последнего заказа: активные — заказ в этом или прошлом месяце, спящие — 2–5 месяцев, на грани — 6 и больше.')}</div></div>
+  <div class="note"><b>${L('Почему это на главной')}</b><div class="sub">${L('Объём и бонус показывают результат, который уже случился. Доля активных показывает, что будет с объёмом через месяц: спящие — это завтрашняя просадка ГО.')}</div></div>
+  <div class="note"><b>${L('Откуда взяли')}</b><div class="sub">${L('Бенчмарк кабинетов: у Oriflame это первый экран партнёра. CX-дискавери, долгосрочная цель 4 — «ясный обзор бизнеса и немедленное руководство по следующим шагам». Чек-лист Карины Поменчук, пункт 16 — «потребители без заказов: напиши тем, кто давно не покупал».')}</div></div>`); }
+function aliveW30(){ const g=alive30(), p=n=>g.tot?n/g.tot*100:0;
+  const seg=(k,n,cls,t)=>n?`<button class="as30 ${cls}" style="flex:${n}" onclick="aliveList30('${k}')" title="${L(t)} · ${n}" aria-label="${L(t)} · ${n}"></button>`:'';
+  const row=(k,n,cls,t,d)=>`<button class="ar30" onclick="aliveList30('${k}')"><span class="ad30 ${cls}"></span><span class="g1"><b>${L(t)}</b><small>${L(d)}</small></span><span class="an30">${n}</span></button>`;
+  return `<div class="hrow"><div><h3>${L('Живая сеть')} ${bdg4('new')}<button class="qi30" onclick="aliveWhy30()" aria-label="${L('Что это и зачем')}">ⓘ</button></h3>
+    <div class="sub">${L('Сколько людей в структуре ещё заказывают')}</div></div></div>
+   <div class="av30"><b>${g.pct}%</b><span>${L('активны')} · ${fmt(g.on.length)} ${L('из')} ${fmt(g.tot)}</span></div>
+   <div class="ab30">${seg('on',g.on.length,'s-on','Активные')}${seg('sleep',g.sleep.length,'s-sl','Спящие')}${seg('risk',g.risk.length,'s-rk','На грани')}</div>
+   <div class="al30">${row('sleep',g.sleep.length,'s-sl','Спящие','2–5 месяцев без заказа')}${row('risk',g.risk.length,'s-rk','На грани','6 месяцев и больше')}</div>`; }
+HW.alive={t:'Живая сеть',d:'Активные, спящие и те, кто на грани',size:'s8'};
+W20.alive=8;
+const _W30=W; W=function(k){ return k==='alive'?aliveW30():_W30(k); };
+['dir','asst'].forEach(s=>{ const d=HDEF[s]; if(d&&!d.order.includes('alive')&&!(d.hidden||[]).includes('alive')){ const i=d.order.indexOf('rank'); d.order.splice(i<0?d.order.length:i+1,0,'alive'); } });
+if(!LS.get('coral_lk_v30b',false)){ Object.values(HCFG).forEach(c=>{ if(!c||!c.order) return;
+  if(!c.order.includes('alive')&&!(c.hidden||[]).includes('alive')){ const i=c.order.indexOf('rank'); c.order.splice(i<0?c.order.length:i+1,0,'alive'); } });
+  LS.set('coral_lk_v30b',true); saveH&&saveH(); }
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -7040,6 +7091,16 @@ Object.assign(EN_DICT,{"Health OS · ваш путь":"Health OS · your path","
 "HydroStack собрана — это то, что вы продаёте в первые 90 дней":"HydroStack is complete — this is what you sell in the first 90 days",
 "Правила фазы не утверждены":"Phase rules are not approved","Ассессмент и персональные наборы":"Assessment and personal sets",
 "Накоплено за месяц":"Earned this month","Посчитать на моей структуре":"Calculate on my own structure"});EN_RE=null;
+Object.assign(EN_DICT,{"Живая сеть":"Live network","Сколько людей в структуре ещё заказывают":"How many people in your structure still order",
+"активны":"active","Активные":"Active","Спящие":"Dormant","На грани":"At risk","2–5 месяцев без заказа":"2–5 months without an order",
+"2–5 месяцев без заказа — пишем первыми":"2–5 months without an order — reach out first","6 месяцев и больше":"6 months and more",
+"6 месяцев и больше: номер под угрозой":"6 months and more: the club number is at risk","Заказ в этом или прошлом месяце":"Ordered this or last month",
+"заказ в этом месяце":"ordered this month","корзина":"cart","Показаны 40 из":"Showing 40 of","полный список — в отчёте по структуре":"full list is in the structure report",
+"Живая сеть: что это и зачем":"Live network: what it is and why","Что считаем":"What we count","Почему это на главной":"Why it is on the home screen","Откуда взяли":"Where it came from","Что это и зачем":"What it is and why",
+"Вся ваша структура делится по дате последнего заказа: активные — заказ в этом или прошлом месяце, спящие — 2–5 месяцев, на грани — 6 и больше.":"Your whole structure is split by last order date: active means an order this or last month, dormant is 2–5 months, at risk is 6 months or more.",
+"Объём и бонус показывают результат, который уже случился. Доля активных показывает, что будет с объёмом через месяц: спящие — это завтрашняя просадка ГО.":"Volume and bonus show a result that already happened. The share of active people shows what volume will look like next month: today's dormant members are tomorrow's drop in group volume.",
+"Бенчмарк кабинетов: у Oriflame это первый экран партнёра. CX-дискавери, долгосрочная цель 4 — «ясный обзор бизнеса и немедленное руководство по следующим шагам». Чек-лист Карины Поменчук, пункт 16 — «потребители без заказов: напиши тем, кто давно не покупал».":"Back-office benchmark: at Oriflame this is the partner's first screen. CX discovery, long run aim 4 — a clear overview of my business and immediate next step guidance. Karina Pomenchuk's checklist, item 16 — consumers without orders: message those who have not bought in a while.",
+"Активные, спящие и те, кто на грани":"Active, dormant and at risk"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
