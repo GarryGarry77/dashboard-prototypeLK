@@ -1933,6 +1933,20 @@ body.navc .side{padding-top:14px}
  .dm20 .dlb20{display:none}
  .dm20{border-style:dashed}
 }
+/* ================= v24 ================= */
+.ten24{display:block;font-size:12.5px;line-height:17px;opacity:.75;margin-bottom:2px}
+.ten24l{font-size:12.5px;line-height:17px;color:var(--muted);margin-bottom:4px}
+.es24{margin-top:14px}
+.es24:first-of-type{margin-top:10px}
+.eh24{display:flex;align-items:baseline;gap:8px}
+.eh24 b{font-size:15px;line-height:21px;font-weight:600}
+.eh24 span{font-size:13px;color:var(--muted);background:var(--soft);border-radius:99px;padding:1px 8px}
+.er24{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:12px;background:var(--soft);margin-top:8px;min-height:44px;box-sizing:border-box}
+.er24:hover,.er24:focus-visible{background:var(--line);outline:none}
+.er24 .g1{flex:1;min-width:0}
+.er24 b{display:block;font-size:15px;line-height:21px}
+.er24 small{display:block;font-size:13px;line-height:18px;color:var(--muted)}
+.er24 .tag{flex:none;white-space:nowrap}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6288,6 +6302,45 @@ function legend23(){ return `<div class="lg23">${LEG23.map(([b,t,d])=>`<div clas
 const _demoDr23=demoDr19; demoDr19=function(){ _demoDr23();
   const d=document.getElementById('dr'); if(!d) return;
   d.insertAdjacentHTML('beforeend',L(`<h3 class="dh">Как читать прототип</h3>${legend23()}`)); };
+/* ================= v24: стаж в клубе (паттерн Аэрофлота) и блок «Немного не хватает» из чек-листа лидера ================= */
+
+/* ---------- 1. Стаж: «Вы в клубе 4 года 3 месяца» ---------- */
+function tenure24(){ const d=M.by[R0()].reg||0, y=Math.floor(d/365.25), mo=Math.floor((d-y*365.25)/30.44);
+  if(!d) return ''; const py=pl17(y,'год','года','лет',y===1?'year':'years'), pm=pl17(mo,'месяц','месяца','месяцев',mo===1?'month':'months');
+  return y?(mo?`${py} ${pm}`:py):pm; }
+const _rankCard24=rankCard; rankCard=function(c,o){ let h=_rankCard24(c,o);
+  const t=tenure24(); if(!t||!o||!o.label||o.sm) return h;
+  return h.replace(/(<div class="nm">)/,`<div class="ten24">${L('В клубе')} ${t}</div>$1`); };
+const _ladder24=ladder17; ladder17=function(){ let h=_ladder24(); const t=tenure24(); if(!t) return h;
+  return h.replace(/(<div class="ls17"><b>)/,`<div class="ls17"><div class="ten24l">${L('В клубе')} ${t}</div><b>`).replace('<div class="ls17"><div','<div class="ls17 ten"><div'); };
+
+/* ---------- 2. «Немного не хватает» — то, что лидер делает руками каждый месяц ---------- */
+const EDGE24={pp:[380,500],eb:[600,750],blk:6};
+function edge24(){ const r=R0(), ids=subtree(M,r), out={pp:[],eb:[],blk:[]};
+  ids.forEach(x=>{ const n=M.by[x];
+    if(n.t==='c'&&n.nso>=EDGE24.pp[0]&&n.nso<EDGE24.pp[1]) out.pp.push({id:x,have:n.nso,need:EDGE24.pp[1]});
+    if(M.go[x]>=EDGE24.eb[0]&&M.go[x]<EDGE24.eb[1]&&M.isDir[x]) out.eb.push({id:x,have:M.go[x],need:EDGE24.eb[1]});
+    if((n.last||0)>=EDGE24.blk) out.blk.push({id:x,m:12-n.last}); });
+  out.pp.sort((a,b)=>b.have-a.have); out.eb.sort((a,b)=>b.have-a.have); out.blk.sort((a,b)=>a.m-b.m);
+  return out; }
+function edgeRow24(id,metric,note,cls){ return `<button class="er24" onclick="crmMsg(${id},'lk')"><span class="g1"><b>${M.by[id].n}</b><small>${metric}</small></span><span class="tag ${cls}">${note}</span></button>`; }
+function edgeW24(){ const e=edge24(), tot=e.pp.length+e.eb.length+e.blk.length;
+  if(!tot) return `<div class="card c-pad"><div class="hrow"><h3 class="h20">${L('Немного не хватает')}</h3></div><div class="sub">${L('Сейчас никто не стоит у порога. Блок оживёт ближе к концу месяца.')}</div></div>`;
+  const sec=(t,d,L2,row)=>L2.length?`<div class="es24"><div class="eh24"><b>${t}</b><span>${L2.length}</span></div><div class="sub">${d}</div>${L2.slice(0,3).map(row).join('')}${L2.length>3?`<button class="link" onclick="edgeAll24()">${L('Показать всех')} · ${L2.length}</button>`:''}</div>`:'';
+  return `<div class="card c-pad"><div class="hrow"><div><h3 class="h20">${L('Немного не хватает')}</h3><div class="sub">${L('Из чек-листа работы с сетью: кто у порога прямо сейчас')}</div></div></div>
+   ${sec(L('До Премиум-потребителя'),L('500 баллов — и человек получает возвратную скидку 10%'),e.pp,x=>edgeRow24(x.id,`${fmt(x.have)} ${L('из')} 500`,`${L('не хватает')} ${fmt(x.need-x.have)}`,'t-w'))}
+   ${sec(L('До Экстрабонуса'),L('ГО 750 — и Директор получает 50 у.е. сверху'),e.eb,x=>edgeRow24(x.id,`${L('ГО')} ${fmt(x.have)} ${L('из')} 750`,`${L('не хватает')} ${fmt(x.need-x.have)}`,'t-w'))}
+   ${sec(L('Номер под риском'),L('12 месяцев без заказа — и клубный номер блокируется'),e.blk,x=>edgeRow24(x.id,`${L('без заказа')} ${12-x.m} ${L('мес.')}`,`${L('осталось')} ${x.m} ${L('мес.')}`,'t-n'))}</div>`; }
+function edgeAll24(){ const e=edge24();
+  openDr(`<h2>${L('Немного не хватает')}</h2>
+   ${['pp','eb','blk'].map(k=>{ const L2=e[k]; if(!L2.length) return '';
+     const t={pp:L('До Премиум-потребителя'),eb:L('До Экстрабонуса'),blk:L('Номер под риском')}[k];
+     return `<h3 class="dh">${t} · ${L2.length}</h3>${L2.map(x=>k==='blk'?edgeRow24(x.id,`${L('без заказа')} ${12-x.m} ${L('мес.')}`,`${L('осталось')} ${x.m} ${L('мес.')}`,'t-n'):edgeRow24(x.id,`${fmt(x.have)} ${L('из')} ${fmt(x.need)}`,`${L('не хватает')} ${fmt(x.need-x.have)}`,'t-w')).join('')}`; }).join('')}`); }
+HW.edge={t:'Немного не хватает',d:'Кто у порога: Премиум-потребитель, Экстрабонус, срок номера',size:'s12'};
+W20.edge=12;
+const _W24=W; W=function(k){ return k==='edge'?edgeW24():_W24(k); };
+['dir','asst'].forEach(s=>{ const d=HDEF[s]; if(!d.order.includes('edge')&&!d.hidden.includes('edge')){ const i=d.order.indexOf('todo'); d.order.splice(i<0?d.order.length:i+1,0,'edge'); } });
+if(!LS.get('coral_lk_v24e',false)){ Object.values(HCFG).forEach(c=>{ if(!c||!c.order) return; if(!c.order.includes('edge')&&!(c.hidden||[]).includes('edge')){ const i=c.order.indexOf('todo'); c.order.splice(i<0?c.order.length:i+1,0,'edge'); } }); LS.set('coral_lk_v24e',true); saveH&&saveH(); }
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -6632,6 +6685,16 @@ Object.assign(EN_DICT,{
 "Цвет и засечка на шкалах — по темпу месяца: прошло":"Colour and notch follow the pace of the month: "
 });EN_RE=null;
 Object.assign(EN_DICT,{"Смотрю как":"Viewing as"});EN_RE=null;
+Object.assign(EN_DICT,{
+"В клубе":"In the club","год":"year","года":"years","лет":"years","месяц":"month","месяца":"months","месяцев":"months",
+"Немного не хватает":"Just short","Из чек-листа работы с сетью: кто у порога прямо сейчас":"From the network checklist: who is at a threshold right now",
+"Сейчас никто не стоит у порога. Блок оживёт ближе к концу месяца.":"Nobody is at a threshold right now. This block comes alive towards month end.",
+"До Премиум-потребителя":"To Premium Consumer","500 баллов — и человек получает возвратную скидку 10%":"500 points and the person gets a 10% cashback discount",
+"До Экстрабонуса":"To the Extra bonus","ГО 750 — и Директор получает 50 у.е. сверху":"GV 750 and a Director gets 50 c.u. on top",
+"Номер под риском":"Number at risk","12 месяцев без заказа — и клубный номер блокируется":"12 months without an order and the club number is blocked",
+"не хватает":"missing","без заказа":"no order for","мес.":"mo.","осталось":"left",
+"Кто у порога: Премиум-потребитель, Экстрабонус, срок номера":"Who is at a threshold: Premium Consumer, Extra bonus, number expiry"
+});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
