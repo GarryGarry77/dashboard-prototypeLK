@@ -1974,6 +1974,25 @@ body.navc .side{padding-top:14px}
 .cdv25 small{font-size:15px;font-weight:500;color:var(--muted)}
 .cd25 .hrow{align-items:center}
 @media (max-width:860px){.cmp25{grid-template-columns:minmax(0,1fr)}.car25{transform:rotate(90deg);justify-self:center}}
+/* ================= v26: шаги пронумерованы ================= */
+.sr26{display:flex;align-items:center;gap:8px;min-width:0}
+.cnt2.s26{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:transparent;color:var(--muted);font-size:12px;font-weight:700;line-height:1;padding:0;box-shadow:inset 0 0 0 1.5px var(--line);position:static}
+.cnt2.s26.ok{background:var(--good);color:#fff;box-shadow:none}
+.sw26{min-width:0;font-size:11.5px;line-height:17px;font-weight:600;border-radius:99px;padding:1px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sw26.w-lo,.sw26.w-go{background:var(--brand-s);color:var(--brand-d,var(--brand))}
+.sw26.w-prep{background:transparent;color:var(--muted);padding:1px 0}
+.hs .st5.done .sw26,.hs .st5.done b,.hs .st5.done small{opacity:.75}
+:root[data-theme="dark"] .hs .st5.done b{color:var(--ink);opacity:.8}
+/* все пять шагов видны целиком — без горизонтальной прокрутки на широком экране */
+@media(min-width:1024px){
+ #w-start .hs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible}
+ #w-start .hs .st5{width:auto;min-width:0}
+ #w-start .hs .st5 b{overflow-wrap:anywhere}
+}
+/* ================= v27 ================= */
+.w27l{margin-top:14px;border-top:1px solid var(--line)}
+.w27 .li{padding:11px 0}
+.w27 .li .num{font-weight:600}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6452,6 +6471,46 @@ const _navTo25=navTo; navTo=function(k){ if(k==='calc'){ go('calc'); return; } r
 /* у ассистента строка про доход на главной ведёт в калькулятор */
 const _W25=W; W=function(k){ let h=_W25(k); if(k!=='metrics'||!h||M.isDir[R0()]) return h;
   return h.replace(/<button class="perk" onclick="go\('mplan','c'\)">/,`<button class="perk" onclick="go('calc')">`); };
+/* ================= v26: «Начало работы» — шаги пронумерованы и объяснено, зачем каждый ================= */
+/* Что даёт шаг: lo — закрывает ЛО 50, go — закрывает ГО 500, prep — подготовка */
+const STEP26={contacts:['prep','подготовка'],lo:['lo','закрывает ЛО 50'],reg:['go','работает на ГО'],go:['go','закрывает ГО 500'],cba:['prep','подготовка']};
+const _W26=W; W=function(k){ let h=_W26(k); if(k!=='start'||!h) return h;
+  const n=START.filter(s=>startDone.has(s[0])).length;
+  h=h.replace(/<h3 class="h20">[^<]*<\/h3>/,`<h3 class="h20">${L('Начало работы')} · ${L('шаг')} ${Math.min(n+1,START.length)} ${L('из')} ${START.length}</h3>`);
+  h=h.replace(/<div class="sub">[^<]*<\/div>/,`<div class="sub">${L('Директор — это ЛО 50 и ГО 500 за один календарный месяц. Шаги 2 и 4 закрывают эти два условия, остальные к ним готовят.')}</div>`);
+  let i=0;
+  h=h.replace(/<span class="cnt2">([^<]*)<\/span>/g,()=>{ const [id]=START[i]||[], s=STEP26[id]||['prep',''], num=++i;
+    return `<span class="sr26"><span class="cnt2 s26 ${startDone.has(id)?'ok':''}">${startDone.has(id)?'✓':num}</span><span class="sw26 w-${s[0]}">${L(s[1])}</span></span>`; });
+  return h; };
+/* ================= v27: у потребителя тоже есть Coral Кошелёк ================= */
+/* Кошелёк потребителя — это возвратная скидка 10% и бонус за рекомендации 5%:
+   копится на счёте и тратится на следующий заказ. Вывода на карту у потребителя нет —
+   выплата требует договора дистрибьютора и налогового статуса. */
+const _navHtml27=navHtml; navHtml=function(){ let h=_navHtml27();
+  if(pk!=='elena') return h;
+  const b=`<button class="nv ${isOnSub('wallet:move')?'on':''}" onclick="navTo('wallet:move')">${svg('wallet')}${L('Coral Кошелёк')}</button>`;
+  return h.replace(/(<button class="nv[^"]*"[^>]*navTo\('shop:orders'\)[^>]*>[\s\S]*?<\/button>)/,'$1'+b); };
+const _renderNav27=renderNav; renderNav=function(){ _renderNav27();
+  if(pk!=='elena') return;
+  const bn=$('#bnav'); if(!bn||bn.querySelector('[onclick*="wallet"]')) return;
+  const ord=[...bn.children].find(x=>/shop/.test(x.getAttribute('onclick')||''));
+  const btn=document.createElement('button');
+  btn.className=isOnSub('wallet:move')?'on':''; btn.setAttribute('onclick',"navTo('wallet:move')");
+  btn.innerHTML=svg('wallet')+L('Кошелёк');
+  ord?ord.after(btn):bn.appendChild(btn); };
+
+/* Страница кошелька для потребителя: откуда деньги и на что их можно потратить */
+const EL27=[['Возвратная скидка 10%','с ваших заказов',9.2],['Бонус за рекомендации 5%','с заказов тех, кого вы привели',3.2]];
+const _wallet27=wallet; wallet=function(){ if(pk!=='elena') return _wallet27();
+  const tot=EL27.reduce((a,b)=>a+b[2],0);
+  return topbar(L('Coral Кошелёк'),L('Накопленная скидка — ею платят за следующий заказ'))+
+  `<div class="card c-pad w27">
+     <small style="color:var(--muted)">${L('Всего в кошельке')}</small><div class="kp7v">${cur(tot)}</div>
+     <div class="w27l">${EL27.map(([t,s,v])=>`<div class="li"><div class="g1">${L(t)}<small>${L(s)}</small></div><span class="num">${cur(v)}</span></div>`).join('')}</div>
+     <div class="btns" style="margin-top:14px"><button class="btn pri" onclick="go('shop','cat')">${L('Оплатить заказ')}</button></div>
+     <div class="note" style="margin-top:14px">${L('Эти деньги тратятся внутри клуба — на заказы. Вывод на карту открывается вместе со статусом дистрибьютора: для выплаты нужен договор и налоговый статус.')}
+     <div style="margin-top:8px"><button class="link" onclick="go('dist')">${L('Что даёт статус дистрибьютора')}</button></div></div>
+   </div>`; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -6831,6 +6890,12 @@ Object.assign(EN_DICT,{
 "Это расчёт выгоды, а не дохода. Чтобы получать вознаграждение на счёт, нужен статус дистрибьютора.":"This is a calculation of savings, not income. To receive compensation to a bank account you need distributor status.",
 "Что это значит":"What this means"
 });EN_RE=null;
+Object.assign(EN_DICT,{"Начало работы":"Getting started","шаг":"step","подготовка":"setup","закрывает ЛО 50":"closes PV 50","работает на ГО":"builds GV","закрывает ГО 500":"closes GV 500",
+"Директор — это ЛО 50 и ГО 500 за один календарный месяц. Шаги 2 и 4 закрывают эти два условия, остальные к ним готовят.":"Director means PV 50 and GV 500 within one calendar month. Steps 2 and 4 close those two conditions; the rest prepare for them."});EN_RE=null;
+Object.assign(EN_DICT,{"Coral Кошелёк":"Coral Wallet","Кошелёк":"Wallet","Накопленная скидка — ею платят за следующий заказ":"Accumulated discount — pays for your next order",
+"Всего в кошельке":"Wallet total","Возвратная скидка 10%":"10% cashback discount","с ваших заказов":"from your own orders","Бонус за рекомендации 5%":"5% referral bonus","с заказов тех, кого вы привели":"from orders of people you brought in","Оплатить заказ":"Pay for an order",
+"Эти деньги тратятся внутри клуба — на заказы. Вывод на карту открывается вместе со статусом дистрибьютора: для выплаты нужен договор и налоговый статус.":"This money is spent inside the club, on orders. Withdrawal to a card comes with distributor status: a payout requires a contract and tax status.",
+"Что даёт статус дистрибьютора":"What distributor status gives you"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
