@@ -1993,6 +1993,45 @@ body.navc .side{padding-top:14px}
 .w27l{margin-top:14px;border-top:1px solid var(--line)}
 .w27 .li{padding:11px 0}
 .w27 .li .num{font-weight:600}
+/* ================= v28: дорожная карта фаз ================= */
+.rl28{padding:2px 0}
+.rl28h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.rl28h b{font-size:15px;font-weight:600}
+.rl28h span{font-size:13px;color:var(--muted)}
+.rl28r{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.rl28i{position:relative;padding:22px 20px 0 0;min-width:0}
+.rl28i::before{content:"";position:absolute;left:5px;right:0;top:4px;border-top:2px solid var(--line)}
+.rl28i.on::before{border-top-color:var(--brand)}
+.rl28i.soon::before{border-top-style:dashed}
+.rl28i.last::before{right:auto;width:28px}
+.rl28d{position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2px var(--line)}
+.rl28i.on .rl28d{background:var(--brand);box-shadow:0 0 0 4px var(--brand-s)}
+.rl28y{display:block;font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.rl28i.on .rl28y{color:var(--brand)}
+.rl28i b{display:block;font-size:16px;font-weight:600;line-height:1.25}
+.rl28i.soon b{color:var(--muted)}
+.rl28s{display:block;margin-top:4px;font-size:13px;line-height:1.45;color:var(--muted);max-width:30ch}
+@media(max-width:760px){
+ .rl28r{grid-template-columns:1fr;gap:0}
+ .rl28i{padding:0 0 18px 24px}
+ .rl28i::before{left:4px;top:6px;right:auto;bottom:-6px;width:0;height:auto;border-top:0;border-left:2px solid var(--line)}
+ .rl28i.on::before{border-left-color:var(--brand)}
+ .rl28i.soon::before{border-left-style:dashed}
+ .rl28i.last::before{display:none}
+ .rl28d{left:0;top:2px}
+ .rl28s{max-width:none}
+}
+.el28{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 18px}
+.el28 button{flex:1 1 200px;min-width:0;display:block;text-align:left;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;color:var(--ink)}
+.el28 button:hover{border-color:var(--brand)}
+.el28 span{display:block;font-size:12.5px;color:var(--muted);margin-bottom:2px}
+.el28 b{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.el28 button:last-child b{color:var(--good)}
+@media(max-width:760px){
+ .el28{gap:10px;margin-bottom:16px}
+ .el28 button{flex:1 1 140px;padding:10px 14px}
+ .el28 b{font-size:19px}
+}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6511,6 +6550,41 @@ const _wallet27=wallet; wallet=function(){ if(pk!=='elena') return _wallet27();
      <div class="note" style="margin-top:14px">${L('Эти деньги тратятся внутри клуба — на заказы. Вывод на карту открывается вместе со статусом дистрибьютора: для выплаты нужен договор и налоговый статус.')}
      <div style="margin-top:8px"><button class="link" onclick="go('dist')">${L('Что даёт статус дистрибьютора')}</button></div></div>
    </div>`; };
+/* ================= v28: фазы Health OS как дорожная карта, деньги в шапке у потребителя, калькулятор в «Стать дистрибьютором» ================= */
+
+/* ---------- 1. Фазы: это путь во времени, а не три равные опции ---------- */
+function rail28(head,sub,items){ return `<div class="rl28">
+  ${head?`<div class="rl28h"><b>${L(head)}</b>${sub?`<span>${L(sub)}</span>`:''}</div>`:''}
+  <ol class="rl28r">${items.map(([y,t,d],i)=>`<li class="rl28i ${i===0?'on':'soon'} ${i===items.length-1?'last':''}">
+    <span class="rl28d"></span><em class="rl28y">${L(y)}</em><b>${L(t)}</b><span class="rl28s">${L(d)}</span></li>`).join('')}</ol></div>`; }
+
+/* клиентская главная */
+const _cHome28=consumerHome; consumerHome=function(){ let h=_cHome28();
+  h=h.replace(/<div class="c12 phase">[\s\S]*?<\/div><\/div>/,
+    `<div class="c12">${rail28('Health OS · ваш путь','три модуля, которые открываются по очереди',
+     [['2026 · вы здесь','Гидратация','Вода каждый день — основа. Сейчас работает этот модуль.'],
+      ['2027','Перезагрузка','Откроется после запуска. Правила ещё готовятся.'],
+      ['2028','Персонализация','Наборы под ваш ассессмент.']])}</div>`);
+  return h; };
+
+/* страница «Потребители» у партнёра */
+const _hos28=hos17; hos17=function(){ let h=_hos28();
+  return h.replace(/<div class="ph17">[\s\S]*?<\/div><\/div>/,
+    rail28(null,null,[['2026 · сейчас','Гидратация','HydroStack собрана — это то, что вы продаёте в первые 90 дней'],
+     ['2027','Перезагрузка','Правила фазы не утверждены'],
+     ['2028','Персонализация','Ассессмент и персональные наборы']])); };
+
+/* ---------- 2. У потребителя деньги видны в шапке, как у партнёра ---------- */
+const _cHome28b=consumerHome; consumerHome=function(){ let h=_cHome28b();
+  const tot=(typeof EL27!=='undefined'?EL27:[]).reduce((a,b)=>a+b[2],0)||12.4;
+  const strip=`<div class="el28"><button onclick="go('wallet','move')"><span>${L('Coral Кошелёк')}</span><b>${cur(tot)}</b></button>
+    <button onclick="go('wallet','move')"><span>${L('Накоплено за месяц')}</span><b>+${cur(3.2)}</b></button></div>`;
+  return h.replace(/(<div class="g">)/,strip+'$1'); };
+
+/* ---------- 3. Калькулятор — третий вход, в «Стать дистрибьютором» ---------- */
+const _dist28=dist; dist=function(){ let h=_dist28();
+  return h.replace(/(<button class="btn gh" onclick="distRules19\(\)">[^<]*<\/button>)/,
+   `$1<button class="btn gh" onclick="go('calc')">${L('Посчитать на моей структуре')}</button>`); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -6896,6 +6970,12 @@ Object.assign(EN_DICT,{"Coral Кошелёк":"Coral Wallet","Кошелёк":"W
 "Всего в кошельке":"Wallet total","Возвратная скидка 10%":"10% cashback discount","с ваших заказов":"from your own orders","Бонус за рекомендации 5%":"5% referral bonus","с заказов тех, кого вы привели":"from orders of people you brought in","Оплатить заказ":"Pay for an order",
 "Эти деньги тратятся внутри клуба — на заказы. Вывод на карту открывается вместе со статусом дистрибьютора: для выплаты нужен договор и налоговый статус.":"This money is spent inside the club, on orders. Withdrawal to a card comes with distributor status: a payout requires a contract and tax status.",
 "Что даёт статус дистрибьютора":"What distributor status gives you"});EN_RE=null;
+Object.assign(EN_DICT,{"Health OS · ваш путь":"Health OS · your path","три модуля, которые открываются по очереди":"three modules that open one after another",
+"2026 · вы здесь":"2026 · you are here","2026 · сейчас":"2026 · now","Вода каждый день — основа. Сейчас работает этот модуль.":"Water every day is the base. This module is live now.",
+"Откроется после запуска. Правила ещё готовятся.":"Opens after launch. The rules are still being prepared.","Наборы под ваш ассессмент.":"Sets based on your assessment.",
+"HydroStack собрана — это то, что вы продаёте в первые 90 дней":"HydroStack is complete — this is what you sell in the first 90 days",
+"Правила фазы не утверждены":"Phase rules are not approved","Ассессмент и персональные наборы":"Assessment and personal sets",
+"Накоплено за месяц":"Earned this month","Посчитать на моей структуре":"Calculate on my own structure"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
