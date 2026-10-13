@@ -1947,6 +1947,33 @@ body.navc .side{padding-top:14px}
 .er24 b{display:block;font-size:15px;line-height:21px}
 .er24 small{display:block;font-size:13px;line-height:18px;color:var(--muted)}
 .er24 .tag{flex:none;white-space:nowrap}
+/* ================= v25 ================= */
+.slg25{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 20px;margin-top:14px}
+.sl25{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:baseline}
+.sl25 .g1{font-size:14px;line-height:20px;color:var(--muted)}
+.sl25 b{font-size:15px;font-weight:600;white-space:nowrap}
+.sl25 input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--brand);height:28px}
+.cg25{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.cg25 b{color:var(--ink);font-size:16px}
+.cmp25{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}
+.car25{align-self:center;font-size:26px;color:var(--muted)}
+.cc25{background:var(--card);border-radius:var(--r-card,20px);padding:20px;box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column}
+.cc25.on{box-shadow:inset 0 0 0 2px var(--brand)}
+.ch25{font-size:18px;line-height:24px;font-weight:600}
+.cs25{font-size:13px;line-height:18px;color:var(--muted);margin-top:2px;margin-bottom:10px}
+.cr25{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line)}
+.cr25 .g1{flex:1;min-width:0}
+.cr25 b{display:block;font-size:14.5px;line-height:20px;font-weight:500}
+.cr25 small{display:block;font-size:12.5px;line-height:17px;color:var(--muted)}
+.cr25.z{opacity:.5}
+.cv25{font-size:16px;font-weight:600;white-space:nowrap}
+.ct25{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:auto;padding-top:14px;border-top:2px solid var(--line);font-size:14px;color:var(--muted)}
+.ct25 b{font-size:28px;line-height:34px;font-weight:600;color:var(--ink)}
+.ct25 b small{font-size:15px;font-weight:500;color:var(--muted)}
+.cdv25{font-size:34px;line-height:40px;font-weight:600;letter-spacing:-.01em}
+.cdv25 small{font-size:15px;font-weight:500;color:var(--muted)}
+.cd25 .hrow{align-items:center}
+@media (max-width:860px){.cmp25{grid-template-columns:minmax(0,1fr)}.car25{transform:rotate(90deg);justify-self:center}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6341,6 +6368,90 @@ W20.edge=12;
 const _W24=W; W=function(k){ return k==='edge'?edgeW24():_W24(k); };
 ['dir','asst'].forEach(s=>{ const d=HDEF[s]; if(!d.order.includes('edge')&&!d.hidden.includes('edge')){ const i=d.order.indexOf('todo'); d.order.splice(i<0?d.order.length:i+1,0,'edge'); } });
 if(!LS.get('coral_lk_v24e',false)){ Object.values(HCFG).forEach(c=>{ if(!c||!c.order) return; if(!c.order.includes('edge')&&!(c.hidden||[]).includes('edge')){ const i=c.order.indexOf('todo'); c.order.splice(i<0?c.order.length:i+1,0,'edge'); } }); LS.set('coral_lk_v24e',true); saveH&&saveH(); }
+/* ================= v25: калькулятор дохода по маркетинг-плану ред. 17 ================= */
+/* Считается теми же ставками, что и реальный бонус в движке: 5% рекомендаций у Ассистента;
+   25% с ЛО + 25/15% первая линия + 20/10% вторая и глубже + Экстрабонус 50 у.е. при ГО ≥ 750 у Директора. */
+
+let CI25=null;
+function ciDefaults25(){ const r=R0(), g=[]; (function w(x){ M.kids[x].forEach(c=>{ if(!M.isDir[c]){ g.push(c); w(c); } }); })(r);
+  const L1=c=>M.by[c].p===r, isC=c=>M.by[c].t==='c', isPA=c=>M.by[c].t==='pc'||(M.by[c].t==='d'&&!M.isDir[c]);
+  const c1=g.filter(c=>L1(c)&&isC(c)), pa1=g.filter(c=>L1(c)&&isPA(c)), c2=g.filter(c=>!L1(c));
+  const avg=a=>a.length?Math.max(10,Math.round(a.reduce((s,x)=>s+M.lo[x],0)/a.length)):40;
+  return {lo:Math.max(10,M.lo[r]||50), c1n:c1.length||3, c1v:avg(c1), pa1n:pa1.length||1, pa1v:avg(pa1), c2n:c2.length||4, c2v:avg(c2)}; }
+function ci25(){ if(!CI25) CI25=ciDefaults25(); return CI25; }
+function calc25(p){ const c1=p.c1n*p.c1v, pa1=p.pa1n*p.pa1v, c2=p.c2n*p.c2v, group=c1+pa1+c2, go=p.lo+group;
+  const aRef=(c1+pa1)*0.05;
+  const dLo=p.lo*0.25, d1c=c1*0.25, d1p=pa1*0.15, d2c=c2*0.20, extra=go>=750?50:0;
+  return {c1,pa1,c2,group,go,
+    a:{rows:[[L('С вашего ЛО · 0%'),0,L('бонус с личного объёма начинается с ранга Директор')],
+             [L('Первая линия · 5%'),aRef,`5% × ${fmt(Math.round(c1+pa1))} — ${L('бонус рекомендаций')}`],
+             [L('Премиум и Ассистенты 1-й линии'),0,L('входят в те же 5%')],
+             [L('Вторая линия и глубже'),0,L('Ассистенту не начисляется')],
+             [L('Экстрабонус'),0,L('только с ранга Директор')]],total:aRef},
+    d:{rows:[[L('С вашего ЛО · 25%'),dLo,`25% × ${fmt(p.lo)}`],
+             [L('Потребители 1-й линии · 25%'),d1c,`25% × ${fmt(Math.round(c1))}`],
+             [L('Премиум и Ассистенты 1-й линии · 15%'),d1p,`15% × ${fmt(Math.round(pa1))}`],
+             [L('Вторая линия и глубже · 20%'),d2c,`20% × ${fmt(Math.round(c2))}`],
+             [L('Экстрабонус'),extra,go>=750?L('ГО ≥ 750 ✓'):`${L('нужен ГО')} 750, ${L('сейчас')} ${fmt(Math.round(go))}`]],
+       total:dLo+d1c+d1p+d2c+extra}}; }
+function ciSet25(k,v){ ci25()[k]=+v; render(); }
+function ciReset25(){ CI25=ciDefaults25(); render(); }
+function sl25(k,label,min,max,step,unit){ const v=ci25()[k];
+  return `<label class="sl25"><span class="g1">${label}</span><b>${fmt(v)}${unit?' '+unit:''}</b>
+   <input type="range" min="${min}" max="${max}" step="${step}" value="${v}" oninput="ciSet25('${k}',this.value)" aria-label="${label}"></label>`; }
+
+function calcPage(){ const r=R0(), p=ci25(), c=calc25(p), isD=M.isDir[r], cons=pk==='elena';
+  const head=topbar(L('Калькулятор дохода'),L('Расчёт по маркетинг-плану ред. 17 — теми же ставками, по которым считается ваш бонус'));
+  if(cons) return head+consumerCalc25();
+  const need=[p.lo>=50?null:`${L('ЛО')} ${fmt(p.lo)} ${L('из')} 50`, c.go>=500?null:`${L('ГО')} ${fmt(Math.round(c.go))} ${L('из')} 500`].filter(Boolean);
+  const col=(t,sub,rows,total,on)=>`<div class="cc25 ${on?'on':''}"><div class="ch25">${t}</div><div class="cs25">${sub}</div>
+    ${rows.map(([k,v,n])=>`<div class="cr25 ${v?'':'z'}"><span class="g1"><b>${k}</b><small>${n}</small></span><span class="cv25">${v?fmt(Math.round(v)):'—'}</span></div>`).join('')}
+    <div class="ct25"><span>${L('Итого в месяц')}</span><b>${fmt(Math.round(total))} <small>${L('у.е.')}</small></b></div></div>`;
+  const diff=Math.round(c.d.total-c.a.total);
+  return head+`<div class="g">
+   <div class="card c-pad c12 ci25"><div class="hrow"><div><h3>${L('Ваши вводные')}</h3><div class="sub">${L('Подвигайте ползунки — расчёт пересчитается')}</div></div><button class="btn gh sm" onclick="ciReset25()">${L('Вернуть мои цифры')}</button></div>
+    <div class="slg25">
+     ${sl25('lo',L('Мой личный объём за месяц'),0,300,5,L('б.'))}
+     ${sl25('c1n',L('Потребителей в первой линии'),0,20,1,'')}
+     ${sl25('c1v',L('Средний заказ потребителя'),10,200,5,L('б.'))}
+     ${sl25('pa1n',L('Премиум и Ассистентов в первой линии'),0,10,1,'')}
+     ${sl25('pa1v',L('Их средний заказ'),10,200,5,L('б.'))}
+     ${sl25('c2n',L('Людей во второй линии и глубже'),0,60,1,'')}
+     ${sl25('c2v',L('Их средний заказ'),10,200,5,L('б.'))}
+    </div>
+    <div class="cg25"><span>${L('Групповой объём')} <b>${fmt(Math.round(c.go))}</b> ${L('б.')}</span><span>${L('из них ваш ЛО')} <b>${fmt(p.lo)}</b></span>${c.go>=750?`<span class="tag t-ok">${L('Экстрабонус доступен')}</span>`:`<span class="tag t-w">${L('до Экстрабонуса')} ${fmt(Math.round(750-c.go))}</span>`}</div></div>
+   <div class="c12 cmp25">
+    ${col(L('Сейчас · Ассистент'),L('5% с заказов первой линии'),c.a.rows,c.a.total,!isD)}
+    <div class="car25" aria-hidden="true">→</div>
+    ${col(L('Директор'),L('25% с ЛО и 10–25% с группы'),c.d.rows,c.d.total,isD)}
+   </div>
+   <div class="card c-pad c12 cd25"><div class="hrow"><div><h3>${L('Разница')}</h3><div class="sub">${L('При тех же людях и тех же заказах')}</div></div><div class="cdv25">+${fmt(diff)} <small>${L('у.е. в месяц')}</small></div></div>
+    ${need.length?`<div class="note">${L('Чтобы закрыть Директора, не хватает')}: ${need.join(' · ')}. <button class="link" onclick="go('rank','ladder')">${L('Что закрыть')}</button></div>`
+      :`<div class="note">${L('При этих цифрах условия Директора выполнены: ЛО 50 и ГО 500 за один месяц.')} <button class="link" onclick="go('plan')">${L('Открыть разметку')}</button></div>`}</div>
+   <div class="card c-pad c12"><div class="sub">${L('Это расчёт при заданных объёмах, а не обещание дохода. Фактическое вознаграждение зависит от выполнения условий ранга и подтверждается расчётом 1 числа. Ставки — маркетинг-план ред. 17 от 17.05.17, обновление апрель 2024.')}</div></div></div>`; }
+
+function consumerCalc25(){ const p=ci25(), nso=M&&M.by?0:0;
+  const back=p.lo*0.10, ref=(p.c1n*p.c1v)*0.05;
+  return `<div class="g">
+   <div class="card c-pad c12 ci25"><h3>${L('Ваши вводные')}</h3><div class="sub">${L('Сколько вы заказываете и сколько человек заказывает по вашей рекомендации')}</div>
+    <div class="slg25">${sl25('lo',L('Мой заказ за месяц'),0,300,5,L('б.'))}${sl25('c1n',L('Человек по вашей рекомендации'),0,10,1,'')}${sl25('c1v',L('Их средний заказ'),10,200,5,L('б.'))}</div></div>
+   <div class="card c-pad c6"><div class="ch25">${L('Возвратная скидка')}</div><div class="cdv25">${fmt(Math.round(back))} <small>${L('у.е.')}</small></div>
+    <div class="sub">${L('10% с личного заказа — с накоплением 500 баллов вы становитесь Премиум-потребителем')}</div></div>
+   <div class="card c-pad c6"><div class="ch25">${L('Бонус рекомендаций')}</div><div class="cdv25">${fmt(Math.round(ref))} <small>${L('у.е.')}</small></div>
+    <div class="sub">${L('5% с заказов тех, кто вступил по вашей ссылке')}</div></div>
+   <div class="card c-pad c12"><div class="sub">${L('Это расчёт выгоды, а не дохода. Чтобы получать вознаграждение на счёт, нужен статус дистрибьютора.')} <button class="link" onclick="go('dist')">${L('Что это значит')}</button></div></div></div>`; }
+
+/* маршрут и вход в меню */
+const _render25=render; render=function(){ if(page!=='calc') return _render25();
+  renderNav(); document.getElementById('main').innerHTML=L('<div class="wrapm">'+calcPage()+'</div>');
+  ['#nav','#bnav','#ps'].forEach(id=>{ const e=document.querySelector(id); if(e) e.innerHTML=L(e.innerHTML); });
+  document.querySelectorAll('[data-ru]').forEach(e=>e.textContent=lang==='en'?e.dataset.en:e.dataset.ru);
+  document.documentElement.lang=lang; if(typeof drawAI==='function') drawAI(); };
+(()=>{ const G=NAV4.find(x=>x.k==='mplan'); if(G&&G.sub&&!G.sub.some(x=>x[0]==='calc')) G.sub.unshift(['calc','Калькулятор дохода','new']); })();
+const _navTo25=navTo; navTo=function(k){ if(k==='calc'){ go('calc'); return; } return _navTo25(k); };
+/* у ассистента строка про доход на главной ведёт в калькулятор */
+const _W25=W; W=function(k){ let h=_W25(k); if(k!=='metrics'||!h||M.isDir[R0()]) return h;
+  return h.replace(/<button class="perk" onclick="go\('mplan','c'\)">/,`<button class="perk" onclick="go('calc')">`); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -6694,6 +6805,31 @@ Object.assign(EN_DICT,{
 "Номер под риском":"Number at risk","12 месяцев без заказа — и клубный номер блокируется":"12 months without an order and the club number is blocked",
 "не хватает":"missing","без заказа":"no order for","мес.":"mo.","осталось":"left",
 "Кто у порога: Премиум-потребитель, Экстрабонус, срок номера":"Who is at a threshold: Premium Consumer, Extra bonus, number expiry"
+});EN_RE=null;
+Object.assign(EN_DICT,{
+"Калькулятор дохода":"Income calculator","Расчёт по маркетинг-плану ред. 17 — теми же ставками, по которым считается ваш бонус":"Calculated from marketing plan ed. 17 — the same rates your real bonus uses",
+"Ваши вводные":"Your inputs","Подвигайте ползунки — расчёт пересчитается":"Move the sliders — the numbers recalculate","Вернуть мои цифры":"Reset to my numbers",
+"Мой личный объём за месяц":"My personal volume this month","Потребителей в первой линии":"Consumers in the first line","Средний заказ потребителя":"Average consumer order",
+"Премиум и Ассистентов в первой линии":"Premium and Assistants in the first line","Их средний заказ":"Their average order",
+"Людей во второй линии и глубже":"People in the second line and deeper","б.":"pts",
+"Групповой объём":"Group volume","из них ваш ЛО":"of which your PV","Экстрабонус доступен":"Extra bonus available","до Экстрабонуса":"to the Extra bonus",
+"Сейчас · Ассистент":"Today · Assistant","5% с заказов первой линии":"5% of first-line orders","Директор":"Director","25% с ЛО и 10–25% с группы":"25% of PV and 10–25% of the group",
+"С вашего ЛО · 0%":"From your PV · 0%","бонус с личного объёма начинается с ранга Директор":"the personal-volume bonus starts at Director",
+"Первая линия · 5%":"First line · 5%","бонус рекомендаций":"referral bonus","Премиум и Ассистенты 1-й линии":"Premium and Assistants, first line","входят в те же 5%":"included in the same 5%",
+"Вторая линия и глубже":"Second line and deeper","Ассистенту не начисляется":"not paid to an Assistant","только с ранга Директор":"from Director rank only",
+"С вашего ЛО · 25%":"From your PV · 25%","Потребители 1-й линии · 25%":"Consumers, first line · 25%","Премиум и Ассистенты 1-й линии · 15%":"Premium and Assistants, first line · 15%",
+"Вторая линия и глубже · 20%":"Second line and deeper · 20%","нужен ГО":"needs GV","сейчас":"now","ГО ≥ 750 ✓":"GV ≥ 750 ✓",
+"Итого в месяц":"Total per month","Разница":"The difference","При тех же людях и тех же заказах":"With the same people and the same orders","у.е. в месяц":"c.u. per month",
+"Чтобы закрыть Директора, не хватает":"To qualify as Director you are short of",
+"При этих цифрах условия Директора выполнены: ЛО 50 и ГО 500 за один месяц.":"At these numbers the Director conditions are met: PV 50 and GV 500 in one month.",
+"Открыть разметку":"Open markup",
+"Это расчёт при заданных объёмах, а не обещание дохода. Фактическое вознаграждение зависит от выполнения условий ранга и подтверждается расчётом 1 числа. Ставки — маркетинг-план ред. 17 от 17.05.17, обновление апрель 2024.":"This is a calculation at the volumes you set, not a promise of income. Actual compensation depends on meeting the rank conditions and is confirmed by the calculation on the 1st. Rates: marketing plan ed. 17 of 17.05.17, updated April 2024.",
+"Сколько вы заказываете и сколько человек заказывает по вашей рекомендации":"How much you order and how much people order on your recommendation",
+"Мой заказ за месяц":"My order this month","Человек по вашей рекомендации":"People who joined on your recommendation",
+"Возвратная скидка":"Cashback discount","10% с личного заказа — с накоплением 500 баллов вы становитесь Премиум-потребителем":"10% of your own order — at 500 accumulated points you become a Premium Consumer",
+"Бонус рекомендаций":"Referral bonus","5% с заказов тех, кто вступил по вашей ссылке":"5% of the orders of those who joined through your link",
+"Это расчёт выгоды, а не дохода. Чтобы получать вознаграждение на счёт, нужен статус дистрибьютора.":"This is a calculation of savings, not income. To receive compensation to a bank account you need distributor status.",
+"Что это значит":"What this means"
 });EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
