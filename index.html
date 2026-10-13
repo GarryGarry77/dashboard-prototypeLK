@@ -2032,6 +2032,10 @@ body.navc .side{padding-top:14px}
  .el28 button{flex:1 1 140px;padding:10px 14px}
  .el28 b{font-size:19px}
 }
+/* ================= v29 ================= */
+.pt29w{display:inline-flex;align-items:center;vertical-align:baseline;line-height:1;font-size:inherit}
+.pt29{flex:none;position:relative;top:.03em}
+.sl25 input{touch-action:none}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6585,6 +6589,66 @@ const _cHome28b=consumerHome; consumerHome=function(){ let h=_cHome28b();
 const _dist28=dist; dist=function(){ let h=_dist28();
   return h.replace(/(<button class="btn gh" onclick="distRules19\(\)">[^<]*<\/button>)/,
    `$1<button class="btn gh" onclick="go('calc')">${L('Посчитать на моей структуре')}</button>`); };
+/* ================= v29: калькулятор не перерисовывает страницу на каждом движении ползунка; балл обозначается как на сайте ================= */
+
+/* ---------- 1. Ползунки: точечное обновление цифр вместо render() ---------- */
+function ciPaint29(){ const p=ci25(), c=calc25(p);
+  document.querySelectorAll('.sl25').forEach(l=>{ const inp=l.querySelector('input'), b=l.querySelector('b'); if(!inp||!b) return;
+    const k=inp.getAttribute('oninput').match(/'([^']+)'/)[1], u=b.dataset.u||'';
+    b.innerHTML=fmt(p[k])+(u?' '+u:''); });
+  const cg=document.querySelector('.cg25');
+  if(cg) cg.innerHTML=`<span>${L('Групповой объём')} <b>${fmt(Math.round(c.go))}</b> ${L('б.')}</span><span>${L('из них ваш ЛО')} <b>${fmt(p.lo)}</b></span>`
+    +(c.go>=750?`<span class="tag t-ok">${L('Экстрабонус доступен')}</span>`:`<span class="tag t-w">${L('до Экстрабонуса')} ${fmt(Math.round(750-c.go))}</span>`);
+  const cols=document.querySelectorAll('.cmp25 .cc25');
+  [c.a,c.d].forEach((side,i)=>{ const el=cols[i]; if(!el) return;
+    el.querySelectorAll('.cr25').forEach((row,j)=>{ const v=side.rows[j]&&side.rows[j][1];
+      row.classList.toggle('z',!v); const cv=row.querySelector('.cv25'); if(cv) cv.textContent=v?fmt(Math.round(v)):'—'; });
+    const t=el.querySelector('.ct25 b'); if(t) t.innerHTML=`${fmt(Math.round(side.total))} <small>${L('у.е.')}</small>`; });
+  const dv=document.querySelector('.cd25 .cdv25');
+  if(dv) dv.innerHTML=`+${fmt(Math.round(c.d.total-c.a.total))} <small>${L('у.е. в месяц')}</small>`;
+  const nt=document.querySelector('.cd25 .note');
+  if(nt){ const need=[p.lo>=50?null:`${L('ЛО')} ${fmt(p.lo)} ${L('из')} 50`,c.go>=500?null:`${L('ГО')} ${fmt(Math.round(c.go))} ${L('из')} 500`].filter(Boolean);
+    nt.innerHTML=need.length?`${L('Чтобы закрыть Директора, не хватает')}: ${need.join(' · ')}. <button class="link" onclick="go('rank','ladder')">${L('Что закрыть')}</button>`
+      :`${L('При этих цифрах условия Директора выполнены: ЛО 50 и ГО 500 за один месяц.')} <button class="link" onclick="go('plan')">${L('Открыть разметку')}</button>`; }
+  const cons=document.querySelectorAll('.g > .card.c6 .cdv25');
+  if(cons.length===2){ cons[0].innerHTML=`${fmt(Math.round(p.lo*0.10))} <small>${L('у.е.')}</small>`;
+    cons[1].innerHTML=`${fmt(Math.round(p.c1n*p.c1v*0.05))} <small>${L('у.е.')}</small>`; }
+  pts29(document.getElementById('main')); }
+ciSet25=function(k,v){ ci25()[k]=+v; ciPaint29(); };
+const _sl29=sl25; sl25=function(k,label,min,max,step,unit){ return _sl29(k,label,min,max,step,unit).replace('<b>',`<b data-u="${unit||''}">`); };
+
+/* ---------- 2. Балл: значок как на сайте в значениях, правильное склонение в тексте ---------- */
+const PTS29='<svg class="pt29" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path d="M4.1 1.6h7.8l3 4.1-6.9 8.7L1.1 5.7z" fill="#F0B429"/><path d="M4.1 1.6 1.1 5.7h13.8l-3-4.1z" fill="#FCD34D"/><path d="M8 14.4 1.1 5.7h13.8z" fill="#E09B12"/></svg>';
+const U29='(?:б\\.|балл\\.|баллов|балла|балл|pts\\.?)';
+function plur29(s){ const n=Math.abs(parseInt(String(s).replace(/[^0-9]/g,''),10)||0), d=n%10, h=n%100;
+  if(d===1&&h!==11) return 'балл'; if(d>=2&&d<=4&&(h<12||h>14)) return 'балла'; return 'баллов'; }
+function pts29(root){ if(!root||lang==='en') return;
+  const re=new RegExp('(\\d[\\d  ,.]*)\\s*'+U29+'(?![а-яА-Я])');
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+    if(!n.nodeValue||!re.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+    const p=n.parentElement;
+    if(!p||/^(SCRIPT|STYLE|INPUT|TEXTAREA|OPTION|SVG)$/i.test(p.tagName)||p.closest('.pt29w')) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT; }});
+  const list=[]; for(let n=w.nextNode();n;n=w.nextNode()) list.push(n);
+  list.forEach(n=>{ const raw=n.nodeValue, pure=new RegExp('^\\s*[\\d  ,.]+\\s*'+U29+'\\s*$').test(raw);
+    const html=raw.replace(new RegExp('(\\d[\\d  ,.]*?)\\s*'+U29+'(?![а-яА-Я])','g'),
+      (m,num)=>pure?num+'\u00A0<span class="pt29w">'+PTS29+'</span>':num+' '+plur29(num));
+    if(html===raw) return;
+    const s2=document.createElement('span'); s2.innerHTML=html; n.replaceWith(s2); });
+  /* случай, когда единица вынесена в свой элемент: 133,10 <small>баллов</small> */
+  root.querySelectorAll('small,span,em').forEach(el=>{
+    if(el.closest('.pt29w')||el.children.length) return;
+    if(!new RegExp('^\\s*'+U29+'\\s*$').test(el.textContent||'')) return;
+    const prev=(el.previousSibling&&el.previousSibling.textContent||'')+(el.parentElement?el.parentElement.textContent:'');
+    if(!/\d\s*$/.test((el.previousSibling&&el.previousSibling.textContent)||'')&&!/\d/.test(prev)) return;
+    el.innerHTML=PTS29; el.classList.add('pt29w'); sizeGem29(el); });
+  root.querySelectorAll('.pt29w').forEach(sizeGem29); }
+function sizeGem29(el){ const svg=el.querySelector('.pt29'); if(!svg) return;
+  const host=el.parentElement||el, fs=parseFloat(getComputedStyle(host).fontSize)||14, px=Math.max(11,Math.round(fs*0.74));
+  svg.setAttribute('width',px); svg.setAttribute('height',px); svg.style.width=px+'px'; svg.style.height=px+'px'; }
+const _render29=render; render=function(){ _render29(); try{ pts29(document.getElementById('main')); }catch(e){} };
+const _openDr29=typeof openDr==='function'?openDr:null;
+if(_openDr29) openDr=function(h){ const r=_openDr29(h); try{ pts29(document.getElementById('dr')); }catch(e){} return r; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
