@@ -6700,6 +6700,54 @@ const _W30=W; W=function(k){ return k==='alive'?aliveW30():_W30(k); };
 if(!LS.get('coral_lk_v30b',false)){ Object.values(HCFG).forEach(c=>{ if(!c||!c.order) return;
   if(!c.order.includes('alive')&&!(c.hidden||[]).includes('alive')){ const i=c.order.indexOf('rank'); c.order.splice(i<0?c.order.length:i+1,0,'alive'); } });
   LS.set('coral_lk_v30b',true); saveH&&saveH(); }
+/* ================= v31: переходы попадают в историю браузера ================= */
+/* Обратная связь лидера: «в историю переходы не добавляются, я даже браузерную кнопку нажать не могу».
+   Чиним корень: каждый переход — запись в history, назад возвращает экран, вкладку, роль и позицию прокрутки.
+   Шторка тоже запись: «назад» на телефоне закрывает её, а не уводит с сайта. */
+let NAV31=false, BACK31=false;
+function st31(){ return {p:page,t:tabs[page]||'',k:pk,y:0}; }
+function hash31(s){ return '#'+s.k+'/'+s.p+(s.t?'/'+s.t:''); }
+function drOpen31(){ const d=document.getElementById('dr'); return !!d&&d.classList.contains('on'); }
+function keepY31(){ try{ history.replaceState(Object.assign({},history.state||{},{y:window.scrollY}),''); }catch(e){} }
+function push31(dr){ if(NAV31) return;
+  const s=st31(); if(dr) s.dr=true;
+  const cur=history.state;
+  try{
+    /* запись шторки не копим: следующий переход её замещает */
+    if(cur&&cur.dr&&!dr){ history.replaceState(s,'',hash31(s)); return; }
+    if(!dr&&cur&&cur.p===s.p&&cur.t===s.t&&cur.k===s.k){ history.replaceState(s,'',hash31(s)); return; }
+    history.pushState(s,'',hash31(s));
+  }catch(e){} }
+
+const _go31=go;      go=function(p,t){ keepY31(); _go31(p,t); push31(); };
+const _setTab31=setTab; setTab=function(p,t){ keepY31(); _setTab31(p,t); push31(); };
+const _setP31=setP;  setP=function(k){ keepY31(); _setP31(k); setTimeout(()=>push31(),400); };
+const _openDr31=openDr; openDr=function(h){ keepY31(); _openDr31(h); push31(true); };
+const _closeDr31=closeDr; closeDr=function(){
+  /* Escape слушают сразу несколько обработчиков — назад жмём только один раз */
+  if(!NAV31&&!BACK31&&drOpen31()&&history.state&&history.state.dr){ BACK31=true; history.back(); return; }
+  _closeDr31(); };
+
+addEventListener('popstate',function(e){ const s=e.state; NAV31=true;
+  try{
+    if(drOpen31()&&(!s||!s.dr)) _closeDr31();
+    if(!s) return;
+    if(s.k&&s.k!==pk){ pk=s.k; sel=null; if(typeof planLoaded!=='undefined') planLoaded=null; recalc(); }
+    page=s.p; if(s.t) tabs[s.p]=s.t;
+    render();
+    const y=s.y||0; requestAnimationFrame(()=>window.scrollTo(0,y));
+  } finally { BACK31=false; setTimeout(()=>{ NAV31=false; },0); } });
+
+/* стартовый адрес: #роль/экран/вкладка — обновление страницы возвращает на тот же экран */
+(function(){ const h=(location.hash||'').replace(/^#/,'').split('/').filter(Boolean);
+  try{ history.replaceState(st31(),'',hash31(st31())); }catch(e){}
+  if(!h.length) return;
+  const [k,p,t]=h;
+  setTimeout(()=>{ try{
+    if(k&&['anna','irina','sergey','elena'].includes(k)&&k!==pk){ pk=k; sel=null; recalc(); }
+    if(p){ page=p; if(t) tabs[p]=t; }
+    render(); try{ history.replaceState(st31(),'',hash31(st31())); }catch(e){}
+  }catch(e){} },500); })();
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
