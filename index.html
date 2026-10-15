@@ -2052,6 +2052,44 @@ body.navc .side{padding-top:14px}
 .ar30 b{display:block;font-size:14px;font-weight:600}
 .ar30 small{display:block;font-size:12px;color:var(--muted)}
 .an30{flex:none;font-size:18px;font-weight:600}
+/* ================= v32: гайд ================= */
+.g32w{display:grid;grid-template-columns:232px minmax(0,1fr);gap:24px;align-items:start}
+.g32toc{position:sticky;top:16px;display:flex;flex-direction:column;gap:1px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.g32toc a{display:block;padding:7px 9px;border-radius:8px;font-size:13px;line-height:1.35;color:var(--muted);text-decoration:none}
+.g32toc a:hover{background:var(--soft);color:var(--ink)}
+.g32b{display:flex;flex-direction:column;gap:16px;min-width:0}
+.g32s{scroll-margin-top:16px}
+.g32s h2{margin:0 0 12px;font-size:21px;font-weight:600;letter-spacing:-.01em}
+.g32h{margin:20px 0 8px;font-size:15px;font-weight:600}
+.g32p{margin:0 0 12px;font-size:14.5px;line-height:1.6;max-width:74ch;color:var(--ink)}
+.g32n{margin:14px 0 0;padding:12px 14px;background:var(--soft2);border-radius:10px;font-size:13.5px;line-height:1.55;color:var(--muted);max-width:76ch}
+.g32t{font-size:13.5px}
+.g32t td{vertical-align:top}
+.st32{display:inline-block;font-size:11.5px;font-weight:600;line-height:17px;border-radius:99px;padding:1px 9px;white-space:nowrap}
+.s-have{background:var(--soft);color:var(--muted)}
+.s-front{background:var(--good-s);color:var(--good)}
+.s-data{background:var(--warn-s);color:var(--warn)}
+.s-rao{background:var(--bad-s);color:var(--bad)}
+.s-biz{background:var(--hos-s);color:var(--hos)}
+.g32sw{display:flex;flex-direction:column;gap:9px;margin:4px 0 14px;font-size:13.5px;color:var(--muted)}
+.g32sw span{display:flex;align-items:center;gap:9px}
+.g32sw i{flex:none;width:14px;height:14px;border-radius:4px}
+.g32pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:4px 0 16px}
+.g32c{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:10px;min-width:0}
+.g32c i{flex:none;width:28px;height:28px;border-radius:8px}
+.g32c b{display:block;font-size:12.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.g32c small{display:block;font-size:11.5px;color:var(--muted);line-height:1.3}
+@media(max-width:1024px){ .g32w{grid-template-columns:1fr} .g32toc{position:static;flex-direction:row;flex-wrap:wrap} .g32toc a{font-size:12.5px;padding:6px 10px;border:1px solid var(--line)} }
+.g32b .tw{overflow:visible}
+.g32t{width:100%;min-width:0;table-layout:fixed}
+.g32t th,.g32t td{padding:10px 10px 10px 0;white-space:normal;word-break:normal;overflow-wrap:anywhere;vertical-align:top}
+.g32t th:first-child,.g32t td:first-child{width:21%}
+.g32t th:nth-child(2),.g32t td:nth-child(2){width:11%}
+.g32t th:last-child,.g32t td:last-child{width:19%}
+.g32t tr>td:only-child,.g32t tr>th:only-child{width:auto}
+.g32t.two th,.g32t.two td{width:auto}
+.st32{white-space:normal;line-height:1.3;padding:3px 9px}
+@media(max-width:860px){ .g32b .tw{overflow-x:auto} .g32t{table-layout:auto;min-width:620px} }
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -6748,6 +6786,217 @@ addEventListener('popstate',function(e){ const s=e.state; NAV31=true;
     if(p){ page=p; if(t) tabs[p]=t; }
     render(); try{ history.replaceState(st31(),'',hash31(st31())); }catch(e){}
   }catch(e){} },500); })();
+/* ================= v32: «Как это устроено» — живой гайд по прототипу, RU/EN ================= */
+const G=(ru,en)=>lang==='en'?en:ru;
+
+/* статусы готовности для продактов и проджектов */
+const ST32={
+ have:['Уже есть в текущем ЛК','Already in the current back office','s-have'],
+ front:['Данные есть — нужен только фронт','Data exists — front end only','s-front'],
+ data:['Нужны данные','Needs data','s-data'],
+ rao:['Нужно решение РАО','Needs a decision from RAO','s-rao'],
+ biz:['Нужно решение бизнеса','Needs a business decision','s-biz']};
+function chip32(k){ const s=ST32[k]; return s?`<span class="st32 ${s[2]}">${G(s[0],s[1])}</span>`:''; }
+
+/* ---------- содержание ---------- */
+const GSEC32=[
+['intro','Что это и для кого','What this is and who it is for'],
+['roles','Роли и демо-переключатель','Roles and the demo switch'],
+['grid','Сетка главного экрана','The home screen grid'],
+['blocks','Блоки главной и готовность','Home blocks and readiness'],
+['kpi','Показатели: что считаем','Metrics: what we count'],
+['pace','Цвет индикаторов','Indicator colours'],
+['rank','Ранги и путь к следующему','Ranks and the path to the next one'],
+['hos','Health OS и подписка','Health OS and subscription'],
+['comp','Компоненты и метки','Components and labels'],
+['tokens','Цвет, шрифт, отступы','Colour, type, spacing'],
+['hint','Подсказки, уведомления, баннеры','Hints, notifications, banners'],
+['nav','Навигация и история','Navigation and history'],
+['i18n','Два языка','Two languages'],
+['not','Чего намеренно нет','What is deliberately absent']];
+
+function p32(ru,en){ return `<p class="g32p">${G(ru,en)}</p>`; }
+function h32(ru,en){ return `<h3 class="g32h">${G(ru,en)}</h3>`; }
+function note32(ru,en){ return `<div class="g32n">${G(ru,en)}</div>`; }
+function tbl32(head,rows){ return `<div class="tw"><table class="tb g32t"><thead><tr>${head.map(h=>`<th>${G(h[0],h[1])}</th>`).join('')}</tr></thead>
+ <tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${typeof c==='string'?c:G(c[0],c[1])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`; }
+
+/* ---------- разделы ---------- */
+function gIntro32(){ return p32(
+ 'Это прототип личного кабинета партнёра Coral Club. Он собран на демонстрационных данных и работает по настоящим правилам маркетинг-плана ред. 17: все суммы, ранги и условия считаются формулами, а не нарисованы. Прототип — не релиз и не макет: это проверяемая модель решения, на которой можно спорить предметно.',
+ 'This is a prototype of the Coral Club partner back office. It runs on demo data but follows the real rules of marketing plan ed. 17: every amount, rank and condition is calculated by formula, not drawn. The prototype is neither a release nor a mockup — it is a testable model you can argue about with specifics.')
+ +p32('Гайд живёт внутри самого прототипа, поэтому он не расходится с тем, что вы видите на экране. Переключатель языка в шапке меняет и интерфейс, и этот текст.',
+      'This guide lives inside the prototype itself, so it never drifts from what you see on screen. The language switch in the header changes both the interface and this text.')
+ +note32('Для продактов и проджектов: в разделе «Блоки главной» у каждого блока стоит статус готовности. Это моя разметка, её нужно проверить — спорить по готовой таблице быстрее, чем собирать её с нуля.',
+         'For product and project managers: every block in the “Home blocks” section carries a readiness status. It is my assessment and needs checking — arguing over a ready table is faster than building one from scratch.'); }
+
+function gRoles32(){ return p32(
+ 'Кабинет у разных рангов разный. Чтобы это было видно без заведения тестовых учёток, в шапке стоит переключатель «Смотрю как» — он меняет роль целиком: структуру, цифры, состав блоков и доступные разделы.',
+ 'The back office differs by rank. To show this without creating test accounts, the header has a “Viewing as” switch that changes the role completely: structure, numbers, set of blocks and available sections.')
+ +tbl32([['Роль','Role'],['Ранг','Rank'],['Структура','Structure'],['Что видно особенного','What is specific']],[
+ [['Анна','Anna'],['Ассистент','Assistant'],'16',['Шаги до первого ранга, калькулятор дохода, «Стать дистрибьютором»','Steps to the first rank, income calculator, “Become a distributor”']],
+ [['Ирина','Irina'],['Золотой директор','Gold Director'],'96',['Ветви, мост к следующему рангу, директора на грани','Legs, bridge to the next rank, directors at risk']],
+ [['Сергей','Sergey'],['Мастер','Master'],'323',['СОП, поколения, бонус бесконечности','GQV, generations, infinity bonus']],
+ [['Елена','Elena'],['Потребитель','Consumer'],'—',['Мой путь, первые 90 дней, кошелёк со скидкой','My path, first 90 days, wallet with cashback']]])
+ +note32('Переключатель — рабочий инструмент демонстрации, а не элемент будущего интерфейса. В релизе его не будет.',
+         'The switch is a demo tool, not part of the future interface. It will not ship.'); }
+
+function gGrid32(){ return p32(
+ 'Главный экран — сетка из 12 колонок с шагом 16 пикселей. Блоки бывают четырёх ширин: 12, 8, 6 и 4 колонки. Это даёт разный вес блокам и убирает ощущение «всё одинаковое».',
+ 'The home screen is a 12-column grid with a 16px gap. Blocks come in four widths: 12, 8, 6 and 4 columns. This gives blocks different weight and avoids the “everything looks the same” feeling.')
+ +tbl32([['Ширина экрана','Screen width'],['Поведение','Behaviour']],[
+ [['1280 и выше','1280 and up'],['полная сетка, все четыре ширины','full grid, all four widths']],
+ [['1024–1279','1024–1279'],['две ширины: половина или вся строка','two widths: half or full row']],
+ [['до 1024','below 1024'],['одна колонка','single column']]])
+ +h32('Правило, которое отличает нас от обычной плитки','The rule that sets this apart from a plain tile wall')
+ +p32('Строки никогда не остаются с дырой: последний блок в строке добирает свободные колонки. Поэтому ряд «карточка ранга 4 + живая сеть 8» всегда ровный, и при любом наборе блоков не появляется пустого места справа.',
+      'Rows never end with a gap: the last block in a row absorbs the free columns. So a row like “rank card 4 + live network 8” is always flush, and no empty space appears on the right whatever set of blocks is chosen.')
+ +p32('То же правило работает внутри блока показателей: плитки сами подбирают число колонок под ширину, а последняя строка растягивается. Минимальная читаемая плитка — 150 пикселей, ниже 640 пикселей всегда две колонки.',
+      'The same rule applies inside the metrics block: tiles pick the number of columns to fit the width, and the last row stretches. The minimum readable tile is 150px; below 640px there are always two columns.'); }
+
+function gBlocks32(){ const R=[
+ ['Мои показатели','My metrics',12,'ЛО, ГО, СОП, баллы в пути — до восьми цифр на выбор','PV, GV, GQV, points in transit — up to eight figures of your choice','rao'],
+ ['Начало работы','Getting started',12,'Пять шагов до первого ранга, у каждого видно, какое условие он закрывает','Five steps to the first rank, each showing which condition it closes','front'],
+ ['Карточка ранга','Rank card',4,'Текущий ранг, стаж в клубе, условия следующего ранга','Current rank, club tenure, conditions for the next rank','rao'],
+ ['Живая сеть','Live network',8,'Активные, спящие и те, кто на грани, с переходом в список','Active, dormant and at-risk members, with a link to the list','front'],
+ ['Директора на грани','Directors at risk',8,'Кто теряет ранг в этом месяце и чего не хватает','Who is about to lose a rank this month and what is missing','front'],
+ ['Немного не хватает','Almost there',12,'До Премиум-потребителя, до Экстрабонуса, срок номера','To Premium Consumer, to the Extra bonus, number expiry','data'],
+ ['Что сделать сейчас','What to do now',12,'Не больше трёх действий, у каждого — «почему я это вижу»','No more than three actions, each with “why I see this”','front'],
+ ['Потребители и Health OS','Clients and Health OS',8,'Первые 90 дней, второй заказ, подписка','First 90 days, second order, subscription','data'],
+ ['Цели месяца','Monthly goals',12,'Квалификация и прогресс, после выполнения — следующий ранг','Qualification and progress; once met, the next rank','rao'],
+ ['Поздравления','Celebrations',12,'Новые ранги в команде, дни рождения','New ranks in the team, birthdays','have'],
+ ['Промо и обучение','Promo and training',6,'Персональные лендинги, курсы CBA','Personal landing pages, CBA courses','biz'],
+ ['Калькулятор дохода','Income calculator',12,'Расчёт по маркетинг-плану: ассистент против директора','Marketing plan maths: assistant versus director','biz']];
+ return p32('Состав главной задаётся конфигом по сегменту, а не кодом фронта. Пользователь может убрать блок или поменять порядок — его настройка хранится в профиле и не затирается при обновлении конфига.',
+            'The composition of the home screen comes from a per-segment config, not from front-end code. A user can hide a block or reorder blocks — their setting lives in the profile and is never overwritten when the config changes.')
+ +tbl32([['Блок','Block'],['Колонок','Columns'],['Что показывает','What it shows'],['Готовность','Readiness']],
+  R.map(r=>[[r[0],r[1]],String(r[2]),[r[3],r[4]],chip32(r[5])]))
+ +note32('Статусы расставил я, по коду прототипа и предусловиям из PRD. Главный риск не в сроках, а в данных: пока не закрыт словарь метрик с РАО и баги расчёта СОП, выпускать цифры нельзя.',
+         'Statuses are my own assessment, based on the prototype code and the PRD preconditions. The main risk is not timing but data: until the metrics glossary with RAO is agreed and the GQV calculation bugs are fixed, these figures must not ship.'); }
+
+function gKpi32(){ return p32(
+ 'Каждая цифра подписана: что это, за какой период и с чем сравнивается. Нажатие открывает объяснение простым языком и ссылку на раздел, где цифра живёт целиком.',
+ 'Every figure is labelled: what it is, for which period and what it is compared with. A tap opens a plain-language explanation and a link to the section where the figure lives in full.')
+ +tbl32([['Показатель','Metric'],['Что это','What it is']],[
+ [['ЛО','PV'],['личный объём за календарный месяц','personal volume for the calendar month']],
+ [['ГО','GV'],['групповой объём: ваш ЛО плюс объём структуры','group volume: your PV plus the structure volume']],
+ [['СОП','GQV'],['объём квалифицированных групп для мастерских рангов','qualified group volume for master ranks']],
+ [['Баллы в пути','Points in transit'],['оплачено, но ещё не доставлено — попадёт в объём после получения','paid for but not yet delivered — counts once received']],
+ [['Бонус','Bonus'],['расчёт по ставкам маркетинг-плана ред. 17','calculated at marketing plan ed. 17 rates']]])
+ +h32('Как считается бонус','How the bonus is calculated')
+ +p32('25% с личного объёма, 25% и 15% с первой линии в зависимости от типа участника, 20% и 10% со второй линии и глубже, экстрабонус 50 у.е. при групповом объёме от 750, бонусы поколений 10–5% и бонус бесконечности на мастерских рангах. Те же формулы работают в калькуляторе дохода — он не декоративный.',
+      '25% on personal volume, 25% and 15% on the first line depending on member type, 20% and 10% on the second line and deeper, a 50 c.u. extra bonus from 750 group volume, generation bonuses of 10–5% and an infinity bonus at master ranks. The income calculator uses the same formulas — it is not decorative.'); }
+
+function gPace32(){ return p32(
+ 'Цвет показателя говорит не «сколько осталось», а «успеваете ли вы по темпу месяца». На шкале есть засечка — где вы должны быть сегодня.',
+ 'A metric’s colour says not “how much is left” but “are you on pace for the month”. The bar carries a notch marking where you should be today.')
+ +`<div class="g32sw">
+   <span><i style="background:var(--good)"></i>${G('идёте с опережением или по плану','ahead of or on plan')}</span>
+   <span><i style="background:var(--warn)"></i>${G('отстаёте от темпа, но месяц ещё вытягивается','behind pace, but the month is still recoverable')}</span>
+   <span><i style="background:var(--bad)"></i>${G('потеря: условие уже не закрыть','a loss: the condition can no longer be met')}</span></div>`
+ +note32('Красный означает только потерю. Если красить им любое отставание, цвет перестаёт работать — человек привыкает и перестаёт реагировать.',
+         'Red means a loss and nothing else. If every shortfall is red, the colour stops working — people get used to it and stop reacting.'); }
+
+function gRank32(){ return p32(
+ 'Ранг показан не полосой прогресса, а списком условий: видно, какие закрыты, а какие нет. Общего процента нет намеренно — он скрывает, что именно мешает.',
+ 'Rank is shown as a list of conditions rather than a progress bar: you see which are met and which are not. There is deliberately no overall percentage — it hides what is actually blocking you.')
+ +p32('«Мост к следующему рангу» раскладывает каждое невыполненное условие на конкретных людей и действия: кому не хватает сколько, кто из них ближе всех и что именно сделать. Это ответ на главную жалобу лидеров: «вижу, что не хватает, но не понимаю, с кем работать».',
+      'The “bridge to the next rank” breaks each unmet condition down into named people and actions: who is short by how much, who is closest, and what exactly to do. This answers the leaders’ main complaint: “I can see what is missing but not who to work with”.')
+ +p32('Лестница рангов — вертикальный путь с историей: когда какой ранг был получен и что он открыл. Дальние ранги свёрнуты, чтобы не превращать экран в прайс-лист.',
+      'The rank ladder is a vertical path with history: when each rank was reached and what it unlocked. Distant ranks are collapsed so the screen does not turn into a price list.'); }
+
+function gHos32(){ return p32(
+ 'Health OS — модель, к которой компания переходит; маркетинг-план — то, по чему платят сегодня. Интерфейс их не смешивает: блоки и действия Health OS помечены отдельно, и метка снимается в тот момент, когда показатель входит в маркетинг-план. Это и есть видимый признак перехода.',
+ 'Health OS is the model the company is moving to; the marketing plan is what people are paid by today. The interface does not mix them: Health OS blocks and actions are marked separately, and the mark is removed the moment a metric enters the marketing plan. That is the visible sign of the transition.')
+ +p32('Три модуля показаны как путь во времени: Гидратация сейчас, Перезагрузка с 2027, Персонализация с 2028. Активная фаза раскрыта, будущие обозначены годом — честно, потому что правила этих фаз ещё не утверждены.',
+      'The three modules are shown as a path through time: Hydration now, Reset from 2027, Personalisation from 2028. The active phase is expanded, future ones carry a year — honestly so, because their rules are not approved yet.')
+ +p32('Узкое место бизнеса — второй заказ: 59% сейчас при цели 65%. Поэтому у партнёра есть окно первых 90 дней по каждому потребителю, а у потребителя — свой путь с подпиской на воду.',
+      'The business bottleneck is the second order: 59% today against a 65% target. Hence the partner gets a 90-day window per client, and the client gets their own path with a water subscription.'); }
+
+function gComp32(){ return p32(
+ 'Компонентов немного, и это сознательно: карточка, плитка показателя, строка списка, шторка, метка, подсказка. Чем меньше типов, тем быстрее человек учится читать экран.',
+ 'There are few components, and that is deliberate: card, metric tile, list row, drawer, label, hint. The fewer the types, the faster a person learns to read the screen.')
+ +h32('Метки','Labels')
+ +`<div class="g32sw">${['new','beta','soon','idea'].filter(k=>BADGES[k]).map(k=>`<span>${bdg4(k)} ${G(
+   {new:'новое в новом ЛК',beta:'работает, но на проверке',soon:'запланировано',idea:'идея, решения ещё нет'}[k],
+   {new:'new in the new back office',beta:'works, under review',soon:'planned',idea:'an idea, no decision yet'}[k])}</span>`).join('')}</div>`
+ +p32('Метки нужны стейкхолдерам, а не партнёрам: они отделяют то, что уже существует, от того, что мы предлагаем. В релизе останется только «Новое».',
+      'The labels are for stakeholders, not partners: they separate what already exists from what we are proposing. Only “New” will remain in the release.')
+ +h32('Шторка вместо перехода','Drawer instead of navigation')
+ +p32('Карточка человека, объяснение цифры, настройки — всё открывается шторкой поверх экрана. Человек не теряет место в списке, а «назад» и Esc закрывают её, а не уводят со страницы.',
+      'A person’s card, a figure’s explanation, settings — all open as a drawer over the screen. You do not lose your place in the list, and Back or Esc closes the drawer rather than leaving the page.'); }
+
+function gTok32(){ const sw=[['--ink','Основной текст и тёмные поверхности','Primary text and dark surfaces'],
+ ['--good','Успех, выполненные условия','Success, conditions met'],
+ ['--warn','Отставание, требует внимания','Behind, needs attention'],
+ ['--bad','Потеря, необратимое','A loss, irreversible'],
+ ['--hos','Health OS','Health OS'],
+ ['--accent','Акцент, награды','Accent, rewards']];
+ return p32('Палитра взята из дизайн-системы Coral: глубокий зелёный как основа, тёплые охры для внимания и Health OS. Цвет несёт смысл — им не украшают.',
+            'The palette comes from the Coral design system: deep green as the base, warm ochres for attention and Health OS. Colour carries meaning; it is not decoration.')
+ +`<div class="g32pal">${sw.map(([v,ru,en])=>`<div class="g32c"><i style="background:var(${v})"></i><b>${v}</b><small>${G(ru,en)}</small></div>`).join('')}</div>`
+ +tbl32([['Параметр','Token'],['Значение','Value']],[
+ [['Шрифт','Typeface'],'Suisse Int’l'],
+ [['Базовый размер','Base size'],'15px / 1.45'],
+ [['Заголовок экрана','Page title'],'25px, 600'],
+ [['Скругление карточки','Card radius'],'12px'],
+ [['Шаг сетки','Grid gap'],'16px'],
+ [['Тень карточки','Card shadow'],'0 1px 2px rgba(0,40,38,.06)']])
+ +p32('Анимации только функциональные: появление шторки, смена состояния кнопки, пересчёт цифры. Декоративных переходов нет — в рабочем инструменте они мешают, а на слабых телефонах тормозят.',
+      'Animation is functional only: the drawer appearing, a button changing state, a figure recalculating. There are no decorative transitions — in a working tool they get in the way and slow down weaker phones.')
+ +p32('Тёмная тема поддержана полностью: это не инверсия, а отдельный набор значений тех же токенов.',
+      'Dark theme is fully supported: it is not an inversion but a separate set of values for the same tokens.'); }
+
+function gHint32(){ return p32(
+ 'Подсказка не всплывает сама — её открывает человек. У каждой цифры есть знак вопроса, за которым объяснение простым языком: что это, откуда берётся и что с этим делать.',
+ 'Hints do not pop up by themselves — the user opens them. Every figure has a question mark leading to a plain-language explanation: what it is, where it comes from and what to do about it.')
+ +p32('Уведомления собраны в одном месте и разделены по смыслу: что случилось в структуре, что требует действия, что просто новость. Баннеры закрываются и не возвращаются.',
+      'Notifications live in one place and are split by meaning: what happened in the structure, what needs action, what is just news. Banners can be dismissed and do not come back.')
+ +p32('Профиль — одно место для личных данных, выплат, документов и визитки. Дублирования с «Моими инструментами» быть не должно: сейчас оно есть и его нужно убрать.',
+      'The profile is one place for personal data, payouts, documents and the referral card. It must not duplicate “My tools” — today it does, and that needs fixing.'); }
+
+function gNav32(){ return p32(
+ 'Каждый переход попадает в историю браузера: кнопка «назад», свайп на телефоне и обновление страницы работают так, как человек ожидает. Адрес показывает экран, поэтому ссылкой можно поделиться.',
+ 'Every transition goes into browser history: the back button, the phone swipe and page refresh all behave as expected. The address shows the screen, so a link can be shared.')
+ +p32('Возврат восстанавливает не только экран, но и вкладку и позицию прокрутки. Открыл человека из середины длинного списка — вернулся на то же место.',
+      'Going back restores the tab and the scroll position, not just the screen. Open a person from the middle of a long list and you return to the same spot.')
+ +note32('Это прямое следствие теста с лидером: «в историю переходы не добавляются, я даже браузерную кнопку нажать не могу».',
+         'This came straight out of a leader’s test: “transitions don’t go into history, I can’t even use the browser button”.'); }
+
+function gI18n32(){ return p32(
+ 'Прототип двуязычный целиком, включая строки, которые собираются на лету из чисел и имён. Это не перевод презентации, а свойство решения: компания работает в 28 странах, и кабинет на одном языке в ней нежизнеспособен.',
+ 'The prototype is fully bilingual, including strings assembled on the fly from numbers and names. This is not a translated deck but a property of the solution: the company operates in 28 countries, and a single-language back office cannot survive there.')
+ +p32('Переключатель языка в шапке меняет интерфейс, подсказки и этот гайд. Валюта и формат чисел следуют стране участника, а не языку интерфейса.',
+      'The language switch in the header changes the interface, the hints and this guide. Currency and number formats follow the member’s country, not the interface language.'); }
+
+function gNot32(){ return p32(
+ 'Честный список того, чего в прототипе нет и почему. На защите его лучше показать самому, чем услышать вопросом из зала.',
+ 'An honest list of what the prototype does not have and why. Better to show it yourself than to hear it as a question from the room.')
+ +tbl32([['Чего нет','What is missing'],['Почему','Why']],[
+ [['Фильтр периода и история месяцев','Period filter and month history'],['нет сохранённых данных за прошлые месяцы','no stored data for previous months']],
+ [['Общий процент выполнения ранга','Overall rank completion percentage'],['нет объяснимой формулы — процент скрывает, что мешает','no explainable formula — a percentage hides what is blocking you']],
+ [['Правила перехода между фазами Health OS','Transition rules between Health OS phases'],['не утверждены','not approved yet']],
+ [['Данные о самочувствии и ассессмент','Wellbeing data and assessment'],['чувствительные данные, нужно согласие потребителя','sensitive data, requires client consent']],
+ [['Прогноз дохода','Income forecast'],['риск обещаний дохода, нужен юрист','risk of income promises, needs legal review']],
+ [['CRM и мессенджер','CRM and messenger'],['вторая волна, после миграции','second wave, after the migration']]]); }
+
+const GBODY32={intro:gIntro32,roles:gRoles32,grid:gGrid32,blocks:gBlocks32,kpi:gKpi32,pace:gPace32,
+ rank:gRank32,hos:gHos32,comp:gComp32,tokens:gTok32,hint:gHint32,nav:gNav32,i18n:gI18n32,not:gNot32};
+
+function guidePage(){
+  return topbar(G('Как это устроено','How this is built'),
+    G('Гайд по прототипу: структура, сетка, расчёты, компоненты и готовность блоков','A guide to the prototype: structure, grid, maths, components and block readiness'))
+  +`<div class="g32w">
+     <nav class="g32toc">${GSEC32.map(([id,ru,en],i)=>`<a href="#s32-${id}" onclick="gJump32('${id}');return false">${i+1}. ${G(ru,en)}</a>`).join('')}</nav>
+     <div class="g32b">${GSEC32.map(([id,ru,en])=>`<section class="card c-pad g32s" id="s32-${id}"><h2>${G(ru,en)}</h2>${GBODY32[id]()}</section>`).join('')}</div>
+   </div>`; }
+function gJump32(id){ const e=document.getElementById('s32-'+id); if(e) window.scrollTo({top:window.scrollY+e.getBoundingClientRect().top-16,behavior:'smooth'}); }
+
+const _render32=render; render=function(){ if(page!=='guide') return _render32();
+  renderNav(); document.getElementById('main').innerHTML='<div class="wrapm">'+guidePage()+'</div>';
+  ['#nav','#bnav','#ps'].forEach(id=>{ const e=document.querySelector(id); if(e) e.innerHTML=L(e.innerHTML); });
+  document.documentElement.lang=lang; if(typeof drawAI==='function') drawAI(); };
+(()=>{ if(!NAV4.some(x=>x.k==='guide')) NAV4.push({k:'guide',t:'Как это устроено',ic:'learn',isNew:1}); })();
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
