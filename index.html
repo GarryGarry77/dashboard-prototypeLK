@@ -6839,7 +6839,11 @@ function gRoles32(){ return p32(
  [['Сергей','Sergey'],['Мастер','Master'],'323',['СОП, поколения, бонус бесконечности','GQV, generations, infinity bonus']],
  [['Елена','Elena'],['Потребитель','Consumer'],'—',['Мой путь, первые 90 дней, кошелёк со скидкой','My path, first 90 days, wallet with cashback']]])
  +note32('Переключатель — рабочий инструмент демонстрации, а не элемент будущего интерфейса. В релизе его не будет.',
-         'The switch is a demo tool, not part of the future interface. It will not ship.'); }
+         'The switch is a demo tool, not part of the future interface. It will not ship.')
+ +h32('Что открывается на каждом ранге','What opens up at each rank')
+ +p32('Здесь четыре демо-роли. Полная карта всех девяти рангов — от Кандидата до Мастера — с условием перехода, тем, что добавляется в кабинете, и нюансом по каждому, лежит на отдельной странице.',
+      'These are four demo roles. The full map of all nine ranks — from Candidate to Master — with the condition for each transition, what it adds to the back office and the catch, is on its own page.')
+ +`<button class="btn pri sm" onclick="go('rankmap')">${L('Открыть «Как ЛК меняется с рангом»')} ›</button>`; }
 
 function gGrid32(){ return p32(
  'Главный экран — сетка из 12 колонок с шагом 16 пикселей. Блоки бывают четырёх ширин: 12, 8, 6 и 4 колонки. Это даёт разный вес блокам и убирает ощущение «всё одинаковое».',
