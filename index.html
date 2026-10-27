@@ -2090,6 +2090,43 @@ body.navc .side{padding-top:14px}
 .g32t.two th,.g32t.two td{width:auto}
 .st32{white-space:normal;line-height:1.3;padding:3px 9px}
 @media(max-width:860px){ .g32b .tw{overflow-x:auto} .g32t{table-layout:auto;min-width:620px} }
+/* ===== v33: деньги в двух единицах, разбор бонуса, чек-листы ===== */
+.ue33{color:var(--muted);font-weight:400}
+
+.bd33t{margin-top:14px;padding:16px 18px;border-radius:12px;background:var(--bg);display:flex;flex-direction:column;gap:4px}
+.bd33t b{font-size:30px;font-weight:600;line-height:1.1;color:var(--ink)}
+.bd33t b .ue33{font-size:17px}
+.bd33t small{color:var(--muted);font-size:12.5px}
+
+.bd33{display:flex;align-items:center;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line)}
+.bd33 .g1{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.bd33 .g1 b{font-weight:500;font-size:14.5px}
+.bd33 .g1 small{color:var(--muted);font-size:12.5px}
+.bd33 .num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.bd33.xb .g1 b{color:var(--accent)}
+.bd33.sum{border-bottom:0;border-top:2px solid var(--ink);margin-top:4px;padding-top:12px}
+.bd33.sum .g1 b{font-weight:600}
+.bd33.sum .num{font-size:19px}
+
+.ck33w{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.ck33h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:10px 14px;background:var(--bg);font-weight:600;font-size:14px}
+.ck33h span{color:var(--muted);font-weight:400;font-size:12.5px}
+.ck33{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-top:1px solid var(--line)}
+.ck33 .mk{width:20px;height:20px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--line);color:var(--muted)}
+.ck33.on .mk{background:var(--good);color:#fff}
+.ck33 .g1{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ck33 .g1 b{font-weight:500;font-size:14px}
+.ck33 .g1 small{color:var(--muted);font-size:12.5px}
+
+.pp33{margin-top:12px}
+.pp33 .bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.pp33 .bar i{display:block;height:100%;border-radius:999px;background:var(--good)}
+.pp33r{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:13px}
+.pp33r span{color:var(--muted)}
+.pp33r b{font-weight:600;color:var(--warn)}
+.n33 .li7 small{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:2px}
+.li7 small{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:2px}
+.li7 span{min-width:0}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -7001,6 +7038,96 @@ const _render32=render; render=function(){ if(page!=='guide') return _render32()
   ['#nav','#bnav','#ps'].forEach(id=>{ const e=document.querySelector(id); if(e) e.innerHTML=L(e.innerHTML); });
   document.documentElement.lang=lang; if(typeof drawAI==='function') drawAI(); };
 (()=>{ if(!NAV4.some(x=>x.k==='guide')) NAV4.push({k:'guide',t:'Как это устроено',ic:'learn',isNew:1}); })();
+/* ================= v33: деньги в двух единицах, разбор бонуса, чек-лист экстрабонуса, порог премиума ================= */
+/* Правки по обратной связи Карины Поменчук: «как считать, сколько до премиума, и объяснять людям, что они получат и когда» */
+
+/* ---------- 1. Курс у.е. по странам ---------- */
+/* [символ, 1 у.е. = N, знаков после запятой]. В продукте курс приходит с сервера. */
+const CUR33={
+ EUR:['€',1,2],      RON:['lei',4.5,2],  MDL:['L',19.5,0],   PLN:['zł',4,2],
+ RUB:['₽',86,0],     KZT:['₸',500,0],    UAH:['₴',40,0],     AMD:['֏',400,0],
+ BGN:['лв',1.8,2],   BYN:['Br',3.1,2],   CZK:['Kč',22,0],    GEL:['₾',2.8,2],
+ HUF:['Ft',380,0],   ILS:['₪',5.63,2],   KGS:['с',88,0],     PRB:['р.',17,0],
+ UZS:['сўм',12500,0],GBP:['£',0.87,2],   NOK:['kr',10.48,2], CHF:['Fr',0.94,2],
+ TJS:['SM',8.8,2],   TRY:['₺',39.2,2],   CAD:['CA$',1.45,2]};
+const CCUR33={RU:'RUB',KZ:'KZT',RO:'RON',MD:'MDL',DE:'EUR',PL:'PLN'};
+const RDATE33='1 октября';
+/* страна берётся из профиля участника, а не из языка интерфейса */
+const PCTRY33={anna:'DE',irina:'RO',sergey:'RO',elena:'RO'};
+
+Object.keys(CCUR33).forEach(k=>{ const c=CUR33[CCUR33[k]]; if(COUNTRIES[k]&&c){ COUNTRIES[k][1]=c[0]; COUNTRIES[k][2]=c[1]; } });
+
+function ccode33(){ return CCUR33[ctry]||'EUR'; }
+function cur33(v,code){ const c=CUR33[code||ccode33()]||CUR33.EUR, x=v*c[1];
+  const s=x.toLocaleString(typeof LOC!=='undefined'?LOC:'ru-RU',{minimumFractionDigits:c[2],maximumFractionDigits:c[2]});
+  return ['€','£'].includes(c[0])?c[0]+' '+s:s+' '+c[0]; }
+cur=function(v){ return cur33(v); };
+money=function(s){ const v=parseFloat(String(s).replace(/[^\d,]/g,'').replace(',','.'))||0; return cur33(v); };
+
+/* «458 у.е.» + та же сумма в валюте страны. Курс и дата — в подсказке. */
+function ue33(v){ return `${fmt(Math.round(v))} ${L('у.е.')} <span class="ue33">· ${cur33(v)}</span>`; }
+function rate33(){ return `1 ${L('у.е.')} = ${cur33(1)}, ${L('курс на')} ${L(RDATE33)}`; }
+
+const _setP33=setP; setP=function(k){ if(PCTRY33[k]) ctry=PCTRY33[k]; return _setP33(k); };
+if(typeof pk!=='undefined'&&PCTRY33[pk]) ctry=PCTRY33[pk];
+
+/* ---------- 2. Бонус: чей он и из чего складывается ---------- */
+/* плитка «Бонус» в «Моих показателях»: вторая сумма в валюте страны */
+KPI4.bonus={t:'Ваш бонус',n:'Ваш бонус за октябрь',
+  c:r=>{ const v=bonus(M,r,P().prevRank).total; return {have:v,need:null,unit:'у.е.',hint:`${cur33(v)} · ${L('предварительно')}`}; }};
+
+/* строки разбора на экране показателя — с формулой, как в расчёте */
+const _kpiData33=kpiData; kpiData=function(k){ const d=_kpiData33(k);
+  if(k==='bonus'&&d){ const b=bonus(M,R0(),P().prevRank);
+    d.parts=d.parts.map(([t,v],i)=>[`${t}${b.parts[i]&&b.parts[i].note?`<small>${b.parts[i].note}</small>`:''}`,v]); }
+  return d; };
+
+/* экран показателя: вторая валюта и чей это бонус; для ГО — чек-лист экстрабонуса */
+const _kpiPage33=kpiPage; kpiPage=function(){ let h=_kpiPage33(); const k=tabs.kpi||'go';
+  if(k==='bonus'){ const b=bonus(M,R0(),P().prevRank);
+    h=h.replace(/<div class="kp7d">[\s\S]*?<\/div>/,`<div class="kp7d">${cur33(b.total)} · ${L('предварительно, окончательный расчёт 1 ноября')}</div>`)
+       .replace('<div class="card c-pad ka7">',`<div class="card c-pad n33">${xbCheck33()}<div class="note" style="margin-top:12px">${L('Бонус начисляется вам лично за ваш объём и объём вашей группы. Это не доход участников вашей структуры и не прогноз: цифра меняется до конца месяца вместе с заказами.')} ${rate33()}.</div></div><div class="card c-pad ka7">`); }
+  if(k==='go'){ const x=xbCheck33(); if(x) h=h.replace('<details class="card c-pad hx7">',`<div class="card c-pad n33">${x}</div><details class="card c-pad hx7">`); }
+  return h; };
+
+/* ---------- 3. Экстрабонус: чек-лист вместо одной плотной строки ---------- */
+function xbCheck33(){ const r=R0(), p=P(), go=M.go[r], nd=!!M.by[r].nd;
+  if(!M.isDir[r]) return '';
+  const
+  okGo=go>=750, okRank=nd||rankIdx(p.prevRank||'А')>=rankIdx('Д');
+  const row=(ok,t,s)=>`<div class="ck33 ${ok?'on':''}"><span class="mk">${ok?'✓':'—'}</span><span class="g1"><b>${t}</b><small>${s}</small></span></div>`;
+  return `<div class="ck33w"><div class="ck33h">${L('Экстрабонус')} · 50 ${L('у.е.')}<span>${cur33(50)}</span></div>
+   ${row(okGo,`${L('ГО')} ${fmt(go)} ${L('из')} 750`,okGo?L('порог пройден'):`${L('не хватает')} ${fmt(750-go)}`)}
+   ${row(okRank,`${L('Ранг в сентябре')}: ${RANK_NAME[p.prevRank]||'—'}`,nd?L('новому Директору засчитывается сразу'):okRank?L('Директор или выше'):L('нужен Директор или выше'))}
+   ${row(okGo&&okRank,`50 ${L('у.е.')} · ${cur33(50)}`,okGo&&okRank?L('начислится 1 ноября вместе с бонусом'):L('начислится, когда выполнены оба условия'))}</div>`; }
+
+const _metric33=metric; metric=function(k){ const res=_metric33(k);
+  if(k==='go'){ const d=document.getElementById('dr'); if(d){ const n=[...d.querySelectorAll('.note')].find(x=>/750|Экстрабонус|Extra/i.test(x.textContent));
+    if(n) n.insertAdjacentHTML('beforebegin',L(xbCheck33())); } }
+  return res; };
+
+/* ---------- 4. До Премиум-потребителя: объяснение и готовый текст ---------- */
+function ppMsg33(id){ const n=M.by[id], have=Math.round(n.nso||0), left=Math.max(0,500-have);
+  const T=[[L('Коротко'),`${n.n}, ${L('до Премиум-потребителя вам осталось')} ${fmt(left)} ${L('баллов накопленного объёма — это сумма всех заказов за всё время, а не за месяц. После 500 начинает работать возвратная скидка 10%: она возвращается на Coral-кошелёк с каждого вашего следующего заказа.')}`],
+   [L('С подбором'),`${n.n}, ${L('привет! Посмотрел ваши заказы: накоплено')} ${fmt(have)} ${L('из 500 баллов. Осталось')} ${fmt(left)}. ${L('Дальше с каждого заказа возвращается 10% на кошелёк — этим можно оплачивать следующие заказы. Подобрать, чем закрыть остаток?')}`],
+   [L('Без давления'),`${n.n}, ${L('без спешки — просто чтобы вы знали: после 500 баллов накопленного объёма открывается возвратная скидка 10%. У вас сейчас')} ${fmt(have)}. ${L('Когда будете делать заказ, посчитаю, что выгоднее взять.')}`]];
+  openDr(`<h2>${L('До Премиум-потребителя')} · ${n.n}</h2>
+   <div class="sub" style="color:var(--muted)">${L('Накопленный объём — сумма всех заказов за всё время. Он не обнуляется в конце месяца.')}</div>
+   <div class="pp33"><div class="bar"><i style="width:${pct(have,500)}%"></i></div><div class="pp33r"><span>${fmt(have)} ${L('из')} 500</span><b>${L('не хватает')} ${fmt(Math.max(0,500-have))}</b></div></div>
+   <div class="chips" style="margin:12px 0">${T.map(([t],i)=>`<button class="chip ${i?'':'on'}" onclick="document.querySelectorAll('#dr .chips .chip').forEach(c=>c.classList.remove('on'));this.classList.add('on');document.getElementById('crmT').value=CRMT[${i}]">${t}</button>`).join('')}</div>
+   <textarea id="crmT" class="ta5" rows="5">${T[0][1]}</textarea>
+   <div class="btns" style="margin-top:12px"><button class="btn pri" onclick="closeDrSilent();toast('${L('Открыт чат с текстом')}')">${L('Открыть чат ЛК')}</button><button class="btn gh" onclick="toast('${L('Текст скопирован')}')">${L('Скопировать')}</button></div>
+   <div class="note">${L('Возвратная скидка 10% приходит на Coral-кошелёк после доставки заказа и тратится на следующие заказы. Это скидка, а не выплата.')}</div>`);
+  window.CRMT=T.map(t=>t[1]); }
+
+edgeW24=function(){ const e=edge24(), tot=e.pp.length+e.eb.length+e.blk.length;
+  if(!tot) return `<div class="card c-pad"><div class="hrow"><h3 class="h20">${L('Немного не хватает')}</h3></div><div class="sub">${L('Сейчас никто не стоит у порога. Блок оживёт ближе к концу месяца.')}</div></div>`;
+  const sec=(t,d,L2,row)=>L2.length?`<div class="es24"><div class="eh24"><b>${t}</b><span>${L2.length}</span></div><div class="sub">${d}</div>${L2.slice(0,3).map(row).join('')}${L2.length>3?`<button class="link" onclick="edgeAll24()">${L('Показать всех')} · ${L2.length}</button>`:''}</div>`:'';
+  const ppRow=x=>`<button class="er24" onclick="ppMsg33(${x.id})"><span class="g1"><b>${M.by[x.id].n}</b><small>${fmt(x.have)} ${L('из')} 500 ${L('накопленного объёма')}</small></span><span class="tag t-w">${L('не хватает')} ${fmt(x.need-x.have)}</span></button>`;
+  return `<div class="card c-pad"><div class="hrow"><div><h3 class="h20">${L('Немного не хватает')}</h3><div class="sub">${L('Из чек-листа работы с сетью: кто у порога прямо сейчас')}</div></div></div>
+   ${sec(L('До Премиум-потребителя'),L('500 баллов — это накопленный объём за всё время, а не за месяц. После порога с каждого заказа возвращается 10% на Coral-кошелёк'),e.pp,ppRow)}
+   ${sec(L('До Экстрабонуса'),`${L('ГО 750 в месяце — и Директор получает 50 у.е. сверху')} · ${cur33(50)}`,e.eb,x=>edgeRow24(x.id,`${L('ГО')} ${fmt(x.have)} ${L('из')} 750`,`${L('не хватает')} ${fmt(x.need-x.have)}`,'t-w'))}
+   ${sec(L('Номер под риском'),L('12 месяцев без заказа — и клубный номер блокируется'),e.blk,x=>edgeRow24(x.id,`${L('без заказа')} ${12-x.m} ${L('мес.')}`,`${L('осталось')} ${x.m} ${L('мес.')}`,'t-n'))}</div>`; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -7404,6 +7531,39 @@ Object.assign(EN_DICT,{"Живая сеть":"Live network","Сколько лю
 "Активные, спящие и те, кто на грани":"Active, dormant and at risk"});EN_RE=null;
 Object.assign(EN_DICT,{"Что открывается на каждом ранге":"What opens up at each rank","Открыть «Как ЛК меняется с рангом»":"Open “How the back office changes with rank”",
 "Здесь четыре демо-роли. Полная карта всех девяти рангов — от Кандидата до Мастера — с условием перехода, тем, что добавляется в кабинете, и нюансом по каждому, лежит на отдельной странице.":"These are four demo roles. The full map of all nine ranks — from Candidate to Master — with the condition for each transition, what it adds to the back office and the catch, is on its own page."});EN_RE=null;
+
+/* ---- v33: деньги в двух единицах, разбор бонуса, экстрабонус, премиум ---- */
+Object.assign(EN_DICT,{
+"курс на":"rate as of","1 октября":"1 October",
+"Ваш бонус за октябрь":"Your bonus for October",
+"предварительно · расчёт 1 ноября":"preliminary · calculated 1 November",
+"Предварительно по сегодняшним цифрам. Окончательный расчёт 1 ноября, выплата по регламенту вашей страны.":"Preliminary, based on today's figures. Final calculation on 1 November, payout under your country's rules.",
+"Из чего складывается бонус потребителя":"What a consumer's bonus is made of",
+"Итого предварительно":"Preliminary total",
+"Бонус начисляется вам лично за ваш объём и объём вашей группы. Это не доход участников вашей структуры и не прогноз: цифра меняется до конца месяца вместе с заказами.":"The bonus is credited to you personally for your volume and your group's volume. It is not the income of people in your structure and not a forecast: the figure changes until month end as orders come in.",
+"Условия и ранг":"Conditions and rank",
+"Ранг в сентябре":"Rank in September",
+"порог пройден":"threshold met",
+"новому Директору засчитывается сразу":"counted immediately for a new Director",
+"Директор или выше":"Director or above",
+"нужен Директор или выше":"Director or above required",
+"начислится 1 ноября вместе с бонусом":"credited on 1 November together with the bonus",
+"начислится, когда выполнены оба условия":"credited once both conditions are met",
+"Накопленный объём — сумма всех заказов за всё время. Он не обнуляется в конце месяца.":"Cumulative volume is the sum of all orders for all time. It does not reset at month end.",
+"накопленного объёма":"of cumulative volume",
+"500 баллов — это накопленный объём за всё время, а не за месяц. После порога с каждого заказа возвращается 10% на Coral-кошелёк":"500 points is cumulative volume for all time, not for the month. Past the threshold, 10% of every order comes back to the Coral wallet",
+"ГО 750 в месяце — и Директор получает 50 у.е. сверху":"GV 750 in the month — and a Director gets 50 c.u. on top",
+"Возвратная скидка 10% приходит на Coral-кошелёк после доставки заказа и тратится на следующие заказы. Это скидка, а не выплата.":"The 10% cashback discount lands in the Coral wallet after delivery and is spent on later orders. It is a discount, not a payout.",
+"Коротко":"Short","С подбором":"With a pick","Без давления":"No pressure",
+"Открыть чат ЛК":"Open back-office chat","Открыт чат с текстом":"Chat opened with the text",
+"до Премиум-потребителя вам осталось":"you are this far from Premium Consumer:",
+"баллов накопленного объёма — это сумма всех заказов за всё время, а не за месяц. После 500 начинает работать возвратная скидка 10%: она возвращается на Coral-кошелёк с каждого вашего следующего заказа.":"points of cumulative volume — that is the sum of all orders for all time, not for the month. Past 500 the 10% cashback discount kicks in: it returns to your Coral wallet from every order you make after that.",
+"привет! Посмотрел ваши заказы: накоплено":"hi! I looked at your orders: you have",
+"из 500 баллов. Осталось":"of 500 points. Left to go:",
+"Дальше с каждого заказа возвращается 10% на кошелёк — этим можно оплачивать следующие заказы. Подобрать, чем закрыть остаток?":"After that, 10% of every order comes back to the wallet and can pay for later orders. Shall I pick something to close the gap?",
+"без спешки — просто чтобы вы знали: после 500 баллов накопленного объёма открывается возвратная скидка 10%. У вас сейчас":"no rush — just so you know: past 500 points of cumulative volume the 10% cashback discount opens up. You currently have",
+"Когда будете делать заказ, посчитаю, что выгоднее взять.":"When you place an order, I'll work out what's best to take."
+});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
