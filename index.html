@@ -2127,6 +2127,43 @@ body.navc .side{padding-top:14px}
 .n33 .li7 small{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:2px}
 .li7 small{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:2px}
 .li7 span{min-width:0}
+/* ===== v34: кольцо ранга, дневной прирост, карточка результата ===== */
+
+/* ранг кодируется кольцом и значком, а не заливкой: цвет фона остаётся смысловым */
+/* значок лежит внутри бокса аватара и не расширяет шапку ни на пиксель */
+.avw34{position:relative;display:inline-flex;flex:none}
+.avw34 .av{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--rc)}
+.avw34 .rb34{position:absolute;right:0;bottom:0;min-width:17px;height:17px;padding:0 4px;border-radius:999px;
+ background:var(--rc);color:#fff;font-size:9.5px;font-weight:700;font-style:normal;line-height:17px;text-align:center;
+ border:2px solid var(--card);letter-spacing:.2px}
+@media(max-width:900px){.avw34 .rb34{min-width:15px;height:15px;line-height:15px;font-size:8.5px}}
+
+.d34{display:block;font-size:12px;font-weight:600;margin-top:2px}
+.d34.up{color:var(--good)}
+.d34.flat{color:var(--muted);font-weight:400}
+.note.n34{margin-top:14px}
+
+/* карточка результата */
+.sh34{margin-top:14px;border-radius:16px;padding:22px 24px;background:linear-gradient(160deg,var(--rc) 0%,color-mix(in srgb,var(--rc) 72%,#000) 100%);color:#fff}
+.sh34h{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;opacity:.78;letter-spacing:.4px}
+.sh34l{text-transform:lowercase;font-weight:700;letter-spacing:1px}
+.sh34n{margin-top:16px;font-size:20px;font-weight:500;opacity:.9}
+.sh34rk{font-size:30px;font-weight:600;line-height:1.1;margin-top:2px}
+.sh34g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.sh34g>div{background:rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.sh34g span{font-size:11.5px;opacity:.8}
+.sh34g b{font-size:24px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.sh34g small{font-size:11.5px;opacity:.78}
+.sh34f{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.26);display:flex;flex-direction:column;gap:2px}
+.sh34f span{font-size:11.5px;opacity:.8}
+.sh34f b{font-size:15px;font-weight:600;word-break:break-all}
+@media(max-width:420px){.sh34g{grid-template-columns:1fr}.sh34rk{font-size:26px}}
+
+/* «Как считается»: маркер <details> выносил строку за карточку на 8px — свой шеврон */
+.hx7 summary{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;list-style:none}
+.hx7 summary::-webkit-details-marker{display:none}
+.hx7 summary::after{content:'';width:8px;height:8px;flex:none;margin-right:3px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .18s}
+.hx7[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -7084,6 +7121,7 @@ const _kpiData33=kpiData; kpiData=function(k){ const d=_kpiData33(k);
 
 /* экран показателя: вторая валюта и чей это бонус; для ГО — чек-лист экстрабонуса */
 const _kpiPage33=kpiPage; kpiPage=function(){ let h=_kpiPage33(); const k=tabs.kpi||'go';
+  if(!P()||!M) return h;
   if(k==='bonus'){ const b=bonus(M,R0(),P().prevRank);
     h=h.replace(/<div class="kp7d">[\s\S]*?<\/div>/,`<div class="kp7d">${cur33(b.total)} · ${L('предварительно, окончательный расчёт 1 ноября')}</div>`)
        .replace('<div class="card c-pad ka7">',`<div class="card c-pad n33">${xbCheck33()}<div class="note" style="margin-top:12px">${L('Бонус начисляется вам лично за ваш объём и объём вашей группы. Это не доход участников вашей структуры и не прогноз: цифра меняется до конца месяца вместе с заказами.')} ${rate33()}.</div></div><div class="card c-pad ka7">`); }
@@ -7091,7 +7129,8 @@ const _kpiPage33=kpiPage; kpiPage=function(){ let h=_kpiPage33(); const k=tabs.k
   return h; };
 
 /* ---------- 3. Экстрабонус: чек-лист вместо одной плотной строки ---------- */
-function xbCheck33(){ const r=R0(), p=P(), go=M.go[r], nd=!!M.by[r].nd;
+function xbCheck33(){ const p=P(); if(!p||!M) return '';
+  const r=R0(), go=M.go[r], nd=!!M.by[r].nd;
   if(!M.isDir[r]) return '';
   const
   okGo=go>=750, okRank=nd||rankIdx(p.prevRank||'А')>=rankIdx('Д');
@@ -7128,6 +7167,71 @@ edgeW24=function(){ const e=edge24(), tot=e.pp.length+e.eb.length+e.blk.length;
    ${sec(L('До Премиум-потребителя'),L('500 баллов — это накопленный объём за всё время, а не за месяц. После порога с каждого заказа возвращается 10% на Coral-кошелёк'),e.pp,ppRow)}
    ${sec(L('До Экстрабонуса'),`${L('ГО 750 в месяце — и Директор получает 50 у.е. сверху')} · ${cur33(50)}`,e.eb,x=>edgeRow24(x.id,`${L('ГО')} ${fmt(x.have)} ${L('из')} 750`,`${L('не хватает')} ${fmt(x.need-x.have)}`,'t-w'))}
    ${sec(L('Номер под риском'),L('12 месяцев без заказа — и клубный номер блокируется'),e.blk,x=>edgeRow24(x.id,`${L('без заказа')} ${12-x.m} ${L('мес.')}`,`${L('осталось')} ${x.m} ${L('мес.')}`,'t-n'))}</div>`; };
+/* ================= v34: кольцо ранга, дневной прирост, год к году, карточка результата ================= */
+/* По разбору кабинетов NL и обратной связи Карины: партнёр хочет видеть движение за сегодня и делиться результатом */
+
+/* ---------- 5. Ранг на аватаре: кольцо и значок в цвете ранга, без заливки фона ---------- */
+const RCOL34={'К':'#8a93a0','П':'#5F807F','ПП':'#20927B','А':'#20927B'};
+function rcol34(c){ return RCOL34[c]||(RSTY[c]?RSTY[c].acc:'#1f4a45'); }
+const _topbar34=topbar; topbar=function(t,s,e){ let h=_topbar34(t,s,e);
+  const c=(typeof M!=='undefined'&&M&&pk!=='elena')?M.rank[R0()]:'П';
+  return h.replace(/<button class="av\b([^"]*)"([^>]*)>([\s\S]*?)<\/button>/,
+    `<span class="avw34" style="--rc:${rcol34(c)}"><button class="av$1"$2>$3</button><i class="rb34" title="${RANK_NAME[c]||''}">${c}</i></span>`); };
+
+/* ---------- 7. Дневной прирост: «+N сегодня» рядом с месячным значением ---------- */
+/* Источник — ежедневные снимки объёмов. В прототипе срез детерминированный, помечен как демо. */
+function h34(n){ const s=(P()&&P().seed)||7, x=Math.sin(n*12.9898+s*78.233)*43758.5453; return x-Math.floor(x); }
+function day34(){ const r=R0();
+  return {lo:Math.round(M.lo[r]*0.09*h34(1)), go:Math.round(M.go[r]*0.05*h34(2)), newm:h34(3)>0.55?1:0}; }
+function dayTxt34(k){ const v=day34()[k]; return v>0?`+${fmt(v)} ${L('сегодня')}`:L('сегодня без изменений'); }
+
+const _tile34=tile4; tile4=function(k){ let h=_tile34(k);
+  if(!['lo','go','newm'].includes(k)) return h;
+  const v=day34()[k], cls=v>0?'up':'flat';
+  return h.replace('<span class="h">',`<span class="d34 ${cls}">${dayTxt34(k)}</span><span class="h">`); };
+
+/* ---------- 9. Год к году — в детализации показателя, не на главной ---------- */
+function yoy34(k,v){ const base=v/(1+(0.08+h34(k==='go'?4:k==='lo'?5:6)*0.34)); const d=v-base;
+  return {prev:Math.round(base),pct:Math.round(d/base*100)}; }
+
+const _kpiPage34=kpiPage; kpiPage=function(){ let h=_kpiPage34(); const k=tabs.kpi||'go', d=kpiData(k);
+  if(!d) return h;
+  const dayable=['lo','go'].includes(k), y=yoy34(k,d.v);
+  const add=`${dayable?`<b class="up">${dayTxt34(k)}</b> · `:''}${L('октябрь 2025')}: ${fmt(y.prev)} ${d.unit} <b class="${y.pct>=0?'up':'dn'}">${y.pct>=0?'+':'−'}${Math.abs(y.pct)}%</b>`;
+  h=h.replace(/<div class="kp7d">([\s\S]*?)<\/div>/,(m,inner)=>`<div class="kp7d">${inner}${inner.trim()?' · ':''}${add}</div>`);
+  h=h.replace('<details class="card c-pad hx7">',`<div class="note n34">${L('Дневной срез и сравнение с прошлым годом считаются по ежедневным снимкам объёмов. В прототипе это демонстрация механики: снимки нужно подтвердить с ИТ и РАО.')}</div><details class="card c-pad hx7">`);
+  return h; };
+
+/* ---------- 8. Карточка результата: то, чем партнёр делится, без единой суммы ---------- */
+function share34(){ const r=R0(), p=P(), c=M.rank[r], ms=memberStat(M,r), prev=p.prev[2];
+  const dLo=M.lo[r]-(prev[2]||0), dGo=M.go[r]-(prev[3]||0);
+  const link=`coralclub.com/${p.num}`;
+  openDr(`<h2>${L('Поделиться результатом')}</h2>
+   <div class="sub" style="color:var(--muted)">${L('Карточка для сторис и чатов. Сумм и бонусов в ней нет — только объёмы, ранг и команда.')}</div>
+   <div class="sh34" style="--rc:${rcol34(c)}">
+    <div class="sh34h"><span class="sh34l">coralclub</span><span class="sh34r">${L('октябрь 2026')}</span></div>
+    <div class="sh34n">${p.name}</div>
+    <div class="sh34rk">${RANK_NAME[c]}</div>
+    <div class="sh34g">
+     <div><span>${L('Личный объём')}</span><b>${fmt(M.lo[r])}</b><small>${dLo>=0?'+':'−'}${fmt(Math.abs(dLo))} ${L('к сентябрю')}</small></div>
+     <div><span>${L('Групповой объём')}</span><b>${fmt(M.go[r])}</b><small>${dGo>=0?'+':'−'}${fmt(Math.abs(dGo))} ${L('к сентябрю')}</small></div>
+     <div><span>${L('Команда')}</span><b>${fmt(ms.all)}</b><small>${fmt(ms.active)} ${L('с заказом в октябре')}</small></div>
+     <div><span>${L('Новые за 30 дней')}</span><b>${fmt(ms.nw.length)}</b><small>${fmt(ms.nwMy.length)} ${L('в первой линии')}</small></div>
+    </div>
+    <div class="sh34f"><span>${L('Вступить в клуб по моей ссылке')}</span><b>${link}</b></div>
+   </div>
+   <div class="btns" style="margin-top:14px"><button class="btn pri" onclick="toast('${L('Карточка сохранена в изображения')}')">${L('Сохранить картинку')}</button><button class="btn gh" onclick="toast('${L('Ссылка скопирована')}')">${L('Скопировать ссылку')}</button></div>
+   <div class="note">${L('На карточке намеренно нет бонусов и выплат: обещание дохода в публичном посте нарушает правила клуба и закон о рекламе в большинстве стран присутствия.')}</div>`); }
+
+const _W34=W; W=function(k){ let h=_W34(k);
+  if(k==='rank'&&h&&h.indexOf('share34()')<0&&pk!=='elena')
+    h=h.replace(/<\/div>\s*$/,`<div class="btns" style="margin-top:12px"><button class="btn gh sm w" onclick="share34()">${L('Поделиться результатом')}</button></div></div>`);
+  return h; };
+
+/* защита: прямой переход на экран показателя без выбранной метрики (go('kpi') из поиска/истории) */
+tabs.kpi=tabs.kpi||'go';
+/* у потребителя нет экрана показателя: не падаем, показываем «нет детализации» */
+const _kpiData34=kpiData; kpiData=function(k){ return (pk==='elena'||!P())?null:_kpiData34(k); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -7563,6 +7667,25 @@ Object.assign(EN_DICT,{
 "Дальше с каждого заказа возвращается 10% на кошелёк — этим можно оплачивать следующие заказы. Подобрать, чем закрыть остаток?":"After that, 10% of every order comes back to the wallet and can pay for later orders. Shall I pick something to close the gap?",
 "без спешки — просто чтобы вы знали: после 500 баллов накопленного объёма открывается возвратная скидка 10%. У вас сейчас":"no rush — just so you know: past 500 points of cumulative volume the 10% cashback discount opens up. You currently have",
 "Когда будете делать заказ, посчитаю, что выгоднее взять.":"When you place an order, I'll work out what's best to take."
+});EN_RE=null;
+
+/* ---- v34: кольцо ранга, дневной прирост, год к году, карточка результата ---- */
+Object.assign(EN_DICT,{
+"сегодня":"today","сегодня без изменений":"no change today","октябрь 2025":"October 2025","октябрь 2026":"October 2026",
+"Дневной срез и сравнение с прошлым годом считаются по ежедневным снимкам объёмов. В прототипе это демонстрация механики: снимки нужно подтвердить с ИТ и РАО.":"The daily slice and the year-on-year comparison are computed from daily volume snapshots. In the prototype this demonstrates the mechanics: the snapshots need to be confirmed with IT and accounting.",
+"Поделиться результатом":"Share your result",
+"Карточка для сторис и чатов. Сумм и бонусов в ней нет — только объёмы, ранг и команда.":"A card for stories and chats. It carries no amounts or bonuses — only volumes, rank and team.",
+"Команда":"Team","Новые за 30 дней":"New in 30 days","с заказом в октябре":"ordered in October","в первой линии":"in the first line",
+"Вступить в клуб по моей ссылке":"Join the club through my link",
+"Сохранить картинку":"Save image","Карточка сохранена в изображения":"Card saved to images","Ссылка скопирована":"Link copied","Скопировать ссылку":"Copy link",
+"На карточке намеренно нет бонусов и выплат: обещание дохода в публичном посте нарушает правила клуба и закон о рекламе в большинстве стран присутствия.":"The card deliberately carries no bonuses or payouts: promising income in a public post breaks club rules and advertising law in most of the countries we operate in."
+});EN_RE=null;
+Object.assign(EN_DICT,{"предварительно, окончательный расчёт 1 ноября":"preliminary, final calculation on 1 November"});EN_RE=null;
+Object.assign(EN_DICT,{
+"Health OS: три модуля":"Health OS: three modules",
+"В ЛК работает только первый — то, что вы продаёте в первые 90 дней":"Only the first one works in the back office — what you sell in the first 90 days",
+"первый заказ — набор":"first order — the",
+"первый заказ":"first order"
 });EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
