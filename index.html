@@ -7565,6 +7565,10 @@ function addOne36(k){ const c=hcfg(); c.hidden=c.hidden.filter(x=>x!==k); if(!c.
 /* удаление блока из его собственного меню — тем же путём, с отменой */
 const _tgH36=tgH; tgH=function(k){ const was=hcfg().order.includes(k); _tgH36(k);
   if(was) toastUndo(`${HW[k]?HW[k].t:k} · ${L('убран с главной')}`,()=>{ _tgH36(k); customize(); }); };
+
+/* v36 заменил customize целиком и снёс обёртку v4d с опросом после настройки — возвращаю */
+const _cz36r=customize; customize=function(){ const r=_cz36r.apply(this,arguments);
+  if(typeof refiner==='function') refiner('cust',15000); return r; };
 /* ================= v37: одна валюта на экране ================= */
 /* Дефект после v33: бонус и кошелёк считались по стране (RON), а цены товаров,
    сертификаты и переводы оставались в евро — на одном экране было две валюты.
