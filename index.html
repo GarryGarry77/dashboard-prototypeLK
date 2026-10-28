@@ -2304,6 +2304,8 @@ body.navc .side{padding-top:14px}
 /* карточка заказа: ряд кнопок был зажат max-width:86% и вылезал за карточку на 40px */
 .cc .msg{max-width:100%;flex-wrap:wrap}
 .cc .msg button{flex:1 1 auto;min-width:0}
+/* ===== v39: цель и выполнение ===== */
+.hb7 .vv.g39 small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -7659,6 +7661,38 @@ function csatSend38(v){ LS.set('coral_lk_csat38',v); render();
 HW.csat={t:'Оценка главной',d:'Один вопрос о новой главной — ответы читает продакт ЛК',size:'s4'};
 W20.csat=4;
 const _W38=W; W=function(k){ return k==='csat'?csat38():_W38(k); };
+/* ================= v39: доллар вместо национальных валют + формулировка цели по Марии ================= */
+/* Встреча со спонсором 28.10:
+   — суммы показываем в долларах: у.е. привязаны к внутренним курсам, но на защите и в сети
+     все говорят в долларах, а не в леях;
+   — Мария: «33% из 65%» читается неоднозначно, писать явно «Цель: 65, выполнено: 33». Принято. */
+
+/* ---------- 1. Валюта ---------- */
+CUR33.USD=['$',1,2];
+const FORCE39='USD';                /* одна валюта показа; механизм «валюта по стране» сохранён */
+ccode33=function(){ return FORCE39||CCUR33[ctry]||'EUR'; };
+Object.keys(CCUR33).forEach(k=>{ if(COUNTRIES[k]){ COUNTRIES[k][1]='$'; COUNTRIES[k][2]=1; } });
+
+/* ---------- 2. Цель и выполнение — словами, а не дробью ---------- */
+function hosGoal39(){ return 65; }
+const _W39=W; W=function(k){ let h=_W39(k);
+  if(k!=='hos'||!h) return h;
+  const hs=hosStats(M,M.kids[R0()]), v=hs.rate, g=hosGoal39();
+  h=h.replace(/<span class="vv"><b>[^<]*<\/b><small>[^<]*<\/small><\/span>/,
+    `<span class="vv g39"><b>${v==null?'—':v+'%'}</b><small>${L('выполнено')} · ${L('цель')} ${g}%</small></span>`);
+  h=h.replace(/<em style="left:59%"><span>[^<]*<\/span><\/em>/,`<em style="left:59%"><span>${L('среднее по сети')} 59%</span></em>`);
+  h=h.replace(/<em class="g" style="left:65%"><span>[^<]*<\/span><\/em>/,`<em class="g" style="left:65%"><span>${L('цель')} ${g}%</span></em>`);
+  h=h.replace(/<span class="hint">([\s\S]*?)<\/span>/,(m,t)=>`<span class="hint">${hs.mat.length?`${L('Цель')}: ${g}% · ${L('выполнено')}: ${v==null?'—':v+'%'} — ${hs.s90} ${L('из')} ${hs.mat.length} ${L('потребителей')}. ${t}`:t}</span>`);
+  return h; };
+
+/* плитка «2-й заказ»: «33% из 65%» заменено на «выполнено / цель» */
+const _tile39=tile4; tile4=function(k){ let h=_tile39(k);
+  if(k!=='hos2'||!h) return h;
+  const hs=hosStats(M,M.kids[R0()]), v=hs.rate==null?0:hs.rate, g=hosGoal39();
+  return h.replace(/<span class="v">[\s\S]*?<\/span>/,
+    `<span class="v">${v}%<small> ${L('выполнено')}</small></span>`)
+   .replace(/<span class="h">[\s\S]*?<\/span>/,
+    `<span class="h">${L('Цель')} ${g}% · ${hs.s90} ${L('из')} ${hs.mat.length} ${L('потребителей')}</span>`); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -8177,6 +8211,11 @@ Object.assign(EN_DICT,{
 "Что мешает в первую очередь?":"What gets in the way most?","Что понравилось? (необязательно)":"What did you like? (optional)",
 "Отправить":"Send","Не сейчас":"Not now","Ответить заново":"Answer again",
 "Один вопрос о новой главной — ответы читает продакт ЛК":"One question about the new home screen — read by the back-office product manager"
+});EN_RE=null;
+
+/* ---- v39: доллар и формулировка цели ---- */
+Object.assign(EN_DICT,{
+"выполнено":"done","цель":"goal","Цель":"Goal","среднее по сети":"network average","потребителей":"consumers"
 });EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
