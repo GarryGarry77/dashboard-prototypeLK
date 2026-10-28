@@ -2133,7 +2133,7 @@ body.navc .side{padding-top:14px}
 /* значок лежит внутри бокса аватара и не расширяет шапку ни на пиксель */
 .avw34{position:relative;display:inline-flex;flex:none}
 .avw34 .av{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--rc)}
-.avw34 .rb34{position:absolute;right:0;bottom:0;min-width:17px;height:17px;padding:0 4px;border-radius:999px;
+.avw34 .rb34{pointer-events:none;position:absolute;right:0;bottom:0;min-width:17px;height:17px;padding:0 4px;border-radius:999px;
  background:var(--rc);color:#fff;font-size:9.5px;font-weight:700;font-style:normal;line-height:17px;text-align:center;
  border:2px solid var(--card);letter-spacing:.2px}
 @media(max-width:900px){.avw34 .rb34{min-width:15px;height:15px;line-height:15px;font-size:8.5px}}
@@ -7465,11 +7465,9 @@ function wbWhy35(){ openDr(`<h2>${L('Как считаем водный бала
 /* ---------- встраивание ---------- */
 function wbCard35(o){ return `<div class="card c-pad ${o&&o.cls||''}"><div class="hrow"><div><h3 class="h20">${L('Водный баланс')}</h3><div class="sub">${L('Сегодня · вода, чай, кофе, соки')}</div></div>${B('hos')}</div><div class="wb35">${wbBody35()}</div></div>`; }
 
-/* потребитель: вместо восьми стаканов — рабочий трекер */
-const _cHome35=consumerHome; consumerHome=function(){ let h=_cHome35();
-  h=h.replace(/<div class="wtr"[\s\S]*?<\/div>/,`<div class="wb35">${wbBody35()}</div>`);
-  h=h.replace(/<span class="tag t-ok">выполнено \d+%<\/span>/,`<span class="tag t-ok wb35done">${L('выполнено')} ${wbProgPct35()}%</span>`);
-  return h; };
+/* ВАЖНО: блок «Моя программа на сегодня» у потребителя НЕ трогаем.
+   Капли воды и отметки Корал-Майн/Simag — это фаза Гидратации Health OS, отдельная логика.
+   Трекер напитков живёт отдельным блоком и подключается через «Настроить главную». */
 
 /* партнёр: блок доступен в «Настроить», по умолчанию главную не трогаем */
 HW.water={t:'Водный баланс',d:'Личный трекер воды, чая, кофе и соков — тот же, что у потребителя',size:'s6'};
@@ -7567,6 +7565,30 @@ function addOne36(k){ const c=hcfg(); c.hidden=c.hidden.filter(x=>x!==k); if(!c.
 /* удаление блока из его собственного меню — тем же путём, с отменой */
 const _tgH36=tgH; tgH=function(k){ const was=hcfg().order.includes(k); _tgH36(k);
   if(was) toastUndo(`${HW[k]?HW[k].t:k} · ${L('убран с главной')}`,()=>{ _tgH36(k); customize(); }); };
+/* ================= v37: одна валюта на экране ================= */
+/* Дефект после v33: бонус и кошелёк считались по стране (RON), а цены товаров,
+   сертификаты и переводы оставались в евро — на одном экране было две валюты.
+   priceOf и price4 объявлены как const, переопределить их нельзя, поэтому
+   приводим суммы в готовом DOM — одним проходом, как делаем со значком баллов. */
+
+const EUR37=/(?:€\s?(\d[\d  \s]*(?:[.,]\d{1,2})?))|(?:(\d[\d  \s]*(?:[.,]\d{1,2})?)\s?€)/;
+function num37(s){ return parseFloat(String(s).replace(/[  \s]/g,'').replace(',','.'))||0; }
+function eur37(root){ if(!root||ccode33()==='EUR') return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+    if(!n.nodeValue||n.nodeValue.indexOf('€')<0) return NodeFilter.FILTER_REJECT;
+    const p=n.parentNode; if(!p||['SCRIPT','STYLE','INPUT','TEXTAREA'].includes(p.nodeName)) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT; }});
+  const list=[]; let n; while((n=w.nextNode())) list.push(n);
+  list.forEach(t=>{ t.nodeValue=t.nodeValue.replace(new RegExp(EUR37.source,'g'),(m,a,b)=>cur33(num37(a!=null?a:b)))
+    .replace(/(·\s*)€/g,'$1'+CUR33[ccode33()][0]); });
+  /* «Сумма, €» в формах перевода */
+  root.querySelectorAll&&root.querySelectorAll('label').forEach(l=>{
+    if(/,\s*€\s*$/.test(l.childNodes[0]&&l.childNodes[0].nodeValue||'')) l.childNodes[0].nodeValue=l.childNodes[0].nodeValue.replace(/€\s*$/,CUR33[ccode33()][0]); });
+}
+function eurAll37(){ try{ eur37(document.getElementById('main')); eur37(document.getElementById('dr')); }catch(e){} }
+
+const _render37=render; render=function(){ const r=_render37.apply(this,arguments); eurAll37(); return r; };
+const _openDr37=openDr; openDr=function(h){ const r=_openDr37.apply(this,arguments); try{ eur37(document.getElementById('dr')); }catch(e){} return r; };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
