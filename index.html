@@ -2164,6 +2164,132 @@ body.navc .side{padding-top:14px}
 .hx7 summary::-webkit-details-marker{display:none}
 .hx7 summary::after{content:'';width:8px;height:8px;flex:none;margin-right:3px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .18s}
 .hx7[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+/* ===== v35: водный баланс ===== */
+.wb35{--c-water:#3C9ED9;--c-cm:#1C6FA8;--c-tea:#7FA86B;--c-coffee:#8A5A2B;--c-juice:#D79A2B;--c-soda:#A8557A;--c-milk:#9AA7B2;--c-other:#7D8C99;margin-top:12px}
+
+.wb35top{display:flex;align-items:center;gap:16px}
+.wb35ring{--p:0;width:78px;height:78px;flex:none;border-radius:50%;display:grid;place-items:center;
+ background:conic-gradient(var(--c-water) calc(var(--p)*1%),var(--line) 0)}
+.wb35ring::after{content:'';position:absolute;width:58px;height:58px;border-radius:50%;background:var(--card)}
+.wb35ring{position:relative}
+.wb35ring b{position:relative;z-index:1;font-size:20px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.wb35ring b small{font-size:11px;font-weight:500;color:var(--muted)}
+.wb35ring.full{background:conic-gradient(var(--good) 100%,var(--good) 0)}
+.wb35m{min-width:0}
+.wb35k{font-size:12.5px;color:var(--muted)}
+.wb35v{font-size:26px;font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums}
+.wb35v small{font-size:14px;font-weight:400;color:var(--muted)}
+
+.wb35r{display:flex;gap:10px;margin-top:12px}
+.wb35r>div{flex:1;min-width:0;background:var(--bg);border-radius:10px;padding:8px 12px;display:flex;flex-direction:column;gap:1px}
+.wb35r span{font-size:11.5px;color:var(--muted)}
+.wb35r b{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+.wb35r b small{font-size:11.5px;font-weight:400;color:var(--muted)}
+.wb35r b.dn{color:var(--bad)}
+
+.wb35bar{display:flex;gap:2px;height:8px;margin-top:12px;border-radius:999px;overflow:hidden;background:var(--line)}
+.wb35bar i{display:block}
+.wb35lg{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:7px;font-size:11.5px;color:var(--muted)}
+.wb35lg span{display:inline-flex;align-items:center;gap:5px}
+.wb35lg i{width:8px;height:8px;border-radius:2px;flex:none}
+.s-water{background:var(--c-water)}.s-cm{background:var(--c-cm)}.s-tea{background:var(--c-tea)}
+.s-coffee{background:var(--c-coffee)}.s-juice{background:var(--c-juice)}.s-soda{background:var(--c-soda)}
+.s-milk{background:var(--c-milk)}.s-other{background:var(--c-other)}
+
+.wb35add,.wb35grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;margin-top:14px}
+.wb35b{min-height:72px;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px 6px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;transition:background .14s,border-color .14s}
+.wb35b:hover{background:var(--bg);border-color:var(--muted)}
+.wb35b span{font-size:19px;line-height:1.1}
+.wb35b b{font-size:12px;font-weight:500;text-align:center;line-height:1.2}
+.wb35b small{font-size:11px;color:var(--muted)}
+.wb35b.more{border-style:dashed}
+
+.wb35d{margin-top:12px}
+.wb35d summary{cursor:pointer;font-size:13px;color:var(--ink);font-weight:500;list-style:none;display:flex;align-items:center;gap:6px}
+.wb35d summary::-webkit-details-marker{display:none}
+.wb35d summary::after{content:'';width:6px;height:6px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .18s}
+.wb35d[open] summary::after{transform:rotate(-135deg)}
+.wb35i{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.wb35i .ic{width:26px;text-align:center;flex:none}
+.wb35i .g1{flex:1;min-width:0;display:flex;flex-direction:column}
+.wb35i .g1 b{font-size:13.5px;font-weight:500}
+.wb35i .g1 small{font-size:11.5px;color:var(--muted)}
+.wb35i .num{font-size:13.5px;font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.wb35i .x{width:26px;height:26px;flex:none;border-radius:50%;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.wb35i .x:hover{background:var(--bg);color:var(--bad)}
+
+.wb35f{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px}
+
+.wb35rem{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.wb35rem label{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:10px;padding:4px 4px 4px 10px}
+.wb35rem input{border:0;background:transparent;font:inherit;font-size:14px;color:var(--ink)}
+.wb35rem .x{width:24px;height:24px;border:0;background:transparent;color:var(--muted);cursor:pointer;border-radius:50%}
+.wb35rem .x:hover{background:var(--bg);color:var(--bad)}
+
+.wb35w{margin-top:14px}
+.wb35w input[type=range]{width:100%}
+.wb35wv{margin-top:8px;font-size:15px}
+.wb35wv b{font-weight:600}
+
+@media(max-width:420px){
+ .wb35ring{width:64px;height:64px}
+ .wb35ring::after{width:48px;height:48px}
+ .wb35ring b{font-size:17px}
+ .wb35v{font-size:22px}
+ .wb35add,.wb35grid{grid-template-columns:repeat(auto-fit,minmax(76px,1fr))}
+}
+.wb35d summary::before{content:none}
+
+/* ===== отправка программы: выбор получателей ===== */
+.ps35l{margin-top:10px;max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:12px}
+.ps35i{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--line);cursor:pointer}
+.ps35i:last-child{border-bottom:0}
+.ps35i:hover{background:var(--bg)}
+.ps35i>input{width:18px;height:18px;flex:none;margin:0;accent-color:var(--good)}
+.ps35i .av{width:30px;height:30px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-size:12.5px;font-weight:600}
+.ps35i .g1{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ps35i .g1 b{font-size:14px;font-weight:500}
+.ps35i .g1 small{font-size:12px;color:var(--muted)}
+.ps35t{display:block;margin-top:14px}
+.ps35t>span{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px}
+/* ===== v36: настройка главной ===== */
+
+/* кнопка в шапке */
+.cz36b{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border-radius:999px;
+ border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.cz36b:hover{background:var(--bg);border-color:var(--muted)}
+.cz36b svg{flex:none;color:var(--muted)}
+
+/* полоса под сеткой */
+.cz36s{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:16px;padding:16px 20px;
+ border:1px dashed var(--line);border-radius:14px;background:var(--card)}
+.cz36s .g1{flex:1;min-width:200px;display:flex;flex-direction:column;gap:2px}
+.cz36s .g1 b{font-size:15px;font-weight:600}
+.cz36s .g1 small{font-size:12.5px;color:var(--muted)}
+.cz36s .btns{display:flex;gap:8px;flex-wrap:wrap}
+
+/* список разделов */
+.cz36h{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:20px 0 6px}
+.cz36h .dh{margin:0;flex:1;min-width:0}
+.cz36l{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cz36l.add{margin-top:12px}
+.cz36{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--card)}
+.cz36:last-child{border-bottom:0}
+.cz36 .hd{flex:none;width:18px;text-align:center;color:var(--muted);font-size:13px;letter-spacing:-2px;cursor:grab}
+.cz36 .g1{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.cz36 .g1 b{font-size:14px;font-weight:500}
+.cz36 .g1 small{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cz36 .ar{display:flex;gap:4px;flex:none}
+.cz36 .rm{width:28px;height:28px;flex:none;border:0;border-radius:50%;background:transparent;color:var(--muted);cursor:pointer;font-size:13px}
+.cz36 .rm:hover{background:var(--bg);color:var(--bad)}
+.cz36.off{opacity:1}
+.cz36.drag{opacity:.45}
+.cz36.over{box-shadow:inset 0 2px 0 var(--good)}
+.cz36.over-a{box-shadow:inset 0 -2px 0 var(--good)}
+.cz36[draggable=true]{cursor:grab}
+.cz36[draggable=true]:active{cursor:grabbing}
+@media(max-width:560px){.cz36 .g1 small{display:none}}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -7232,6 +7358,215 @@ const _W34=W; W=function(k){ let h=_W34(k);
 tabs.kpi=tabs.kpi||'go';
 /* у потребителя нет экрана показателя: не падаем, показываем «нет детализации» */
 const _kpiData34=kpiData; kpiData=function(k){ return (pk==='elena'||!P())?null:_kpiData34(k); };
+/* ================= v35: водный баланс — реальный учёт воды, кофе, соков ================= */
+/* Опыт Coral Health 365 (виджет воды с напоминаниями), перенесённый в ЛК.
+   Коэффициентов «кофе обезвоживает» здесь нет: по Beverage Hydration Index (Maughan, AJCN 2016)
+   чай и кофе удерживают жидкость не хуже воды. Поэтому считаем три честные цифры:
+   чистая вода (цель программы), всего жидкости и кофеин. */
+
+const WB35={
+ water:{n:'Вода',       ic:'💧', ml:250, pure:1, caf:0},
+ cm:   {n:'Вода с Корал-Майн', ic:'🔷', ml:250, pure:1, caf:0},
+ tea:  {n:'Чай',        ic:'🍵', ml:200, pure:0, caf:40},
+ coffee:{n:'Кофе',      ic:'☕️', ml:150, pure:0, caf:90},
+ juice:{n:'Сок',        ic:'🧃', ml:200, pure:0, caf:0},
+ soda: {n:'Газировка',  ic:'🥤', ml:330, pure:0, caf:35},
+ milk: {n:'Молоко или кефир', ic:'🥛', ml:200, pure:0, caf:0},
+ other:{n:'Другое',     ic:'🥂', ml:200, pure:0, caf:0}
+};
+const WBQ35=['water','cm','tea','coffee','juice'];   /* быстрый ввод */
+const VOL35=[150,200,250,330,500];
+const CAF35=400;                                      /* безопасный суточный кофеин, мг */
+
+function wbKey35(){ return 'd'+(new Date(2026,9,28)).toISOString().slice(0,10); } /* в прототипе день фиксирован */
+function wbAll35(){ return LS.get('coral_lk_wb35',{}); }
+function wbDay35(){ const a=wbAll35(); return a[wbKey35()]||[]; }
+function wbSave35(list){ const a=wbAll35(); a[wbKey35()]=list; LS.set('coral_lk_wb35',a); }
+function wbW35(){ return LS.get('coral_lk_wb35_w',62); }
+function wbGoal35(){ return Math.round(wbW35()*30/10)*10; }
+function wbRem35(){ return LS.get('coral_lk_wb35_rem',['08:00','11:00','14:00','17:00','20:00']); }
+
+function wbSum35(){ const l=wbDay35(); let pure=0,tot=0,caf=0;
+  l.forEach(e=>{ const d=WB35[e.k]||WB35.other; tot+=e.ml; if(d.pure) pure+=e.ml; caf+=Math.round(d.caf*e.ml/d.ml); });
+  return {pure,tot,caf,n:l.length}; }
+
+function wbAdd35(k,ml){ const l=wbDay35();
+  const h=['08:14','09:40','11:05','12:30','14:10','15:45','17:20','18:50','20:15','21:30'];
+  l.push({k,ml:ml||WB35[k].ml,t:h[l.length%h.length]});
+  wbSave35(l); wbPaint35(); toastUndo(`${WB35[k].n} · ${ml||WB35[k].ml} ${L('мл')}`,()=>{ const x=wbDay35(); x.pop(); wbSave35(x); wbPaint35(); }); }
+function wbDel35(i){ const l=wbDay35(); l.splice(i,1); wbSave35(l); wbPaint35(); }
+function wbReset35(){ wbSave35([]); wbPaint35(); toast(L('День очищен')); }
+
+/* точечная перерисовка: ползать по всему render() ради стакана воды незачем */
+function wbPaint35(){ document.querySelectorAll('.wb35').forEach(el=>{ el.innerHTML=L(wbBody35()); });
+  const t=document.querySelector('.wb35done'); if(t) t.textContent=L('выполнено')+' '+wbProgPct35()+'%'; }
+function wbProgPct35(){ const s=wbSum35(); return pct((ticks.cm?1:0)+(ticks.sim?1:0)+(s.pure>=wbGoal35()?1:0),3); }
+
+function wbBody35(){ const s=wbSum35(), goal=wbGoal35(), p=Math.min(100,Math.round(s.pure/goal*100)),
+  left=Math.max(0,goal-s.pure), gl=Math.ceil(left/250), l=wbDay35();
+  const seg=['water','cm','tea','coffee','juice','soda','milk','other'].map(k=>({k,ml:l.filter(e=>e.k===k).reduce((a,e)=>a+e.ml,0)})).filter(x=>x.ml);
+  return `<div class="wb35top">
+    <div class="wb35ring ${p>=100?'full':''}" style="--p:${p}" role="img" aria-label="${L('Чистая вода')} ${p}%"><b>${p}<small>%</small></b></div>
+    <div class="wb35m">
+      <div class="wb35k">${L('Чистая вода')}</div>
+      <div class="wb35v">${fmt(s.pure)}<small> / ${fmt(goal)} ${L('мл')}</small></div>
+      <div class="sub">${left?`${L('осталось')} ${fmt(left)} ${L('мл')} — ${pl17(gl,'стакан','стакана','стаканов',gl===1?'glass':'glasses')}`:L('норма дня закрыта')}</div>
+    </div>
+  </div>
+  <div class="wb35r">
+    <div><span>${L('Всего жидкости')}</span><b>${fmt(s.tot)} ${L('мл')}</b></div>
+    <div><span>${L('Кофеин')}</span><b class="${s.caf>CAF35?'dn':''}">${fmt(s.caf)} <small>${L('из')} ${CAF35} ${L('мг')}</small></b></div>
+  </div>
+  ${seg.length?`<div class="wb35bar" role="img" aria-label="${L('Состав выпитого за день')}">${seg.map(x=>`<i class="s-${x.k}" style="flex:${x.ml}" title="${L(WB35[x.k].n)} · ${fmt(x.ml)} ${L('мл')}"></i>`).join('')}</div>
+  <div class="wb35lg">${seg.map(x=>`<span><i class="s-${x.k}"></i>${L(WB35[x.k].n)} ${fmt(x.ml)}</span>`).join('')}</div>`:''}
+  <div class="wb35add">${WBQ35.map(k=>`<button class="wb35b" onclick="wbAdd35('${k}')" title="${L(WB35[k].n)} · ${WB35[k].ml} ${L('мл')}"><span>${WB35[k].ic}</span><b>${L(WB35[k].n)}</b><small>+${WB35[k].ml}</small></button>`).join('')}<button class="wb35b more" onclick="wbMore35()"><span>＋</span><b>${L('Другое')}</b><small>${L('и объём')}</small></button></div>
+  ${l.length?`<details class="wb35d"><summary>${L('Что выпито сегодня')} · ${l.length}</summary>
+    ${l.map((e,i)=>`<div class="wb35i"><span class="ic">${(WB35[e.k]||WB35.other).ic}</span><span class="g1"><b>${L((WB35[e.k]||WB35.other).n)}</b><small>${e.t}</small></span><span class="num">${fmt(e.ml)} ${L('мл')}</span><button class="x" aria-label="${L('Убрать запись')}" onclick="wbDel35(${i})">✕</button></div>`).join('')}
+    <button class="link" onclick="wbReset35()">${L('Очистить день')}</button></details>`:`<div class="sub" style="margin-top:10px">${L('Сегодня записей нет. Нажмите напиток — он добавится с обычным объёмом.')}</div>`}
+  <div class="wb35f">
+    <button class="link" onclick="wbRemDr35()">${L('Напоминания')}: ${wbRem35().length}</button>
+    <button class="link" onclick="wbWDr35()">${L('Норма')}: 30 ${L('мл на кг')} · ${wbW35()} ${L('кг')}</button>
+    <button class="link" onclick="wbWhy35()">${L('Как считаем')}</button>
+  </div>`; }
+
+function wbMore35(){ openDr(`<h2>${L('Добавить напиток')}</h2>
+  <div class="sub" style="color:var(--muted)">${L('Выберите напиток и объём. В чистую воду идут только вода и вода с Корал-Майн — это цель программы.')}</div>
+  <div class="wb35grid">${Object.keys(WB35).map(k=>`<button class="wb35b" onclick="wbPick35('${k}')"><span>${WB35[k].ic}</span><b>${L(WB35[k].n)}</b><small>${WB35[k].pure?L('чистая вода'):WB35[k].caf?`${WB35[k].caf} ${L('мг кофеина')}`:L('жидкость')}</small></button>`).join('')}</div>`); }
+function wbPick35(k){ openDr(`<h2>${WB35[k].ic} ${L(WB35[k].n)}</h2>
+  <div class="sub" style="color:var(--muted)">${L('Сколько выпили?')}</div>
+  <div class="chips" style="margin-top:12px">${VOL35.map(v=>`<button class="chip ${v===WB35[k].ml?'on':''}" onclick="closeDrSilent();wbAdd35('${k}',${v})">${v} ${L('мл')}</button>`).join('')}</div>`); }
+
+function wbRemDr35(){ const r=wbRem35();
+  openDr(`<h2>${L('Напоминания пить воду')}</h2>
+   <div class="sub" style="color:var(--muted)">${L('До пяти времён в день. Приходят в Telegram или push — там же, где напоминания программы.')}</div>
+   <div class="wb35rem">${r.map((t,i)=>`<label><input type="time" value="${t}" onchange="wbRemSet35(${i},this.value)"><button class="x" aria-label="${L('Убрать')}" onclick="wbRemDel35(${i})">✕</button></label>`).join('')}</div>
+   ${r.length<5?`<button class="btn gh sm" style="margin-top:10px" onclick="wbRemAdd35()">${L('Добавить время')}</button>`:''}
+   <div class="note">${L('В прототипе напоминания не уходят — показан состав и расписание. В Coral Health 365 этот же виджет уже работает: до пяти времён и отметка приёма продуктов.')}</div>`); }
+function wbRemSet35(i,v){ const r=wbRem35(); r[i]=v; r.sort(); LS.set('coral_lk_wb35_rem',r); }
+function wbRemDel35(i){ const r=wbRem35(); r.splice(i,1); LS.set('coral_lk_wb35_rem',r); wbRemDr35(); }
+function wbRemAdd35(){ const r=wbRem35(); if(r.length>=5) return; r.push('21:00'); r.sort(); LS.set('coral_lk_wb35_rem',r); wbRemDr35(); }
+
+function wbWDr35(){ openDr(`<h2>${L('Норма воды')}</h2>
+  <div class="sub" style="color:var(--muted)">${L('Считаем 30 мл на килограмм веса — ориентир курса «Вода: первые 90 дней».')}</div>
+  <div class="wb35w"><input type="range" min="40" max="130" step="1" value="${wbW35()}" oninput="wbWSet35(this.value)"><div class="wb35wv"><b id="wbw35">${wbW35()}</b> ${L('кг')} → <b id="wbg35">${fmt(wbGoal35())}</b> ${L('мл в день')}</div></div>
+  <div class="note">${L('Это ориентир, а не медицинская рекомендация. При нагрузке, жаре, беременности и хронических болезнях норму определяет врач.')}</div>`); }
+function wbWSet35(v){ LS.set('coral_lk_wb35_w',+v);
+  const a=document.getElementById('wbw35'), b=document.getElementById('wbg35');
+  if(a) a.textContent=v; if(b) b.textContent=fmt(wbGoal35()); wbPaint35(); }
+
+function wbWhy35(){ openDr(`<h2>${L('Как считаем водный баланс')}</h2>
+  <div class="expl">
+   <b>${L('Три цифры вместо одной.')}</b> ${L('Чистая вода — цель программы: вода и вода с Корал-Майн. Всего жидкости — сколько вы выпили всего. Кофеин — отдельный лимит, 400 мг в день для взрослого.')}
+   <div class="fx">${L('Чистая вода')} = ${L('вода')} + ${L('вода с Корал-Майн')}<br>${L('Всего жидкости')} = ${L('все напитки')}<br>${L('Норма')} = 30 ${L('мл')} × ${L('вес, кг')}</div>
+   <b>${L('Почему кофе не вычитаем.')}</b> ${L('Расхожее «кофе обезвоживает» не подтверждается: в исследовании Beverage Hydration Index (Maughan, American Journal of Clinical Nutrition, 2016) чай и кофе удерживали жидкость не хуже воды, а молоко и сок — лучше. Поэтому они идут в общую жидкость, но не в цель курса: курс — про воду.')}
+   <b>${L('Откуда данные.')}</b> ${L('Записи делает сам человек. В продукте этот виджет берётся из Coral Health 365, где он уже работает, — чтобы не было двух мест для одной отметки.')}
+  </div>`); }
+
+/* ---------- встраивание ---------- */
+function wbCard35(o){ return `<div class="card c-pad ${o&&o.cls||''}"><div class="hrow"><div><h3 class="h20">${L('Водный баланс')}</h3><div class="sub">${L('Сегодня · вода, чай, кофе, соки')}</div></div>${B('hos')}</div><div class="wb35">${wbBody35()}</div></div>`; }
+
+/* потребитель: вместо восьми стаканов — рабочий трекер */
+const _cHome35=consumerHome; consumerHome=function(){ let h=_cHome35();
+  h=h.replace(/<div class="wtr"[\s\S]*?<\/div>/,`<div class="wb35">${wbBody35()}</div>`);
+  h=h.replace(/<span class="tag t-ok">выполнено \d+%<\/span>/,`<span class="tag t-ok wb35done">${L('выполнено')} ${wbProgPct35()}%</span>`);
+  return h; };
+
+/* партнёр: блок доступен в «Настроить», по умолчанию главную не трогаем */
+HW.water={t:'Водный баланс',d:'Личный трекер воды, чая, кофе и соков — тот же, что у потребителя',size:'s6'};
+W20.water=6;
+const _W35=W; W=function(k){ return k==='water'?wbCard35():_W35(k); };
+
+/* ---------- «Отправить потребителю»: кнопка обещала отправку, а копировала ссылку ---------- */
+let PS35={prog:null,sel:new Set()};
+function progSend35(k,title){ const r=R0(), ids=clientsOf(M,M.kids[r]).slice(0,12);
+  PS35={prog:[k,title],sel:new Set()};
+  openDr(`<h2>${L('Отправить программу')}</h2>
+   <div class="sub" style="color:var(--muted)">${L('Программа')} «${esc(title)}» · ${L('выберите, кому отправить')}</div>
+   <input id="ps35q" class="pin" placeholder="${L('Поиск по имени')}" oninput="ps35Filter()" autocomplete="off">
+   <div id="ps35l" class="ps35l">${ids.map(x=>`<label class="ps35i"><input type="checkbox" onchange="ps35Tog(${x},this.checked)"><span class="av">${M.by[x].n[0]}</span><span class="g1"><b>${M.by[x].n}</b><small>${hosInfo(M.by[x]).day!=null?`${L('день')} ${hosInfo(M.by[x]).day} ${L('из 90')}`:L('потребитель')}</small></span></label>`).join('')}</div>
+   <label class="ps35t"><span>${L('Сопроводительный текст')}</span><textarea id="ps35m" class="ta5" rows="3">${L('Привет! Отправляю программу')} «${esc(title)}». ${L('Там пошаговый план и напоминания — я буду видеть, как вы идёте, и подскажу, если что-то собьётся.')}</textarea></label>
+   <div class="btns" style="margin-top:12px"><button class="btn pri" id="ps35b" disabled onclick="ps35Send()">${L('Выслать')}</button><button class="btn gh" onclick="toast('${L('Ссылка на программу скопирована')}')">${L('Скопировать ссылку')}</button></div>
+   <div class="note">${L('Программа уйдёт в чат ЛК и в Telegram тем, кто его подключил. Изменить состав и даты можно после отправки — у потребителя обновится.')}</div>`); }
+function ps35Tog(id,on){ on?PS35.sel.add(id):PS35.sel.delete(id);
+  const b=document.getElementById('ps35b'); if(b){ b.disabled=!PS35.sel.size; b.textContent=L('Выслать')+(PS35.sel.size?` · ${PS35.sel.size}`:''); } }
+function ps35Filter(){ const q=(document.getElementById('ps35q').value||'').toLowerCase();
+  document.querySelectorAll('#ps35l .ps35i').forEach(el=>{ el.style.display=el.textContent.toLowerCase().includes(q)?'':'none'; }); }
+function ps35Send(){ const n=PS35.sel.size, t=PS35.prog?PS35.prog[1]:'';
+  closeDrSilent(); toast(`${L('Программа')} «${t}» ${L('отправлена')} · ${pl17(n,'человек','человека','человек',n===1?'person':'people')}`); }
+
+const _progTab35=progTab; progTab=function(){ let h=_progTab35();
+  h=h.replace(/<button class="btn pri sm" onclick="toast\('Ссылка на программу «([^»]*)» с вашим номером скопирована'\)">Отправить потребителю<\/button>/g,
+    (m,t)=>{ const k=(PROGS.find(p=>p[1]===t)||[])[0]||'';
+      return `<button class="btn pri sm" onclick="progSend35('${k}',${JSON.stringify(t).replace(/"/g,'&quot;')})">Отправить потребителю</button><button class="btn gh sm" onclick="toast('Ссылка на программу «${t}» с вашим номером скопирована')" aria-label="Скопировать ссылку на программу «${t}»">⧉</button>`; });
+  return h; };
+/* ================= v36: настройка главной — заметная точка входа и перетаскивание ================= */
+/* Обратная связь: «не очевидно, что главную можно настроить под себя».
+   Раньше вход был только в профиле. Теперь — кнопка в шапке и полоса под сеткой. */
+
+/* ---------- 1. Точки входа ---------- */
+function cz36Strip(){ const c=hcfg(), n=c.hidden.filter(k=>HW[k]).length;
+  return `<div class="cz36s" id="cz36">
+   <div class="g1"><b>${L('Настроить главную')}</b><small>${L('Добавьте новые разделы или поменяйте их порядок — перетаскиванием')}</small></div>
+   <div class="btns"><button class="btn gh sm" onclick="addBlocks36()">${L('Добавить разделы')}${n?` · ${n}`:''}</button><button class="btn pri sm" onclick="customize()">${L('Настроить')}</button></div>
+  </div>`; }
+function cz36Mount(){ if(page!=='home'||pk==='elena') return;
+  const mg=document.querySelector('#main .hgrid,#main .mg'); if(!mg||document.getElementById('cz36')) return;
+  mg.insertAdjacentHTML('afterend',L(cz36Strip())); }
+const _render36=render; render=function(){ const r=_render36.apply(this,arguments); try{ cz36Mount(); }catch(e){} return r; };
+
+const _topbar36=topbar; topbar=function(t,s,e){ let h=_topbar36(t,s,e);
+  if(page!=='home'||pk==='elena') return h;
+  const btn=`<button class="cz36b" onclick="customize()" aria-label="${L('Настроить главную')}" title="${L('Настроить главную')}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span class="hide-m">${L('Настроить главную')}</span></button>`;
+  return h.replace('<button class="srch"',btn+'<button class="srch"'); };
+
+/* ---------- 2. Экран настройки: перетаскивание, удаление, добавление ---------- */
+let DRAG36=null;
+function cz36Row(k,i,n){ return `<div class="cz36 ${DRAG36===k?'drag':''}" draggable="true" data-k="${k}"
+   ondragstart="cz36Start(event,'${k}')" ondragover="cz36Over(event,'${k}')" ondrop="cz36Drop(event,'${k}')" ondragend="cz36End()">
+   <span class="hd" aria-hidden="true">⋮⋮</span>
+   <span class="g1"><b>${HW[k].t}</b><small>${HW[k].d||''}</small></span>
+   <span class="ar"><button class="ib2" ${i===0?'disabled':''} onclick="mvH('${k}',-1)" aria-label="${L('Выше')}: ${HW[k].t}">↑</button><button class="ib2" ${i===n-1?'disabled':''} onclick="mvH('${k}',1)" aria-label="${L('Ниже')}: ${HW[k].t}">↓</button></span>
+   <button class="rm" onclick="tgH('${k}')" aria-label="${L('Убрать с главной')}: ${HW[k].t}">✕</button></div>`; }
+
+function cz36Start(e,k){ DRAG36=k; e.dataTransfer.effectAllowed='move'; try{e.dataTransfer.setData('text/plain',k);}catch(x){}
+  const el=e.currentTarget; setTimeout(()=>el.classList.add('drag'),0); }
+function cz36Over(e,k){ if(!DRAG36||DRAG36===k) return; e.preventDefault(); e.dataTransfer.dropEffect='move';
+  const el=e.currentTarget, r=el.getBoundingClientRect(), after=(e.clientY-r.top)>r.height/2;
+  document.querySelectorAll('.cz36.over,.cz36.over-a').forEach(x=>x.classList.remove('over','over-a'));
+  el.classList.add(after?'over-a':'over'); }
+function cz36Drop(e,k){ e.preventDefault(); if(!DRAG36||DRAG36===k) return cz36End();
+  const c=hcfg(), from=c.order.indexOf(DRAG36); if(from<0) return cz36End();
+  const el=e.currentTarget, r=el.getBoundingClientRect(), after=(e.clientY-r.top)>r.height/2;
+  c.order.splice(from,1);
+  let to=c.order.indexOf(k); if(to<0) to=c.order.length; if(after) to++;
+  c.order.splice(to,0,DRAG36);
+  const moved=HW[DRAG36].t; DRAG36=null; saveH(); render(); customize(); toast(`${moved} · ${L('перемещён')}`); }
+function cz36End(){ DRAG36=null; document.querySelectorAll('.cz36.over,.cz36.over-a,.cz36.drag').forEach(x=>x.classList.remove('over','over-a','drag')); }
+
+customize=function(){ const c=hcfg(), hid=c.hidden.filter(k=>HW[k]);
+  openDr(`<h2>${L('Настроить главную')}</h2>
+   <div class="sub" style="color:var(--muted)">${L('Добавьте новые разделы или поменяйте их порядок. Сохраняется на этом устройстве; в продукте — в профиле, на всех устройствах')}</div>
+   <h3 class="dh">${L('Показатели')}</h3>
+   <button class="perk" onclick="pickKpi()"><span class="pi">✎</span><span><b>${c.kpis.map(k=>KPI4[k]?KPI4[k].t:k).join(' · ')||L('не выбраны')}</b><small>${L('Выбрать до 6 показателей')}</small></span></button>
+   <div class="cz36h"><h3 class="dh">${L('На главной')} · ${c.order.length}</h3><button class="btn pri sm" onclick="addBlocks36()">${L('Добавить разделы')}${hid.length?` · ${hid.length}`:''}</button></div>
+   <div class="sub" style="margin-bottom:8px">${L('Перетащите за ручку ⋮⋮ или двигайте стрелками — на телефоне работают стрелки')}</div>
+   <div class="cz36l" ondragover="event.preventDefault()">${c.order.filter(k=>HW[k]).map((k,i,a)=>cz36Row(k,i,a.length)).join('')}</div>
+   <button class="btn gh w" style="margin-top:16px" onclick="resetH()">${L('Вернуть как было')}</button>`);
+  if(typeof markStart==='function') markStart('home'); };
+
+function addBlocks36(){ const c=hcfg(), hid=c.hidden.filter(k=>HW[k]);
+  openDr(`<h2>${L('Добавить разделы')}</h2>
+   <div class="sub" style="color:var(--muted)">${L('Раздел встанет в конец главной — дальше можно перетащить его выше.')}</div>
+   ${hid.length?`<div class="cz36l add">${hid.map(k=>`<div class="cz36 off"><span class="g1"><b>${HW[k].t}</b><small>${HW[k].d||''}</small></span><button class="btn pri sm" onclick="addOne36('${k}')">${L('Добавить')}</button></div>`).join('')}</div>`
+    :`<div class="note">${L('Все доступные разделы уже на главной. Чтобы убрать лишнее — вернитесь в «Настроить главную».')}</div>`}
+   <button class="btn gh w" style="margin-top:16px" onclick="customize()">${L('К порядку разделов')}</button>`); }
+function addOne36(k){ const c=hcfg(); c.hidden=c.hidden.filter(x=>x!==k); if(!c.order.includes(k)) c.order.push(k);
+  saveH(); render(); addBlocks36();
+  toastUndo(`${HW[k].t} · ${L('добавлен на главную')}`,()=>{ const d=hcfg(); d.order=d.order.filter(x=>x!==k); d.hidden.push(k); saveH(); render(); addBlocks36(); }); }
+
+/* удаление блока из его собственного меню — тем же путём, с отменой */
+const _tgH36=tgH; tgH=function(k){ const was=hcfg().order.includes(k); _tgH36(k);
+  if(was) toastUndo(`${HW[k]?HW[k].t:k} · ${L('убран с главной')}`,()=>{ _tgH36(k); customize(); }); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -7687,6 +8022,56 @@ Object.assign(EN_DICT,{
 "первый заказ — набор":"first order — the",
 "первый заказ":"first order"
 });EN_RE=null;
+
+/* ---- v35: водный баланс и отправка программы ---- */
+Object.assign(EN_DICT,{
+"Водный баланс":"Water balance","Сегодня · вода, чай, кофе, соки":"Today · water, tea, coffee, juices",
+"Чистая вода":"Plain water","Всего жидкости":"Total fluids","Кофеин":"Caffeine",
+"мл":"ml","мг":"mg","кг":"kg","мл на кг":"ml per kg","мл в день":"ml a day","вес, кг":"weight, kg",
+"осталось":"left","норма дня закрыта":"daily goal met","Состав выпитого за день":"What you drank today",
+"Вода":"Water","Вода с Корал-Майн":"Water with Coral-Mine","Чай":"Tea","Кофе":"Coffee","Сок":"Juice",
+"Газировка":"Soda","Молоко или кефир":"Milk or kefir","Другое":"Other","и объём":"and volume",
+"Что выпито сегодня":"What you drank today","Убрать запись":"Remove entry","Очистить день":"Clear the day",
+"День очищен":"Day cleared","Сегодня записей нет. Нажмите напиток — он добавится с обычным объёмом.":"Nothing logged today. Tap a drink and it is added with its usual volume.",
+"Напоминания":"Reminders","Норма":"Goal","Как считаем":"How we count",
+"Добавить напиток":"Add a drink","Выберите напиток и объём. В чистую воду идут только вода и вода с Корал-Майн — это цель программы.":"Pick a drink and a volume. Only water and water with Coral-Mine count as plain water — that is the goal of the programme.",
+"чистая вода":"plain water","мг кофеина":"mg of caffeine","жидкость":"fluid","Сколько выпили?":"How much did you drink?",
+"Напоминания пить воду":"Drink-water reminders","До пяти времён в день. Приходят в Telegram или push — там же, где напоминания программы.":"Up to five times a day. They arrive in Telegram or as push — the same place as programme reminders.",
+"Добавить время":"Add a time","Убрать":"Remove",
+"В прототипе напоминания не уходят — показан состав и расписание. В Coral Health 365 этот же виджет уже работает: до пяти времён и отметка приёма продуктов.":"The prototype does not actually send reminders — it shows the set-up and the schedule. In Coral Health 365 this same widget already works: up to five times and product check-ins.",
+"Норма воды":"Water goal","Считаем 30 мл на килограмм веса — ориентир курса «Вода: первые 90 дней».":"We count 30 ml per kilogram of body weight — the guideline of the “Water: first 90 days” course.",
+"Это ориентир, а не медицинская рекомендация. При нагрузке, жаре, беременности и хронических болезнях норму определяет врач.":"This is a guideline, not medical advice. With exercise, heat, pregnancy or chronic conditions the goal is set by a doctor.",
+"Как считаем водный баланс":"How we count water balance",
+"Три цифры вместо одной.":"Three numbers instead of one.",
+"Чистая вода — цель программы: вода и вода с Корал-Майн. Всего жидкости — сколько вы выпили всего. Кофеин — отдельный лимит, 400 мг в день для взрослого.":"Plain water is the programme goal: water and water with Coral-Mine. Total fluids is everything you drank. Caffeine is a separate limit — 400 mg a day for an adult.",
+"вода":"water","вода с Корал-Майн":"water with Coral-Mine","все напитки":"all drinks",
+"Почему кофе не вычитаем.":"Why we do not subtract coffee.",
+"Расхожее «кофе обезвоживает» не подтверждается: в исследовании Beverage Hydration Index (Maughan, American Journal of Clinical Nutrition, 2016) чай и кофе удерживали жидкость не хуже воды, а молоко и сок — лучше. Поэтому они идут в общую жидкость, но не в цель курса: курс — про воду.":"The common claim that coffee dehydrates you does not hold up: in the Beverage Hydration Index study (Maughan, American Journal of Clinical Nutrition, 2016) tea and coffee retained fluid as well as water, and milk and juice better. So they count toward total fluids but not toward the course goal: the course is about water.",
+"Откуда данные.":"Where the data comes from.",
+"Записи делает сам человек. В продукте этот виджет берётся из Coral Health 365, где он уже работает, — чтобы не было двух мест для одной отметки.":"Entries are made by the person. In the product this widget comes from Coral Health 365, where it already works, so there are not two places for the same check-in.",
+"Отправить программу":"Send the programme","Программа":"Programme","выберите, кому отправить":"choose who to send it to",
+"Поиск по имени":"Search by name","день":"day","из 90":"of 90","потребитель":"consumer",
+"Сопроводительный текст":"Covering message","Привет! Отправляю программу":"Hi! I am sending you the programme",
+"Там пошаговый план и напоминания — я буду видеть, как вы идёте, и подскажу, если что-то собьётся.":"It has a step-by-step plan and reminders — I will see how you are doing and nudge you if something slips.",
+"Выслать":"Send","Ссылка на программу скопирована":"Programme link copied","отправлена":"sent",
+"Программа уйдёт в чат ЛК и в Telegram тем, кто его подключил. Изменить состав и даты можно после отправки — у потребителя обновится.":"The programme goes to the back-office chat and to Telegram for those who connected it. You can change the contents and dates after sending — the consumer's copy updates.",
+"Личный трекер воды, чая, кофе и соков — тот же, что у потребителя":"A personal tracker for water, tea, coffee and juices — the same one the consumer has",
+"выполнено":"done"
+});EN_RE=null;
+
+/* ---- v36: настройка главной ---- */
+Object.assign(EN_DICT,{
+"Добавьте новые разделы или поменяйте их порядок — перетаскиванием":"Add new sections or change their order — by dragging",
+"Добавьте новые разделы или поменяйте их порядок. Сохраняется на этом устройстве; в продукте — в профиле, на всех устройствах":"Add new sections or change their order. Saved on this device; in the product — in your profile, on every device",
+"Добавить разделы":"Add sections","К порядку разделов":"Back to section order",
+"Перетащите за ручку ⋮⋮ или двигайте стрелками — на телефоне работают стрелки":"Drag by the ⋮⋮ handle or move with the arrows — on a phone the arrows work",
+"Убрать с главной":"Remove from the home screen","Выше":"Up","Ниже":"Down",
+"перемещён":"moved","добавлен на главную":"added to the home screen","убран с главной":"removed from the home screen",
+"Раздел встанет в конец главной — дальше можно перетащить его выше.":"The section goes to the end of the home screen — you can then drag it higher.",
+"Все доступные разделы уже на главной. Чтобы убрать лишнее — вернитесь в «Настроить главную».":"Every available section is already on the home screen. To remove something, go back to “Customize home”.",
+"Добавить":"Add","не выбраны":"none selected"
+});EN_RE=null;
+Object.assign(EN_DICT,{"Уведомление":"Notice","Одно важное уведомление или акция, закрывается крестиком":"One important notice or promotion, dismissed with the cross"});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
