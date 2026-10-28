@@ -2290,6 +2290,20 @@ body.navc .side{padding-top:14px}
 .cz36[draggable=true]{cursor:grab}
 .cz36[draggable=true]:active{cursor:grabbing}
 @media(max-width:560px){.cz36 .g1 small{display:none}}
+/* ===== v38: оценка главной ===== */
+.cs38q{display:block;margin:12px 0 8px;font-size:15px;font-weight:600}
+.cs38e{display:flex;gap:6px;flex-wrap:wrap}
+.cs38e button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:19px;cursor:pointer;transition:background .14s,border-color .14s,transform .12s}
+.cs38e button:hover{background:var(--bg);border-color:var(--muted);transform:translateY(-1px)}
+.cs38f{margin-top:10px}
+.cs38d{margin-top:14px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-size:14px}
+
+/* счётчики на иконках шапки лежали за пределами кнопки и давали переполнение строки */
+.topbar .bulb .cnt5,.topbar .bell15 .cnt5{top:0;right:0}
+
+/* карточка заказа: ряд кнопок был зажат max-width:86% и вылезал за карточку на 40px */
+.cc .msg{max-width:100%;flex-wrap:wrap}
+.cc .msg button{flex:1 1 auto;min-width:0}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo">coralclub<small data-ru="Личный кабинет" data-en="Back office">Личный кабинет</small></div><nav id="nav"></nav>
 <div class="demo"><b data-ru="Демо: кто смотрит" data-en="Demo: who is viewing">Демо: кто смотрит</b><div class="ps" id="ps"></div><div style="margin-top:8px" data-ru="Цифры считаются из структуры по маркетинг-плану ред. 17" data-en="Numbers are calculated from the structure per marketing plan ed. 17">Цифры считаются из структуры по маркетинг-плану ред. 17</div></div></aside>
@@ -7593,6 +7607,58 @@ function eurAll37(){ try{ eur37(document.getElementById('main')); eur37(document
 
 const _render37=render; render=function(){ const r=_render37.apply(this,arguments); eurAll37(); return r; };
 const _openDr37=openDr; openDr=function(h){ const r=_openDr37.apply(this,arguments); try{ eur37(document.getElementById('dr')); }catch(e){} return r; };
+/* ================= v38: обучение и CSAT снова на виду ================= */
+/* Диагноз: ничего не удалялось. v15 убрала лампочку из шапки и спрятала «Советы и туры»
+   во вкладку колокольчика; виджет оценки главной остался в старом реестре WREG;
+   опрос на главной не доживал до показа у нового пользователя из-за тура. */
+
+/* ---------- 1. Лампочка в шапке ---------- */
+const BULB38='<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>';
+const _topbar38=topbar; topbar=function(t,s,e){ let h=_topbar38(t,s,e);
+  if(h.indexOf('class="ib bulb"')>=0) return h;
+  const n=(typeof unreadTips==='function')?unreadTips():0;
+  const b=`<button class="ib bulb" onclick="tipsCenter()" aria-label="${L('Обучение и советы')}" title="${L('Обучение и советы')}">${BULB38}<span class="cnt5" ${n?'':'style="display:none"'}>${n}</span></button>`;
+  h=h.replace('<button class="ib bell15"',b+'<button class="ib bell15"');
+  /* колокольчик больше не считает советы — их считает лампочка, иначе одни и те же 5 висят дважды */
+  const nb=(typeof NOTIF15==='function')?NOTIF15():0;
+  h=h.replace(/(<button class="ib bell15"[^>]*aria-label=")[^"]*(")/,`$1${L('Уведомления')} · ${nb}$2`)
+     .replace(/(<button class="ib bell15"[\s\S]*?<span class="cnt5">)\d+(<\/span>)/,`$1${nb}$2`);
+  return h; };
+
+/* ---------- 2. Явный вход в обучение из меню аккаунта ---------- */
+const _acct38=acct; acct=function(){ const r=_acct38.apply(this,arguments);
+  const d=document.getElementById('dr'); if(!d) return r;
+  const rows=[...d.querySelectorAll('.li6')];
+  const tips=rows.find(x=>/Советы и туры|Tips and tours/i.test(x.textContent));
+  const html=`<div class="li6" onclick="closeDrSilent();startTour()"><span>${L('Пройти обучение по ЛК')}</span><span>${L('5 шагов')} ›</span></div>
+   <div class="li6" onclick="closeDrSilent();tipsCenter()"><span>${L('Советы и что нового')}</span><span>›</span></div>`;
+  if(tips){ tips.outerHTML=html; } else { d.insertAdjacentHTML('beforeend',html); }
+  return r; };
+
+/* ---------- 3. Опрос на главной — после тура, а не вместо него ---------- */
+let rfHome38=false;
+const _drawTour38=drawTour; drawTour=function(){ const wasOpen=(typeof tourI!=='undefined'&&tourI>=0);
+  const r=_drawTour38.apply(this,arguments);
+  const closed=(typeof tourI==='undefined'||tourI<0||tourI>=curTour.length);
+  if(wasOpen&&closed&&!rfHome38&&page==='home'&&pk!=='elena'&&typeof refiner==='function'){ rfHome38=true; refiner('home',2500); }
+  return r; };
+
+/* ---------- 4. «Оценка главной» — в живой реестр блоков ---------- */
+function csat38(){ const done=LS.get('coral_lk_csat38',0);
+  return `<div class="card c-pad cs38">
+   <div class="hrow"><div><h3 class="h20">${L('Оценка главной')}</h3><div class="sub">${L('Ответы читает продакт ЛК')}</div></div></div>
+   ${done?`<div class="cs38d">${L('Спасибо! Ответ ушёл команде ЛК')} 💚<button class="link" onclick="LS.set('coral_lk_csat38',0);render()">${L('Ответить заново')}</button></div>`
+    :`<b class="cs38q">${L('Как вам новая главная?')}</b>
+      <div class="emo cs38e">${['😞','😕','😐','🙂','😍'].map((e,i)=>`<button aria-label="${L('Оценка')} ${i+1} ${L('из 5')}" onclick="csatSend38(${i+1})">${e}</button>`).join('')}</div>
+      <div class="sub cs38f">${L('Один вопрос, без формы. Подробности можно дописать после оценки.')}</div>`}</div>`; }
+function csatSend38(v){ LS.set('coral_lk_csat38',v); render();
+  openDr(`<h2>${L('Спасибо!')}</h2><div class="sub" style="color:var(--muted)">${L('Оценка ушла команде ЛК. Если есть минута — что улучшить в первую очередь?')}</div>
+   <textarea class="ta5" rows="4" placeholder="${v<=3?L('Что мешает в первую очередь?'):L('Что понравилось? (необязательно)')}"></textarea>
+   <div class="btns" style="margin-top:12px"><button class="btn pri" onclick="closeDrSilent();toast('${L('Спасибо! Ответ ушёл команде ЛК')}')">${L('Отправить')}</button><button class="btn gh" onclick="closeDrSilent()">${L('Не сейчас')}</button></div>`); }
+
+HW.csat={t:'Оценка главной',d:'Один вопрос о новой главной — ответы читает продакт ЛК',size:'s4'};
+W20.csat=4;
+const _W38=W; W=function(k){ return k==='csat'?csat38():_W38(k); };
 /* EN для v4 */
 Object.assign(EN_DICT,{
 "программа детокса":"detox program","стик-пакеты · минералы":"stick packs · minerals","магний · капсулы":"magnesium · capsules","гиалуроновая кислота":"hyaluronic acid","коллаген · 30 стиков":"collagen · 30 sticks","программа очищения":"cleansing program","комплексное решение":"complete solution","Спирулина":"Spirulina","суперфуд":"superfood","лецитин":"lecithin","Оушенмин · курс на месяц":"Oceanmin · one-month course",
@@ -8098,6 +8164,20 @@ Object.assign(EN_DICT,{
 "Добавить":"Add","не выбраны":"none selected"
 });EN_RE=null;
 Object.assign(EN_DICT,{"Уведомление":"Notice","Одно важное уведомление или акция, закрывается крестиком":"One important notice or promotion, dismissed with the cross"});EN_RE=null;
+
+/* ---- v38: обучение и оценка главной ---- */
+Object.assign(EN_DICT,{
+"Обучение и советы":"Tutorial and tips","Пройти обучение по ЛК":"Take the back-office tour","5 шагов":"5 steps",
+"Советы и что нового":"Tips and what's new","Оценка главной":"Rate the home screen",
+"Ответы читает продакт ЛК":"The back-office product manager reads the answers",
+"Как вам новая главная?":"How do you find the new home screen?",
+"Один вопрос, без формы. Подробности можно дописать после оценки.":"One question, no form. You can add details after rating.",
+"Оценка":"Rating","из 5":"of 5","Спасибо!":"Thank you!",
+"Оценка ушла команде ЛК. Если есть минута — что улучшить в первую очередь?":"Your rating went to the back-office team. If you have a minute — what should we improve first?",
+"Что мешает в первую очередь?":"What gets in the way most?","Что понравилось? (необязательно)":"What did you like? (optional)",
+"Отправить":"Send","Не сейчас":"Not now","Ответить заново":"Answer again",
+"Один вопрос о новой главной — ответы читает продакт ЛК":"One question about the new home screen — read by the back-office product manager"
+});EN_RE=null;
 recalc(); render();
 document.getElementById('ov').onclick=closeDr;
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeDr(); if(aiOpen){aiOpen=false;drawAI();} } });
